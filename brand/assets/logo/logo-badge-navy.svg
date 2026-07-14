@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="ProBikeStock">
+  <circle cx="60" cy="60" r="58" fill="#002843"/>
+  <path fill="#FFFFFF" d="M42 30 H71 C84 30 94 40 94 53 C94 66 84 76 71 76 H56 V92 L42 90 Z"/>
+  <path fill="#002843" d="M56 43 H69 C76 43 80 47 80 53 C80 59 76 63 69 63 H56 Z"/>
+</svg>

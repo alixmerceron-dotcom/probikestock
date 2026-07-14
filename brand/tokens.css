@@ -51,8 +51,9 @@
 /* ---------- En-tête : logo + pagination ---------- */
 .pbs-head{display:flex;align-items:center;justify-content:space-between;}
 .pbs-logo{display:flex;align-items:center;gap:16px;}
-.pbs-badge{width:56px;height:56px;border-radius:50%;background:var(--pbs-white);color:var(--pbs-navy);
-  display:flex;align-items:center;justify-content:center;font-family:var(--pbs-display);font-weight:900;font-size:34px;}
+/* Logo officiel (SVG). Variante disque blanc pour fonds navy. */
+.pbs-badge{width:56px;height:56px;flex:none;font-size:0;color:transparent;
+  background:url("assets/logo/logo-badge-white.svg") no-repeat center/contain;}
 .pbs-word b{display:block;font-family:var(--pbs-display);font-weight:800;font-size:24px;letter-spacing:.01em;color:var(--pbs-white);line-height:1;}
 .pbs-word span{display:block;margin-top:7px;font-family:var(--pbs-mono);font-size:13px;letter-spacing:.24em;
   text-transform:uppercase;color:var(--pbs-mist);}
