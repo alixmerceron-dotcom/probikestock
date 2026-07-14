@@ -18,15 +18,17 @@ rythmer le feed, mais le navy reste constant et le lime demeure la signature.
 | Texte secondaire | Bleu Brume | `#93B5CC` |
 | Promo · urgence (à doser) | Rouge Signal | `#E5202B` |
 
-## 02 — Typographie (3 voix)
+## 02 — Typographie
 | Voix | Police | Emploi |
 |------|--------|--------|
-| **DISPLAY** | **Archivo Expanded** — Black 900 | titres, accroches, chiffres géants. Interlignage serré, jamais timide. |
-| **TEXTE** | **Archivo** — 400–700 | sous-titres, descriptions, corps. Clair et direct. |
+| **DISPLAY & TEXTE** | **Arial / Helvetica** (grotesque) — **Bold** pour les titres, 400–700 pour le corps | titres, accroches, chiffres géants, sous-titres, corps. Interlignage serré, clair et direct. |
 | **LABELS** | **Space Mono** — 700 | kickers, tags, données techniques. Toujours CAPITALES, tracking large. |
 
-> ✅ Les polices sont **auto-hébergées** dans `brand/assets/fonts/` (`pbs-fonts.css`, importé par `tokens.css`) —
-> rendu fidèle hors-ligne, pas de dépendance réseau. Mise en avant : **un seul mot** du titre passe en lime.
+> ℹ️ **Note importante :** le PDF *nomme* « Archivo Expanded / Archivo », mais il est **effectivement composé
+> en Arial/Helvetica** (police embarquée : *Arimo-Bold*). J'ai donc calé la charte sur **Arial/Helvetica**,
+> ce qui correspond au rendu réel du PDF et de tes posts. La police embarquée est **Arimo** (équivalent
+> open-source métrique-compatible d'Arial), **auto-hébergée** dans `brand/assets/fonts/` avec Space Mono.
+> Si tu veux réellement passer à Archivo, dis-le et je bascule. Mise en avant : **un seul mot** du titre en lime.
 
 ## 03 — Logo & signature
 - **Badge « P »** rond (blanc à P navy sur fond foncé / navy à P sur fond blanc) + wordmark **PRO BIKE STOCK**.
