@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La sortie de la semaine — Tarmac SL9 (paysage 1200×675)</title>
+<style>
+  :root{
+    --ink:#0A0C10; --surface:#12161C; --line:#232B34;
+    --lime:#C6F832; --white:#FFFFFF; --muted:#9AA3AF;
+    --font:"Helvetica Neue",Arial,"Segoe UI",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:#05070a;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:var(--font)}
+  .canvas{
+    position:relative;width:1200px;height:675px;overflow:hidden;color:var(--white);display:flex;
+    background:radial-gradient(120% 130% at 100% 0%, #1b232e 0%, var(--ink) 52%, #05070a 100%);
+  }
+  .grid{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:75px 75px;opacity:.09}
+  /* left copy */
+  .left{position:relative;z-index:2;flex:1;padding:60px 56px;display:flex;flex-direction:column}
+  .eyebrow{display:inline-flex;align-items:center;gap:12px;align-self:flex-start;background:var(--lime);color:var(--ink);
+    font-weight:800;letter-spacing:.18em;text-transform:uppercase;font-size:20px;padding:12px 18px;border-radius:6px}
+  .eyebrow .dot{width:10px;height:10px;border-radius:50%;background:var(--ink)}
+  .why{margin-top:auto}
+  .why .k{color:var(--lime);font-weight:800;text-transform:uppercase;letter-spacing:.14em;font-size:20px}
+  h1{font-size:62px;line-height:1.02;font-weight:800;letter-spacing:-.02em;margin-top:12px;max-width:620px}
+  h1 u{text-decoration:none;color:var(--lime)}
+  .body{margin-top:20px;font-size:23px;line-height:1.4;color:#CDD4DC;max-width:600px}
+  .foot{margin-top:34px;display:flex;align-items:center;gap:22px}
+  .brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:26px}
+  .mark{width:40px;height:40px;border-radius:9px;background:var(--lime);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:26px}
+  .brand em{font-style:normal;color:var(--muted);font-weight:600}
+  .src{color:var(--muted);font-size:16px;border-left:1px solid var(--line);padding-left:22px;line-height:1.35}
+  /* right accent panel */
+  .right{position:relative;width:430px;background:linear-gradient(160deg,#161c24,#0b0e13);border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+  .bike{width:400px;opacity:.9;stroke:var(--lime);fill:none;stroke-width:5}
+  .badge{position:absolute;top:40px;right:40px;text-align:right}
+  .badge b{display:block;font-size:74px;font-weight:800;letter-spacing:-.03em;line-height:.9}
+  .badge b u{text-decoration:none;color:var(--lime)}
+  .badge small{color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-size:17px}
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="grid"></div>
+    <div class="left">
+      <span class="eyebrow"><span class="dot"></span>La sortie de la semaine</span>
+      <div class="why">
+        <div class="k">Pourquoi ça compte</div>
+        <h1>Specialized redéfinit le vélo de course <u>tout-terrain-route</u>.</h1>
+        <p class="body">Aéro d'un vélo de contre-la-montre, poids d'un grimpeur&nbsp;: la SL9 fusionne les deux et vise, chiffres à l'appui, la première place face aux Colnago Y1Rs et Cervélo S5.</p>
+        <div class="foot">
+          <div class="brand"><span class="mark">P</span><span>by&nbsp;<em>probikestock</em></span></div>
+          <div class="src">Source&nbsp;: BikeRadar / Cyclist — présentation officielle du 30 juin 2026.</div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="badge"><b>−28<u>s</u></b><small>sur 100 km vs SL8</small></div>
+      <svg class="bike" viewBox="0 0 600 340" aria-hidden="true">
+        <circle cx="150" cy="240" r="86"/><circle cx="450" cy="240" r="86"/>
+        <path d="M150 240 L300 240 L250 120 L150 240 M300 240 L400 130 L250 120 M400 130 L432 178 L450 240 M400 130 L360 118"/>
+        <path d="M250 120 L232 104 M360 118 q26 -20 54 -8"/>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>
