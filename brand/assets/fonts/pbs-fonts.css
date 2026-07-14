@@ -1,10 +1,9 @@
-/* ProBikeStock — polices officielles (self-hosted, sous-ensemble latin)
-   Affichage & texte : Arimo (équivalent open-source, métrique-compatible, d'Arial/Helvetica —
-   c'est la police effectivement composée dans le PDF officiel).
-   Labels : Space Mono. */
-@font-face{font-family:'Arimo';font-style:normal;font-weight:400;font-display:swap;src:url('./Arimo-400-lat.woff2') format('woff2');}
-@font-face{font-family:'Arimo';font-style:normal;font-weight:500;font-display:swap;src:url('./Arimo-500-lat.woff2') format('woff2');}
-@font-face{font-family:'Arimo';font-style:normal;font-weight:600;font-display:swap;src:url('./Arimo-600-lat.woff2') format('woff2');}
-@font-face{font-family:'Arimo';font-style:normal;font-weight:700;font-display:swap;src:url('./Arimo-700-lat.woff2') format('woff2');}
+/* ProBikeStock — polices officielles (self-hosted, latin). Archivo (display+texte) + Space Mono (labels). */
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400;font-display:swap;src:url('./Archivo-400-lat.woff2') format('woff2');}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:500;font-display:swap;src:url('./Archivo-500-lat.woff2') format('woff2');}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:600;font-display:swap;src:url('./Archivo-600-lat.woff2') format('woff2');}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:700;font-display:swap;src:url('./Archivo-700-lat.woff2') format('woff2');}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:800;font-display:swap;src:url('./Archivo-800-lat.woff2') format('woff2');}
+@font-face{font-family:'Archivo';font-style:normal;font-weight:900;font-display:swap;src:url('./Archivo-900-lat.woff2') format('woff2');}
 @font-face{font-family:'Space Mono';font-style:normal;font-weight:400;font-display:swap;src:url('./SpaceMono-400-lat.woff2') format('woff2');}
 @font-face{font-family:'Space Mono';font-style:normal;font-weight:700;font-display:swap;src:url('./SpaceMono-700-lat.woff2') format('woff2');}
