@@ -1,78 +1,64 @@
-<!DOCTYPE html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ProBikeStock — Aperçu charte</title>
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
+<title>ProBikeStock — Aperçu charte V2</title>
 <link rel="stylesheet" href="tokens.css">
 <style>
-  body{margin:0;background:#0C0D0F;color:#ECEDEE;font-family:var(--pbs-font-sans);padding:48px;}
-  h2{font-family:var(--pbs-font-mono);text-transform:uppercase;letter-spacing:.22em;font-size:15px;color:#9A9C9E;margin:48px 0 18px;border-top:1px solid rgba(255,255,255,.12);padding-top:22px;}
+  body{margin:0;background:#001320;color:#fff;font-family:var(--pbs-text);padding:56px}
+  .t{font-family:var(--pbs-mono);text-transform:uppercase;letter-spacing:.24em;font-size:14px;color:var(--pbs-mist);
+     margin:52px 0 20px;border-top:1px solid var(--pbs-line);padding-top:22px}
   .sw{display:flex;gap:14px;flex-wrap:wrap}
-  .sw div{width:150px;border-radius:12px;overflow:hidden;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-family:var(--pbs-font-mono);font-size:12px}
-  .sw .c{height:80px}.sw p{margin:8px 10px;color:#ECEDEE}.sw span{color:#9A9C9E}
-  .type p{margin:6px 0}
-  .stage{display:flex;gap:36px;flex-wrap:wrap;align-items:flex-start}
-  .frame{width:432px;height:540px;transform-origin:top left;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-  .frame .pbs-canvas{width:1080px;height:1350px;transform:scale(.4);transform-origin:top left}
-  .cap{font-family:var(--pbs-font-mono);font-size:13px;color:#9A9C9E;letter-spacing:.1em;margin-top:12px;text-transform:uppercase}
+  .sw div{width:168px;border-radius:12px;overflow:hidden;background:var(--pbs-ink);border:1px solid var(--pbs-line);font-family:var(--pbs-mono);font-size:12px}
+  .sw .c{height:78px}.sw p{margin:9px 12px}.sw span{color:var(--pbs-mist)}
+  .stage{display:flex;gap:30px;flex-wrap:wrap}
+  .frame{width:420px;height:420px;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+  .frame .pbs-canvas{transform:scale(.3889);transform-origin:top left}
+  .cap{font-family:var(--pbs-mono);font-size:12px;color:var(--pbs-mist);letter-spacing:.1em;margin-top:12px;text-transform:uppercase}
 </style></head>
 <body>
-  <div style="font-family:var(--pbs-font-mono);letter-spacing:.24em;color:var(--pbs-lime);font-size:15px">PRO BIKE STOCK — CHARTE V1.0</div>
-  <div style="font-family:var(--pbs-font-serif);font-size:52px;margin-top:8px">Aperçu de la charte graphique</div>
+  <div style="font-family:var(--pbs-mono);letter-spacing:.24em;color:var(--pbs-lime);font-size:14px">PRO BIKE STOCK — CHARTE OFFICIELLE V2.0</div>
+  <div style="font-family:var(--pbs-display);font-weight:900;font-size:60px;margin-top:10px">Aperçu de la charte</div>
+  <p style="color:var(--pbs-mist);font-size:20px;max-width:760px">Navy en dominante, lime en signature, rouge rare. Polices officielles Archivo Expanded / Archivo / Space Mono auto-hébergées.</p>
 
-  <h2>Palette</h2>
+  <div class="t">Palette</div>
   <div class="sw">
-    <div><div class="c" style="background:#0C0D0F"></div><p>Noir base<br><span>#0C0D0F</span></p></div>
-    <div><div class="c" style="background:#0E2334"></div><p>Base bleu<br><span>#0E2334</span></p></div>
-    <div><div class="c" style="background:#221A13"></div><p>Base espresso<br><span>#221A13</span></p></div>
-    <div><div class="c" style="background:#A8D400"></div><p>Accent lime<br><span>#A8D400</span></p></div>
-    <div><div class="c" style="background:#C9A45A"></div><p>Accent or<br><span>#C9A45A</span></p></div>
-    <div><div class="c" style="background:#E23A2C"></div><p>Promo rouge<br><span>#E23A2C</span></p></div>
-    <div><div class="c" style="background:#ECEDEE"></div><p>Texte<br><span>#ECEDEE</span></p></div>
+    <div><div class="c" style="background:#002843"></div><p>Navy Profond<br><span>#002843</span></p></div>
+    <div><div class="c" style="background:#001B2E"></div><p>Navy Encre<br><span>#001B2E</span></p></div>
+    <div><div class="c" style="background:#C6F000"></div><p>Vert Lime<br><span>#C6F000</span></p></div>
+    <div><div class="c" style="background:#FFFFFF"></div><p>Blanc<br><span>#FFFFFF</span></p></div>
+    <div><div class="c" style="background:#93B5CC"></div><p>Bleu Brume<br><span>#93B5CC</span></p></div>
+    <div><div class="c" style="background:#E5202B"></div><p>Rouge Signal<br><span>#E5202B</span></p></div>
   </div>
 
-  <h2>Typographies</h2>
-  <div class="type">
-    <p style="font-family:var(--pbs-font-serif);font-size:44px">Serif éditorial — La formule de départ. <span style="color:var(--pbs-gold)">(thème or)</span></p>
-    <p style="font-family:var(--pbs-font-sans);font-weight:800;font-size:44px;letter-spacing:-.02em">Sans lourd — Ça change quoi vraiment ? <span style="color:var(--pbs-lime)">(thème lime)</span></p>
-    <p style="font-family:var(--pbs-font-mono);letter-spacing:.24em;font-size:18px">MONOSPACE — EYEBROWS · LABELS · FOOTER · 1/4</p>
+  <div class="t">Typographies</div>
+  <p style="font-family:var(--pbs-display);font-weight:900;font-size:56px;margin:6px 0">DISPLAY — ARCHIVO EXPANDED 900</p>
+  <p style="font-family:var(--pbs-text);font-size:30px;margin:6px 0">Texte — Archivo : sous-titres, corps, clair et direct.</p>
+  <p style="font-family:var(--pbs-mono);font-weight:700;letter-spacing:.24em;font-size:18px;color:var(--pbs-lime)">LABELS — SPACE MONO · KICKERS · TAGS · DATA</p>
+
+  <div class="t">Éléments graphiques</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+    <span class="pbs-tag pbs-tag--lime">Nouveau</span>
+    <span class="pbs-tag pbs-tag--promo">Promo −40%</span>
+    <span class="pbs-tag pbs-tag--ghost">Stock limité</span>
+    <span class="pbs-ribbon">Route · Carbone</span>
+    <span class="pbs-arrow">La flèche pointe l'action</span>
+    <span class="pbs-vs">VS</span>
+    <div class="pbs-numcard"><b>−40<u>%</u></b><small>Sur le stock</small></div>
   </div>
 
-  <h2>Slides reconstruites avec les tokens (sans tes photos officielles)</h2>
+  <div class="t">Slide reconstruite avec les tokens (thème officiel)</div>
   <div class="stage">
     <div>
-      <div class="frame"><div class="pbs-canvas pbs-theme-lime">
-        <div class="pbs-bg"></div>
+      <div class="frame"><div class="pbs-canvas pbs-1x1">
+        <div class="pbs-watermark">P</div>
         <div class="pbs-pad">
-          <div class="pbs-head">
-            <div class="pbs-logo"><div class="pbs-mark">P</div><div class="pbs-word"><b>PRO BIKE STOCK</b><span>Shimano · Transmission</span></div></div>
-            <div class="pbs-page">3/4</div>
-          </div>
-          <div style="margin-top:70px" class="pbs-eyebrow">Sur le vélo</div>
-          <div class="pbs-h1">Ça change<br>quoi <span class="a">vraiment ?</span></div>
-          <div style="margin-top:44px" class="pbs-card pbs-card--win"><h3 style="font-family:var(--pbs-font-sans);text-transform:none;letter-spacing:0;color:#fff">Dura-Ace R9200</h3><p>Tolérances plus strictes : passages plus nets, transmission très directe. Le gain reste subtil — mais il est là.</p></div>
-          <div style="margin-top:22px" class="pbs-callout"><b>−278 <span class="a">g</span></b> sur le groupe complet, en faveur du Dura-Ace.</div>
-          <div class="pbs-foot"><span class="l">Swipe →</span><span class="r">@probikestock</span></div>
+          <div class="pbs-head"><div class="pbs-logo"><div class="pbs-badge">P</div><div class="pbs-word"><b>PRO BIKE STOCK</b><span>Matériel des pros</span></div></div><div class="pbs-page">1/4</div></div>
+          <div class="pbs-kicker" style="margin-top:50px">Nouvel arrivage</div>
+          <h1 class="pbs-h1" style="margin-top:18px">Roue<br>Carbone <span class="a">50</span></h1>
+          <div class="pbs-price" style="margin-top:24px">489 € <s>590 €</s></div>
+          <div style="margin-top:28px"><span class="pbs-tag pbs-tag--lime">Nouveau</span></div>
+          <div class="pbs-foot" style="margin-top:auto"><span class="l">@probikestock</span><span class="r">En stock →</span></div>
         </div>
       </div></div>
-      <div class="cap">Thème lime · titre sans</div>
-    </div>
-
-    <div>
-      <div class="frame"><div class="pbs-canvas pbs-theme-gold">
-        <div class="pbs-bg"></div>
-        <div class="pbs-pad">
-          <div class="pbs-head">
-            <div class="pbs-logo"><div class="pbs-mark">P</div><div class="pbs-word"><b>PRO BIKE STOCK</b><span>Manivelles · Le guide</span></div></div>
-            <div class="pbs-page">3/3</div>
-          </div>
-          <div style="margin-top:70px" class="pbs-eyebrow">Ta bonne longueur</div>
-          <div class="pbs-h1">La formule<br>de départ.</div>
-          <div style="margin-top:44px" class="pbs-card"><div style="font-family:var(--pbs-font-serif);font-size:48px"><span style="color:var(--pbs-gold)">0,216</span> × entrejambe</div><p style="margin-top:12px">= longueur de manivelle (mm)</p></div>
-          <div style="margin-top:22px" class="pbs-callout">Un point de départ, pas une vérité. Le vrai réglage se fait chez un <span class="a">bikefitter</span>.</div>
-          <div style="margin-top:26px" class="pbs-cta pbs-cta--ghost">Pédaliers &amp; capteurs — lien en bio →</div>
-          <div class="pbs-foot"><span class="l">@probikestock</span><span class="r">probikestock.com</span></div>
-        </div>
-      </div></div>
-      <div class="cap">Thème or · titre serif</div>
+      <div class="cap">Feed 1080×1080 · F1 nouvel arrivage</div>
     </div>
   </div>
 </body></html>

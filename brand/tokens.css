@@ -1,157 +1,146 @@
 /* =============================================================
-   ProBikeStock — Design tokens (charte graphique)
-   Source : carrousels Instagram officiels (guides MANIVELLES, SHIMANO).
-   Importe ce fichier dans tout visuel : <link rel="stylesheet" href="tokens.css">
-   Puis applique une classe de thème sur .pbs-canvas :
-     .pbs-theme-lime  → accent vert hi-vis, base bleu nuit (race, transmission, tech)
-     .pbs-theme-gold  → accent or chaud,    base brun espresso (guides, réglage, premium)
+   ProBikeStock — Design tokens (charte officielle V2.0)
+   Source : "Base de communication ProBikeStock" (PDF officiel).
+   Règle d'or : Navy en dominante, lime en signature, rouge rare.
+                On ne dilue jamais l'accent.
+   Usage : <link rel="stylesheet" href="tokens.css">  puis  <div class="pbs-canvas pbs-1x1">…
    ============================================================= */
-
-/* ---- Polices : dépose les .woff2 dans brand/assets/fonts/ ----
-   Titres = serif éditorial haute-contraste (type Playfair Display)
-   Courant = sans neutre (type Inter / Helvetica Neue)
-   Labels  = monospace (type Space Mono)                            */
-/*
-@font-face{font-family:"PBS Serif"; src:url("assets/fonts/PlayfairDisplay.woff2") format("woff2"); font-weight:400 900; font-display:swap;}
-@font-face{font-family:"PBS Sans";  src:url("assets/fonts/Inter.woff2") format("woff2"); font-weight:400 800; font-display:swap;}
-@font-face{font-family:"PBS Mono";  src:url("assets/fonts/SpaceMono.woff2") format("woff2"); font-weight:400 700; font-display:swap;}
-*/
+@import url("assets/fonts/pbs-fonts.css");
 
 :root{
-  /* Neutres / base */
-  --pbs-ink:        #0C0D0F;   /* noir de base */
-  --pbs-base-warm:  #221A13;   /* fond espresso (thème or) */
-  --pbs-base-cool:  #0E2334;   /* fond bleu nuit (thème lime) */
-  --pbs-white:      #FFFFFF;
-  --pbs-text:       #ECEDEE;   /* texte courant (blanc cassé) */
-  --pbs-muted:      #9A9C9E;   /* labels/footer atténués */
+  /* ---- Couleurs officielles ---- */
+  --pbs-navy:      #002843;   /* Navy Profond — fond principal (dominante) */
+  --pbs-ink:       #001B2E;   /* Navy Encre — panneaux · inserts · cartes */
+  --pbs-lime:      #C6F000;   /* Vert Lime — accent signature · CTA · chiffres */
+  --pbs-white:     #FFFFFF;   /* titres · texte principal */
+  --pbs-mist:      #93B5CC;   /* Bleu Brume — texte secondaire */
+  --pbs-red:       #E5202B;   /* Rouge Signal — promo · urgence (à doser) */
 
-  /* Accents thématiques */
-  --pbs-lime:       #A8D400;   /* vert hi-vis signature */
-  --pbs-gold:       #C9A45A;   /* or chaud premium */
+  --pbs-line:      rgba(147,181,204,.22);  /* filets / bords sur navy */
+  --pbs-strike:    #5C7C93;                /* ancien prix barré */
 
-  /* Utilitaires */
-  --pbs-promo:      #E23A2C;   /* badge PROMO rouge */
-  --pbs-card:       rgba(255,255,255,.06);   /* carte sombre translucide */
-  --pbs-card-brd:   rgba(255,255,255,.16);   /* bord de carte */
-  --pbs-product-bg: #FFFFFF;                 /* carte produit blanche */
-  --pbs-product-ink:#14161A;
-  --pbs-product-muted:#6B7075;
-  --pbs-strike:     #9AA0A6;                 /* ancien prix barré */
+  /* Accent signature (lime par défaut). Le navy reste TOUJOURS la base. */
+  --pbs-accent:    var(--pbs-lime);
 
-  /* Rayons */
+  /* ---- Typo : 3 voix ---- */
+  --pbs-display: 'Archivo Expanded','Archivo Black',Arial,sans-serif; /* Black 900 */
+  --pbs-text:    'Archivo','Helvetica Neue',Arial,sans-serif;
+  --pbs-mono:    'Space Mono','JetBrains Mono','Courier New',monospace;
+
+  /* ---- Rayons ---- */
+  --pbs-r-card: 20px;
   --pbs-r-pill: 999px;
-  --pbs-r-card: 18px;
-  --pbs-r-btn:  14px;
-
-  /* Piles de polices (préférence → fallback système) */
-  --pbs-font-serif: "PBS Serif","Playfair Display",Georgia,"Times New Roman",serif;
-  --pbs-font-sans:  "PBS Sans","Inter","Helvetica Neue",Arial,sans-serif;
-  --pbs-font-mono:  "PBS Mono","Space Mono","JetBrains Mono","Courier New",monospace;
-
-  /* Défaut = thème lime */
-  --pbs-accent: var(--pbs-lime);
-  --pbs-base:   var(--pbs-base-cool);
+  --pbs-r-tag:  8px;
 }
 
-.pbs-theme-lime{ --pbs-accent: var(--pbs-lime); --pbs-base: var(--pbs-base-cool); }
-.pbs-theme-gold{ --pbs-accent: var(--pbs-gold); --pbs-base: var(--pbs-base-warm); }
-
-/* ---------- Toile carrousel (format 4:5 par défaut) ---------- */
-.pbs-canvas{
-  position:relative; width:1080px; height:1350px; overflow:hidden;
-  color:var(--pbs-text); background:var(--pbs-base);
-  font-family:var(--pbs-font-sans);
-}
-/* Fond photo plein cadre + dégradé de lisibilité */
+/* ---------- Toile / formats ---------- */
+.pbs-canvas{position:relative;overflow:hidden;background:var(--pbs-navy);color:var(--pbs-white);
+  font-family:var(--pbs-text);width:1080px;height:1080px;}
+.pbs-1x1{width:1080px;height:1080px;}       /* Feed carré */
+.pbs-4x5{width:1080px;height:1350px;}        /* Feed portrait */
+.pbs-9x16{width:1080px;height:1920px;}       /* Story / Reel */
 .pbs-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
 .pbs-bg::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.15) 35%, rgba(0,0,0,.72) 100%);}
-.pbs-pad{position:absolute;inset:0;padding:64px 60px;display:flex;flex-direction:column;z-index:2;}
+  background:linear-gradient(180deg, rgba(0,20,34,.25) 0%, rgba(0,20,34,.05) 40%, rgba(0,27,46,.85) 100%);}
+.pbs-pad{position:absolute;inset:0;padding:72px;display:flex;flex-direction:column;z-index:3;}
+
+/* Filigrane "P" (bas-droite) */
+.pbs-watermark{position:absolute;right:-40px;bottom:-90px;font-family:var(--pbs-display);font-weight:900;
+  font-size:520px;line-height:1;color:var(--pbs-white);opacity:.04;z-index:1;user-select:none;}
 
 /* ---------- En-tête : logo + pagination ---------- */
-.pbs-head{display:flex;align-items:flex-start;justify-content:space-between;}
+.pbs-head{display:flex;align-items:center;justify-content:space-between;}
 .pbs-logo{display:flex;align-items:center;gap:16px;}
-.pbs-mark{width:52px;height:52px;border-radius:50%;background:var(--pbs-white);color:var(--pbs-ink);
-  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:30px;font-family:var(--pbs-font-sans);}
-.pbs-word{line-height:1;}
-.pbs-word b{display:block;font-weight:800;font-size:26px;letter-spacing:.02em;color:var(--pbs-white);}
-.pbs-word span{display:block;margin-top:6px;font-family:var(--pbs-font-mono);font-size:13px;
-  letter-spacing:.24em;text-transform:uppercase;color:var(--pbs-muted);}
-.pbs-page{font-family:var(--pbs-font-mono);font-size:16px;color:var(--pbs-text);
-  border:1px solid var(--pbs-card-brd);border-radius:var(--pbs-r-pill);padding:8px 16px;background:rgba(0,0,0,.25);}
+.pbs-badge{width:56px;height:56px;border-radius:50%;background:var(--pbs-white);color:var(--pbs-navy);
+  display:flex;align-items:center;justify-content:center;font-family:var(--pbs-display);font-weight:900;font-size:34px;}
+.pbs-word b{display:block;font-family:var(--pbs-display);font-weight:800;font-size:24px;letter-spacing:.01em;color:var(--pbs-white);line-height:1;}
+.pbs-word span{display:block;margin-top:7px;font-family:var(--pbs-mono);font-size:13px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--pbs-mist);}
+.pbs-page{font-family:var(--pbs-mono);font-size:16px;color:var(--pbs-mist);border:1px solid var(--pbs-line);
+  border-radius:var(--pbs-r-pill);padding:8px 16px;}
 
-/* ---------- Eyebrow / label mono accent ---------- */
-.pbs-eyebrow{font-family:var(--pbs-font-mono);text-transform:uppercase;letter-spacing:.28em;
-  font-size:19px;color:var(--pbs-accent);}
-.pbs-label{font-family:var(--pbs-font-mono);text-transform:uppercase;letter-spacing:.2em;
-  font-size:20px;color:var(--pbs-accent);display:inline-block;padding-bottom:8px;border-bottom:2px solid var(--pbs-accent);}
+/* ---------- Kicker / eyebrow ---------- */
+.pbs-kicker{font-family:var(--pbs-mono);font-weight:700;text-transform:uppercase;letter-spacing:.3em;
+  font-size:20px;color:var(--pbs-accent);}
 
-/* ---------- Titre principal — TYPO SELON LE THÈME ----------
-   Thème OR  = serif éditorial (guides, réglage, premium)
-   Thème LIME = sans lourd (race, tech, comparatifs)              */
-.pbs-h1{font-size:88px;line-height:.99;letter-spacing:-.01em;color:var(--pbs-white);margin-top:18px;}
-.pbs-theme-gold .pbs-h1{font-family:var(--pbs-font-serif);font-weight:700;}
-.pbs-theme-lime .pbs-h1{font-family:var(--pbs-font-sans);font-weight:800;letter-spacing:-.02em;}
-.pbs-h1 .a{color:var(--pbs-accent);}          /* mot mis en avant */
-.pbs-lede{font-size:32px;line-height:1.34;color:var(--pbs-text);margin-top:24px;max-width:900px;}
-.pbs-lede .a{color:var(--pbs-accent);font-weight:600;}
+/* ---------- Titre display (Archivo Expanded Black) ---------- */
+.pbs-h1{font-family:var(--pbs-display);font-weight:900;font-size:92px;line-height:.94;letter-spacing:-.01em;
+  color:var(--pbs-white);margin-top:20px;}
+.pbs-h1 .a{color:var(--pbs-accent);}
+.pbs-lede{font-family:var(--pbs-text);font-size:32px;line-height:1.34;color:var(--pbs-mist);margin-top:24px;max-width:820px;}
+.pbs-lede .a{color:var(--pbs-white);font-weight:700;}
 
-/* ---------- Gros chiffre-stat ---------- */
-.pbs-stat{font-family:var(--pbs-font-sans);font-weight:800;letter-spacing:-.03em;line-height:.9;
-  font-size:150px;color:var(--pbs-accent);}
-.pbs-stat u{text-decoration:none;font-size:.42em;}
+/* ---------- Gros chiffre géant ---------- */
+.pbs-stat{font-family:var(--pbs-display);font-weight:900;letter-spacing:-.03em;line-height:.86;
+  font-size:172px;color:var(--pbs-accent);}
+.pbs-stat u{text-decoration:none;font-size:.34em;}
 
-/* ---------- Liste à flèches ---------- */
-.pbs-list{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:20px;}
-.pbs-list li{position:relative;padding-left:52px;font-size:30px;line-height:1.3;color:var(--pbs-text);}
-.pbs-list li::before{content:"→";position:absolute;left:0;color:var(--pbs-accent);font-family:var(--pbs-font-mono);}
+/* ---------- Pastilles & tags ---------- */
+.pbs-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--pbs-mono);font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;font-size:18px;padding:10px 16px;border-radius:var(--pbs-r-tag);}
+.pbs-tag--lime{background:var(--pbs-lime);color:var(--pbs-navy);}
+.pbs-tag--promo{background:var(--pbs-red);color:var(--pbs-white);}
+.pbs-tag--ghost{background:transparent;color:var(--pbs-lime);border:1px solid var(--pbs-line);}
 
-/* ---------- Bloc citation / callout (bord accent) ---------- */
-.pbs-callout{border-left:5px solid var(--pbs-accent);padding:6px 0 6px 28px;font-size:30px;line-height:1.35;}
-.pbs-callout .a{color:var(--pbs-accent);font-weight:600;}
+/* ---------- Ruban coupé (coin biseauté) ---------- */
+.pbs-ribbon{display:inline-flex;align-items:center;font-family:var(--pbs-mono);font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em;font-size:20px;color:var(--pbs-navy);background:var(--pbs-lime);
+  padding:12px 40px 12px 22px;clip-path:polygon(0 0,100% 0,calc(100% - 22px) 100%,0 100%);}
 
-/* ---------- Carte sombre / bloc comparatif ---------- */
-.pbs-card{background:var(--pbs-card);border:1px solid var(--pbs-card-brd);border-radius:var(--pbs-r-card);padding:34px 38px;}
+/* ---------- Liste à flèches / checks ---------- */
+.pbs-arrow{display:flex;align-items:center;gap:16px;font-family:var(--pbs-text);font-weight:700;font-size:30px;}
+.pbs-arrow::before{content:"→";color:var(--pbs-accent);font-family:var(--pbs-mono);}
+.pbs-checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px;}
+.pbs-checks li{position:relative;padding-left:44px;font-size:28px;line-height:1.3;}
+.pbs-checks li::before{content:"✓";position:absolute;left:0;color:var(--pbs-accent);font-weight:700;}
+
+/* ---------- Cartes chiffres (insert navy encre) ---------- */
+.pbs-numcard{background:var(--pbs-ink);border:1px solid var(--pbs-line);border-radius:16px;padding:28px 32px;display:inline-block;}
+.pbs-numcard b{font-family:var(--pbs-display);font-weight:900;font-size:70px;line-height:.9;color:var(--pbs-white);}
+.pbs-numcard b u{text-decoration:none;font-size:.4em;}
+.pbs-numcard small{display:block;margin-top:10px;font-family:var(--pbs-mono);font-size:15px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--pbs-mist);}
+
+/* ---------- Carte / bloc comparatif ---------- */
+.pbs-card{background:var(--pbs-ink);border:1px solid var(--pbs-line);border-radius:var(--pbs-r-card);padding:34px 38px;}
 .pbs-card--win{border-color:var(--pbs-accent);}
-.pbs-card h3{font-size:30px;font-weight:800;color:var(--pbs-white);}
-.pbs-card--win h3{font-family:var(--pbs-font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--pbs-accent);}
-.pbs-card p{font-size:26px;line-height:1.35;color:var(--pbs-text);margin-top:10px;}
+.pbs-card h3{font-family:var(--pbs-text);font-weight:700;font-size:30px;color:var(--pbs-white);}
+.pbs-card p{font-size:25px;line-height:1.36;color:var(--pbs-mist);margin-top:10px;}
 
-/* ---------- Barres de comparaison (data-viz) ---------- */
-.pbs-bars{display:flex;flex-direction:column;gap:22px;margin-top:24px;}
-.pbs-bar .top{display:flex;justify-content:space-between;align-items:baseline;
-  font-family:var(--pbs-font-mono);text-transform:uppercase;letter-spacing:.08em;font-size:20px;}
-.pbs-bar .top .k{color:var(--pbs-text);}
-.pbs-bar .top .v{color:var(--pbs-accent);font-weight:700;}
-.pbs-bar .track{margin-top:10px;height:22px;border-radius:var(--pbs-r-pill);background:rgba(255,255,255,.10);overflow:hidden;}
-.pbs-bar .fill{height:100%;border-radius:var(--pbs-r-pill);background:var(--pbs-accent);}
-.pbs-bar--muted .fill{background:rgba(255,255,255,.45);}
-.pbs-bar--muted .top .v{color:var(--pbs-text);}
+/* ---------- Citation ---------- */
+.pbs-quote{border-left:4px solid var(--pbs-accent);padding-left:24px;font-size:30px;line-height:1.34;color:var(--pbs-white);}
+.pbs-quote cite{display:block;margin-top:14px;font-family:var(--pbs-mono);font-style:normal;font-size:16px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--pbs-mist);}
+
+/* ---------- Badge VS ---------- */
+.pbs-vs{width:96px;height:96px;border-radius:50%;background:var(--pbs-lime);color:var(--pbs-navy);
+  display:flex;align-items:center;justify-content:center;font-family:var(--pbs-display);font-weight:900;font-size:34px;}
 
 /* ---------- Carte produit (fond blanc) ---------- */
-.pbs-product{position:relative;background:var(--pbs-product-bg);border-radius:16px;overflow:hidden;color:var(--pbs-product-ink);}
+.pbs-product{background:var(--pbs-white);border-radius:16px;overflow:hidden;color:var(--pbs-navy);}
 .pbs-product .img{aspect-ratio:1/1;background-size:cover;background-position:center;}
 .pbs-product .body{padding:20px 22px;}
-.pbs-product .name{font-weight:800;font-size:26px;line-height:1.15;}
-.pbs-product .price{margin-top:10px;font-weight:800;font-size:30px;color:var(--pbs-lime);}
-.pbs-product .price s{color:var(--pbs-strike);font-weight:500;font-size:.72em;margin-left:8px;}
-.pbs-badge{position:absolute;top:16px;left:16px;background:var(--pbs-promo);color:#fff;
-  font-family:var(--pbs-font-mono);font-size:16px;font-weight:700;letter-spacing:.08em;padding:6px 12px;border-radius:6px;}
+.pbs-product .name{font-family:var(--pbs-text);font-weight:700;font-size:26px;line-height:1.15;}
+.pbs-product .price{margin-top:8px;font-family:var(--pbs-display);font-weight:900;font-size:32px;color:var(--pbs-navy);}
+.pbs-product .price s{color:var(--pbs-strike);font-weight:400;font-size:.62em;margin-left:10px;}
 
-/* ---------- Bouton CTA ---------- */
-.pbs-cta{display:flex;align-items:center;justify-content:center;gap:10px;border-radius:var(--pbs-r-btn);
-  font-weight:700;font-size:30px;padding:26px 32px;text-align:center;}
-.pbs-cta--ghost{border:1px solid var(--pbs-card-brd);background:rgba(255,255,255,.04);color:var(--pbs-white);}
-.pbs-cta--solid{background:var(--pbs-white);color:var(--pbs-ink);}
+/* ---------- Prix sur navy (packshot) ---------- */
+.pbs-price{font-family:var(--pbs-display);font-weight:900;font-size:64px;color:var(--pbs-lime);}
+.pbs-price s{color:var(--pbs-mist);font-weight:400;font-size:.5em;margin-left:12px;}
+
+/* ---------- Bouton / CTA ---------- */
+.pbs-cta{display:inline-flex;align-items:center;gap:10px;font-family:var(--pbs-text);font-weight:700;font-size:28px;
+  padding:22px 30px;border-radius:14px;}
+.pbs-cta--solid{background:var(--pbs-lime);color:var(--pbs-navy);}
+.pbs-cta--ghost{background:transparent;color:var(--pbs-white);border:1px solid var(--pbs-line);}
 
 /* ---------- Chips / sélecteur ---------- */
-.pbs-chips{display:flex;gap:14px;font-family:var(--pbs-font-mono);}
-.pbs-chip{font-size:22px;letter-spacing:.06em;color:var(--pbs-text);padding:12px 20px;border-radius:var(--pbs-r-pill);}
-.pbs-chip--on{border:1px solid var(--pbs-card-brd);}
+.pbs-chips{display:flex;gap:12px;font-family:var(--pbs-mono);}
+.pbs-chip{font-size:22px;letter-spacing:.06em;color:var(--pbs-mist);padding:12px 20px;border-radius:var(--pbs-r-pill);}
+.pbs-chip--on{color:var(--pbs-lime);border:1px solid var(--pbs-line);}
 
 /* ---------- Pied de page ---------- */
 .pbs-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;
-  font-family:var(--pbs-font-mono);font-size:20px;letter-spacing:.1em;text-transform:lowercase;}
-.pbs-foot .l{color:var(--pbs-accent);text-transform:uppercase;}
-.pbs-foot .r{color:var(--pbs-muted);}
+  font-family:var(--pbs-mono);font-size:18px;letter-spacing:.08em;}
+.pbs-foot .l{color:var(--pbs-lime);}
+.pbs-foot .r{color:var(--pbs-mist);text-transform:uppercase;}
