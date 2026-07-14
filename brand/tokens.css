@@ -1,0 +1,157 @@
+/* =============================================================
+   ProBikeStock — Design tokens (charte graphique)
+   Source : carrousels Instagram officiels (guides MANIVELLES, SHIMANO).
+   Importe ce fichier dans tout visuel : <link rel="stylesheet" href="tokens.css">
+   Puis applique une classe de thème sur .pbs-canvas :
+     .pbs-theme-lime  → accent vert hi-vis, base bleu nuit (race, transmission, tech)
+     .pbs-theme-gold  → accent or chaud,    base brun espresso (guides, réglage, premium)
+   ============================================================= */
+
+/* ---- Polices : dépose les .woff2 dans brand/assets/fonts/ ----
+   Titres = serif éditorial haute-contraste (type Playfair Display)
+   Courant = sans neutre (type Inter / Helvetica Neue)
+   Labels  = monospace (type Space Mono)                            */
+/*
+@font-face{font-family:"PBS Serif"; src:url("assets/fonts/PlayfairDisplay.woff2") format("woff2"); font-weight:400 900; font-display:swap;}
+@font-face{font-family:"PBS Sans";  src:url("assets/fonts/Inter.woff2") format("woff2"); font-weight:400 800; font-display:swap;}
+@font-face{font-family:"PBS Mono";  src:url("assets/fonts/SpaceMono.woff2") format("woff2"); font-weight:400 700; font-display:swap;}
+*/
+
+:root{
+  /* Neutres / base */
+  --pbs-ink:        #0C0D0F;   /* noir de base */
+  --pbs-base-warm:  #221A13;   /* fond espresso (thème or) */
+  --pbs-base-cool:  #0E2334;   /* fond bleu nuit (thème lime) */
+  --pbs-white:      #FFFFFF;
+  --pbs-text:       #ECEDEE;   /* texte courant (blanc cassé) */
+  --pbs-muted:      #9A9C9E;   /* labels/footer atténués */
+
+  /* Accents thématiques */
+  --pbs-lime:       #A8D400;   /* vert hi-vis signature */
+  --pbs-gold:       #C9A45A;   /* or chaud premium */
+
+  /* Utilitaires */
+  --pbs-promo:      #E23A2C;   /* badge PROMO rouge */
+  --pbs-card:       rgba(255,255,255,.06);   /* carte sombre translucide */
+  --pbs-card-brd:   rgba(255,255,255,.16);   /* bord de carte */
+  --pbs-product-bg: #FFFFFF;                 /* carte produit blanche */
+  --pbs-product-ink:#14161A;
+  --pbs-product-muted:#6B7075;
+  --pbs-strike:     #9AA0A6;                 /* ancien prix barré */
+
+  /* Rayons */
+  --pbs-r-pill: 999px;
+  --pbs-r-card: 18px;
+  --pbs-r-btn:  14px;
+
+  /* Piles de polices (préférence → fallback système) */
+  --pbs-font-serif: "PBS Serif","Playfair Display",Georgia,"Times New Roman",serif;
+  --pbs-font-sans:  "PBS Sans","Inter","Helvetica Neue",Arial,sans-serif;
+  --pbs-font-mono:  "PBS Mono","Space Mono","JetBrains Mono","Courier New",monospace;
+
+  /* Défaut = thème lime */
+  --pbs-accent: var(--pbs-lime);
+  --pbs-base:   var(--pbs-base-cool);
+}
+
+.pbs-theme-lime{ --pbs-accent: var(--pbs-lime); --pbs-base: var(--pbs-base-cool); }
+.pbs-theme-gold{ --pbs-accent: var(--pbs-gold); --pbs-base: var(--pbs-base-warm); }
+
+/* ---------- Toile carrousel (format 4:5 par défaut) ---------- */
+.pbs-canvas{
+  position:relative; width:1080px; height:1350px; overflow:hidden;
+  color:var(--pbs-text); background:var(--pbs-base);
+  font-family:var(--pbs-font-sans);
+}
+/* Fond photo plein cadre + dégradé de lisibilité */
+.pbs-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+.pbs-bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.35) 0%, rgba(0,0,0,.15) 35%, rgba(0,0,0,.72) 100%);}
+.pbs-pad{position:absolute;inset:0;padding:64px 60px;display:flex;flex-direction:column;z-index:2;}
+
+/* ---------- En-tête : logo + pagination ---------- */
+.pbs-head{display:flex;align-items:flex-start;justify-content:space-between;}
+.pbs-logo{display:flex;align-items:center;gap:16px;}
+.pbs-mark{width:52px;height:52px;border-radius:50%;background:var(--pbs-white);color:var(--pbs-ink);
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:30px;font-family:var(--pbs-font-sans);}
+.pbs-word{line-height:1;}
+.pbs-word b{display:block;font-weight:800;font-size:26px;letter-spacing:.02em;color:var(--pbs-white);}
+.pbs-word span{display:block;margin-top:6px;font-family:var(--pbs-font-mono);font-size:13px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--pbs-muted);}
+.pbs-page{font-family:var(--pbs-font-mono);font-size:16px;color:var(--pbs-text);
+  border:1px solid var(--pbs-card-brd);border-radius:var(--pbs-r-pill);padding:8px 16px;background:rgba(0,0,0,.25);}
+
+/* ---------- Eyebrow / label mono accent ---------- */
+.pbs-eyebrow{font-family:var(--pbs-font-mono);text-transform:uppercase;letter-spacing:.28em;
+  font-size:19px;color:var(--pbs-accent);}
+.pbs-label{font-family:var(--pbs-font-mono);text-transform:uppercase;letter-spacing:.2em;
+  font-size:20px;color:var(--pbs-accent);display:inline-block;padding-bottom:8px;border-bottom:2px solid var(--pbs-accent);}
+
+/* ---------- Titre principal — TYPO SELON LE THÈME ----------
+   Thème OR  = serif éditorial (guides, réglage, premium)
+   Thème LIME = sans lourd (race, tech, comparatifs)              */
+.pbs-h1{font-size:88px;line-height:.99;letter-spacing:-.01em;color:var(--pbs-white);margin-top:18px;}
+.pbs-theme-gold .pbs-h1{font-family:var(--pbs-font-serif);font-weight:700;}
+.pbs-theme-lime .pbs-h1{font-family:var(--pbs-font-sans);font-weight:800;letter-spacing:-.02em;}
+.pbs-h1 .a{color:var(--pbs-accent);}          /* mot mis en avant */
+.pbs-lede{font-size:32px;line-height:1.34;color:var(--pbs-text);margin-top:24px;max-width:900px;}
+.pbs-lede .a{color:var(--pbs-accent);font-weight:600;}
+
+/* ---------- Gros chiffre-stat ---------- */
+.pbs-stat{font-family:var(--pbs-font-sans);font-weight:800;letter-spacing:-.03em;line-height:.9;
+  font-size:150px;color:var(--pbs-accent);}
+.pbs-stat u{text-decoration:none;font-size:.42em;}
+
+/* ---------- Liste à flèches ---------- */
+.pbs-list{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:20px;}
+.pbs-list li{position:relative;padding-left:52px;font-size:30px;line-height:1.3;color:var(--pbs-text);}
+.pbs-list li::before{content:"→";position:absolute;left:0;color:var(--pbs-accent);font-family:var(--pbs-font-mono);}
+
+/* ---------- Bloc citation / callout (bord accent) ---------- */
+.pbs-callout{border-left:5px solid var(--pbs-accent);padding:6px 0 6px 28px;font-size:30px;line-height:1.35;}
+.pbs-callout .a{color:var(--pbs-accent);font-weight:600;}
+
+/* ---------- Carte sombre / bloc comparatif ---------- */
+.pbs-card{background:var(--pbs-card);border:1px solid var(--pbs-card-brd);border-radius:var(--pbs-r-card);padding:34px 38px;}
+.pbs-card--win{border-color:var(--pbs-accent);}
+.pbs-card h3{font-size:30px;font-weight:800;color:var(--pbs-white);}
+.pbs-card--win h3{font-family:var(--pbs-font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--pbs-accent);}
+.pbs-card p{font-size:26px;line-height:1.35;color:var(--pbs-text);margin-top:10px;}
+
+/* ---------- Barres de comparaison (data-viz) ---------- */
+.pbs-bars{display:flex;flex-direction:column;gap:22px;margin-top:24px;}
+.pbs-bar .top{display:flex;justify-content:space-between;align-items:baseline;
+  font-family:var(--pbs-font-mono);text-transform:uppercase;letter-spacing:.08em;font-size:20px;}
+.pbs-bar .top .k{color:var(--pbs-text);}
+.pbs-bar .top .v{color:var(--pbs-accent);font-weight:700;}
+.pbs-bar .track{margin-top:10px;height:22px;border-radius:var(--pbs-r-pill);background:rgba(255,255,255,.10);overflow:hidden;}
+.pbs-bar .fill{height:100%;border-radius:var(--pbs-r-pill);background:var(--pbs-accent);}
+.pbs-bar--muted .fill{background:rgba(255,255,255,.45);}
+.pbs-bar--muted .top .v{color:var(--pbs-text);}
+
+/* ---------- Carte produit (fond blanc) ---------- */
+.pbs-product{position:relative;background:var(--pbs-product-bg);border-radius:16px;overflow:hidden;color:var(--pbs-product-ink);}
+.pbs-product .img{aspect-ratio:1/1;background-size:cover;background-position:center;}
+.pbs-product .body{padding:20px 22px;}
+.pbs-product .name{font-weight:800;font-size:26px;line-height:1.15;}
+.pbs-product .price{margin-top:10px;font-weight:800;font-size:30px;color:var(--pbs-lime);}
+.pbs-product .price s{color:var(--pbs-strike);font-weight:500;font-size:.72em;margin-left:8px;}
+.pbs-badge{position:absolute;top:16px;left:16px;background:var(--pbs-promo);color:#fff;
+  font-family:var(--pbs-font-mono);font-size:16px;font-weight:700;letter-spacing:.08em;padding:6px 12px;border-radius:6px;}
+
+/* ---------- Bouton CTA ---------- */
+.pbs-cta{display:flex;align-items:center;justify-content:center;gap:10px;border-radius:var(--pbs-r-btn);
+  font-weight:700;font-size:30px;padding:26px 32px;text-align:center;}
+.pbs-cta--ghost{border:1px solid var(--pbs-card-brd);background:rgba(255,255,255,.04);color:var(--pbs-white);}
+.pbs-cta--solid{background:var(--pbs-white);color:var(--pbs-ink);}
+
+/* ---------- Chips / sélecteur ---------- */
+.pbs-chips{display:flex;gap:14px;font-family:var(--pbs-font-mono);}
+.pbs-chip{font-size:22px;letter-spacing:.06em;color:var(--pbs-text);padding:12px 20px;border-radius:var(--pbs-r-pill);}
+.pbs-chip--on{border:1px solid var(--pbs-card-brd);}
+
+/* ---------- Pied de page ---------- */
+.pbs-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--pbs-font-mono);font-size:20px;letter-spacing:.1em;text-transform:lowercase;}
+.pbs-foot .l{color:var(--pbs-accent);text-transform:uppercase;}
+.pbs-foot .r{color:var(--pbs-muted);}
