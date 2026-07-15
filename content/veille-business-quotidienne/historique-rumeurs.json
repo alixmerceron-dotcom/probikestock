@@ -1,0 +1,38 @@
+{
+  "description": "Journal de chaque signal détecté par la routine quotidienne, y compris les rumeurs non vérifiées (niveau D). Sert à dédupliquer d'un jour sur l'autre. Ne jamais supprimer une entrée : mettre à jour son statut (actif / confirmé / infirmé / obsolète).",
+  "rumeurs": [
+    {
+      "id": "totalenergies-sponsor-titre-2027",
+      "equipe": "TotalEnergies",
+      "famille": "B",
+      "resume": "Absence de sponsor titre identifié pour la saison prochaine",
+      "niveau_confiance": "C",
+      "date_detection": "2026-07-15",
+      "derniere_maj": "2026-07-15",
+      "statut": "actif",
+      "sources": []
+    },
+    {
+      "id": "picnic-postnl-licence-1an",
+      "equipe": "Picnic PostNL",
+      "famille": "C",
+      "resume": "Licence WorldTour accordée pour 1 an seulement par l'UCI, équilibre financier jugé fragile",
+      "niveau_confiance": "C",
+      "date_detection": "2026-07-15",
+      "derniere_maj": "2026-07-15",
+      "statut": "actif",
+      "sources": []
+    },
+    {
+      "id": "soudal-qs-specialized-merida",
+      "equipe": "Soudal Quick-Step",
+      "famille": "A",
+      "resume": "Fin de contrat Specialized, passage pressenti chez Merida la saison prochaine",
+      "niveau_confiance": "C",
+      "date_detection": "2026-07-15",
+      "derniere_maj": "2026-07-15",
+      "statut": "actif",
+      "sources": []
+    }
+  ]
+}

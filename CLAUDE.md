@@ -37,3 +37,35 @@ logo, composants). Elle sert de **référence pour Claude Design** — ne pas pr
 ## 🔒 Limites connues de l'environnement
 - `probikestock.com` et les hébergeurs d'images/CDN sont **bloqués** par la politique réseau : pas
   de crawl du site ni de téléchargement de photos produit. La veille se fait via recherche web + presse.
+
+---
+
+# Routine « Veille business quotidienne » — ProBikeStock
+
+## 🎯 Mission (à chaque exécution planifiée, quotidienne)
+Détecter au plus tôt les signaux — **même de simples rumeurs non vérifiées** — annonçant
+qu'une équipe pro va se séparer de matériel : changement d'équipementier, incertitude ou
+perte de sponsor titre, restructuration/rétrogradation/fermeture, ou sortie d'un nouveau
+modèle chez une marque qui pousse au déstockage de la génération précédente. Livrable
+**100 % interne** : jamais de contenu public, jamais de visuel.
+
+Instructions complètes, échelle de confiance, sources et gabarit :
+`content/veille-business-quotidienne/ROUTINE.md`.
+
+## 📋 Résumé des étapes (voir ROUTINE.md pour le détail)
+1. Lire `tracker-equipes.json` et `historique-rumeurs.json` (mémoire des dossiers déjà ouverts).
+2. Traiter `signaux-manuels.md` s'il contient des liens/captures ajoutés par l'utilisateur.
+3. Rechercher les mises à jour des dossiers suivis + de nouveaux signaux (4 familles : voir
+   ROUTINE.md §2), en croisant plusieurs sources.
+4. Noter chaque signal avec un **niveau de confiance A/B/C/D** (voir ROUTINE.md §4).
+5. Mettre à jour `tracker-equipes.json` et `historique-rumeurs.json`.
+6. Rédiger `content/veille-business-quotidienne/AAAA-MM-JJ/brief.md` (gabarit
+   `TEMPLATE-brief-quotidien.md`).
+7. Commit + push sur la branche de travail.
+8. Notifier l'utilisateur d'un résumé court (nouveaux dossiers, changements de confiance).
+
+## ✅ À faire / ❌ à ne pas faire
+- ✅ Ne jamais écarter une rumeur faute de preuve — la classer au bon niveau (A-D) plutôt.
+- ✅ Toujours dater la première détection et tracer l'évolution du niveau de confiance.
+- ❌ Ne jamais présenter une rumeur C/D comme un fait acquis.
+- ❌ Ne jamais publier ce brief en externe ni l'utiliser comme base de contenu public.

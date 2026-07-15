@@ -1,0 +1,41 @@
+{
+  "description": "Fiche vivante par équipe suivie. Mise à jour à chaque run de la routine quotidienne. Ne jamais supprimer une entrée : la marquer 'statut: obsolète' si le dossier est clos.",
+  "equipes": [
+    {
+      "nom": "TotalEnergies",
+      "division": "WorldTour",
+      "equipementier_velo": "Bianchi",
+      "famille_signal": "B",
+      "statut": "Aucun sponsor titre confirmé identifié pour la saison prochaine ; recherche de partenaire en cours",
+      "niveau_confiance": "C",
+      "premiere_detection": "2026-07-15",
+      "derniere_maj": "2026-07-15",
+      "sources": [],
+      "notes": "Dossier ouvert manuellement par l'utilisateur le 15/07/2026 à partir de sa propre veille. À confirmer par recherche presse lors du premier run."
+    },
+    {
+      "nom": "Picnic PostNL",
+      "division": "WorldTour",
+      "equipementier_velo": "",
+      "famille_signal": "C",
+      "statut": "Licence WorldTour accordée pour 1 an seulement par l'UCI ; équilibre financier jugé fragile, incertitude sur le maintien en WorldTour l'an prochain",
+      "niveau_confiance": "C",
+      "premiere_detection": "2026-07-15",
+      "derniere_maj": "2026-07-15",
+      "sources": [],
+      "notes": "Dossier ouvert manuellement par l'utilisateur le 15/07/2026. Surveiller toute annonce UCI ou déclaration de la direction sportive sur la saison suivante."
+    },
+    {
+      "nom": "Soudal Quick-Step",
+      "division": "WorldTour",
+      "equipementier_velo": "Specialized (actuel) -> Merida (pressenti)",
+      "famille_signal": "A",
+      "statut": "Fin de contrat avec Specialized, passage chez Merida annoncé pour la saison prochaine",
+      "niveau_confiance": "C",
+      "premiere_detection": "2026-07-15",
+      "derniere_maj": "2026-07-15",
+      "sources": [],
+      "notes": "Dossier ouvert manuellement par l'utilisateur le 15/07/2026 sur la base d'informations déjà connues. Opportunité de rachat du stock Specialized en fin de saison. À sourcer et faire remonter de niveau de confiance lors du premier run si confirmation presse trouvée."
+    }
+  ]
+}
