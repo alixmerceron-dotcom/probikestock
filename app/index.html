@@ -578,6 +578,7 @@ function renderCalendar(){
     <button class="icon-btn" onclick="calShift(7)" aria-label="Semaine suivante">›</button>
     ${!isThisWeek?`<button class="btn sm ghost" onclick="calToday()">Aujourd'hui</button>`:""}
     <span class="top-spacer" style="flex:1"></span>
+    <button class="btn sm" onclick="syncStrava(this)" title="Importer mes sorties depuis Strava">↻ Strava</button>
     <button class="btn sm" onclick="quickNewSession()">+ Séance</button>
   </div>
 
@@ -611,7 +612,7 @@ function renderSessChip(s){
   const statusIc = s.status==="done"?"✓" : s.status==="skipped"?"✕" : "";
   const meta = s.type==="muscu"
     ? `${(s.entries||[]).length} exo${(s.entries||[]).length>1?"s":""}`
-    : (s.duration?`${s.duration}′`:"vélo");
+    : (s.strava ? `${s.strava.distance_km} km · ${s.strava.elevation} m` : (s.duration?`${s.duration}′`:"vélo"));
   return `<div class="sess ${s.type} ${s.status}" draggable="true" data-id="${s.id}" onclick="openSession('${s.id}')">
     <div class="s-name">${escapeHtml(s.title||defaultTitle(s))}</div>
     <div class="s-meta">${meta}</div>
@@ -719,6 +720,8 @@ function renderSessionModal(s){
         <label class="field" style="flex:1;min-width:120px">Date<input type="date" id="sDate" value="${s.date}"></label>
         ${!isMuscu?`<label class="field" style="flex:1;min-width:120px">Durée (min)<input type="number" id="sDur" value="${s.duration??''}" placeholder="ex : 90"></label>`:""}
       </div>
+
+      ${ !isMuscu && s.strava ? renderStravaBlock(s.strava) : "" }
 
       ${ isMuscu ? `
         <div>
@@ -1119,6 +1122,20 @@ function renderData(){
       </div>
       <p class="muted" style="font-size:12.5px;margin:12px 0 0">💡 Pour versionner dans Git : exporte, puis dis à Claude « voici ma sauvegarde » avec le fichier — il l'ajoute à <span class="kbd">content/muscu-cyclisme/</span>.</p>
     </div>
+
+    <div class="card pad">
+      <div class="between wrap">
+        <div><h3>Strava</h3><p class="muted" style="font-size:13.5px;margin:6px 0 0;max-width:52ch">Importe automatiquement tes sorties vélo dans le calendrier (distance, dénivelé, durée, effort relatif). Elles se placent à côté de la muscu pour gérer la fatigue combinée.</p></div>
+        <span class="pill ${stravaAvailable()?'good':'plain'}" id="stravaStatus">${stravaAvailable()?'connecteur prêt':'hors app publiée'}</span>
+      </div>
+      <div class="row wrap" style="gap:10px;margin-top:14px">
+        <button class="btn primary" onclick="syncStrava(this)">↻ Synchroniser mes sorties</button>
+        <button class="btn" onclick="importStravaProfile(this)">Importer mon profil (poids)</button>
+        <span class="top-spacer" style="flex:1"></span>
+        ${ state.profile.stravaLastSync ? `<span class="muted" style="font-size:12.5px;align-self:center">Dernière synchro : ${new Date(state.profile.stravaLastSync).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</span>` : "" }
+      </div>
+      ${ !stravaAvailable() ? `<p class="muted" style="font-size:12.5px;margin:12px 0 0">ℹ️ La synchro fonctionne quand tu ouvres l'app <b>publiée sur claude.ai</b> avec le connecteur Strava activé. Ouverte comme fichier local, ce bouton reste inactif.</p>` : "" }
+    </div>
   </div>`;
 }
 function wireData(){
@@ -1156,6 +1173,122 @@ function resetAll(){
   state=defaultState(); save(); currentTab="board";
   document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab==="board"));
   render(); toast("Réinitialisé");
+}
+
+/* ============================================================
+   STRAVA — synchro via le connecteur claude.ai (window.claude.mcp)
+   ============================================================ */
+const STRAVA_SERVER = "Strava";
+const RIDE_RE = /ride/i; // Ride, VirtualRide, GravelRide, MountainBikeRide, EBikeRide…
+
+function stravaAvailable(){ return !!(window.claude && window.claude.mcp); }
+
+function renderStravaBlock(sv){
+  const cells=[
+    ["Distance", sv.distance_km!=null?`${sv.distance_km} km`:"–"],
+    ["Dénivelé", sv.elevation!=null?`${sv.elevation} m`:"–"],
+    ["Durée", sv.moving_min!=null?`${Math.floor(sv.moving_min/60)}h${String(sv.moving_min%60).padStart(2,'0')}`:"–"],
+    ["Vit. moy.", sv.avg_speed!=null?`${sv.avg_speed} km/h`:"–"],
+    ["Effort", sv.effort!=null?`${sv.effort}`:"–"],
+    ["Calories", sv.calories!=null?`${sv.calories}`:"–"],
+  ];
+  return `<div>
+    <div class="eyebrow" style="margin:0 0 8px">Données Strava <span class="pill warn" style="font-size:9px">importé</span></div>
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);gap:8px">
+      ${cells.map(([k,v])=>`<div class="card" style="padding:10px 12px"><div class="k" style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint)">${k}</div><div class="num" style="font-family:var(--disp);font-weight:800;font-size:18px;margin-top:2px">${v}</div></div>`).join("")}
+    </div>
+  </div>`;
+}
+
+function mapStravaActivity(a){
+  const sum = a.summary||{};
+  return {
+    id: String(a.id),
+    distance_km: sum.distance!=null ? +(sum.distance/1000).toFixed(1) : null,
+    elevation: sum.elevation_gain!=null ? Math.round(sum.elevation_gain) : null,
+    moving_min: sum.moving_time!=null ? Math.round(sum.moving_time/60) : null,
+    avg_speed: sum.avg_speed!=null ? +(sum.avg_speed*3.6).toFixed(1) : null,
+    effort: sum.relative_effort!=null ? sum.relative_effort : null,
+    calories: sum.total_calories!=null ? sum.total_calories : null,
+    cadence: sum.avg_cadence!=null ? Math.round(sum.avg_cadence) : null,
+    sport: a.sport_type||"Ride",
+  };
+}
+
+async function callStrava(tool, input){
+  if(!stravaAvailable()){ const e=new Error("no-mcp"); e.code="capability_disabled"; throw e; }
+  const res = await window.claude.mcp.callTool(STRAVA_SERVER, tool, input);
+  let p = res && res.payload;
+  if(typeof p === "string"){ try{ p = JSON.parse(p); }catch(_e){} }
+  return p;
+}
+
+async function syncStrava(btn){
+  if(!stravaAvailable()){
+    toast("Synchro dispo depuis l'app publiée sur claude.ai (connecteur Strava activé)");
+    return;
+  }
+  const label = btn ? btn.textContent : null;
+  if(btn){ btn.disabled=true; btn.textContent="↻ Synchro…"; }
+  try{
+    const start = addDays(today(), -120);
+    const data = await callStrava("list_activities", { first:100, range_start: start+"T00:00:00", ordering:"StartDateLocalDesc" });
+    const acts = (data && data.activities) || [];
+    let added=0, updated=0, rides=0;
+    acts.forEach(a=>{
+      if(!RIDE_RE.test(a.sport_type||"")) return;
+      rides++;
+      const date=(a.start_local||"").slice(0,10); if(!date) return;
+      const sv=mapStravaActivity(a);
+      let s=state.sessions.find(x=>x.strava && x.strava.id===sv.id);
+      if(s){ s.date=date; s.title=a.name||"Sortie vélo"; s.duration=sv.moving_min; s.strava=sv; updated++; }
+      else {
+        state.sessions.push({ id:uid(), date, type:"velo", status:"done", title:a.name||"Sortie vélo",
+          duration:sv.moving_min, entries:[], wellness:{sleep:null,fatigue:null,mood:null,notes:""},
+          strava:sv, createdAt:Date.now() });
+        added++;
+      }
+    });
+    state.profile.stravaLastSync = Date.now();
+    save(); render();
+    toast(rides ? `Strava : ${added} ajoutée(s), ${updated} à jour` : "Aucune sortie vélo sur 120 j");
+  }catch(err){
+    if(btn){ btn.disabled=false; btn.textContent=label; }
+    handleStravaError(err);
+  }
+}
+
+async function importStravaProfile(btn){
+  if(!stravaAvailable()){ toast("Disponible depuis l'app publiée sur claude.ai"); return; }
+  const label = btn ? btn.textContent : null;
+  if(btn){ btn.disabled=true; btn.textContent="…"; }
+  try{
+    const p = await callStrava("get_athlete_profile", {});
+    if(p){
+      if(p.weight) state.profile.bodyweight = p.weight;
+      if(!state.profile.name && p.first_name) state.profile.name = p.first_name;
+      save(); render();
+      toast(`Profil importé : ${p.first_name||""} ${p.weight?`· ${p.weight} kg`:""}`.trim());
+    } else { if(btn){btn.disabled=false;btn.textContent=label;} toast("Profil vide"); }
+  }catch(err){ if(btn){ btn.disabled=false; btn.textContent=label; } handleStravaError(err); }
+}
+
+function handleStravaError(err){
+  const code = err && err.code;
+  const map = {
+    needs_reauth:        "Strava déconnecté — reconnecte-le dans claude.ai › Réglages › Connecteurs.",
+    server_not_connected:"Ajoute le connecteur Strava dans claude.ai › Réglages › Connecteurs.",
+    selection_required:  "Plusieurs comptes Strava — choisis-en un dans l'invite claude.ai puis réessaie.",
+    not_in_manifest:     "Accès Strava non autorisé pour cette page.",
+    blocked_by_policy:   "Strava est bloqué par la politique de ton organisation.",
+    approval_required:   "Cet appel Strava requiert une approbation non disponible ici.",
+    server_unavailable:  "Strava momentanément injoignable — réessaie dans un instant.",
+    tool_error:          "Strava a renvoyé une erreur sur la requête.",
+    not_granted:         "Synchro dispo uniquement dans l'app publiée sur claude.ai.",
+    capability_disabled: "Synchro dispo uniquement dans l'app publiée sur claude.ai avec le connecteur.",
+  };
+  toast("⚠️ " + (map[code] || "Échec de la synchro Strava."));
+  console.warn("Strava error", code, err && err.message);
 }
 
 /* ============================================================
