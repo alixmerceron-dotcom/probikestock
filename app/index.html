@@ -1,0 +1,1701 @@
+<title>ProBikeStock — Suivi Muscu Cyclisme</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+  /* ============================ TOKENS ============================ */
+  :root {
+    --bg:        #f3f7f9;
+    --surface:   #ffffff;
+    --surface-2: #eef3f6;
+    --surface-3: #e4edf2;
+    --border:    #d2e0e8;
+    --border-2:  #bcd0dc;
+    --text:      #002843;
+    --muted:     #5a7688;
+    --faint:     #86a1b1;
+    --accent:      #C6F000;
+    --accent-ink:  #002843;   /* text on lime */
+    --accent-text: #47690a;   /* lime-ish text usable on light ground */
+    --good:  #12805c;
+    --warn:  #b26a00;
+    --danger:#c81721;
+    --good-bg:  #d9f2e8;
+    --warn-bg:  #fbecd2;
+    --danger-bg:#fbdcde;
+    --shadow: 0 1px 2px rgba(0,40,67,.06), 0 8px 24px rgba(0,40,67,.06);
+    --radius: 14px;
+    --radius-sm: 9px;
+    --mono: 'Space Mono', ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+    --disp: 'Archivo', 'Helvetica Neue', system-ui, -apple-system, sans-serif;
+    --body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:        #00121f;
+      --surface:   #002843;
+      --surface-2: #063351;
+      --surface-3: #0b3f60;
+      --border:    #13446a;
+      --border-2:  #1d567f;
+      --text:      #e9f3f9;
+      --muted:     #94b3c6;
+      --faint:     #5e829a;
+      --accent:      #C6F000;
+      --accent-ink:  #002843;
+      --accent-text: #C6F000;
+      --good:  #3ddc97;
+      --warn:  #f5a623;
+      --danger:#ff5b62;
+      --good-bg:  #063a2c;
+      --warn-bg:  #3d2e08;
+      --danger-bg:#3d1215;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  /* explicit theme toggles win over the media query, both directions */
+  :root[data-theme="light"] {
+    --bg:#f3f7f9; --surface:#fff; --surface-2:#eef3f6; --surface-3:#e4edf2;
+    --border:#d2e0e8; --border-2:#bcd0dc; --text:#002843; --muted:#5a7688; --faint:#86a1b1;
+    --accent-text:#47690a; --good:#12805c; --warn:#b26a00; --danger:#c81721;
+    --good-bg:#d9f2e8; --warn-bg:#fbecd2; --danger-bg:#fbdcde;
+    --shadow:0 1px 2px rgba(0,40,67,.06), 0 8px 24px rgba(0,40,67,.06);
+  }
+  :root[data-theme="dark"] {
+    --bg:#00121f; --surface:#002843; --surface-2:#063351; --surface-3:#0b3f60;
+    --border:#13446a; --border-2:#1d567f; --text:#e9f3f9; --muted:#94b3c6; --faint:#5e829a;
+    --accent-text:#C6F000; --good:#3ddc97; --warn:#f5a623; --danger:#ff5b62;
+    --good-bg:#063a2c; --warn-bg:#3d2e08; --danger-bg:#3d1215;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  /* ============================ BASE ============================ */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--body); line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+  }
+  h1,h2,h3,h4 { font-family: var(--disp); font-weight: 800; margin: 0; letter-spacing: -.02em; line-height: 1.1; text-wrap: balance; }
+  button { font-family: inherit; cursor: pointer; }
+  input, select, textarea { font-family: inherit; font-size: 15px; }
+  a { color: var(--accent-text); }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  /* ============================ SHELL ============================ */
+  .app { max-width: 1080px; margin: 0 auto; padding: 0 16px 96px; }
+  header.top {
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    margin: 0 -16px 20px; padding: 12px 16px;
+  }
+  .top-row { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; gap: 14px; }
+  .brand { display: flex; align-items: baseline; gap: 9px; }
+  .brand .mark {
+    font-family: var(--disp); font-weight: 800; font-size: 19px; letter-spacing: -.03em;
+  }
+  .brand .mark b { color: var(--accent-text); }
+  .brand .tag {
+    font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em;
+    color: var(--faint); border-left: 1px solid var(--border-2); padding-left: 9px;
+  }
+  .top-spacer { flex: 1; }
+  .icon-btn {
+    background: var(--surface); border: 1px solid var(--border); color: var(--text);
+    width: 38px; height: 38px; border-radius: 10px; font-size: 16px; display: grid; place-items: center;
+    transition: border-color .15s, background .15s;
+  }
+  .icon-btn:hover { border-color: var(--border-2); }
+
+  nav.tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; margin-top: 12px; max-width:1080px; }
+  nav.tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: 0 0 auto; background: transparent; border: 0; color: var(--muted);
+    padding: 8px 14px; border-radius: 999px; font-weight: 600; font-size: 14px;
+    display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+    transition: background .15s, color .15s;
+  }
+  .tab:hover { color: var(--text); background: var(--surface-2); }
+  .tab.active { background: var(--accent); color: var(--accent-ink); }
+  .tab .tab-ic { font-size: 15px; }
+
+  /* ============================ PRIMITIVES ============================ */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .pad { padding: 18px; }
+  .grid { display: grid; gap: 14px; }
+  .row { display: flex; gap: 12px; }
+  .between { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .wrap { flex-wrap: wrap; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .14em;
+    color: var(--faint); margin: 0 0 3px;
+  }
+  .muted { color: var(--muted); }
+  .btn {
+    background: var(--surface-2); border: 1px solid var(--border); color: var(--text);
+    padding: 9px 15px; border-radius: 10px; font-weight: 650; font-size: 14px;
+    display: inline-flex; align-items: center; gap: 7px; transition: border-color .15s, background .15s, transform .05s;
+  }
+  .btn:hover { border-color: var(--border-2); }
+  .btn:active { transform: translateY(1px); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 750; }
+  .btn.primary:hover { filter: brightness(1.04); }
+  .btn.ghost { background: transparent; }
+  .btn.sm { padding: 6px 11px; font-size: 13px; border-radius: 8px; }
+  .btn.danger { color: var(--danger); }
+  .btn:focus-visible, .tab:focus-visible, .icon-btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--accent); outline-offset: 2px;
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono);
+    font-size: 11px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+    padding: 3px 9px; border-radius: 999px; border: 1px solid transparent;
+  }
+  .pill.good { background: var(--good-bg); color: var(--good); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn); }
+  .pill.danger { background: var(--danger-bg); color: var(--danger); }
+  .pill.plain { background: var(--surface-2); color: var(--muted); border-color: var(--border); }
+  .pill.accent { background: var(--accent); color: var(--accent-ink); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+
+  label.field { display: grid; gap: 5px; font-size: 13px; color: var(--muted); font-weight: 600; }
+  input[type=text], input[type=number], input[type=date], select, textarea {
+    background: var(--bg); border: 1px solid var(--border); color: var(--text);
+    padding: 9px 11px; border-radius: 9px; width: 100%; transition: border-color .15s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 62px; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 12px; }
+  .stat { padding: 15px 16px; }
+  .stat .k { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--faint); }
+  .stat .v { font-family: var(--disp); font-weight: 800; font-size: 30px; letter-spacing: -.02em; margin-top: 4px; line-height: 1; }
+  .stat .v small { font-size: 15px; color: var(--muted); font-weight: 700; letter-spacing: 0; }
+  .stat .sub { font-size: 12.5px; color: var(--muted); margin-top: 5px; }
+
+  /* ============================ CALENDAR ============================ */
+  .cal-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+  .week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  @media (max-width: 720px) { .week-grid { grid-template-columns: repeat(2, 1fr); } }
+  .day {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    min-height: 130px; padding: 8px; display: flex; flex-direction: column; gap: 7px;
+    transition: border-color .12s, background .12s;
+  }
+  .day.today { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .day.drop-hot { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+  .day-hd { display: flex; align-items: baseline; justify-content: space-between; }
+  .day-hd .dow { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: .1em; color: var(--faint); }
+  .day-hd .dnum { font-family: var(--disp); font-weight: 800; font-size: 15px; }
+  .day-add { border: 1px dashed var(--border-2); background: transparent; color: var(--faint);
+    border-radius: 8px; padding: 4px; font-size: 12px; font-weight: 600; margin-top: auto; }
+  .day-add:hover { color: var(--accent-text); border-color: var(--accent); }
+
+  .sess {
+    border-radius: 9px; padding: 8px 9px; cursor: grab; border: 1px solid var(--border);
+    background: var(--surface-2); position: relative; user-select: none;
+  }
+  .sess:active { cursor: grabbing; }
+  .sess.velo { border-left: 3px solid var(--warn); }
+  .sess.muscu { border-left: 3px solid var(--accent); }
+  .sess.done { opacity: .62; }
+  .sess.skipped { opacity: .5; }
+  .sess .s-name { font-weight: 700; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+  .sess .s-meta { font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+  .sess .s-status { position: absolute; top: 6px; right: 7px; font-size: 11px; }
+
+  /* ============================ EXERCISE LOG ============================ */
+  .ex-block { border: 1px solid var(--border); border-radius: 11px; padding: 12px; background: var(--surface); }
+  .ex-block + .ex-block { margin-top: 10px; }
+  .set-table { width: 100%; border-collapse: collapse; }
+  .set-table th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .08em;
+    color: var(--faint); text-align: left; font-weight: 700; padding: 4px 6px; }
+  .set-table td { padding: 3px 6px; }
+  .set-table input, .set-table select { padding: 6px 8px; text-align: center; }
+  .set-table input { width: 100%; }
+  .set-no { font-family: var(--mono); color: var(--faint); font-size: 12px; width: 26px; text-align: center; }
+  .e1rm-badge { font-family: var(--mono); font-size: 12px; color: var(--accent-text); font-weight: 700; }
+
+  /* ============================ MODAL ============================ */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,18,31,.55); backdrop-filter: blur(3px);
+    display: flex; align-items: flex-start; justify-content: center; padding: 24px 14px; z-index: 100;
+    overflow-y: auto;
+  }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border-2); border-radius: 16px;
+    width: 100%; max-width: 640px; box-shadow: 0 20px 60px rgba(0,0,0,.4); margin: auto;
+  }
+  .modal-hd { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--surface); border-radius: 16px 16px 0 0; z-index: 2; }
+  .modal-bd { padding: 18px; display: grid; gap: 15px; }
+  .modal-ft { padding: 14px 18px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; position: sticky; bottom: 0; background: var(--surface); border-radius: 0 0 16px 16px; }
+
+  /* ============================ CHART ============================ */
+  .chart-wrap { overflow-x: auto; }
+  svg.chart { display: block; width: 100%; height: auto; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+
+  /* ============================ PLAN ============================ */
+  .phase { border-left: 3px solid var(--border-2); padding: 4px 0 4px 16px; position: relative; }
+  .phase::before { content:''; position: absolute; left: -6px; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: var(--border-2); }
+  .phase.active { border-color: var(--accent); }
+  .phase.active::before { background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
+
+  .toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--text); color: var(--bg); padding: 11px 18px; border-radius: 999px;
+    font-weight: 650; font-size: 14px; box-shadow: var(--shadow); opacity: 0; pointer-events: none;
+    transition: opacity .2s, transform .2s; z-index: 200;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .empty { text-align: center; color: var(--muted); padding: 34px 16px; }
+  .empty .big { font-size: 30px; margin-bottom: 6px; }
+  .hr { height: 1px; background: var(--border); border: 0; margin: 4px 0; }
+  .list-clean { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .kbd { font-family: var(--mono); font-size: 11px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 5px; padding: 1px 5px; }
+
+  /* ============================ EXERCISES ============================ */
+  .ex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px,1fr)); gap: 12px; }
+  .ex-card { cursor: pointer; overflow: hidden; padding: 0; transition: border-color .15s, transform .08s; display: flex; flex-direction: column; }
+  .ex-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .ex-thumb { background: var(--surface-2); border-bottom: 1px solid var(--border); display: grid; place-items: center; padding: 4px; }
+  .ex-svg { color: var(--text); width: 100%; height: auto; display: block; }
+  .ex-thumb .ex-svg { max-height: 128px; }
+  .ex-card-bd { padding: 12px 13px; display: grid; gap: 6px; }
+  .ex-card-bd .nm { font-weight: 750; font-size: 14.5px; font-family: var(--disp); letter-spacing: -.01em; }
+  .guide-svg-wrap { background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; padding: 8px; display: grid; place-items: center; }
+  .guide-svg-wrap .ex-svg { max-height: 210px; }
+  .guide-steps { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 14.5px; }
+  .guide-steps li { padding-left: 3px; }
+  .guide-steps li::marker { color: var(--accent-text); font-family: var(--mono); font-weight: 700; }
+  .do-list, .dont-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; font-size: 14px; }
+  .do-list li, .dont-list li { display: flex; gap: 9px; align-items: baseline; }
+  .do-list li::before { content: "✓"; color: var(--good); font-weight: 800; }
+  .dont-list li::before { content: "✕"; color: var(--danger); font-weight: 800; }
+  .transfer-box { background: color-mix(in srgb, var(--accent) 13%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border)); border-radius: 12px; padding: 15px; }
+  .transfer-box h4 { display: flex; align-items: center; gap: 8px; }
+  .info-btn { background: transparent; border: 0; color: var(--faint); cursor: pointer; font-size: 14px; padding: 0 4px; }
+  .info-btn:hover { color: var(--accent-text); }
+  .ex-mini { font-size: 12.5px; line-height: 1.4; margin: 0 0 9px; }
+  .ex-fiche-link { color: var(--accent-text); cursor: pointer; font-weight: 650; white-space: nowrap; }
+  .ex-fiche-link:hover { text-decoration: underline; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  .hidden { display: none !important; }
+</style>
+
+<div class="app">
+  <header class="top">
+    <div class="top-row">
+      <div class="brand">
+        <span class="mark">by<b>probikestock</b></span>
+        <span class="tag">Muscu · Cyclisme</span>
+      </div>
+      <span class="top-spacer"></span>
+      <button class="icon-btn" id="themeBtn" title="Basculer thème clair/sombre" aria-label="Basculer le thème">◐</button>
+    </div>
+    <nav class="tabs" id="tabs" role="tablist">
+      <button class="tab active" data-tab="board"><span class="tab-ic">◎</span>Tableau de bord</button>
+      <button class="tab" data-tab="calendar"><span class="tab-ic">▦</span>Calendrier</button>
+      <button class="tab" data-tab="progress"><span class="tab-ic">▲</span>Progression</button>
+      <button class="tab" data-tab="exercises"><span class="tab-ic">📖</span>Exercices</button>
+      <button class="tab" data-tab="plan"><span class="tab-ic">◈</span>Plan</button>
+      <button class="tab" data-tab="data"><span class="tab-ic">⛁</span>Données</button>
+    </nav>
+  </header>
+
+  <main id="view"></main>
+</div>
+
+<div id="modalHost"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+/* ============================================================
+   ProBikeStock — Suivi Muscu Cyclisme
+   Persistance : localStorage  (+ export / import JSON versionné Git)
+   ============================================================ */
+
+const STORE_KEY = "pbs_muscu_v1";
+const APP_VERSION = 1;
+
+/* ---------- utilitaires date ---------- */
+const DOW = ["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"];
+const MONTHS = ["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
+function iso(d){ const z=new Date(d); z.setMinutes(z.getMinutes()-z.getTimezoneOffset()); return z.toISOString().slice(0,10); }
+function today(){ return iso(new Date()); }
+function parseISO(s){ const [y,m,d]=s.split("-").map(Number); return new Date(y,m-1,d); }
+function addDays(s,n){ const d=parseISO(s); d.setDate(d.getDate()+n); return iso(d); }
+function mondayOf(s){ const d=parseISO(s); const wd=(d.getDay()+6)%7; d.setDate(d.getDate()-wd); return iso(d); }
+function fmtDate(s){ const d=parseISO(s); return `${DOW[(d.getDay()+6)%7]} ${d.getDate()} ${MONTHS[d.getMonth()]}`; }
+function fmtShort(s){ const d=parseISO(s); return `${d.getDate()} ${MONTHS[d.getMonth()]}`; }
+function uid(){ return Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-4); }
+
+/* ---------- bibliothèque d'exercices par défaut (issue de la recherche) ---------- */
+const DEFAULT_EXERCISES = [
+  { id:"squat",       name:"Squat / Demi-squat",         cat:"force",      group:"Jambes",       uni:false, weighted:true },
+  { id:"presse1j",    name:"Presse à cuisses (1 jambe)",  cat:"force",      group:"Jambes",       uni:true,  weighted:true },
+  { id:"bulgare",     name:"Fente bulgare",               cat:"force",      group:"Jambes",       uni:true,  weighted:true },
+  { id:"sdtroumain",  name:"Soulevé de terre roumain",    cat:"force",      group:"Chaîne post.", uni:false, weighted:true },
+  { id:"hipthrust",   name:"Hip thrust",                  cat:"force",      group:"Chaîne post.", uni:false, weighted:true },
+  { id:"mollets",     name:"Mollets debout",              cat:"force",      group:"Jambes",       uni:false, weighted:true },
+  { id:"copenhagen",  name:"Copenhagen plank",            cat:"prevention", group:"Gainage",      uni:true,  weighted:false },
+  { id:"pallof",      name:"Pallof press",                cat:"prevention", group:"Gainage",      uni:true,  weighted:true },
+  { id:"deadbug",     name:"Dead bug",                    cat:"prevention", group:"Gainage",      uni:false, weighted:false },
+  { id:"glutebridge", name:"Pont fessier (1 jambe)",      cat:"prevention", group:"Fessiers",     uni:true,  weighted:false },
+];
+
+/* ---------- phases de périodisation (issues de la recherche) ---------- */
+const PHASES = [
+  { key:"prepa",      name:"Adaptation anatomique", weeks:4, scheme:"3 × 10–12 RM · RPE 6–7 · ~65 %",
+    desc:"Technique, tendons, base musculaire. Volume élevé, charge moyenne." },
+  { key:"force",      name:"Force maximale",        weeks:7, scheme:"4–6 RM · RPE 8–9 · concentrique explosif",
+    desc:"Cœur du bloc. Charge lourde ≥ 80 %, volume réduit. Le gain de puissance vient d'ici." },
+  { key:"conversion", name:"Conversion / puissance", weeks:4, scheme:"lourd + explosif à vitesse max",
+    desc:"Transformer la force en puissance spécifique avant la reprise." },
+  { key:"maintien",   name:"Maintien en saison",    weeks:0, scheme:"1 ×/sem · volume réduit, intensité lourde",
+    desc:"En course : 1 séance/sem suffit à préserver les gains. Sans entretien : détraînement en ~2 mois." },
+];
+
+/* ---------- modèles de séance muscu (2×/sem) ---------- */
+function templateSessions(){
+  return {
+    A: { label:"Séance A — Bilatéral lourd", exos:["squat","sdtroumain","copenhagen","pallof"] },
+    B: { label:"Séance B — Unilatéral + fessiers", exos:["presse1j","bulgare","hipthrust","glutebridge","deadbug"] },
+  };
+}
+
+/* ============================================================
+   ÉTAT
+   ============================================================ */
+let state = load();
+
+function defaultState(){
+  return {
+    version: APP_VERSION,
+    profile: { name:"", bodyweight:null, planStart: today(), muscuDays:[1,4] /* Mar, Ven (0=Lun) */ },
+    exercises: DEFAULT_EXERCISES.map(e=>({...e})),
+    sessions: [],
+    ui: { calWeek: mondayOf(today()), progExo:"squat" },
+  };
+}
+function load(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return defaultState();
+    const s = JSON.parse(raw);
+    return migrate(s);
+  }catch(e){ console.warn("load fail",e); return defaultState(); }
+}
+function migrate(s){
+  const base = defaultState();
+  s = Object.assign({}, base, s);
+  s.profile = Object.assign({}, base.profile, s.profile||{});
+  s.ui = Object.assign({}, base.ui, s.ui||{});
+  if(!Array.isArray(s.exercises) || !s.exercises.length) s.exercises = base.exercises;
+  if(!Array.isArray(s.sessions)) s.sessions = [];
+  return s;
+}
+function save(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }
+  catch(e){ toast("⚠️ Sauvegarde impossible (stockage plein)"); }
+}
+function exById(id){ return state.exercises.find(e=>e.id===id); }
+
+/* estimation 1RM — formule d'Epley */
+function e1rm(weight, reps){
+  if(!weight || !reps) return 0;
+  if(reps===1) return weight;
+  return Math.round(weight * (1 + reps/30));
+}
+/* meilleur e1RM d'une entrée d'exercice */
+function bestE1rm(entry){
+  let best=0;
+  (entry.sets||[]).forEach(st=>{ const v=e1rm(+st.weight, +st.reps); if(v>best) best=v; });
+  return best;
+}
+function sessionTonnage(sess){
+  let t=0;
+  (sess.entries||[]).forEach(en=>{
+    (en.sets||[]).forEach(st=>{ t += (+st.weight||0) * (+st.reps||0); });
+  });
+  return t;
+}
+
+/* ============================================================
+   RENDU — routeur
+   ============================================================ */
+let currentTab = "board";
+const view = document.getElementById("view");
+
+function render(){
+  save();
+  if(currentTab==="board")    view.innerHTML = renderBoard();
+  if(currentTab==="calendar") { view.innerHTML = renderCalendar(); wireCalendar(); }
+  if(currentTab==="progress") { view.innerHTML = renderProgress(); wireProgress(); }
+  if(currentTab==="exercises") view.innerHTML = renderExercises();
+  if(currentTab==="plan")     view.innerHTML = renderPlan();
+  if(currentTab==="data")     { view.innerHTML = renderData(); wireData(); }
+}
+
+document.getElementById("tabs").addEventListener("click", e=>{
+  const b = e.target.closest(".tab"); if(!b) return;
+  currentTab = b.dataset.tab;
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active", t===b));
+  render();
+});
+
+/* ============================================================
+   ONGLET — TABLEAU DE BORD
+   ============================================================ */
+function currentPhaseInfo(){
+  const start = state.profile.planStart;
+  const daysIn = Math.floor((parseISO(today()) - parseISO(start)) / 86400000);
+  if(daysIn < 0) return { phase:null, weekNo:0, daysToStart:-daysIn };
+  let acc=0, weekNo = Math.floor(daysIn/7)+1;
+  for(const p of PHASES){
+    if(p.weeks===0) return { phase:p, weekNo, weekInPhase:weekNo-acc, totalWeeks:acc };
+    if(daysIn < (acc+p.weeks)*7) return { phase:p, weekNo, weekInPhase:(weekNo-acc), totalWeeks:acc+p.weeks };
+    acc += p.weeks;
+  }
+  return { phase: PHASES[PHASES.length-1], weekNo, weekInPhase:weekNo-acc };
+}
+
+function renderBoard(){
+  const done = state.sessions.filter(s=>s.type==="muscu" && s.status==="done");
+  const upcoming = state.sessions
+    .filter(s=> s.status!=="done" && s.status!=="skipped" && s.date>=today())
+    .sort((a,b)=> a.date.localeCompare(b.date));
+  const next = upcoming[0];
+  const ph = currentPhaseInfo();
+
+  // stats
+  const now = new Date();
+  const weekStart = mondayOf(today());
+  const thisWeek = state.sessions.filter(s=>s.type==="muscu" && s.status==="done" && s.date>=weekStart);
+  const totalTonnage = done.reduce((a,s)=>a+sessionTonnage(s),0);
+  const streak = computeStreakWeeks();
+
+  // PR récents (top e1RM par exo, sur les 60 derniers jours prend le dernier record)
+  const prs = computePRs().filter(p=>p.e1rm>0).slice(0,4);
+
+  let phaseCard;
+  if(ph.daysToStart){
+    phaseCard = `<div class="card pad">
+      <div class="eyebrow">Programme</div>
+      <h3>Le bloc démarre dans ${ph.daysToStart} j</h3>
+      <p class="muted" style="margin:8px 0 0">Début planifié le <b>${fmtDate(state.profile.planStart)}</b>. Va dans l'onglet <b>Plan</b> pour générer les séances dans le calendrier.</p>
+    </div>`;
+  } else if(ph.phase){
+    const idx = PHASES.indexOf(ph.phase);
+    phaseCard = `<div class="card pad">
+      <div class="between">
+        <div>
+          <div class="eyebrow">Phase en cours · semaine ${ph.weekNo}</div>
+          <h3>${ph.phase.name}</h3>
+        </div>
+        <span class="pill accent">${idx+1}/${PHASES.length}</span>
+      </div>
+      <p class="mono" style="color:var(--accent-text);font-size:13px;margin:10px 0 4px">${ph.phase.scheme}</p>
+      <p class="muted" style="margin:0">${ph.phase.desc}</p>
+    </div>`;
+  } else phaseCard = "";
+
+  return `
+  <div class="grid">
+    <div class="between wrap">
+      <div>
+        <div class="eyebrow">La sortie de la semaine, côté salle</div>
+        <h1 style="font-size:26px">Bonjour${state.profile.name?`, ${escapeHtml(state.profile.name)}`:""} 👋</h1>
+      </div>
+      <button class="btn primary" onclick="quickNewSession()">+ Nouvelle séance</button>
+    </div>
+
+    ${phaseCard}
+
+    <div class="stat-grid">
+      ${stat("Séances muscu", done.length, "réalisées au total")}
+      ${stat("Cette semaine", `${thisWeek.length}<small>/2</small>`, thisWeek.length>=2?"objectif atteint ✓":"objectif hebdo")}
+      ${stat("Régularité", `${streak}<small> sem</small>`, "avec ≥ 1 séance")}
+      ${stat("Tonnage cumulé", `${Math.round(totalTonnage/1000)}<small> t</small>`, "charge × reps soulevée")}
+    </div>
+
+    <div class="grid" style="grid-template-columns: 1.3fr 1fr; align-items:start" id="boardCols">
+      <div class="card pad">
+        <div class="between"><h3>Prochaine séance</h3>${next?`<span class="pill plain">${fmtShort(next.date)}</span>`:""}</div>
+        ${ next ? sessionPreview(next) : `<div class="empty"><div class="big">🗓️</div>Aucune séance à venir.<br><button class="btn sm" style="margin-top:10px" onclick="quickNewSession()">Planifier une séance</button></div>` }
+      </div>
+
+      <div class="card pad">
+        <h3>Records estimés (1RM)</h3>
+        ${ prs.length ? `<ul class="list-clean" style="margin-top:12px">${prs.map(p=>`
+          <li class="between" style="border-bottom:1px solid var(--border);padding-bottom:8px">
+            <span>${escapeHtml(p.name)}</span>
+            <span class="num" style="font-weight:700">${p.e1rm} <span class="muted" style="font-weight:400">kg</span></span>
+          </li>`).join("")}</ul>`
+          : `<div class="empty" style="padding:22px 8px"><div class="big">🏋️</div><span style="font-size:13px">Enregistre des séries avec charge pour voir tes records.</span></div>` }
+      </div>
+    </div>
+  </div>
+  <style>@media(max-width:760px){#boardCols{grid-template-columns:1fr !important}}</style>
+  `;
+}
+function stat(k,v,sub){ return `<div class="card stat"><div class="k">${k}</div><div class="v num">${v}</div><div class="sub">${sub}</div></div>`; }
+
+function sessionPreview(s){
+  const exos = (s.entries||[]).map(en=>{ const ex=exById(en.exerciseId); return ex?ex.name:en.custom||"?"; });
+  return `<div style="margin-top:12px" class="grid">
+    <div class="between">
+      <div><b>${escapeHtml(s.title||defaultTitle(s))}</b><div class="muted" style="font-size:13px">${fmtDate(s.date)}</div></div>
+      <span class="pill ${s.type==='muscu'?'accent':'warn'}">${s.type==='muscu'?'Muscu':'Vélo'}</span>
+    </div>
+    ${ exos.length ? `<div class="muted" style="font-size:13px">${exos.map(escapeHtml).join(" · ")}</div>` : "" }
+    <div class="row">
+      <button class="btn primary sm" onclick="openSession('${s.id}')">${s.type==='muscu'?'Ouvrir & enregistrer':'Ouvrir'}</button>
+      <button class="btn sm" onclick="setStatus('${s.id}','done')">Marquer fait ✓</button>
+    </div>
+  </div>`;
+}
+function computeStreakWeeks(){
+  let w = mondayOf(today()), streak=0;
+  for(let i=0;i<52;i++){
+    const ws=w, we=addDays(w,6);
+    const has = state.sessions.some(s=>s.type==="muscu"&&s.status==="done"&&s.date>=ws&&s.date<=we);
+    if(has) streak++; else if(i>0) break; else { w=addDays(w,-7); continue; }
+    w=addDays(w,-7);
+  }
+  return streak;
+}
+function computePRs(){
+  const map = {};
+  state.sessions.filter(s=>s.status==="done").forEach(s=>{
+    (s.entries||[]).forEach(en=>{
+      const ex=exById(en.exerciseId); if(!ex||!ex.weighted) return;
+      const b=bestE1rm(en);
+      if(b>(map[en.exerciseId]?.e1rm||0)) map[en.exerciseId]={ id:en.exerciseId, name:ex.name, e1rm:b, date:s.date };
+    });
+  });
+  return Object.values(map).sort((a,b)=>b.e1rm-a.e1rm);
+}
+
+/* ============================================================
+   ONGLET — CALENDRIER  (vue semaine, drag & drop)
+   ============================================================ */
+function renderCalendar(){
+  const wk = state.ui.calWeek || mondayOf(today());
+  const days = Array.from({length:7},(_,i)=>addDays(wk,i));
+  const label = `${fmtShort(days[0])} – ${fmtShort(days[6])}`;
+  const isThisWeek = wk===mondayOf(today());
+
+  return `
+  <div class="cal-head">
+    <button class="icon-btn" onclick="calShift(-7)" aria-label="Semaine précédente">‹</button>
+    <div style="min-width:150px;text-align:center">
+      <div class="eyebrow" style="margin:0">Semaine</div>
+      <b class="num" style="font-size:16px">${label}</b>
+    </div>
+    <button class="icon-btn" onclick="calShift(7)" aria-label="Semaine suivante">›</button>
+    ${!isThisWeek?`<button class="btn sm ghost" onclick="calToday()">Aujourd'hui</button>`:""}
+    <span class="top-spacer" style="flex:1"></span>
+    <button class="btn sm" onclick="syncStrava(this)" title="Importer mes sorties depuis Strava">↻ Strava</button>
+    <button class="btn sm" onclick="quickNewSession()">+ Séance</button>
+  </div>
+
+  <div class="week-grid">
+    ${days.map(d=>renderDayCol(d)).join("")}
+  </div>
+
+  <div class="card pad" style="margin-top:16px">
+    <div class="between wrap">
+      <div>
+        <div class="eyebrow">Astuce</div>
+        <span class="muted" style="font-size:13.5px">Utilise <b>« + planifier »</b> sous chaque jour pour poser une séance à venir, puis <b>glisse-dépose</b> pour réorganiser tes jours. Clique une séance pour l'ouvrir, enregistrer tes séries et la cocher « fait ».</span>
+      </div>
+      <div class="row" style="gap:8px">
+        <span class="pill accent">Muscu</span><span class="pill warn">Vélo</span>
+      </div>
+    </div>
+  </div>`;
+}
+function renderDayCol(d){
+  const sessions = state.sessions.filter(s=>s.date===d).sort((a,b)=>(a.type>b.type?1:-1));
+  const isToday = d===today();
+  const dd=parseISO(d);
+  return `<div class="day ${isToday?'today':''}" data-date="${d}">
+    <div class="day-hd"><span class="dow">${DOW[(dd.getDay()+6)%7]}</span><span class="dnum num">${dd.getDate()}</span></div>
+    ${sessions.map(renderSessChip).join("")}
+    <button class="day-add" onclick="quickNewSession('${d}', true)">+ planifier</button>
+  </div>`;
+}
+function renderSessChip(s){
+  const statusIc = s.status==="done"?"✓" : s.status==="skipped"?"✕" : "";
+  const meta = s.type==="muscu"
+    ? `${(s.entries||[]).length} exo${(s.entries||[]).length>1?"s":""}`
+    : (s.strava ? `${s.strava.distance_km} km · ${s.strava.elevation} m` : (s.duration?`${s.duration}′`:"vélo"));
+  return `<div class="sess ${s.type} ${s.status}" draggable="true" data-id="${s.id}" onclick="openSession('${s.id}')">
+    <div class="s-name">${escapeHtml(s.title||defaultTitle(s))}</div>
+    <div class="s-meta">${meta}</div>
+    ${statusIc?`<span class="s-status">${statusIc}</span>`:""}
+  </div>`;
+}
+function wireCalendar(){
+  let dragId=null;
+  document.querySelectorAll(".sess").forEach(el=>{
+    el.addEventListener("dragstart", ev=>{ dragId=el.dataset.id; ev.dataTransfer.effectAllowed="move"; setTimeout(()=>el.style.opacity=".4",0); });
+    el.addEventListener("dragend", ()=>{ el.style.opacity=""; document.querySelectorAll(".day").forEach(d=>d.classList.remove("drop-hot")); });
+  });
+  document.querySelectorAll(".day").forEach(col=>{
+    col.addEventListener("dragover", ev=>{ ev.preventDefault(); col.classList.add("drop-hot"); });
+    col.addEventListener("dragleave", ()=> col.classList.remove("drop-hot"));
+    col.addEventListener("drop", ev=>{
+      ev.preventDefault(); col.classList.remove("drop-hot");
+      if(!dragId) return;
+      const s = state.sessions.find(x=>x.id===dragId);
+      if(s && s.date!==col.dataset.date){ s.date=col.dataset.date; render(); toast("Séance replanifiée"); }
+      dragId=null;
+    });
+  });
+}
+function calShift(n){ state.ui.calWeek = addDays(state.ui.calWeek||mondayOf(today()), n); render(); }
+function calToday(){ state.ui.calWeek = mondayOf(today()); render(); }
+
+/* ============================================================
+   SÉANCE — création rapide + éditeur (modal)
+   ============================================================ */
+function defaultTitle(s){
+  if(s.type==="velo") return "Sortie vélo";
+  return "Séance muscu";
+}
+function quickNewSession(date, plan){
+  openTypePicker(date||today(), plan);
+}
+function openTypePicker(date, plan){
+  const tpl=templateSessions();
+  const p = plan ? 'true' : 'false';
+  modal(`
+    <div class="modal-hd">
+      <div><h3>${plan?'Planifier une séance':'Nouvelle séance'} — ${fmtDate(date)}</h3>
+      ${plan?'<div class="muted" style="font-size:12.5px">Elle se pose sur ce jour ; tu l\'ouvriras plus tard pour enregistrer.</div>':''}</div>
+      <button class="icon-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-bd">
+      <div class="eyebrow">Choisis le type</div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
+        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px;height:100%" onclick="createSession('${date}','muscu','A',${p})">
+          <b style="font-size:15px">💪 ${tpl.A.label.split("—")[1].trim()}</b>
+          <span class="muted" style="font-size:12px;margin-top:4px">${tpl.A.exos.map(id=>exById(id)?.name).join(", ")}</span>
+        </button>
+        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px;height:100%" onclick="createSession('${date}','muscu','B',${p})">
+          <b style="font-size:15px">💪 ${tpl.B.label.split("—")[1].trim()}</b>
+          <span class="muted" style="font-size:12px;margin-top:4px">${tpl.B.exos.map(id=>exById(id)?.name).join(", ")}</span>
+        </button>
+        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px" onclick="createSession('${date}','muscu','vide',${p})">
+          <b style="font-size:15px">🏋️ Séance muscu vide</b>
+          <span class="muted" style="font-size:12px;margin-top:4px">Tu ajoutes les exercices toi-même</span>
+        </button>
+        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px" onclick="createSession('${date}','velo','',${p})">
+          <b style="font-size:15px">🚴 Sortie vélo</b>
+          <span class="muted" style="font-size:12px;margin-top:4px">Repère de charge dans le calendrier</span>
+        </button>
+      </div>
+      ${plan?`<p class="muted" style="font-size:12px;margin:2px 0 0">💡 Astuce : tu peux ensuite glisser-déposer la séance d'un jour à l'autre pour réorganiser tes jours à venir.</p>`:''}
+    </div>
+  `);
+}
+function createSession(date,type,tplKey,plan){
+  const s = { id:uid(), date, type, status:"planned", title:"", entries:[], wellness:{sleep:null,fatigue:null,mood:null,notes:""}, createdAt:Date.now() };
+  if(type==="muscu" && (tplKey==="A"||tplKey==="B")){
+    const tpl=templateSessions()[tplKey];
+    s.title = tpl.label;
+    s.entries = tpl.exos.map(id=>({ exerciseId:id, sets:defaultSets(id) }));
+  }
+  if(type==="muscu" && tplKey==="vide") s.title="Séance muscu";
+  if(type==="velo"){ s.title="Sortie vélo"; s.duration=null; }
+  state.sessions.push(s);
+  save();
+  if(plan){ closeModal(); if(currentTab!=="calendar"){ currentTab="calendar"; document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab==="calendar")); } state.ui.calWeek=mondayOf(date); render(); toast(`Séance planifiée · ${fmtShort(date)}`); }
+  else openSession(s.id);
+}
+function defaultSets(exId){
+  const ph = currentPhaseInfo().phase;
+  const reps = ph && ph.key==="force" ? 5 : ph && ph.key==="prepa" ? 10 : 6;
+  const ex=exById(exId);
+  const n = ex&&ex.cat==="prevention"?3:3;
+  return Array.from({length:n},()=>({ weight:"", reps: ex&&ex.weighted?reps:"", rpe:"", rir:"" }));
+}
+
+let editingId=null;
+function openSession(id){
+  const s=state.sessions.find(x=>x.id===id); if(!s) return;
+  editingId=id;
+  renderSessionModal(s);
+}
+function renderSessionModal(s){
+  const w=s.wellness||{};
+  const isMuscu = s.type==="muscu";
+  modal(`
+    <div class="modal-hd">
+      <div>
+        <input id="sTitle" type="text" value="${escapeAttr(s.title||defaultTitle(s))}" style="font-family:var(--disp);font-weight:800;font-size:18px;border:0;background:transparent;padding:2px 0;width:100%">
+        <div class="muted" style="font-size:12.5px">${fmtDate(s.date)} · <span class="pill ${isMuscu?'accent':'warn'}" style="font-size:10px">${isMuscu?'Muscu':'Vélo'}</span></div>
+      </div>
+      <button class="icon-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-bd">
+      <div class="row wrap" style="gap:8px">
+        <label class="field" style="flex:1;min-width:120px">Date<input type="date" id="sDate" value="${s.date}"></label>
+        ${!isMuscu?`<label class="field" style="flex:1;min-width:120px">Durée (min)<input type="number" id="sDur" value="${s.duration??''}" placeholder="ex : 90"></label>`:""}
+      </div>
+
+      ${ !isMuscu && s.strava ? renderStravaBlock(s.strava) : "" }
+
+      ${ isMuscu ? `
+        <div>
+          <div class="between" style="margin-bottom:8px"><div class="eyebrow" style="margin:0">Exercices</div><span class="e1rm-badge">Tonnage : <span id="sTon" class="num">${Math.round(sessionTonnage(s))}</span> kg</span></div>
+          <div id="exList">${(s.entries||[]).map((en,i)=>renderExBlock(en,i)).join("")}</div>
+          <button class="btn sm ghost" style="margin-top:10px;border-style:dashed" onclick="addExercise()">+ Ajouter un exercice</button>
+        </div>` : "" }
+
+      <hr class="hr">
+      <div class="eyebrow" style="margin:0">Ressenti & récupération</div>
+      <div class="row wrap" style="gap:10px">
+        ${wellnessSelect("Sommeil","sleep",w.sleep)}
+        ${wellnessSelect("Fatigue","fatigue",w.fatigue)}
+        ${wellnessSelect("Forme","mood",w.mood)}
+      </div>
+      <label class="field">Notes<textarea id="sNotes" placeholder="Sensations, douleurs, ajustements…">${escapeHtml(w.notes||"")}</textarea></label>
+    </div>
+    <div class="modal-ft">
+      <button class="btn danger ghost" onclick="deleteSession('${s.id}')">Supprimer</button>
+      <span style="flex:1"></span>
+      <button class="btn" onclick="saveSession(false)">Enregistrer</button>
+      <button class="btn primary" onclick="saveSession(true)">Enregistrer & marquer fait ✓</button>
+    </div>
+  `);
+  wireExInputs();
+}
+function wellnessSelect(label,key,val){
+  const opts=[["","–"],["1","1 · mauvais"],["2","2"],["3","3 · moyen"],["4","4"],["5","5 · top"]];
+  return `<label class="field" style="flex:1;min-width:96px">${label}
+    <select data-well="${key}">${opts.map(([v,t])=>`<option value="${v}" ${String(val??"")===v?"selected":""}>${t}</option>`).join("")}</select></label>`;
+}
+function renderExBlock(en,i){
+  const ex=exById(en.exerciseId);
+  const name = ex?ex.name:(en.custom||"Exercice");
+  const weighted = ex?ex.weighted:true;
+  const b=bestE1rm(en);
+  return `<div class="ex-block" data-i="${i}">
+    <div class="between" style="margin-bottom:4px">
+      <div><b>${escapeHtml(name)}</b> ${ex&&ex.uni?`<span class="pill plain" style="font-size:9px">1 côté</span>`:""}</div>
+      <div class="row" style="gap:8px;align-items:center">
+        ${weighted&&b?`<span class="e1rm-badge">1RM est. ${b} kg</span>`:""}
+        <button class="btn sm ghost" onclick="removeExercise(${i})" title="Retirer">✕</button>
+      </div>
+    </div>
+    ${EXG[en.exerciseId]?`<div class="ex-mini muted">${escapeHtml(shorten(EXG[en.exerciseId].desc,86))} <a class="ex-fiche-link" onclick="guideFromSession('${en.exerciseId}')">Voir la fiche →</a></div>`:""}
+    <table class="set-table">
+      <thead><tr><th></th>${weighted?"<th>Charge (kg)</th>":""}<th>Reps</th><th>RPE</th><th>RIR</th></tr></thead>
+      <tbody>
+        ${(en.sets||[]).map((st,j)=>`<tr data-j="${j}">
+          <td class="set-no">${j+1}</td>
+          ${weighted?`<td><input type="number" step="0.5" data-f="weight" value="${st.weight??''}" inputmode="decimal"></td>`:""}
+          <td><input type="number" data-f="reps" value="${st.reps??''}" inputmode="numeric"></td>
+          <td>${rpeSelect(st.rpe)}</td>
+          <td><input type="number" data-f="rir" value="${st.rir??''}" inputmode="numeric" style="max-width:56px"></td>
+        </tr>`).join("")}
+      </tbody>
+    </table>
+    <button class="btn sm ghost" style="margin-top:6px" onclick="addSet(${i})">+ Série</button>
+  </div>`;
+}
+function rpeSelect(val){
+  let o='<option value="">–</option>';
+  for(let r=6;r<=10;r+=0.5){ o+=`<option value="${r}" ${String(val)===String(r)?"selected":""}>${r}</option>`; }
+  return `<select data-f="rpe" style="max-width:70px">${o}</select>`;
+}
+
+/* --- interactions dans le modal séance (lecture live du DOM) --- */
+function collectFromDOM(){
+  const s=state.sessions.find(x=>x.id===editingId); if(!s) return null;
+  const t=document.getElementById("sTitle"); if(t) s.title=t.value.trim();
+  const d=document.getElementById("sDate"); if(d&&d.value) s.date=d.value;
+  const dur=document.getElementById("sDur"); if(dur) s.duration=dur.value?+dur.value:null;
+  const notes=document.getElementById("sNotes"); if(notes) s.wellness.notes=notes.value;
+  document.querySelectorAll("[data-well]").forEach(sel=>{ s.wellness[sel.dataset.well]=sel.value?+sel.value:null; });
+  document.querySelectorAll("#exList .ex-block").forEach(block=>{
+    const i=+block.dataset.i; const en=s.entries[i]; if(!en) return;
+    block.querySelectorAll("tbody tr").forEach(tr=>{
+      const j=+tr.dataset.j; if(!en.sets[j]) en.sets[j]={};
+      tr.querySelectorAll("[data-f]").forEach(inp=>{ en.sets[j][inp.dataset.f]=inp.value; });
+    });
+  });
+  return s;
+}
+function wireExInputs(){
+  const list=document.getElementById("exList"); if(!list) return;
+  list.addEventListener("input", e=>{
+    if(e.target.dataset.f){
+      collectFromDOM();
+      const ton=document.getElementById("sTon"); if(ton) ton.textContent=Math.round(sessionTonnage(state.sessions.find(x=>x.id===editingId)));
+      // maj badge 1RM du bloc
+      const block=e.target.closest(".ex-block"); if(block){ const i=+block.dataset.i; const s=state.sessions.find(x=>x.id===editingId); const badge=block.querySelector(".e1rm-badge"); const ex=exById(s.entries[i].exerciseId); if(badge&&ex&&ex.weighted){ const b=bestE1rm(s.entries[i]); badge.textContent= b?`1RM est. ${b} kg`:""; } }
+    }
+  });
+}
+function addSet(i){ collectFromDOM(); const s=state.sessions.find(x=>x.id===editingId); const en=s.entries[i]; const last=en.sets[en.sets.length-1]||{}; en.sets.push({weight:last.weight||"",reps:last.reps||"",rpe:"",rir:""}); refreshExList(); }
+function addExercise(){
+  collectFromDOM();
+  openExercisePicker(exId=>{
+    const s=state.sessions.find(x=>x.id===editingId);
+    s.entries.push({ exerciseId:exId, sets:defaultSets(exId) });
+    refreshExList();
+  });
+}
+function removeExercise(i){ collectFromDOM(); const s=state.sessions.find(x=>x.id===editingId); s.entries.splice(i,1); refreshExList(); }
+function refreshExList(){
+  const s=state.sessions.find(x=>x.id===editingId);
+  const list=document.getElementById("exList");
+  if(list){ list.innerHTML=s.entries.map((en,i)=>renderExBlock(en,i)).join(""); }
+  const ton=document.getElementById("sTon"); if(ton) ton.textContent=Math.round(sessionTonnage(s));
+}
+function openExercisePicker(cb){
+  const groups={};
+  state.exercises.forEach(e=>{ (groups[e.cat==='force'?'Force':'Prévention & gainage'] ||= []).push(e); });
+  const html=Object.entries(groups).map(([g,list])=>`
+    <div class="eyebrow" style="margin:12px 0 6px">${g}</div>
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px">
+      ${list.map(e=>`<button class="btn sm" style="justify-content:flex-start" onclick="pickExercise('${e.id}')">${escapeHtml(e.name)}</button>`).join("")}
+    </div>`).join("");
+  _pickCb=cb;
+  modal(`
+    <div class="modal-hd"><h3>Ajouter un exercice</h3><button class="icon-btn" onclick="reopenSession()">✕</button></div>
+    <div class="modal-bd">
+      ${html}
+      <hr class="hr">
+      <label class="field">Exercice personnalisé
+        <div class="row" style="gap:8px"><input type="text" id="customEx" placeholder="Nom de l'exercice"><button class="btn" onclick="pickCustom()">Ajouter</button></div>
+      </label>
+    </div>`);
+}
+let _pickCb=null;
+function pickExercise(id){ const cb=_pickCb; reopenSession(); cb&&cb(id); }
+function pickCustom(){
+  const v=document.getElementById("customEx").value.trim(); if(!v) return;
+  const id="custom_"+uid();
+  state.exercises.push({ id, name:v, cat:"force", group:"Perso", uni:false, weighted:true });
+  const cb=_pickCb; reopenSession(); cb&&cb(id);
+}
+function reopenSession(){ const s=state.sessions.find(x=>x.id===editingId); if(s) renderSessionModal(s); else closeModal(); }
+
+function saveSession(markDone){
+  const s=collectFromDOM(); if(!s){ closeModal(); return; }
+  if(markDone) s.status="done";
+  else if(s.status!=="done") s.status = s.date<today()?"done":"planned";
+  save(); closeModal(); render();
+  toast(markDone?"Séance enregistrée ✓":"Enregistré");
+}
+function deleteSession(id){
+  if(!confirm("Supprimer cette séance et ses données ?")) return;
+  state.sessions=state.sessions.filter(s=>s.id!==id);
+  save(); closeModal(); render(); toast("Séance supprimée");
+}
+function setStatus(id,st){ const s=state.sessions.find(x=>x.id===id); if(s){ s.status=st; save(); render(); toast(st==="done"?"Marqué fait ✓":"Mis à jour"); } }
+
+/* ============================================================
+   ONGLET — PROGRESSION (graphiques SVG)
+   ============================================================ */
+function renderProgress(){
+  const weighted = state.exercises.filter(e=>e.weighted);
+  const sel = state.ui.progExo || "squat";
+  const series = e1rmSeries(sel);
+  const volSeries = weeklyVolumeSeries();
+  const prs = computePRs();
+
+  return `
+  <div class="grid">
+    <div class="between wrap">
+      <div><div class="eyebrow">Progression</div><h1 style="font-size:24px">Ta force dans le temps</h1></div>
+      <label class="field" style="min-width:220px">Exercice suivi
+        <select id="progSel">${weighted.map(e=>`<option value="${e.id}" ${e.id===sel?"selected":""}>${escapeHtml(e.name)}</option>`).join("")}</select>
+      </label>
+    </div>
+
+    <div class="card pad">
+      <div class="between"><h3>1RM estimé — ${escapeHtml(exById(sel)?.name||"")}</h3>${series.length?`<span class="pill good">${series[series.length-1].v} kg</span>`:""}</div>
+      <div class="chart-wrap" style="margin-top:14px">
+        ${ series.length>=1 ? lineChart(series, "kg") : emptyChart("Enregistre des séries avec charge pour cet exercice.") }
+      </div>
+      ${ series.length>=2 ? `<p class="muted" style="font-size:13px;margin:10px 0 0">Évolution : <b class="num" style="color:var(--good)">${series[series.length-1].v-series[0].v>=0?"+":""}${series[series.length-1].v-series[0].v} kg</b> depuis le ${fmtShort(series[0].d)}.</p>` : "" }
+    </div>
+
+    <div class="card pad">
+      <h3>Volume hebdomadaire (tonnage)</h3>
+      <div class="chart-wrap" style="margin-top:14px">
+        ${ volSeries.length ? barChart(volSeries) : emptyChart("Aucune séance muscu enregistrée.") }
+      </div>
+    </div>
+
+    <div class="card pad">
+      <h3>Tous les records estimés</h3>
+      ${ prs.filter(p=>p.e1rm>0).length ? `<div style="overflow-x:auto;margin-top:12px"><table class="set-table" style="min-width:420px">
+        <thead><tr><th>Exercice</th><th>1RM estimé</th><th>Depuis</th></tr></thead>
+        <tbody>${prs.filter(p=>p.e1rm>0).map(p=>`<tr><td style="text-align:left"><b>${escapeHtml(p.name)}</b></td><td class="num" style="text-align:left;color:var(--accent-text);font-weight:700">${p.e1rm} kg</td><td class="muted" style="text-align:left">${fmtShort(p.date)}</td></tr>`).join("")}</tbody>
+      </table></div>` : `<div class="empty" style="padding:22px"><div class="big">📈</div>Pas encore de record. Enregistre une séance !</div>` }
+    </div>
+  </div>`;
+}
+function wireProgress(){
+  const sel=document.getElementById("progSel");
+  if(sel) sel.addEventListener("change", ()=>{ state.ui.progExo=sel.value; render(); });
+}
+function e1rmSeries(exId){
+  const pts=[];
+  state.sessions.filter(s=>s.status==="done").sort((a,b)=>a.date.localeCompare(b.date)).forEach(s=>{
+    const en=(s.entries||[]).find(e=>e.exerciseId===exId);
+    if(en){ const v=bestE1rm(en); if(v>0) pts.push({ d:s.date, v }); }
+  });
+  return pts;
+}
+function weeklyVolumeSeries(){
+  const map={};
+  state.sessions.filter(s=>s.type==="muscu"&&s.status==="done").forEach(s=>{
+    const wk=mondayOf(s.date); map[wk]=(map[wk]||0)+sessionTonnage(s);
+  });
+  return Object.entries(map).sort((a,b)=>a[0].localeCompare(b[0])).slice(-10).map(([d,v])=>({d,v:Math.round(v)}));
+}
+/* --- graphiques SVG --- */
+function lineChart(series, unit){
+  const W=680,H=220,pad=36, padL=46;
+  const xs=series.map((p,i)=>i), ys=series.map(p=>p.v);
+  const minY=Math.min(...ys), maxY=Math.max(...ys);
+  const lo=Math.floor((minY-2)/5)*5, hi=Math.ceil((maxY+2)/5)*5, span=Math.max(1,hi-lo);
+  const n=series.length;
+  const px=i=> n<=1 ? padL+(W-padL-pad)/2 : padL + (W-padL-pad)*(i/(n-1));
+  const py=v=> pad + (H-pad*2)*(1-(v-lo)/span);
+  const pts=series.map((p,i)=>[px(i),py(p.v)]);
+  const path=pts.map((p,i)=>(i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ");
+  const area=`M ${px(0)} ${H-pad} `+pts.map(p=>"L "+p[0].toFixed(1)+" "+p[1].toFixed(1)).join(" ")+` L ${px(n-1)} ${H-pad} Z`;
+  const gridY=[0,.25,.5,.75,1].map(f=>{ const v=lo+span*f; const y=py(v); return `<line x1="${padL}" y1="${y}" x2="${W-pad}" y2="${y}" stroke="var(--border)" stroke-width="1"/><text x="${padL-8}" y="${y+4}" text-anchor="end" font-size="10" fill="var(--faint)" font-family="var(--mono)">${Math.round(v)}</text>`; }).join("");
+  const dots=pts.map((p,i)=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${i===n-1?4.5:3}" fill="${i===n-1?'var(--accent)':'var(--surface)'}" stroke="var(--accent)" stroke-width="2"/>`).join("");
+  const lastLbl = `<text x="${px(n-1)}" y="${py(series[n-1].v)-11}" text-anchor="middle" font-size="12" font-weight="700" fill="var(--accent-text)" font-family="var(--mono)">${series[n-1].v}</text>`;
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Courbe 1RM estimé">
+    ${gridY}
+    <defs><linearGradient id="lg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".28"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
+    <path d="${area}" fill="url(#lg)"/>
+    <path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    ${dots}${lastLbl}
+  </svg>`;
+}
+function barChart(series){
+  const W=680,H=200,pad=30,padL=44;
+  const ys=series.map(s=>s.v), maxY=Math.max(...ys,1);
+  const hi=Math.ceil(maxY/1000)*1000||1000;
+  const n=series.length, bw=(W-padL-pad)/n*0.62, gap=(W-padL-pad)/n;
+  const by=v=> pad + (H-pad*2)*(1-v/hi);
+  const bars=series.map((s,i)=>{
+    const x=padL+gap*i+(gap-bw)/2, y=by(s.v), h=(H-pad)-y;
+    return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(0,h).toFixed(1)}" rx="3" fill="var(--accent)" opacity="${i===n-1?1:.62}"/>
+      <text x="${(x+bw/2).toFixed(1)}" y="${H-pad+13}" text-anchor="middle" font-size="9.5" fill="var(--faint)" font-family="var(--mono)">${fmtShort(s.d)}</text>`;
+  }).join("");
+  const gridY=[0,.5,1].map(f=>{ const v=hi*f, y=by(v); return `<line x1="${padL}" y1="${y}" x2="${W-pad}" y2="${y}" stroke="var(--border)"/><text x="${padL-8}" y="${y+4}" text-anchor="end" font-size="10" fill="var(--faint)" font-family="var(--mono)">${Math.round(v/1000)}t</text>`; }).join("");
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Volume hebdomadaire">${gridY}${bars}</svg>`;
+}
+function emptyChart(msg){ return `<div class="empty" style="padding:30px 12px"><div class="big">📊</div><span style="font-size:13px">${msg}</span></div>`; }
+
+/* ============================================================
+   ONGLET — PLAN
+   ============================================================ */
+function renderPlan(){
+  const cur = currentPhaseInfo();
+  const start = state.profile.planStart;
+  let acc=0;
+  const rows = PHASES.map(p=>{
+    const from = p.weeks? addDays(start, acc*7): addDays(start, acc*7);
+    const to = p.weeks? addDays(start,(acc+p.weeks)*7-1): null;
+    const active = cur.phase===p;
+    const html=`<div class="phase ${active?'active':''}">
+      <div class="between wrap">
+        <div><b style="font-size:15.5px">${p.name}</b> ${active?'<span class="pill accent" style="font-size:9px;margin-left:6px">EN COURS</span>':''}
+          <div class="mono" style="font-size:12px;color:var(--accent-text);margin-top:2px">${p.scheme}</div>
+        </div>
+        <span class="pill plain">${p.weeks?`${p.weeks} sem · ${fmtShort(from)}→${fmtShort(to)}`:"continu (saison)"}</span>
+      </div>
+      <p class="muted" style="font-size:13.5px;margin:6px 0 0">${p.desc}</p>
+    </div>`;
+    acc+=p.weeks;
+    return html;
+  }).join('<div style="height:14px"></div>');
+
+  const tpl=templateSessions();
+
+  return `
+  <div class="grid">
+    <div><div class="eyebrow">Plan périodisé — fondé sur la recherche</div><h1 style="font-size:24px">Bloc intersaison · force maximale + prévention</h1>
+      <p class="muted" style="margin:8px 0 0;max-width:60ch">Structure validée par la littérature (Rønnestad, Vikmoen) : préparation → force lourde ≥ 80 % 1RM → conversion en puissance, puis maintien 1×/sem en saison. 2 séances/semaine. Concentrique explosif sur les charges lourdes.</p>
+    </div>
+
+    <div class="card pad">
+      <div class="between wrap">
+        <label class="field" style="min-width:170px">Début du bloc<input type="date" id="planStart" value="${start}"></label>
+        <div class="row wrap" style="gap:8px;align-self:flex-end">
+          <button class="btn primary" onclick="generatePlan()">⚡ Générer les séances au calendrier</button>
+          <button class="btn ghost danger sm" onclick="clearGenerated()">Effacer les séances planifiées non faites</button>
+        </div>
+      </div>
+      <p class="muted" style="font-size:12.5px;margin:10px 0 0">Crée automatiquement 2 séances muscu/semaine (${state.profile.muscuDays.map(d=>DOW[d]).join(" & ")}) sur toute la durée du bloc, avec le schéma de la phase. Tu ajustes ensuite par glisser-déposer.</p>
+    </div>
+
+    <div class="card pad">${rows}</div>
+
+    <div class="grid" style="grid-template-columns:1fr 1fr;gap:14px" id="tplCols">
+      ${planTemplateCard(tpl.A)}
+      ${planTemplateCard(tpl.B)}
+    </div>
+    <p class="muted" style="font-size:12.5px">📚 Base scientifique complète dans <span class="kbd">content/muscu-cyclisme/RECHERCHE-scientifique.md</span> du dépôt.</p>
+  </div>
+  <style>@media(max-width:680px){#tplCols{grid-template-columns:1fr !important}}</style>
+  `;
+}
+function planTemplateCard(t){
+  return `<div class="card pad">
+    <h3 style="font-size:16px">${escapeHtml(t.label)}</h3>
+    <ul class="list-clean" style="margin-top:10px">
+      ${t.exos.map(id=>{const e=exById(id);return `<li class="between" style="border-bottom:1px solid var(--border);padding-bottom:6px"><span>${escapeHtml(e?.name||id)}</span><span class="pill ${e?.cat==='force'?'accent':'plain'}" style="font-size:9px">${e?.cat==='force'?'Force':'Prév.'}</span></li>`;}).join("")}
+    </ul>
+  </div>`;
+}
+function generatePlan(){
+  const sd=document.getElementById("planStart"); if(sd&&sd.value) state.profile.planStart=sd.value;
+  const start=state.profile.planStart;
+  const totalWeeks=PHASES.reduce((a,p)=>a+p.weeks,0);
+  const tpl=templateSessions();
+  const days=state.profile.muscuDays;
+  let created=0;
+  for(let w=0; w<totalWeeks; w++){
+    const wkStart=addDays(start, w*7);
+    days.forEach((dow,idx)=>{
+      const date=addDays(wkStart,dow);
+      // évite doublon si une séance muscu existe déjà ce jour
+      if(state.sessions.some(s=>s.date===date&&s.type==="muscu")) return;
+      const key=idx%2===0?"A":"B";
+      const t=tpl[key];
+      state.sessions.push({ id:uid(), date, type:"muscu", status:"planned", title:t.label,
+        entries:t.exos.map(id=>({exerciseId:id, sets:defaultSetsForDate(id,date)})),
+        wellness:{sleep:null,fatigue:null,mood:null,notes:""}, generated:true, createdAt:Date.now() });
+      created++;
+    });
+  }
+  save(); toast(`${created} séances générées 🗓️`);
+  currentTab="calendar"; state.ui.calWeek=mondayOf(start);
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab==="calendar"));
+  render();
+}
+function defaultSetsForDate(exId,date){
+  const daysIn=Math.floor((parseISO(date)-parseISO(state.profile.planStart))/86400000);
+  let acc=0, phase=PHASES[0];
+  for(const p of PHASES){ if(p.weeks===0){phase=p;break;} if(daysIn<(acc+p.weeks)*7){phase=p;break;} acc+=p.weeks; }
+  const ex=exById(exId);
+  const reps= phase.key==="force"?5 : phase.key==="prepa"?10 : phase.key==="conversion"?4 : 4;
+  const n= ex&&ex.cat==="prevention"?3:3;
+  return Array.from({length:n},()=>({weight:"",reps:ex&&ex.weighted?reps:"",rpe:"",rir:""}));
+}
+function clearGenerated(){
+  const before=state.sessions.length;
+  state.sessions=state.sessions.filter(s=>!(s.generated&&s.status==="planned"));
+  save(); render(); toast(`${before-state.sessions.length} séances retirées`);
+}
+
+/* ============================================================
+   ONGLET — DONNÉES (profil, export/import)
+   ============================================================ */
+function renderData(){
+  const p=state.profile;
+  const cnt=state.sessions.length, done=state.sessions.filter(s=>s.status==="done").length;
+  return `
+  <div class="grid">
+    <div><div class="eyebrow">Données & sauvegarde</div><h1 style="font-size:24px">Ton compte, en local</h1>
+      <p class="muted" style="margin:8px 0 0;max-width:62ch">Tes données sont enregistrées <b>automatiquement dans ce navigateur</b> (rien ne se perd entre deux visites sur le même appareil). Pour une sauvegarde durable et multi-appareils, <b>exporte le fichier JSON</b> et donne-le à Claude : il le versionne dans le dépôt Git. Tu peux le réimporter n'importe où.</p>
+    </div>
+
+    <div class="card pad">
+      <h3>Profil</h3>
+      <div class="row wrap" style="gap:12px;margin-top:12px">
+        <label class="field" style="flex:1;min-width:160px">Prénom<input type="text" id="pName" value="${escapeAttr(p.name||"")}" placeholder="Ton prénom"></label>
+        <label class="field" style="flex:1;min-width:140px">Poids de corps (kg)<input type="number" id="pBw" value="${p.bodyweight??""}" placeholder="ex : 70"></label>
+      </div>
+      <div class="row wrap" style="gap:12px;margin-top:12px">
+        <label class="field" style="flex:1;min-width:160px">Jours de muscu
+          <div class="row wrap" style="gap:6px" id="dowPick">
+            ${DOW.map((d,i)=>`<button type="button" class="btn sm ${state.profile.muscuDays.includes(i)?'primary':'ghost'}" data-dow="${i}">${d}</button>`).join("")}
+          </div>
+        </label>
+      </div>
+      <button class="btn primary sm" style="margin-top:14px" onclick="saveProfile()">Enregistrer le profil</button>
+    </div>
+
+    <div class="card pad">
+      <h3>Sauvegarde</h3>
+      <div class="stat-grid" style="margin:12px 0">
+        ${stat("Séances",cnt,"dans la base")}
+        ${stat("Réalisées",done,"marquées faites")}
+        ${stat("Exercices",state.exercises.length,"dans la bibliothèque")}
+      </div>
+      <div class="row wrap" style="gap:10px">
+        <button class="btn primary" onclick="exportJSON()">⭳ Exporter (JSON)</button>
+        <label class="btn" style="cursor:pointer">⭱ Importer un fichier<input type="file" id="importFile" accept="application/json,.json" class="hidden"></label>
+        <button class="btn" onclick="copyJSON()">⧉ Copier le JSON</button>
+        <span class="top-spacer" style="flex:1"></span>
+        <button class="btn ghost danger" onclick="resetAll()">Tout réinitialiser</button>
+      </div>
+      <p class="muted" style="font-size:12.5px;margin:12px 0 0">💡 Pour versionner dans Git : exporte, puis dis à Claude « voici ma sauvegarde » avec le fichier — il l'ajoute à <span class="kbd">content/muscu-cyclisme/</span>.</p>
+    </div>
+
+    <div class="card pad">
+      <div class="between wrap">
+        <div><h3>Strava</h3><p class="muted" style="font-size:13.5px;margin:6px 0 0;max-width:52ch">Importe automatiquement tes sorties vélo dans le calendrier (distance, dénivelé, durée, effort relatif). Elles se placent à côté de la muscu pour gérer la fatigue combinée.</p></div>
+        <span class="pill ${stravaAvailable()?'good':'plain'}" id="stravaStatus">${stravaAvailable()?'connecteur prêt':'hors app publiée'}</span>
+      </div>
+      <div class="row wrap" style="gap:10px;margin-top:14px">
+        <button class="btn primary" onclick="syncStrava(this)">↻ Synchroniser mes sorties</button>
+        <button class="btn" onclick="importStravaProfile(this)">Importer mon profil (poids)</button>
+        <span class="top-spacer" style="flex:1"></span>
+        ${ state.profile.stravaLastSync ? `<span class="muted" style="font-size:12.5px;align-self:center">Dernière synchro : ${new Date(state.profile.stravaLastSync).toLocaleString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</span>` : "" }
+      </div>
+      ${ !stravaAvailable() ? `<p class="muted" style="font-size:12.5px;margin:12px 0 0">ℹ️ La synchro fonctionne quand tu ouvres l'app <b>publiée sur claude.ai</b> avec le connecteur Strava activé. Ouverte comme fichier local, ce bouton reste inactif.</p>` : "" }
+    </div>
+  </div>`;
+}
+function wireData(){
+  const dp=document.getElementById("dowPick");
+  if(dp) dp.addEventListener("click",e=>{ const b=e.target.closest("[data-dow]"); if(!b)return; const i=+b.dataset.dow; const arr=state.profile.muscuDays; const k=arr.indexOf(i); if(k>=0){ if(arr.length>1)arr.splice(k,1);} else { arr.push(i); arr.sort((a,b)=>a-b);} render(); });
+  const f=document.getElementById("importFile");
+  if(f) f.addEventListener("change",importJSON);
+}
+function saveProfile(){
+  const n=document.getElementById("pName"), bw=document.getElementById("pBw");
+  state.profile.name=n.value.trim(); state.profile.bodyweight=bw.value?+bw.value:null;
+  save(); toast("Profil enregistré"); render();
+}
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob);
+  a.download=`probikestock-muscu-${today()}.json`; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  toast("Fichier exporté ⭳");
+}
+async function copyJSON(){
+  try{ await navigator.clipboard.writeText(JSON.stringify(state,null,2)); toast("JSON copié dans le presse-papier ⧉"); }
+  catch(e){ toast("Copie impossible — utilise l'export fichier"); }
+}
+function importJSON(e){
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=()=>{ try{ const data=JSON.parse(r.result); if(!data||typeof data!=="object") throw 0;
+    state=migrate(data); save(); render(); toast("Sauvegarde importée ✓"); }
+    catch(err){ toast("⚠️ Fichier invalide"); } };
+  r.readAsText(file);
+}
+function resetAll(){
+  if(!confirm("Effacer TOUTES les données et repartir de zéro ?")) return;
+  state=defaultState(); save(); currentTab="board";
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab==="board"));
+  render(); toast("Réinitialisé");
+}
+
+/* ============================================================
+   RÉPERTOIRE D'EXERCICES — fiches détaillées + illustrations SVG
+   ============================================================ */
+const EXG = {
+  squat: {
+    muscles:["Quadriceps","Fessiers"], also:["Ischios","Lombaires","Gainage"], material:"Barre + rack (ou Smith)",
+    dose:"Prépa 3×10–12 · Force 4×4–6 (≥80 %) · concentrique explosif",
+    desc:"Le mouvement roi pour la force des membres inférieurs. Le demi-squat (descente jusqu'à cuisses ~parallèles) est la variante la plus étudiée — et la plus efficace — chez le cycliste.",
+    steps:[
+      "Barre calée sur le haut des trapèzes, pieds largeur d'épaules, pointes légèrement ouvertes.",
+      "Inspire, gaine le tronc et verrouille le dos en position neutre.",
+      "Descends en poussant les hanches vers l'arrière puis en pliant les genoux, jusqu'à cuisses parallèles au sol.",
+      "Remonte en poussant fort dans le sol : phase concentrique la plus explosive possible.",
+    ],
+    dos:["Dos neutre et gainé du début à la fin","Genoux dans l'axe des pointes de pieds","Appui réparti mi-pied / talon","Regard vers l'horizon"],
+    donts:["Genoux qui rentrent vers l'intérieur","Talons qui décollent","Dos qui s'arrondit en bas","Rebond élastique en position basse"],
+    transfer:"Développe la force maximale des extenseurs de jambe : c'est la base de tout le transfert vers le vélo. Plus de force max = plus de watts sur les relances, les bosses et les sprints, et une meilleure économie de pédalage (chaque coup de pédale ne représente plus qu'un pourcentage plus faible de ta force maximale, donc moins fatigant à intensité donnée).",
+  },
+  presse1j: {
+    muscles:["Quadriceps","Fessiers"], also:["Ischios"], material:"Presse à cuisses (leg press)",
+    dose:"3×6–8 par jambe, charge lourde",
+    desc:"Renforce chaque jambe séparément avec très peu de contrainte sur le dos. Le geste de poussée est proche de la phase motrice du pédalage.",
+    steps:[
+      "Installe-toi, dos et bassin bien plaqués, un seul pied à plat au centre de la plateforme.",
+      "Déverrouille la sécurité, contrôle la descente en amenant le genou vers la poitrine (~90°).",
+      "Pousse la plateforme sans verrouiller le genou d'un coup sec en fin de mouvement.",
+      "Répète, puis change de jambe.",
+    ],
+    dos:["Bassin et bas du dos plaqués au siège","Genou aligné avec le pied","Amplitude complète et contrôlée"],
+    donts:["Verrouillage brutal du genou","Amplitude trop courte","Bassin qui décolle / dos qui s'arrondit"],
+    transfer:"Le travail unilatéral corrige les déséquilibres droite/gauche, très fréquents chez le cycliste, et sécurise le dos. Le transfert sur la poussée jambe par jambe est direct : tu renforces exactement le geste qui produit les watts, sans le maillon faible du dos.",
+  },
+  bulgare: {
+    muscles:["Quadriceps","Fessiers"], also:["Ischios","Stabilisateurs hanche/cheville"], material:"Banc + haltères",
+    dose:"3×8 par jambe",
+    desc:"Fente unilatérale pied arrière surélevé : travaille à la fois la force ET la stabilité du bassin, essentielle pour la posture sur le vélo.",
+    steps:[
+      "Place le dessus du pied arrière sur un banc, l'autre pied bien en avant.",
+      "Descends verticalement jusqu'à ce que le genou avant atteigne ~90°, buste légèrement incliné.",
+      "Garde le bassin horizontal et stable pendant toute la descente.",
+      "Remonte en poussant dans le talon avant.",
+    ],
+    dos:["Genou avant au-dessus du pied (ne le dépasse pas trop)","Bassin stable et horizontal","Tronc gainé"],
+    donts:["Genou qui part vers l'intérieur","Pas trop court (genou trop en avant)","Bascule / rotation du bassin"],
+    transfer:"En sollicitant fessiers et stabilisateurs de hanche, cet exercice rend ton bassin stable sous l'effort : moins de fuites de puissance, moins de douleurs lombaires, et un meilleur équilibre entre les deux jambes — donc un pédalage plus symétrique et efficace.",
+  },
+  sdtroumain: {
+    muscles:["Ischios","Fessiers"], also:["Lombaires","Dorsaux","Gainage"], material:"Barre (ou haltères)",
+    dose:"3×6–8",
+    desc:"Soulevé de terre jambes semi-tendues : cible la chaîne postérieure en excentrique, équilibre le travail des quadriceps et protège le dos.",
+    steps:[
+      "Debout, barre contre les cuisses, genoux légèrement fléchis (angle fixe).",
+      "Pousse les hanches vers l'arrière en gardant le dos parfaitement neutre (charnière de hanche).",
+      "Descends la barre le long des jambes jusqu'à sentir l'étirement des ischios.",
+      "Reviens en contractant fessiers et ischios, barre toujours proche du corps.",
+    ],
+    dos:["Dos plat et gréé en permanence","Barre qui frôle les jambes","Mouvement de bascule des hanches, pas un squat"],
+    donts:["Dos qui s'arrondit","Barre qui s'éloigne du corps","Plier les genoux comme un squat"],
+    transfer:"Une chaîne postérieure forte améliore la phase haute et arrière du coup de pédale (le « tirage ») et surtout blinde ton dos pour tenir la position sur les longues sorties et en position aéro sans douleur ni perte de rendement.",
+  },
+  hipthrust: {
+    muscles:["Fessiers"], also:["Ischios"], material:"Banc + barre (avec coussin)",
+    dose:"3×6–8, contraction marquée en haut",
+    desc:"L'exercice le plus ciblé pour la puissance des fessiers — le grand moteur, souvent sous-exploité, de l'extension de hanche.",
+    steps:[
+      "Haut du dos calé sur un banc, barre sur le pli du bassin (coussin), pieds à plat.",
+      "Monte le bassin jusqu'à aligner épaules, hanches et genoux.",
+      "Serre fort les fessiers en haut ; les tibias doivent être verticaux.",
+      "Redescends de façon contrôlée sans poser complètement.",
+    ],
+    dos:["Menton légèrement rentré","Tibias verticaux en position haute","Extension par les fessiers"],
+    donts:["Hyperextension du bas du dos","Amplitude partielle","Pousser sur les pointes de pieds"],
+    transfer:"Chez le cycliste, les fessiers sont puissants mais souvent « endormis » au profit des quadriceps. Les renforcer spécifiquement augmente ta puissance d'extension de hanche (des watts directement exploitables) et stabilise ton bassin sur la selle.",
+  },
+  mollets: {
+    muscles:["Mollets (triceps sural)"], also:["Cheville / tendon d'Achille"], material:"Machine mollets ou marche + charge",
+    dose:"3×8–12",
+    desc:"Renforce la cheville et le mollet, dernier maillon de la transmission de la force vers la pédale.",
+    steps:[
+      "Avant-pieds sur un rebord, talons dans le vide, charge en place.",
+      "Monte sur la pointe des pieds au maximum de l'amplitude.",
+      "Descends le talon sous le niveau du rebord pour étirer le mollet.",
+      "Contrôle la descente, sans rebond.",
+    ],
+    dos:["Amplitude complète (haut ET bas)","Tempo contrôlé","Léger temps d'arrêt en haut"],
+    donts:["Amplitude trop courte","Rebond élastique","Charge au détriment de l'amplitude"],
+    transfer:"Une cheville forte et rigide transmet mieux la force produite par les grosses masses musculaires jusqu'à la pédale et résiste mieux à la fatigue en fin de sortie, quand la cheville a tendance à « s'affaisser ».",
+  },
+  copenhagen: {
+    muscles:["Adducteurs","Gainage latéral"], also:["Obliques","Stabilisateurs de hanche"], material:"Banc",
+    dose:"3×20–40 s par côté",
+    desc:"Gainage latéral avancé qui renforce puissamment les adducteurs et la stabilité du bassin — une des meilleures préventions du cycliste.",
+    steps:[
+      "Allongé sur le côté, pose le pied (difficile) ou le genou (plus facile) de la jambe supérieure sur un banc.",
+      "Appuie-toi sur l'avant-bras au sol, corps sur le côté.",
+      "Soulève le bassin jusqu'à former une ligne droite tête-bassin-pieds.",
+      "Maintiens en respirant, puis change de côté.",
+    ],
+    dos:["Corps parfaitement aligné","Bassin haut","Commencer genou fléchi puis progresser jambe tendue"],
+    donts:["Bassin qui s'affaisse","Rotation du tronc","Bloquer sa respiration"],
+    transfer:"Des adducteurs forts et un bassin stable latéralement rendent ton pédalage plus propre et centré (les genoux ne partent plus vers l'extérieur/intérieur), réduisent les douleurs de hanche et de genou, et améliorent le transfert de puissance.",
+  },
+  pallof: {
+    muscles:["Gainage anti-rotation","Obliques"], also:["Transverse","Épaules"], material:"Poulie ou élastique",
+    dose:"3×10–12 par côté",
+    desc:"Renforce le tronc en anti-rotation — c'est la vraie fonction du gainage sur le vélo : empêcher le buste de se tordre.",
+    steps:[
+      "Place-toi de profil par rapport à l'ancrage (poulie/élastique), mains jointes au niveau du sternum.",
+      "Tends les bras droit devant toi en résistant à la traction qui veut te faire pivoter.",
+      "Tiens 1–2 s bras tendus sans tourner, puis reviens contrôlé.",
+      "Change de côté.",
+    ],
+    dos:["Bassin et épaules bien face à l'avant","Résister à la rotation, ne pas tourner","Gainage continu"],
+    donts:["Rotation du buste vers l'ancrage","Épaules qui remontent","Bras qui montent au lieu d'aller droit"],
+    transfer:"Un tronc qui ne se tord pas garantit que toute la force de tes jambes part dans la pédale au lieu de se dissiper dans un mouvement parasite du buste. Décisif en danseuse, au sprint et sur les relances où le haut du corps travaille.",
+  },
+  deadbug: {
+    muscles:["Abdos profonds (transverse)","Gainage anti-extension"], also:["Coordination"], material:"Aucun (tapis)",
+    dose:"3×8–10 par côté",
+    desc:"Apprend à verrouiller le bas du dos pendant que les membres bougent : la base de la protection lombaire, sans risque pour le dos.",
+    steps:[
+      "Allongé sur le dos, bras tendus vers le plafond, hanches et genoux fléchis à 90°.",
+      "Colle le bas du dos au sol et garde-le collé pendant tout l'exercice.",
+      "Descends lentement le bras et la jambe opposés vers le sol sans creuser le dos.",
+      "Reviens et alterne.",
+    ],
+    dos:["Bas du dos plaqué au sol en permanence","Mouvements lents et contrôlés","Respiration régulière"],
+    donts:["Cambrure du bas du dos qui se creuse","Aller trop vite","Retenir sa respiration"],
+    transfer:"Ce contrôle lombaire est exactement ce qui te permet de tenir une position basse/aéro longtemps sans douleur, et de garder un bassin stable — le socle d'un pédalage efficace où l'énergie ne fuit pas dans le dos.",
+  },
+  glutebridge: {
+    muscles:["Fessiers"], also:["Ischios","Gainage"], material:"Aucun (tapis)",
+    dose:"2–3×10–12 par jambe",
+    desc:"Active et renforce les fessiers jambe par jambe : corrige les asymétries, améliore la posture du bassin. Parfait aussi en activation/échauffement.",
+    steps:[
+      "Sur le dos, un pied à plat au sol genou fléchi, l'autre jambe tendue en l'air.",
+      "Monte le bassin en poussant dans le talon, par la force du fessier.",
+      "Aligne épaule–hanche–genou en haut, sans laisser le bassin partir de travers.",
+      "Redescends contrôlé, puis change de jambe.",
+    ],
+    dos:["Bassin horizontal (ne pas s'affaisser d'un côté)","Poussée dans le talon","Sentir le fessier travailler"],
+    donts:["Bascule du bassin","Pousser avec le bas du dos","Amplitude trop courte"],
+    transfer:"Il réveille des fessiers souvent sous-actifs chez le cycliste, stabilise le bassin et soulage le bas du dos. Excellent comme exercice d'activation avant les gros mouvements (squat, hip thrust) pour mieux les recruter.",
+  },
+};
+
+/* ---------- illustrations SVG (autonomes, adaptatives au thème) ---------- */
+function _svg(inner){ return `<svg class="ex-svg" viewBox="0 0 260 188" role="img" aria-hidden="true">${inner}</svg>`; }
+const _G = `<line x1="24" y1="176" x2="236" y2="176" stroke="currentColor" stroke-width="2" opacity=".2" stroke-linecap="round"/>`;
+function _b(a,b,w){ return `<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="currentColor" stroke-width="${w||9}" stroke-linecap="round"/>`; }
+function _h(c,r){ return `<circle cx="${c[0]}" cy="${c[1]}" r="${r||11}" fill="var(--surface)" stroke="currentColor" stroke-width="5"/>`; }
+function _gl(c,rx,ry,rot){ return `<ellipse cx="${c[0]}" cy="${c[1]}" rx="${rx}" ry="${ry}" transform="rotate(${rot||0} ${c[0]} ${c[1]})" fill="var(--accent)" opacity=".38"/>`; }
+function _plate(c){ return `<circle cx="${c[0]}" cy="${c[1]}" r="13" fill="var(--surface)" stroke="currentColor" stroke-width="5"/><circle cx="${c[0]}" cy="${c[1]}" r="3" fill="currentColor"/>`; }
+function _db(c){ return `<g stroke="currentColor" stroke-width="5" stroke-linecap="round"><line x1="${c[0]-11}" y1="${c[1]}" x2="${c[0]+11}" y2="${c[1]}"/><line x1="${c[0]-11}" y1="${c[1]-6}" x2="${c[0]-11}" y2="${c[1]+6}"/><line x1="${c[0]+11}" y1="${c[1]-6}" x2="${c[0]+11}" y2="${c[1]+6}"/></g>`; }
+function _arrow(x,y1,y2){ return `<g stroke="var(--accent)" stroke-width="3" fill="none" stroke-linecap="round"><line x1="${x}" y1="${y1+7}" x2="${x}" y2="${y2-7}"/><path d="M ${x} ${y1} l -4 7 M ${x} ${y1} l 4 7"/><path d="M ${x} ${y2} l -4 -7 M ${x} ${y2} l 4 -7"/></g>`; }
+function _arrowH(y,x1,x2){ return `<g stroke="var(--accent)" stroke-width="3" fill="none" stroke-linecap="round"><line x1="${x1+7}" y1="${y}" x2="${x2-7}" y2="${y}"/><path d="M ${x2} ${y} l -7 -4 M ${x2} ${y} l -7 4"/></g>`; }
+function _benchTop(x1,x2,y){ return `<rect x="${x1}" y="${y}" width="${x2-x1}" height="7" rx="2" fill="currentColor" opacity=".5"/><line x1="${x1+7}" y1="${y+7}" x2="${x1+7}" y2="176" stroke="currentColor" stroke-width="4" opacity=".5" stroke-linecap="round"/><line x1="${x2-7}" y1="${y+7}" x2="${x2-7}" y2="176" stroke="currentColor" stroke-width="4" opacity=".5" stroke-linecap="round"/>`; }
+
+function exerciseSVG(id){
+  switch(id){
+    case "squat": return _svg(
+      _gl([144,131],19,8,-8)+_gl([126,132],11,11,0)+
+      _b([120,88],[126,132],9)+           // torse quasi vertical, léger avant
+      _b([126,132],[162,130],10)+_b([162,130],[150,174],10)+  // cuisse ~parallèle + tibia
+      _b([122,90],[138,82],7)+_b([138,82],[128,92],7)+        // bras qui tiennent la barre sur le dos
+      _h([116,72])+ _plate([122,90])+     // barre sur les trapèzes
+      _G+_arrow(202,104,150));
+    case "presse1j": return _svg(
+      `<rect x="30" y="120" width="18" height="56" rx="3" fill="currentColor" opacity=".4"/>`+ // dossier siège
+      _gl([150,116],19,8,-30)+
+      _b([70,150],[118,138],9)+           // torse allongé/reclined
+      _b([118,138],[150,110],10)+_b([150,110],[182,96],10)+  // cuisse + tibia vers plateforme
+      _b([70,150],[86,142],7)+            // bras
+      _h([60,148])+
+      `<rect x="184" y="74" width="10" height="44" rx="3" transform="rotate(18 189 96)" fill="currentColor" opacity=".55"/>`+ // plateforme
+      _G+_arrow(214,92,128));
+    case "bulgare": return _svg(
+      _benchTop(60,96,132)+
+      _gl([150,150],17,8,-78)+_gl([138,120],10,10,0)+
+      _b([138,86],[138,122],9)+          // torse vertical
+      _b([138,122],[152,150],10)+_b([152,150],[150,174],10)+ // jambe avant fléchie
+      _b([138,122],[110,140],9)+_b([110,140],[86,138],10)+   // jambe arrière vers banc
+      _b([138,92],[150,112],7)+_b([146,92],[134,112],7)+     // bras (haltères)
+      _h([138,74])+ _db([150,116])+_db([134,116])+
+      _G+_arrow(200,104,150));
+    case "sdtroumain": return _svg(
+      _gl([150,126],9,17,80)+
+      _b([116,86],[150,116],9)+          // torse en bascule avant
+      _b([150,116],[146,140],10)+_b([146,140],[142,174],10)+ // jambe semi-tendue
+      _b([116,86],[122,120],7)+          // bras qui pendent
+      _h([106,80])+
+      `<line x1="104" y1="122" x2="140" y2="122" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>`+ // barre
+      _plate([104,122])+_plate([140,122])+
+      _G+`<path d="M 186 108 q 22 16 6 42" stroke="var(--accent)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M 192 148 l 0 -9 M 192 148 l -8 -3" stroke="var(--accent)" stroke-width="3" fill="none" stroke-linecap="round"/>`);
+    case "hipthrust": return _svg(
+      _benchTop(64,104,116)+
+      _gl([150,122],13,11,0)+
+      _b([98,120],[150,122],9)+          // torse horizontal (tabletop)
+      _b([150,122],[176,124],10)+_b([176,124],[178,172],10)+ // cuisse + tibia vertical
+      _b([98,120],[86,120],7)+          // épaule/bras sur banc
+      _h([80,118])+
+      `<line x1="136" y1="108" x2="164" y2="108" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>`+ // barre sur bassin
+      _plate([136,108])+_plate([164,108])+
+      _G+_arrow(120,146,116));
+    case "mollets": return _svg(
+      `<rect x="150" y="168" width="30" height="8" rx="2" fill="currentColor" opacity=".45"/>`+ // marche
+      _gl([132,150],8,17,0)+
+      _b([136,58],[136,104],9)+          // torse
+      _b([136,104],[138,132],10)+_b([138,132],[140,166],10)+ // jambe
+      `<line x1="140" y1="166" x2="156" y2="166" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>`+ // avant-pied sur marche
+      _b([136,70],[126,104],7)+ _db([120,104])+
+      _h([136,50])+
+      _G+_arrow(196,120,150));
+    case "copenhagen": return _svg(
+      _benchTop(178,214,120)+
+      _gl([150,132],16,8,-16)+
+      _b([92,166],[112,166],7)+          // avant-bras au sol
+      _b([100,150],[196,124],9)+         // corps en ligne (épaule -> pied haut)
+      _b([100,150],[100,166],9)+         // appui épaule->coude
+      _h([90,144])+
+      _G+`<path d="M 120 96 q 20 -10 40 0" stroke="var(--accent)" stroke-width="3" fill="none" stroke-linecap="round"/>`);
+    case "pallof": return _svg(
+      `<rect x="26" y="70" width="9" height="70" rx="2" fill="currentColor" opacity=".4"/>`+ // ancrage mur
+      _gl([132,108],12,14,0)+
+      _b([132,80],[132,120],9)+          // torse
+      _b([132,120],[122,150],10)+_b([122,150],[120,174],10)+ // jambe 1
+      _b([132,120],[142,150],10)+_b([142,150],[146,174],10)+ // jambe 2
+      _b([132,86],[152,92],7)+_b([152,92],[172,94],7)+       // bras tendus devant
+      _h([132,66])+
+      `<line x1="35" y1="94" x2="172" y2="94" stroke="var(--accent)" stroke-width="3" stroke-dasharray="5 5" stroke-linecap="round"/>`+ // câble
+      _G+_arrowH(120,150,196));
+    case "deadbug": return _svg(
+      _gl([124,150],14,7,0)+
+      _b([96,152],[150,152],9)+          // tronc au sol
+      _b([96,152],[74,124],7)+           // bras opposé tendu (arrière)
+      _b([150,152],[176,124],10)+_b([176,124],[200,124],10)+ // jambe fléchie en l'air
+      _b([150,152],[150,116],10)+        // autre jambe/cuisse levée droite (repère)
+      _b([120,152],[120,116],7)+         // bras vertical
+      _h([84,152])+
+      `<line x1="60" y1="164" x2="210" y2="164" stroke="currentColor" stroke-width="2" opacity=".2" stroke-linecap="round"/>`+
+      _arrow(232,126,150));
+    case "glutebridge": return _svg(
+      _gl([140,132],12,11,0)+
+      _b([92,158],[140,130],9)+          // épaules au sol -> hanche montée
+      _b([140,130],[168,132],10)+_b([168,132],[170,158],10)+ // jambe d'appui
+      _b([140,130],[196,120],10)+        // jambe tendue en l'air
+      _b([92,158],[80,158],7)+
+      _h([74,156])+
+      `<line x1="58" y1="164" x2="210" y2="164" stroke="currentColor" stroke-width="2" opacity=".2" stroke-linecap="round"/>`+
+      _arrow(120,150,124));
+    default: return _svg(`<circle cx="130" cy="90" r="30" fill="none" stroke="currentColor" stroke-width="4" opacity=".3"/><text x="130" y="150" text-anchor="middle" font-size="12" fill="currentColor" opacity=".5" font-family="var(--mono)">exercice</text>`);
+  }
+}
+
+/* ---------- onglet Exercices ---------- */
+function renderExercises(){
+  const force = state.exercises.filter(e=>e.cat==="force" && EXG[e.id]);
+  const prev  = state.exercises.filter(e=>e.cat==="prevention" && EXG[e.id]);
+  const section = (title,sub,list)=>`
+    <div>
+      <div class="eyebrow" style="margin:0 0 2px">${sub}</div>
+      <h3 style="margin:0 0 12px">${title}</h3>
+      <div class="ex-grid">${list.map(exCard).join("")}</div>
+    </div>`;
+  return `
+  <div class="grid">
+    <div><div class="eyebrow">Répertoire</div><h1 style="font-size:24px">Bibliothèque d'exercices</h1>
+      <p class="muted" style="margin:8px 0 0;max-width:60ch">Chaque fiche détaille l'exécution, les erreurs à éviter, le dosage selon ta phase, et <b>à quoi l'exercice sert pour ta progression à vélo</b>. Clique une carte pour l'ouvrir.</p>
+    </div>
+    ${section("Force","Développement de la puissance",force)}
+    ${section("Prévention & gainage","Posture, stabilité, anti-blessure",prev)}
+    <p class="muted" style="font-size:12.5px">📚 Fondements dans <span class="kbd">content/muscu-cyclisme/RECHERCHE-scientifique.md</span>.</p>
+  </div>`;
+}
+function exCard(e){
+  const g=EXG[e.id];
+  return `<div class="card ex-card" onclick="openGuide('${e.id}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openGuide('${e.id}')">
+    <div class="ex-thumb">${exerciseSVG(e.id)}</div>
+    <div class="ex-card-bd">
+      <div class="nm">${escapeHtml(e.name)}</div>
+      <div class="tag-row">${g.muscles.map(m=>`<span class="pill accent" style="font-size:9px">${escapeHtml(m)}</span>`).join("")}</div>
+    </div>
+  </div>`;
+}
+function guideFromSession(id){
+  if(!EXG[id]){ toast("Pas encore de fiche pour cet exercice"); return; }
+  collectFromDOM(); save();
+  openGuide(id, true);
+}
+function openGuide(id, fromSession){
+  const e=exById(id), g=EXG[id];
+  if(!g){ toast("Pas encore de fiche pour cet exercice"); return; }
+  const back = fromSession ? "reopenSession()" : "closeModal()";
+  modal(`
+    <div class="modal-hd">
+      <div><h3 style="font-size:19px">${escapeHtml(e?e.name:id)}</h3>
+        <div class="muted" style="font-size:12.5px">${escapeHtml(g.material)}</div></div>
+      <button class="icon-btn" onclick="${back}">✕</button>
+    </div>
+    <div class="modal-bd">
+      <div class="guide-svg-wrap">${exerciseSVG(id)}</div>
+
+      <div class="tag-row">
+        ${g.muscles.map(m=>`<span class="pill accent">${escapeHtml(m)}</span>`).join("")}
+        ${g.also.map(m=>`<span class="pill plain">${escapeHtml(m)}</span>`).join("")}
+      </div>
+
+      <p style="margin:0">${escapeHtml(g.desc)}</p>
+
+      <div>
+        <div class="eyebrow" style="margin:0 0 8px">Exécution</div>
+        <ol class="guide-steps">${g.steps.map(s=>`<li>${escapeHtml(s)}</li>`).join("")}</ol>
+      </div>
+
+      <div class="row wrap" style="gap:16px">
+        <div style="flex:1;min-width:180px">
+          <div class="eyebrow" style="margin:0 0 8px">Points-clés</div>
+          <ul class="do-list">${g.dos.map(s=>`<li><span>${escapeHtml(s)}</span></li>`).join("")}</ul>
+        </div>
+        <div style="flex:1;min-width:180px">
+          <div class="eyebrow" style="margin:0 0 8px">Erreurs à éviter</div>
+          <ul class="dont-list">${g.donts.map(s=>`<li><span>${escapeHtml(s)}</span></li>`).join("")}</ul>
+        </div>
+      </div>
+
+      <div class="transfer-box">
+        <h4 style="margin:0 0 7px">🚴 À quoi ça sert pour ta progression</h4>
+        <p style="margin:0;font-size:14.5px">${escapeHtml(g.transfer)}</p>
+      </div>
+
+      <div class="between" style="border-top:1px solid var(--border);padding-top:12px">
+        <span class="eyebrow" style="margin:0">Dosage conseillé</span>
+        <span class="mono" style="font-size:13px;color:var(--accent-text);font-weight:700;text-align:right">${escapeHtml(g.dose)}</span>
+      </div>
+    </div>
+    <div class="modal-ft">
+      <button class="btn primary" onclick="${back}">${fromSession?"← Retour à la séance":"Fermer"}</button>
+    </div>
+  `);
+}
+
+/* ============================================================
+   STRAVA — synchro via le connecteur claude.ai (window.claude.mcp)
+   ============================================================ */
+const STRAVA_SERVER = "Strava";
+const RIDE_RE = /ride/i; // Ride, VirtualRide, GravelRide, MountainBikeRide, EBikeRide…
+
+function stravaAvailable(){ return !!(window.claude && window.claude.mcp); }
+
+function renderStravaBlock(sv){
+  const cells=[
+    ["Distance", sv.distance_km!=null?`${sv.distance_km} km`:"–"],
+    ["Dénivelé", sv.elevation!=null?`${sv.elevation} m`:"–"],
+    ["Durée", sv.moving_min!=null?`${Math.floor(sv.moving_min/60)}h${String(sv.moving_min%60).padStart(2,'0')}`:"–"],
+    ["Vit. moy.", sv.avg_speed!=null?`${sv.avg_speed} km/h`:"–"],
+    ["Effort", sv.effort!=null?`${sv.effort}`:"–"],
+    ["Calories", sv.calories!=null?`${sv.calories}`:"–"],
+  ];
+  return `<div>
+    <div class="eyebrow" style="margin:0 0 8px">Données Strava <span class="pill warn" style="font-size:9px">importé</span></div>
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr);gap:8px">
+      ${cells.map(([k,v])=>`<div class="card" style="padding:10px 12px"><div class="k" style="font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--faint)">${k}</div><div class="num" style="font-family:var(--disp);font-weight:800;font-size:18px;margin-top:2px">${v}</div></div>`).join("")}
+    </div>
+  </div>`;
+}
+
+function mapStravaActivity(a){
+  const sum = a.summary||{};
+  return {
+    id: String(a.id),
+    distance_km: sum.distance!=null ? +(sum.distance/1000).toFixed(1) : null,
+    elevation: sum.elevation_gain!=null ? Math.round(sum.elevation_gain) : null,
+    moving_min: sum.moving_time!=null ? Math.round(sum.moving_time/60) : null,
+    avg_speed: sum.avg_speed!=null ? +(sum.avg_speed*3.6).toFixed(1) : null,
+    effort: sum.relative_effort!=null ? sum.relative_effort : null,
+    calories: sum.total_calories!=null ? sum.total_calories : null,
+    cadence: sum.avg_cadence!=null ? Math.round(sum.avg_cadence) : null,
+    sport: a.sport_type||"Ride",
+  };
+}
+
+async function callStrava(tool, input){
+  if(!stravaAvailable()){ const e=new Error("no-mcp"); e.code="capability_disabled"; throw e; }
+  const res = await window.claude.mcp.callTool(STRAVA_SERVER, tool, input);
+  let p = res && res.payload;
+  if(typeof p === "string"){ try{ p = JSON.parse(p); }catch(_e){} }
+  return p;
+}
+
+async function syncStrava(btn){
+  if(!stravaAvailable()){
+    toast("Synchro dispo depuis l'app publiée sur claude.ai (connecteur Strava activé)");
+    return;
+  }
+  const label = btn ? btn.textContent : null;
+  if(btn){ btn.disabled=true; btn.textContent="↻ Synchro…"; }
+  try{
+    const start = addDays(today(), -120);
+    const data = await callStrava("list_activities", { first:100, range_start: start+"T00:00:00", ordering:"StartDateLocalDesc" });
+    const acts = (data && data.activities) || [];
+    let added=0, updated=0, rides=0;
+    acts.forEach(a=>{
+      if(!RIDE_RE.test(a.sport_type||"")) return;
+      rides++;
+      const date=(a.start_local||"").slice(0,10); if(!date) return;
+      const sv=mapStravaActivity(a);
+      let s=state.sessions.find(x=>x.strava && x.strava.id===sv.id);
+      if(s){ s.date=date; s.title=a.name||"Sortie vélo"; s.duration=sv.moving_min; s.strava=sv; updated++; }
+      else {
+        state.sessions.push({ id:uid(), date, type:"velo", status:"done", title:a.name||"Sortie vélo",
+          duration:sv.moving_min, entries:[], wellness:{sleep:null,fatigue:null,mood:null,notes:""},
+          strava:sv, createdAt:Date.now() });
+        added++;
+      }
+    });
+    state.profile.stravaLastSync = Date.now();
+    save(); render();
+    toast(rides ? `Strava : ${added} ajoutée(s), ${updated} à jour` : "Aucune sortie vélo sur 120 j");
+  }catch(err){
+    if(btn){ btn.disabled=false; btn.textContent=label; }
+    handleStravaError(err);
+  }
+}
+
+async function importStravaProfile(btn){
+  if(!stravaAvailable()){ toast("Disponible depuis l'app publiée sur claude.ai"); return; }
+  const label = btn ? btn.textContent : null;
+  if(btn){ btn.disabled=true; btn.textContent="…"; }
+  try{
+    const p = await callStrava("get_athlete_profile", {});
+    if(p){
+      if(p.weight) state.profile.bodyweight = p.weight;
+      if(!state.profile.name && p.first_name) state.profile.name = p.first_name;
+      save(); render();
+      toast(`Profil importé : ${p.first_name||""} ${p.weight?`· ${p.weight} kg`:""}`.trim());
+    } else { if(btn){btn.disabled=false;btn.textContent=label;} toast("Profil vide"); }
+  }catch(err){ if(btn){ btn.disabled=false; btn.textContent=label; } handleStravaError(err); }
+}
+
+function handleStravaError(err){
+  const code = err && err.code;
+  const map = {
+    needs_reauth:        "Strava déconnecté — reconnecte-le dans claude.ai › Réglages › Connecteurs.",
+    server_not_connected:"Ajoute le connecteur Strava dans claude.ai › Réglages › Connecteurs.",
+    selection_required:  "Plusieurs comptes Strava — choisis-en un dans l'invite claude.ai puis réessaie.",
+    not_in_manifest:     "Accès Strava non autorisé pour cette page.",
+    blocked_by_policy:   "Strava est bloqué par la politique de ton organisation.",
+    approval_required:   "Cet appel Strava requiert une approbation non disponible ici.",
+    server_unavailable:  "Strava momentanément injoignable — réessaie dans un instant.",
+    tool_error:          "Strava a renvoyé une erreur sur la requête.",
+    not_granted:         "Synchro dispo uniquement dans l'app publiée sur claude.ai.",
+    capability_disabled: "Synchro dispo uniquement dans l'app publiée sur claude.ai avec le connecteur.",
+  };
+  toast("⚠️ " + (map[code] || "Échec de la synchro Strava."));
+  console.warn("Strava error", code, err && err.message);
+}
+
+/* ============================================================
+   MODALE / TOAST / HELPERS
+   ============================================================ */
+const modalHost=document.getElementById("modalHost");
+function modal(inner){
+  modalHost.innerHTML=`<div class="overlay" id="ov"><div class="modal" role="dialog" aria-modal="true">${inner}</div></div>`;
+  document.getElementById("ov").addEventListener("mousedown",e=>{ if(e.target.id==="ov") closeModal(); });
+  document.body.style.overflow="hidden";
+}
+function closeModal(){ modalHost.innerHTML=""; document.body.style.overflow=""; editingId=null; }
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"&&modalHost.innerHTML) closeModal(); });
+
+let toastT;
+function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2200); }
+
+function escapeHtml(s){ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function shorten(s,n){ s=String(s||""); return s.length>n ? s.slice(0,n).replace(/\s+\S*$/,"")+"…" : s; }
+function escapeAttr(s){ return escapeHtml(s); }
+
+/* ---------- thème ---------- */
+function applyTheme(t){ if(t) document.documentElement.setAttribute("data-theme",t); localStorage.setItem("pbs_theme",t); }
+(function initTheme(){ const saved=localStorage.getItem("pbs_theme"); if(saved) document.documentElement.setAttribute("data-theme",saved); })();
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme")
+    || (matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  applyTheme(cur==="dark"?"light":"dark");
+});
+
+/* ---------- go ---------- */
+render();
+</script>
