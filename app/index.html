@@ -284,6 +284,9 @@
   .transfer-box h4 { display: flex; align-items: center; gap: 8px; }
   .info-btn { background: transparent; border: 0; color: var(--faint); cursor: pointer; font-size: 14px; padding: 0 4px; }
   .info-btn:hover { color: var(--accent-text); }
+  .ex-mini { font-size: 12.5px; line-height: 1.4; margin: 0 0 9px; }
+  .ex-fiche-link { color: var(--accent-text); cursor: pointer; font-weight: 650; white-space: nowrap; }
+  .ex-fiche-link:hover { text-decoration: underline; }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   .hidden { display: none !important; }
@@ -615,7 +618,7 @@ function renderCalendar(){
     <div class="between wrap">
       <div>
         <div class="eyebrow">Astuce</div>
-        <span class="muted" style="font-size:13.5px">Glisse-dépose une séance d'un jour à l'autre pour replanifier. Clique une séance pour l'ouvrir, enregistrer tes séries et la cocher « fait ».</span>
+        <span class="muted" style="font-size:13.5px">Utilise <b>« + planifier »</b> sous chaque jour pour poser une séance à venir, puis <b>glisse-dépose</b> pour réorganiser tes jours. Clique une séance pour l'ouvrir, enregistrer tes séries et la cocher « fait ».</span>
       </div>
       <div class="row" style="gap:8px">
         <span class="pill accent">Muscu</span><span class="pill warn">Vélo</span>
@@ -630,7 +633,7 @@ function renderDayCol(d){
   return `<div class="day ${isToday?'today':''}" data-date="${d}">
     <div class="day-hd"><span class="dow">${DOW[(dd.getDay()+6)%7]}</span><span class="dnum num">${dd.getDate()}</span></div>
     ${sessions.map(renderSessChip).join("")}
-    <button class="day-add" onclick="quickNewSession('${d}')">+</button>
+    <button class="day-add" onclick="quickNewSession('${d}', true)">+ planifier</button>
   </div>`;
 }
 function renderSessChip(s){
@@ -672,37 +675,43 @@ function defaultTitle(s){
   if(s.type==="velo") return "Sortie vélo";
   return "Séance muscu";
 }
-function quickNewSession(date){
-  openTypePicker(date||today());
+function quickNewSession(date, plan){
+  openTypePicker(date||today(), plan);
 }
-function openTypePicker(date){
+function openTypePicker(date, plan){
   const tpl=templateSessions();
+  const p = plan ? 'true' : 'false';
   modal(`
-    <div class="modal-hd"><h3>Nouvelle séance — ${fmtDate(date)}</h3><button class="icon-btn" onclick="closeModal()">✕</button></div>
+    <div class="modal-hd">
+      <div><h3>${plan?'Planifier une séance':'Nouvelle séance'} — ${fmtDate(date)}</h3>
+      ${plan?'<div class="muted" style="font-size:12.5px">Elle se pose sur ce jour ; tu l\'ouvriras plus tard pour enregistrer.</div>':''}</div>
+      <button class="icon-btn" onclick="closeModal()">✕</button>
+    </div>
     <div class="modal-bd">
-      <div class="eyebrow">Type</div>
+      <div class="eyebrow">Choisis le type</div>
       <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
-        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px;height:100%" onclick="createSession('${date}','muscu','A')">
+        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px;height:100%" onclick="createSession('${date}','muscu','A',${p})">
           <b style="font-size:15px">💪 ${tpl.A.label.split("—")[1].trim()}</b>
           <span class="muted" style="font-size:12px;margin-top:4px">${tpl.A.exos.map(id=>exById(id)?.name).join(", ")}</span>
         </button>
-        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px;height:100%" onclick="createSession('${date}','muscu','B')">
+        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px;height:100%" onclick="createSession('${date}','muscu','B',${p})">
           <b style="font-size:15px">💪 ${tpl.B.label.split("—")[1].trim()}</b>
           <span class="muted" style="font-size:12px;margin-top:4px">${tpl.B.exos.map(id=>exById(id)?.name).join(", ")}</span>
         </button>
-        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px" onclick="createSession('${date}','muscu','vide')">
+        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px" onclick="createSession('${date}','muscu','vide',${p})">
           <b style="font-size:15px">🏋️ Séance muscu vide</b>
           <span class="muted" style="font-size:12px;margin-top:4px">Tu ajoutes les exercices toi-même</span>
         </button>
-        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px" onclick="createSession('${date}','velo','')">
+        <button class="btn" style="flex-direction:column;align-items:flex-start;padding:14px" onclick="createSession('${date}','velo','',${p})">
           <b style="font-size:15px">🚴 Sortie vélo</b>
           <span class="muted" style="font-size:12px;margin-top:4px">Repère de charge dans le calendrier</span>
         </button>
       </div>
+      ${plan?`<p class="muted" style="font-size:12px;margin:2px 0 0">💡 Astuce : tu peux ensuite glisser-déposer la séance d'un jour à l'autre pour réorganiser tes jours à venir.</p>`:''}
     </div>
   `);
 }
-function createSession(date,type,tplKey){
+function createSession(date,type,tplKey,plan){
   const s = { id:uid(), date, type, status:"planned", title:"", entries:[], wellness:{sleep:null,fatigue:null,mood:null,notes:""}, createdAt:Date.now() };
   if(type==="muscu" && (tplKey==="A"||tplKey==="B")){
     const tpl=templateSessions()[tplKey];
@@ -713,7 +722,8 @@ function createSession(date,type,tplKey){
   if(type==="velo"){ s.title="Sortie vélo"; s.duration=null; }
   state.sessions.push(s);
   save();
-  openSession(s.id);
+  if(plan){ closeModal(); if(currentTab!=="calendar"){ currentTab="calendar"; document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab==="calendar")); } state.ui.calWeek=mondayOf(date); render(); toast(`Séance planifiée · ${fmtShort(date)}`); }
+  else openSession(s.id);
 }
 function defaultSets(exId){
   const ph = currentPhaseInfo().phase;
@@ -784,13 +794,14 @@ function renderExBlock(en,i){
   const weighted = ex?ex.weighted:true;
   const b=bestE1rm(en);
   return `<div class="ex-block" data-i="${i}">
-    <div class="between" style="margin-bottom:8px">
-      <div><b>${escapeHtml(name)}</b>${EXG[en.exerciseId]?`<button class="info-btn" onclick="guideFromSession('${en.exerciseId}')" title="Voir la fiche de l'exercice">ⓘ</button>`:""} ${ex&&ex.uni?`<span class="pill plain" style="font-size:9px">1 côté</span>`:""}</div>
+    <div class="between" style="margin-bottom:4px">
+      <div><b>${escapeHtml(name)}</b> ${ex&&ex.uni?`<span class="pill plain" style="font-size:9px">1 côté</span>`:""}</div>
       <div class="row" style="gap:8px;align-items:center">
         ${weighted&&b?`<span class="e1rm-badge">1RM est. ${b} kg</span>`:""}
         <button class="btn sm ghost" onclick="removeExercise(${i})" title="Retirer">✕</button>
       </div>
     </div>
+    ${EXG[en.exerciseId]?`<div class="ex-mini muted">${escapeHtml(shorten(EXG[en.exerciseId].desc,86))} <a class="ex-fiche-link" onclick="guideFromSession('${en.exerciseId}')">Voir la fiche →</a></div>`:""}
     <table class="set-table">
       <thead><tr><th></th>${weighted?"<th>Charge (kg)</th>":""}<th>Reps</th><th>RPE</th><th>RIR</th></tr></thead>
       <tbody>
@@ -1673,6 +1684,7 @@ let toastT;
 function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2200); }
 
 function escapeHtml(s){ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function shorten(s,n){ s=String(s||""); return s.length>n ? s.slice(0,n).replace(/\s+\S*$/,"")+"…" : s; }
 function escapeAttr(s){ return escapeHtml(s); }
 
 /* ---------- thème ---------- */
