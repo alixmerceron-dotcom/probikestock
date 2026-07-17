@@ -147,10 +147,14 @@ Règles :
 8. Si `signaux-manuels.md` contenait des entrées traitées, les déplacer dans
    `signaux-manuels-archive.md` et vider le fichier source.
 9. Commit + push sur la branche de travail.
-10. Notifier l'utilisateur (résumé court : nombre de dossiers actifs, tout changement de
-    niveau de confiance depuis la veille, tout nouveau dossier ouvert). Si strictement
-    rien de nouveau et aucun changement de statut : le dire en une phrase, ne pas
-    sur-notifier.
+10. **Afficher le brief complet dans la réponse finale du run** (le contenu intégral du
+    fichier `brief.md`, pas seulement un résumé) : l'utilisateur doit pouvoir tout lire
+    directement dans l'app Claude / la session, sans avoir besoin d'ouvrir GitHub.
+11. Notifier l'utilisateur (PushNotification, résumé court sous 200 caractères : nombre
+    de dossiers actifs, tout changement de niveau de confiance depuis la veille, tout
+    nouveau dossier ouvert) pour signaler que le brief du jour est prêt à lire dans la
+    session. Si strictement rien de nouveau et aucun changement de statut : le dire en
+    une phrase, ne pas sur-notifier.
 
 ---
 
