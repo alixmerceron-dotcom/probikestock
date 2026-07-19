@@ -1,0 +1,347 @@
+<title>Probikestock — Banc d'essai animations (copie du site)</title>
+<style>
+  @font-face{font-family:'Archivo';font-weight:400;font-style:normal;font-display:swap;src:url(data:font/woff2;base64,__A400__) format('woff2')}
+  @font-face{font-family:'Archivo';font-weight:700;font-style:normal;font-display:swap;src:url(data:font/woff2;base64,__A700__) format('woff2')}
+
+  :root{
+    --bg:#ffffff; --text:#0e1b4d; --accent:#4770db; --grey:#f9f9f9;
+    --dark:#181616; --red:#e32402; --border:rgba(14,27,77,.4);
+    --radius-card:16px; --radius-btn:40px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:'Archivo',Arial,sans-serif;font-size:15.5px;line-height:1.55}
+  h1,h2,h3{font-weight:700;letter-spacing:.01em;text-wrap:balance}
+  a{color:inherit}
+  img{max-width:100%}
+  .page{max-width:1400px;margin:0 auto;padding:0 3rem}
+  @media(max-width:750px){.page{padding:0 1.4rem}}
+
+  /* chips that label each animation for review */
+  .anim-tag{position:absolute;top:10px;right:10px;z-index:9;background:var(--text);color:#fff;
+    font-size:10.5px;letter-spacing:.12em;padding:4px 10px;border-radius:20px;opacity:.85;pointer-events:none}
+
+  /* ══ ANIM 1 — header sticky + logo roues au scroll ══ */
+  .site-header{position:sticky;top:0;z-index:50;background:var(--bg);
+    border-bottom:1px solid rgba(14,27,77,.12);
+    transition:box-shadow .3s, padding .3s}
+  .site-header.scrolled{box-shadow:0 6px 24px -12px rgba(14,27,77,.35)}
+  .header-inner{display:flex;align-items:center;gap:2.5rem;padding:20px 0;transition:padding .3s}
+  .site-header.scrolled .header-inner{padding:10px 0}
+  .logo{display:flex;align-items:center;text-decoration:none;font-weight:700;
+    font-size:26px;letter-spacing:.02em;line-height:1;transition:font-size .3s}
+  .site-header.scrolled .logo{font-size:21px}
+  .logo svg{height:1.05em;width:1.05em;margin:0 .06em;vertical-align:-.12em;will-change:transform}
+  nav.mainmenu{display:flex;gap:1.6rem;font-size:14px}
+  nav.mainmenu a{text-decoration:none;position:relative;padding:.4rem 0}
+  nav.mainmenu a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;
+    background:var(--accent);transition:width .25s}
+  nav.mainmenu a:hover::after{width:100%}
+  .header-icons{margin-left:auto;display:flex;gap:1.1rem;font-size:18px}
+  @media(max-width:900px){nav.mainmenu{display:none}}
+
+  /* ANIM 2 — barre de progression « chaîne » */
+  .scroll-progress{position:absolute;left:0;bottom:-1px;height:3px;width:100%;transform-origin:0 50%;
+    transform:scaleX(0);background:linear-gradient(90deg,var(--accent),var(--text))}
+
+  /* ══ ANIM 3 — diaporama parallax ══ */
+  .hero{position:relative;overflow:hidden;border-radius:20px;margin-top:14px;
+    background:linear-gradient(115deg,#0e1b4d 0%,#20306e 55%,#4770db 130%);color:#fff;
+    min-height:min(62vh,540px);display:flex;align-items:center}
+  .hero-art{position:absolute;inset:0;overflow:hidden}
+  .hero-art svg{position:absolute;right:-6%;top:50%;height:130%;transform:translateY(-50%);
+    opacity:.35;will-change:transform}
+  .hero-box{position:relative;z-index:2;margin:clamp(24px,5vw,64px);max-width:520px;
+    background:#fff;color:var(--text);border-radius:20px;padding:clamp(22px,3vw,40px);
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
+  .hero-box h2{margin:0 0 10px;font-size:clamp(24px,3vw,38px)}
+  .hero-box p{margin:0 0 20px;color:#3a4570}
+  .btn{display:inline-block;text-decoration:none;font-weight:700;font-size:14.5px;
+    padding:13px 26px;border-radius:var(--radius-btn);border:1px solid var(--text);
+    background:var(--text);color:#fff;transition:transform .18s, box-shadow .18s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px -10px rgba(14,27,77,.6)}
+  .btn.secondary{background:transparent;color:var(--text)}
+  .hero-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+  .hero-dots span{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.45)}
+  .hero-dots span.on{background:#fff}
+
+  /* sections */
+  section.block{position:relative;padding:36px 0}
+  .section-title{font-size:clamp(24px,2.6vw,34px);margin:0 0 4px}
+  .section-sub{margin:0 0 22px;color:#3a4570;font-size:14.5px}
+
+  /* ══ ANIM 4 — reveal au scroll ══ */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  .stagger>*{opacity:0;transform:translateY(26px);transition:opacity .55s ease, transform .55s ease}
+  .stagger.in>*{opacity:1;transform:none}
+
+  /* ══ ANIM 5 — cartes produit tilt 3D ══ */
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+  @media(max-width:990px){.grid4{grid-template-columns:repeat(2,1fr)}}
+  .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-card);
+    overflow:hidden;transform-style:preserve-3d;will-change:transform;
+    transition:box-shadow .25s}
+  .card:hover{box-shadow:0 24px 50px -24px rgba(14,27,77,.45)}
+  .card .ph{aspect-ratio:1;margin:16px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(140deg,#eef1f8,#dfe5f2);position:relative;overflow:hidden}
+  .card .ph svg{width:58%;height:58%;color:#0e1b4d;transform:translateZ(30px)}
+  .card .ph::after{content:"";position:absolute;inset:0;transform:translateX(-120%) skewX(-18deg);
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);width:60%}
+  .card:hover .ph::after{transition:transform .7s;transform:translateX(220%) skewX(-18deg)}
+  .card .body{padding:0 16px 18px}
+  .card .vendor{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#6a76a8}
+  .card .name{font-size:14.5px;font-weight:700;margin:4px 0 8px;min-height:2.7em}
+  .card .price{font-weight:700}
+  .card .price .was{color:#6a76a8;font-weight:400;text-decoration:line-through;font-size:13px;margin-left:8px}
+  .promo-badge{position:absolute;top:10px;left:10px;background:var(--accent);color:#fff;
+    font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;transform:translateZ(40px)}
+
+  /* ══ ANIM 6 — bande bleue « Qui nous sommes » ══ */
+  .brandband{background:var(--accent);color:#fff;text-align:center;overflow:hidden;position:relative}
+  .brandband .inner{padding:44px 20px;position:relative;z-index:2}
+  .brandband .caption{letter-spacing:.22em;text-transform:uppercase;font-size:12px;opacity:.9}
+  .brandband h3{font-size:clamp(22px,2.6vw,32px);margin:10px 0 2px}
+  .brandband h4{font-weight:400;margin:0 0 12px;opacity:.95}
+  .brandband a{color:#fff;font-weight:700}
+  .brandband .spin-wheel{position:absolute;top:50%;width:340px;height:340px;opacity:.14;z-index:1;will-change:transform}
+  .brandband .spin-wheel.left{left:-120px}
+  .brandband .spin-wheel.right{right:-120px}
+
+  /* collections */
+  .coll .ph{aspect-ratio:1;border-radius:var(--radius-card);border:1px solid var(--border);
+    display:grid;place-items:center;background:linear-gradient(160deg,#f5f7fc,#e4e9f5);
+    transition:transform .3s, box-shadow .3s;position:relative;overflow:hidden}
+  .coll:hover .ph{transform:translateY(-6px);box-shadow:0 22px 40px -22px rgba(14,27,77,.4)}
+  .coll .ph svg{width:46%;height:46%;color:var(--text);transition:transform .5s}
+  .coll:hover .ph svg{transform:rotate(-8deg) scale(1.08)}
+  .coll h3{font-size:16px;margin:12px 0 0}
+  .coll h3 a{text-decoration:none}
+  .coll h3 a::after{content:" →";opacity:0;transition:opacity .2s}
+  .coll:hover h3 a::after{opacity:1}
+
+  /* réassurance — ANIM 7 */
+  .reassure{background:var(--grey);padding:2.2rem 0}
+  .re-row{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;max-width:1200px;margin:0 auto;padding:0 1rem}
+  .re-item{flex:1 1 180px;min-width:180px;max-width:230px;background:#fff;border-radius:6px;
+    box-shadow:0 1px 3px rgba(0,0,0,.08);padding:1rem;display:flex;gap:.7rem;align-items:flex-start;
+    transition:transform .2s, box-shadow .2s}
+  .re-item:hover{transform:translateY(-3px);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+  .re-item svg{width:30px;height:30px;flex:none;color:var(--accent)}
+  .re-title{font-weight:700;font-size:13.5px;color:#000}
+  .re-sub{font-size:12.5px;color:#444}
+
+  /* footer sombre (bloc SEO) */
+  .darkfoot{background:var(--dark);color:#fff;padding:44px 0 60px;margin-top:36px}
+  .darkfoot .page{max-width:1000px}
+  .darkfoot p{opacity:.8;font-size:14px}
+  .darkfoot .sig{margin-top:22px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;opacity:.55}
+
+  /* légende flottante */
+  .legend{position:fixed;right:14px;bottom:14px;z-index:60;background:#fff;color:var(--text);
+    border:1px solid var(--border);border-radius:14px;padding:14px 16px;max-width:250px;
+    box-shadow:0 18px 40px -18px rgba(14,27,77,.5);font-size:12.5px}
+  .legend b{display:block;margin-bottom:6px;font-size:13px}
+  .legend ol{margin:0;padding-left:18px;display:grid;gap:3px}
+  .legend .close{position:absolute;top:6px;right:10px;border:0;background:none;cursor:pointer;
+    font-size:14px;color:inherit}
+  @media(max-width:750px){.legend{display:none}}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal,.stagger>*{opacity:1 !important;transform:none !important;transition:none}
+    .hero-art svg,.spin-wheel,.logo svg{animation:none !important}
+  }
+</style>
+
+<!-- ══════════ HEADER — ANIM 1 + 2 ══════════ -->
+<header class="site-header" id="siteHeader">
+  <div class="page header-inner">
+    <a class="logo" href="#" aria-label="Probikestock — accueil">
+      PR<svg class="wheel-o" viewBox="0 0 100 100" aria-hidden="true"><g stroke="currentColor" fill="none"><circle cx="50" cy="50" r="44" stroke-width="9"/><circle cx="50" cy="50" r="9" fill="currentColor" stroke="none"/><g stroke-width="4"><line x1="50" y1="14" x2="50" y2="86"/><line x1="14" y1="50" x2="86" y2="50"/><line x1="25" y1="25" x2="75" y2="75"/><line x1="75" y1="25" x2="25" y2="75"/></g></g></svg>BIKEST<svg class="wheel-o" viewBox="0 0 100 100" aria-hidden="true"><g stroke="currentColor" fill="none"><circle cx="50" cy="50" r="44" stroke-width="9"/><circle cx="50" cy="50" r="9" fill="currentColor" stroke="none"/><g stroke-width="4"><line x1="50" y1="14" x2="50" y2="86"/><line x1="14" y1="50" x2="86" y2="50"/><line x1="25" y1="25" x2="75" y2="75"/><line x1="75" y1="25" x2="25" y2="75"/></g></g></svg>CK
+    </a>
+    <nav class="mainmenu">
+      <a href="#offres">Promos</a>
+      <a href="#collections">Collections</a>
+      <a href="#ventes">Meilleures ventes</a>
+      <a href="#">Blog</a>
+    </nav>
+    <div class="header-icons" aria-hidden="true">🔍&ensp;👤&ensp;🛒</div>
+  </div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+</header>
+
+<!-- ══════════ DIAPORAMA — ANIM 3 ══════════ -->
+<div class="page">
+  <div class="hero" id="hero">
+    <span class="anim-tag">ANIM 3 · PARALLAX</span>
+    <div class="hero-art" id="heroArt" aria-hidden="true">
+      <svg viewBox="0 0 200 200"><g stroke="#fff" fill="none"><circle cx="100" cy="100" r="86" stroke-width="7"/><circle cx="100" cy="100" r="14" fill="#fff" stroke="none"/><g stroke-width="3.5"><line x1="100" y1="18" x2="100" y2="182"/><line x1="18" y1="100" x2="182" y2="100"/><line x1="43" y1="43" x2="157" y2="157"/><line x1="157" y1="43" x2="43" y2="157"/><line x1="100" y1="18" x2="43" y2="157"/><line x1="100" y1="18" x2="157" y2="157"/></g></g></svg>
+    </div>
+    <div class="hero-box" id="heroBox">
+      <h2>L'Excellence Shimano Dura-Ace 12V</h2>
+      <p>Passez à la vitesse supérieure avec la cassette et les manivelles de pédalier 12 vitesses, à prix imbattable.</p>
+      <a class="btn secondary" href="#offres">Découvrir l'offre</a>
+    </div>
+    <div class="hero-dots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span></div>
+  </div>
+</div>
+
+<!-- ══════════ OFFRES — ANIM 4 + 5 ══════════ -->
+<section class="block page" id="offres">
+  <span class="anim-tag">ANIM 4 · REVEAL &nbsp;+&nbsp; ANIM 5 · TILT 3D</span>
+  <h2 class="section-title reveal">OFFRES DE LA SEMAINE</h2>
+  <p class="section-sub reveal">Le matériel neuf en promotion</p>
+  <div class="grid4 stagger" id="cards1">
+    <article class="card tilt"><div class="ph"><span class="promo-badge">PROMO</span><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><circle cx="50" cy="50" r="34" stroke-width="6"/><circle cx="50" cy="50" r="7" fill="currentColor"/><line x1="50" y1="16" x2="50" y2="84" stroke-width="4"/><line x1="16" y1="50" x2="84" y2="50" stroke-width="4"/><line x1="26" y1="26" x2="74" y2="74" stroke-width="4"/><line x1="74" y1="26" x2="26" y2="74" stroke-width="4"/></svg></div>
+      <div class="body"><div class="vendor">LOOK</div><div class="name">Roues vélo route carbone Look R50 Disc</div><div class="price">639,00 € <span class="was">899,00 €</span></div></div></article>
+    <article class="card tilt"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><circle cx="42" cy="50" r="26" stroke-width="6"/><circle cx="42" cy="50" r="6" fill="currentColor"/><rect x="46" y="46" width="42" height="8" rx="4" fill="currentColor" stroke="none" transform="rotate(28 46 50)"/></svg></div>
+      <div class="body"><div class="vendor">Shimano</div><div class="name">Pédalier Dura-Ace FC-R9200 12v – 52-36</div><div class="price">379,00 €</div></div></article>
+    <article class="card tilt"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><circle cx="50" cy="50" r="34" stroke-width="5"/><circle cx="50" cy="50" r="26" stroke-width="4"/><circle cx="50" cy="50" r="18" stroke-width="3.5"/><circle cx="50" cy="50" r="10" stroke-width="3"/></svg></div>
+      <div class="body"><div class="vendor">Shimano</div><div class="name">Cassette Dura-Ace CS-R9200 12v – 11-30</div><div class="price">159,00 €</div></div></article>
+    <article class="card tilt"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><path d="M20 62 Q34 40 58 42 Q84 44 84 56 Q84 64 62 64 L30 66 Q20 66 20 62 Z" stroke-width="5"/></svg></div>
+      <div class="body"><div class="vendor">Specialized</div><div class="name">Selle Power Pro Mirror – Noir</div><div class="price">256,00 €</div></div></article>
+  </div>
+</section>
+
+<!-- ══════════ BANDE BLEUE — ANIM 6 ══════════ -->
+<section class="brandband" id="brandband">
+  <span class="anim-tag">ANIM 6 · ROUES EN ROTATION</span>
+  <svg class="spin-wheel left" viewBox="0 0 100 100" aria-hidden="true"><g stroke="#fff" fill="none"><circle cx="50" cy="50" r="44" stroke-width="5"/><g stroke-width="2.5"><line x1="50" y1="6" x2="50" y2="94"/><line x1="6" y1="50" x2="94" y2="50"/><line x1="19" y1="19" x2="81" y2="81"/><line x1="81" y1="19" x2="19" y2="81"/></g></g></svg>
+  <svg class="spin-wheel right" viewBox="0 0 100 100" aria-hidden="true"><g stroke="#fff" fill="none"><circle cx="50" cy="50" r="44" stroke-width="5"/><g stroke-width="2.5"><line x1="50" y1="6" x2="50" y2="94"/><line x1="6" y1="50" x2="94" y2="50"/><line x1="19" y1="19" x2="81" y2="81"/><line x1="81" y1="19" x2="19" y2="81"/></g></g></svg>
+  <div class="inner reveal">
+    <div class="caption">Qualité professionnelle — accessible à tous</div>
+    <h3>Matériel neuf</h3>
+    <h4>Magasin de pièces de vélo &amp; d'accessoires en ligne</h4>
+    <a href="#">En savoir plus →</a>
+  </div>
+</section>
+
+<!-- ══════════ COLLECTIONS ══════════ -->
+<section class="block page" id="collections">
+  <div class="grid4 stagger">
+    <div class="coll"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><path d="M14 36 H86 M22 36 Q20 62 34 64 M78 36 Q80 62 66 64" stroke-width="7" stroke-linecap="round"/></svg></div><h3><a href="#">Cintres et cockpits</a></h3></div>
+    <div class="coll"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><circle cx="34" cy="58" r="20" stroke-width="5"/><circle cx="72" cy="42" r="12" stroke-width="4"/><line x1="34" y1="58" x2="72" y2="42" stroke-width="4"/></svg></div><h3><a href="#">Pièces transmission</a></h3></div>
+    <div class="coll"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><path d="M26 70 L50 30 L74 70 Z" stroke-width="5" stroke-linejoin="round"/><circle cx="50" cy="30" r="6" fill="currentColor"/></svg></div><h3><a href="#">Entraînement indoor</a></h3></div>
+    <div class="coll"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><path d="M24 40 H76 L68 72 H32 Z" stroke-width="5" stroke-linejoin="round"/><path d="M38 40 V32 a12 12 0 0 1 24 0 v8" stroke-width="5"/></svg></div><h3><a href="#">Destockage</a></h3></div>
+  </div>
+</section>
+
+<!-- ══════════ MEILLEURES VENTES ══════════ -->
+<section class="block page" id="ventes">
+  <h2 class="section-title reveal">MEILLEURES VENTES</h2>
+  <p class="section-sub reveal">Les produits neufs les plus vendus ce mois-ci.</p>
+  <div class="grid4 stagger">
+    <article class="card tilt"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><rect x="30" y="24" width="40" height="52" rx="8" stroke-width="5"/><rect x="42" y="16" width="16" height="8" rx="3" fill="currentColor"/></svg></div>
+      <div class="body"><div class="vendor">Pro Bike Stock</div><div class="name">Support compteur cockpit Garmin / Wahoo</div><div class="price">11,99 €</div></div></article>
+    <article class="card tilt"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><circle cx="50" cy="50" r="20" stroke-width="8"/><circle cx="50" cy="50" r="34" stroke-width="4" stroke-dasharray="6 8"/></svg></div>
+      <div class="body"><div class="vendor">Lapierre</div><div class="name">Entretoises réhausse cockpit — 5/10 mm</div><div class="price">4,99 €</div></div></article>
+    <article class="card tilt"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><path d="M20 70 Q40 20 80 30 M20 70 Q45 60 80 30" stroke-width="6" stroke-linecap="round"/></svg></div>
+      <div class="body"><div class="vendor">SUPACAZ</div><div class="name">Ruban de cintre Super Sticky Kush</div><div class="price">27,99 €</div></div></article>
+    <article class="card tilt"><div class="ph"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor"><rect x="30" y="30" width="40" height="40" rx="10" stroke-width="5"/><circle cx="50" cy="50" r="8" fill="currentColor"/></svg></div>
+      <div class="body"><div class="vendor">Shimano</div><div class="name">Étrier de frein Dura-Ace BR-R9270</div><div class="price">89,00 €</div></div></article>
+  </div>
+</section>
+
+<!-- ══════════ RÉASSURANCE — ANIM 7 ══════════ -->
+<section class="reassure" id="reassure">
+  <span class="anim-tag" style="position:static;display:inline-block;margin:0 0 12px 16px">ANIM 7 · APPARITION EN CASCADE</span>
+  <div class="re-row stagger">
+    <div class="re-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><div><div class="re-title">Frais de port offerts</div><div class="re-sub">À partir de 100 €, vers 10 pays</div></div></div>
+    <div class="re-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><div><div class="re-title">Expédition sous 48 h*</div><div class="re-sub">(*) Voir conditions</div></div></div>
+    <div class="re-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><div><div class="re-title">Paiement sécurisé</div><div class="re-sub">Système de paiement crypté</div></div></div>
+    <div class="re-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1 0 3-6"/><path d="M4 4v5h5"/></svg><div><div class="re-title">Satisfait ou remboursé</div><div class="re-sub">Sous 14 j</div></div></div>
+    <div class="re-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg><div><div class="re-title">Garantie du prix le + bas</div><div class="re-sub">Tarifs les plus compétitifs</div></div></div>
+  </div>
+</section>
+
+<!-- ══════════ PIED SOMBRE ══════════ -->
+<footer class="darkfoot">
+  <div class="page reveal">
+    <p>Passion du vélo et exigence du matériel : chez Pro Bike Stock, la performance commence par le bon
+    équipement. Route, triathlon, gravel, cyclo-cross — pièces détachées et périphériques des meilleures
+    marques (Lapierre, Shimano, Specialized, Continental, Lazer, Zefal…).</p>
+    <div class="sig">by probikestock · @probikestock</div>
+  </div>
+</footer>
+
+<!-- légende -->
+<aside class="legend" id="legend">
+  <button class="close" onclick="legend.remove()" aria-label="Fermer">✕</button>
+  <b>7 animations à évaluer</b>
+  <ol>
+    <li>Logo : les « O » roulent au scroll</li>
+    <li>Barre de progression sous le menu</li>
+    <li>Bannière : parallax + zoom lent</li>
+    <li>Sections révélées au défilement</li>
+    <li>Cartes produit : inclinaison 3D</li>
+    <li>Bande bleue : roues en rotation</li>
+    <li>Réassurance : cascade d'entrée</li>
+  </ol>
+</aside>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ANIM 1 — logo wheels roll with scroll + header shrink */
+  const header = document.getElementById('siteHeader');
+  const wheels = document.querySelectorAll('.logo .wheel-o');
+  /* ANIM 2 — progress bar */
+  const progress = document.getElementById('scrollProgress');
+  /* ANIM 3 — hero parallax */
+  const heroArt = document.getElementById('heroArt').querySelector('svg');
+  const heroBox = document.getElementById('heroBox');
+  /* ANIM 6 — band wheels */
+  const bandWheels = document.querySelectorAll('.spin-wheel');
+
+  let ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      header.classList.toggle('scrolled', y > 24);
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - innerHeight;
+      progress.style.transform = `scaleX(${max > 0 ? y/max : 0})`;
+      if (!reduce){
+        const deg = y * 0.6;                      /* les O roulent comme des roues */
+        wheels.forEach(w => w.style.transform = `rotate(${deg}deg)`);
+        heroArt.style.transform = `translateY(calc(-50% + ${y*0.12}px)) rotate(${y*0.08}deg)`;
+        heroBox.style.transform = `translateY(${Math.min(y*0.06,40)}px)`;
+        bandWheels.forEach(w => w.style.transform = `translateY(-50%) rotate(${deg*0.5}deg)`);
+      }
+      ticking = false;
+    });
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ANIM 4 + 7 — reveal / stagger via IntersectionObserver */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      if (e.target.classList.contains('stagger')){
+        [...e.target.children].forEach((c,i)=> c.style.transitionDelay = (i*90)+'ms');
+      }
+      io.unobserve(e.target);
+    });
+  }, {threshold:.18});
+  document.querySelectorAll('.reveal,.stagger').forEach(el => io.observe(el));
+
+  /* ANIM 5 — 3D tilt on product cards */
+  if (!reduce && matchMedia('(pointer:fine)').matches){
+    document.querySelectorAll('.card.tilt').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left)/r.width - .5;
+        const py = (e.clientY - r.top)/r.height - .5;
+        card.style.transform = `perspective(800px) rotateY(${px*10}deg) rotateX(${-py*10}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => card.style.transform = '');
+    });
+  }
+})();
+</script>

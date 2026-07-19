@@ -1,0 +1,460 @@
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_N8BLef": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/BANNIERE_SHOPIFY_PROBIKESTOCK_1.jpg",
+            "heading": "L'Excellence Shimano Dura-Ace 12V",
+            "heading_size": "h2",
+            "subheading": "Passez à la vitesse supérieure avec la cassette et les manivelles de pédalier 12 vitesses, à prix imbattable.",
+            "button_label": "Découvrir l'offre",
+            "link": "shopify://collections/pieces-transmission",
+            "button_style_secondary": true,
+            "box_align": "middle-left",
+            "show_text_box": true,
+            "text_alignment": "left",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-2",
+            "text_alignment_mobile": "left"
+          }
+        },
+        "slide-0": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_5254.jpg",
+            "heading": "Cockpits Lapierre",
+            "heading_size": "h2",
+            "subheading": "Nombreuses dimensions disponibles",
+            "button_label": "J'en profite",
+            "link": "shopify://collections/cintres",
+            "button_style_secondary": true,
+            "box_align": "bottom-left",
+            "show_text_box": true,
+            "text_alignment": "left",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-2",
+            "text_alignment_mobile": "left"
+          }
+        },
+        "slide_BiajGx": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/af_cropped.png",
+            "heading": "Athletic Fuel",
+            "heading_size": "h2",
+            "subheading": "Digeste et hypertonique",
+            "button_label": "Je découvre",
+            "link": "shopify://products/poudre-energetique-athletic-fuel-training-powder",
+            "button_style_secondary": true,
+            "box_align": "bottom-left",
+            "show_text_box": true,
+            "text_alignment": "left",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-2",
+            "text_alignment_mobile": "right"
+          }
+        },
+        "slide_RNBjDM": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_oijwhwoijwhwoijw.png",
+            "heading": "L'indoor, version 2026",
+            "heading_size": "h2",
+            "subheading": "Redécouvrez le Home Trainer",
+            "button_label": "Voir les produits",
+            "link": "shopify://collections/entrainement-en-interieur",
+            "button_style_secondary": true,
+            "box_align": "bottom-right",
+            "show_text_box": true,
+            "text_alignment": "right",
+            "image_overlay_opacity": 20,
+            "color_scheme": "scheme-2",
+            "text_alignment_mobile": "center"
+          }
+        },
+        "slide_b7beaJ": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/canva_7674f6df-5588-4879-915a-00c134070143.png",
+            "heading": "N°1",
+            "heading_size": "h2",
+            "subheading": "<strong>Des revendeurs des équipes professionnelles en ligne</strong>",
+            "button_label": "Qui sommes nous ?",
+            "link": "shopify://blogs/faq/ladn-de-probikestock",
+            "button_style_secondary": true,
+            "box_align": "top-left",
+            "show_text_box": true,
+            "text_alignment": "left",
+            "image_overlay_opacity": 0,
+            "color_scheme": "scheme-2",
+            "text_alignment_mobile": "left"
+          }
+        }
+      },
+      "block_order": [
+        "slide_N8BLef",
+        "slide-0",
+        "slide_BiajGx",
+        "slide_RNBjDM",
+        "slide_b7beaJ"
+      ],
+      "settings": {
+        "layout": "grid",
+        "slide_height": "adapt_image",
+        "slider_visual": "dots",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": "Nos offres du moment"
+      }
+    },
+    "image_banner_Q6y93i": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_bjzxQk": {
+          "type": "heading",
+          "settings": {
+            "heading": "Bannière avec image",
+            "heading_size": "h1"
+          }
+        },
+        "text_Ew8qqX": {
+          "type": "text",
+          "settings": {
+            "text": "Fournissez des détails à votre clientèle sur l’image/les images ou le contenu de la bannière du modèle.",
+            "text_style": "body"
+          }
+        },
+        "buttons_URq4BY": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Texte du bouton",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Texte du bouton",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_bjzxQk",
+        "text_Ew8qqX",
+        "buttons_URq4BY"
+      ],
+      "disabled": true,
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "small",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "zoom-in",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "featured_collection_MgBUEn": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "title": "OFFRES DE LA SEMAINE",
+        "heading_size": "h1",
+        "description": "<p>Le matériel neuf en promotion</p>",
+        "show_description": false,
+        "description_style": "subtitle",
+        "collection": "hot-deals",
+        "products_to_show": 12,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": true,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": true,
+        "show_rating": true,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_Wz9UDE": {
+      "type": "rich-text",
+      "blocks": {
+        "caption_93iNQy": {
+          "type": "caption",
+          "settings": {
+            "caption": "Qualité professionnelle - accessible à tous",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "text_mALtfE": {
+          "type": "text",
+          "settings": {
+            "text": "<h3>Matériel neuf</h3><h4>Magasin de pièces de vélo & d'accessoires en ligne </h4>"
+          }
+        },
+        "text_AW9xNr": {
+          "type": "text",
+          "settings": {
+            "text": "<p><a href=\"/blogs/faq/ladn-de-probikestock\" title=\"L'ADN de PROBIKESTOCK\">En savoir plus →</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "caption_93iNQy",
+        "text_mALtfE",
+        "text_AW9xNr"
+      ],
+      "name": "Qui nous sommes",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-4",
+        "full_width": true,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "17617298938f54bc81": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_all_reviews_text_EKfTjd": {
+          "type": "shopify://apps/judge-me-reviews/blocks/all_reviews_text/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_all_reviews_text_EKfTjd"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "collection_list_BVHW8p": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_6ag3bG": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "cintres"
+          }
+        },
+        "featured_collection_ycCaXK": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "pieces-transmission"
+          }
+        },
+        "featured_collection_gDFinT": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "entrainement-en-interieur"
+          }
+        },
+        "featured_collection_HB4MDL": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "destockage"
+          }
+        },
+        "featured_collection_N44PVY": {
+          "type": "featured_collection",
+          "disabled": true,
+          "settings": {
+            "collection": "occasion"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_6ag3bG",
+        "featured_collection_ycCaXK",
+        "featured_collection_gDFinT",
+        "featured_collection_HB4MDL",
+        "featured_collection_N44PVY"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "show_view_all": false,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 24
+      }
+    },
+    "custom_liquid_njW7wT": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "ligne horiz",
+      "settings": {
+        "custom_liquid": "<hr style=\"width: 65%; margin: 0px auto; border: none; border-top: 1px solid #d9d9d9;\">",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured-collection-0": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "MEILLEURES VENTES",
+        "heading_size": "h1",
+        "description": "<p>Les produits neufs les plus vendus ce mois-ci.</p>",
+        "show_description": false,
+        "description_style": "subtitle",
+        "collection": "a-la-une",
+        "products_to_show": 12,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": true,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": true,
+        "show_rating": true,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_8Wqr4q": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "ligne horiz",
+      "settings": {
+        "custom_liquid": "<hr style=\"width: 65%; margin: 0px auto; border: none; border-top: 1px solid #d9d9d9;\">",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_blog_kR7Vfq": {
+      "type": "featured-blog",
+      "settings": {
+        "heading": "ARTICLES DE BLOG",
+        "heading_size": "h1",
+        "blog": "articles",
+        "post_limit": 4,
+        "columns_desktop": 4,
+        "color_scheme": "",
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "show_view_all": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_liquid_79hNMf": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "ligne horiz",
+      "settings": {
+        "custom_liquid": "<hr style=\"width: 65%; margin: 0px auto; border: none; border-top: 1px solid #d9d9d9;\">",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_t4iPUx": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "ligne horiz",
+      "settings": {
+        "custom_liquid": "<hr style=\"width: 65%; margin: 0px auto; border: none; border-top: 1px solid #d9d9d9;\">",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "17604691249a66686b": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_featured_carousel_dLrehc": {
+          "type": "shopify://apps/judge-me-reviews/blocks/featured_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1080
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_featured_carousel_dLrehc"
+      ],
+      "name": "Avis",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "custom_liquid_rFHpqr": {
+      "type": "custom-liquid",
+      "name": "reinsurance",
+      "settings": {
+        "custom_liquid": "<section class=\"reassurance-bar\">\n  <style>\n    .reassurance-bar{background:#f9f9f9;padding:1rem 0}\n    .reassurance-container{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;max-width:1200px;margin:0 auto;padding:0 1rem}\n    .reassurance-item{flex:1 1 180px;min-width:180px;max-width:230px;background:#fff;border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,0.08);padding:1rem;text-align:left;transition:all .2s}\n    .reassurance-item:hover{transform:translateY(-2px);box-shadow:0 2px 6px rgba(0,0,0,0.1)}\n    .reassurance-link{display:flex;gap:.75rem;text-decoration:none;color:inherit;align-items:flex-start}\n    .reassurance-link img{width:32px;height:32px;object-fit:contain}\n    .reassurance-title{font-weight:600;font-size:14px;color:#000}\n    .reassurance-subtitle{font-size:13px;color:#444}\n    @media(max-width:700px){.reassurance-item{flex:1 1 calc(50% - .5rem)}}\n  </style>\n\n  <div class=\"reassurance-container\">\n    <!-- Item 1 -->\n    <div class=\"reassurance-item\">\n      <a href=\"/pages/promo-1\" class=\"reassurance-link\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0896/6707/6438/files/2769339.png?v=1761733238\" alt=\"Frais de port\">\n        <div>\n          <div class=\"reassurance-title\">Frais de port offerts</div>\n          <div class=\"reassurance-subtitle\">A partir de 100€, vers 10 pays</div>\n        </div>\n      </a>\n    </div>\n\n    <!-- Item 2 -->\n    <div class=\"reassurance-item\">\n      <a href=\"https://probikestock.com/policies/shipping-policy\" class=\"reassurance-link\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0896/6707/6438/files/2769339.png?v=1761733238\" alt=\"Expédition\">\n        <div>\n          <div class=\"reassurance-title\">Expédition sous 48h*</div>\n          <div class=\"reassurance-subtitle\">(*) Voir conditions</div>\n        </div>\n      </a>\n    </div>\n\n    <!-- Item 3 -->\n    <div class=\"reassurance-item\">\n      <a \n  href=\"{{ block.settings.link | default: '#' }}\" \n  class=\"reassurance-link\" \n  {% unless block.settings.link %} style=\"cursor: default; pointer-events: none;\" {% endunless %}\n>\n        <img src=\"https://cdn.shopify.com/s/files/1/0896/6707/6438/files/istockphoto-1007749552-612x612_1.jpg?v=1761734035\" alt=\"Paiement sécurisé\">\n        <div>\n          <div class=\"reassurance-title\">Paiement sécurisé</div>\n          <div class=\"reassurance-subtitle\">Système de paiement crypté</div>\n        </div>\n      </a>\n    </div>\n\n<!-- Item 4 -->\n    <div  class=\"reassurance-item\">\n      <a href=\"https://probikestock.com/policies/refund-policy\" class=\"reassurance-link\">\n        <img src=\"https://cdn.shopify.com/s/files/1/0896/6707/6438/files/istockphoto-1450268590-612x612.jpg?v=1761733463\" alt=\"Satisfait ou remboursé\">\n        <div>\n          <div class=\"reassurance-title\">Satisfait ou remboursé</div>\n          <div class=\"reassurance-subtitle\">Sous 14j</div>\n        </div>\n      </a>\n    </div>\n\n<!-- Item 5 -->\n    <div class=\"reassurance-item\">\n      <a \n  href=\"{{ block.settings.link | default: '#' }}\" \n  class=\"reassurance-link\" \n  {% unless block.settings.link %} style=\"cursor: default; pointer-events: none;\" {% endunless %}\n>\n        <img src=\"https://cdn.shopify.com/s/files/1/0896/6707/6438/files/4372750.png?v=1761733463\" alt=\"Paiement sécurisé\">\n        <div>\n          <div class=\"reassurance-title\">Garantie du prix le + bas</div>\n          <div class=\"reassurance-subtitle\">Tarifs les plus compétitifs</div>\n        </div>\n      </a>\n    </div>\n\n    <!-- Ajoute/supprime des blocs similaires selon besoin -->\n  </div>\n</section>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "custom_liquid_y8X4fc": {
+      "type": "custom-liquid",
+      "name": "seo_footer",
+      "settings": {
+        "custom_liquid": "<style>\n .seo-wrapper {\n  width: 100%;\n  margin: 0 auto;\n  padding: 0 40px;\n  box-sizing: border-box;\n}\n\n  .seo-section {\n    position: relative;\n    overflow: hidden;\n    max-height: 120px;\n    transition: max-height 0.5s ease;\n  }\n\n  .seo-section.expanded {\n    max-height: 5000px;\n  }\n\n  .seo-fade {\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    right: 0;\n    height: 60px;\n    background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);\n    pointer-events: none;\n    transition: opacity 0.3s;\n  }\n\n  .seo-section.expanded .seo-fade {\n    opacity: 0;\n  }\n\n  .seo-toggle {\n    display: inline-block;\n    margin-top: 10px;\n    background: none;\n    border: none;\n    color: inherit;\n    cursor: pointer;\n    font-size: 14px;\n    text-decoration: underline;\n    padding: 0;\n    font-weight: 500;\n  }\n\n  .seo-toggle:hover {\n    opacity: 0.7;\n  }\n</style>\n<div class=\"seo-wrapper\">\n  <div id=\"seo-text\" class=\"seo-section\">\n  \n<p>\nPassion du vélo et exigence du matériel : chez Pro Bike Stock, la performance commence par le bon équipement. [texte SEO complet conservé dans le thème en ligne]\n</p>\n\n    <div class=\"seo-fade\"></div>\n  </div>\n\n  <button id=\"seo-toggle\" class=\"seo-toggle\">Voir plus</button>\n</div>\n\n<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    const section = document.getElementById(\"seo-text\");\n    const button = document.getElementById(\"seo-toggle\");\n\n    button.addEventListener(\"click\", function() {\n      const expanded = section.classList.toggle(\"expanded\");\n      button.textContent = expanded ? \"Voir moins\" : \"Voir plus\";\n    });\n  });\n</script>",
+        "color_scheme": "scheme-5",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "custom_liquid_gjh4jg": {
+      "type": "custom-liquid",
+      "name": "ligne horiz",
+      "settings": {
+        "custom_liquid": "<div style=\"background-color: #181616; padding: 0px 0;\">\n  <hr style=\"width: 65%; margin: 0px auto; border: none; border-top: 1px solid #d9d9d9;\">\n</div>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "image_banner_Q6y93i",
+    "featured_collection_MgBUEn",
+    "rich_text_Wz9UDE",
+    "17617298938f54bc81",
+    "collection_list_BVHW8p",
+    "custom_liquid_njW7wT",
+    "featured-collection-0",
+    "custom_liquid_8Wqr4q",
+    "featured_blog_kR7Vfq",
+    "custom_liquid_79hNMf",
+    "custom_liquid_t4iPUx",
+    "17604691249a66686b",
+    "custom_liquid_rFHpqr",
+    "custom_liquid_y8X4fc",
+    "custom_liquid_gjh4jg"
+  ]
+}
