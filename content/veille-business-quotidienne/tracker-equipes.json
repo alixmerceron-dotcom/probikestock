@@ -6,36 +6,66 @@
       "division": "WorldTour",
       "equipementier_velo": "Bianchi",
       "famille_signal": "B",
-      "statut": "Aucun sponsor titre confirmé identifié pour la saison prochaine ; recherche de partenaire en cours",
-      "niveau_confiance": "C",
+      "statut": "TotalEnergies confirme ne plus être sponsor-titre à partir de fin 2026 (10 ans de partenariat). Jean-René Bernaudeau recherche activement un nouveau partenaire pour 2027 et reconnaît publiquement que « la pérennité de l'équipe n'est pas assurée aujourd'hui ». Aucun successeur identifié à ce jour.",
+      "niveau_confiance": "A",
       "premiere_detection": "2026-07-15",
-      "derniere_maj": "2026-07-15",
-      "sources": [],
-      "notes": "Dossier ouvert manuellement par l'utilisateur le 15/07/2026 à partir de sa propre veille. À confirmer par recherche presse lors du premier run."
+      "derniere_maj": "2026-07-20",
+      "sources": [
+        "https://www.franceinfo.fr/sports/cyclisme/cyclisme-la-perennite-de-l-equipe-totalenergies-n-est-pas-assuree-aujourd-hui-reconnait-jean-rene-bernaudeau-qui-cherche-un-sponsor-pour-la-saison-prochaine_7848128.html",
+        "https://sports.orange.fr/cyclisme/article/totalenergies-ne-sera-plus-sponsor-titre-fin-2026-CNT000002kUtiT.html"
+      ],
+      "notes": "20/07/2026 : confirmation A que le départ de TotalEnergies fin 2026 est acté (déclaration du manager lui-même, reprise par plusieurs médias). Le niveau A porte sur l'absence de sponsor pour 2027, pas sur une fermeture de l'équipe (non actée). Stock Bianchi à surveiller si aucun repreneur n'est trouvé d'ici la fin de saison — historique de Bernaudeau : a toujours trouvé un repreneur par le passé (Direct Energie, Europcar, Bbox, Brioches La Boulangère, Bonjour)."
     },
     {
       "nom": "Picnic PostNL",
       "division": "WorldTour",
       "equipementier_velo": "",
       "famille_signal": "C",
-      "statut": "Licence WorldTour accordée pour 1 an seulement par l'UCI ; équilibre financier jugé fragile, incertitude sur le maintien en WorldTour l'an prochain",
-      "niveau_confiance": "C",
+      "statut": "Licence WorldTour hommes et femmes confirmée par l'UCI mais limitée à la seule saison 2026, sous conditions financières pour une prolongation 2027-2028. Pertes cumulées ~19,5 M€ sur 3 ans (perte de 6,2 M€ en 2024 pour 11,7 M€ de revenus) ; budget total ~18 M€/an, l'un des plus faibles du WorldTour. L'ancien coureur Thomas Dekker (analyste TV, non-officiel) juge que « l'équipe s'effrite » et s'interroge publiquement sur sa survie à moyen terme, après le départ du leader Oscar Onley.",
+      "niveau_confiance": "B",
       "premiere_detection": "2026-07-15",
-      "derniere_maj": "2026-07-15",
-      "sources": [],
-      "notes": "Dossier ouvert manuellement par l'utilisateur le 15/07/2026. Surveiller toute annonce UCI ou déclaration de la direction sportive sur la saison suivante."
+      "derniere_maj": "2026-07-20",
+      "sources": [
+        "https://procyclinguk.com/picnic-postnl-mens-and-womens-worldtour-licence-initially-limited-to-single-year-as-full-list-of-2026-2028-wt-teams-released/",
+        "https://escapecollective.com/picnic-gets-a-limited-worldtour-license-as-uci-announces-2026-field/",
+        "https://www.cyclingnews.com/pro-cycling/teams-riders/picnic-postnl-mens-and-womens-worldtour-licence-initially-limited-to-single-year-as-full-list-of-2026-2028-wt-teams-released/",
+        "https://cyclinguptodate.com/cycling/the-team-is-crumbling-thomas-dekker-worried-picnic-postnl-could-cease-to-exist-in-the-near-future",
+        "https://moneyinsport.substack.com/p/picnic-postnls-195m-losses-in-last"
+      ],
+      "notes": "20/07/2026 : niveau A pour la restriction de licence elle-même (décision officielle UCI, largement recoupée) ; niveau C/D pour le pronostic de disparition de l'équipe (opinion d'un consultant TV, pas une source officielle) — niveau_confiance global du dossier maintenu à B par prudence tant qu'aucune source officielle ne confirme un risque de fermeture. Équipementier vélo toujours non identifié dans nos recherches, à vérifier."
     },
     {
       "nom": "Soudal Quick-Step",
       "division": "WorldTour",
-      "equipementier_velo": "Specialized (actuel) -> Merida (pressenti)",
+      "equipementier_velo": "Specialized (actuel) -> Merida (pressenti, 2027)",
       "famille_signal": "A",
-      "statut": "Fin de contrat avec Specialized, passage chez Merida annoncé pour la saison prochaine",
-      "niveau_confiance": "C",
+      "statut": "Fin de contrat avec Specialized (partenariat de ~20 ans) en fin de saison 2026 ; passage chez Merida rapporté pour 2027, contrat pressenti de 3-4 ans couvrant aussi l'équipe féminine AG Insurance-Soudal. Nouveaux modèles évoqués : Merida Reacto et Scultura. Par ailleurs, Quick-Step (la marque outillage) quitte aussi le sponsoring-titre après 24 ans, un remplaçant serait déjà trouvé pour 2027.",
+      "niveau_confiance": "B",
       "premiere_detection": "2026-07-15",
-      "derniere_maj": "2026-07-15",
-      "sources": [],
-      "notes": "Dossier ouvert manuellement par l'utilisateur le 15/07/2026 sur la base d'informations déjà connues. Opportunité de rachat du stock Specialized en fin de saison. À sourcer et faire remonter de niveau de confiance lors du premier run si confirmation presse trouvée."
+      "derniere_maj": "2026-07-20",
+      "sources": [
+        "https://escapecollective.com/reports-soudal-quick-step-to-switch-from-specialized-to-merida-in-2027/",
+        "https://www.wielerflits.be/materiaalzone/soudal-quick-step-neemt-afscheid-van-specialized-stapt-in-2027-over-op-merida/",
+        "https://www.cyclingnews.com/bikes/pro-bikes/soudal-quickstep-and-specialized-set-to-end-near-20-year-partnership-according-to-report/",
+        "https://www.domestiquecycling.com/en/news/soudal-quick-step-to-part-ways-with-specialized-a-year-after-evenepoel-exit/"
+      ],
+      "notes": "20/07/2026 : niveau relevé C → B — plusieurs médias indépendants (Wielerflits, Escape Collective citant le journaliste Daniel Benson, Cyclingnews, Domestique) convergent sur la même info, mais aucune confirmation officielle de l'équipe, de Specialized ou de Merida à ce stade. Opportunité de rachat du stock Specialized (Tarmac SL8/SL9, roues, etc.) en fin de saison 2026 si le passage à Merida se confirme. Angle complémentaire : Specialized a lancé le nouveau Tarmac SL9 (S-Works, ~14 000€) cet été, ce qui pousse déjà les SL8 en soldes sur le marché grand public — surveiller si Soudal Quick-Step écoule son parc SL8/SL9 avant le switch Merida plutôt que d'attendre la fin de contrat."
+    },
+    {
+      "nom": "Visma-Lease a Bike",
+      "division": "WorldTour",
+      "equipementier_velo": "Cervélo (pas de changement identifié)",
+      "famille_signal": "B",
+      "statut": "Visma (sponsor-titre depuis 2019, ex-Jumbo-Visma) annonce se retirer du rôle de sponsor-titre et passer à un rôle secondaire/réduit à partir de 2027, laissant un trou budgétaire estimé à ~20 M€/an. Recherche d'un remplaçant en cours depuis février 2026 ; aucun accord trouvé à la mi-juillet malgré de bons résultats sportifs (Vingegaard, van Aert). Le staff se dit optimiste (« it's a no until it's a yes but things are looking very promising »).",
+      "niveau_confiance": "B",
+      "premiere_detection": "2026-07-20",
+      "derniere_maj": "2026-07-20",
+      "sources": [
+        "https://www.cyclingnews.com/pro-cycling/teams-riders/visma-lease-a-bike-reportedly-seeking-new-title-sponsor-with-visma-set-to-take-a-step-back/",
+        "https://www.cyclingweekly.com/racing/tour-de-france/team-budgets-are-approaching-eur60-million-and-visma-lease-a-bike-is-still-hunting-for-a-title-sponsor-at-the-tour-de-france",
+        "https://sports.yahoo.com/articles/visma-lease-bike-still-hunting-083138978.html"
+      ],
+      "notes": "Nouveau dossier ouvert le 20/07/2026. Priorité basse à moyenne pour Probikestock : équipe très performante et médiatisée (peu de risque de fermeture), équipementier vélo (Cervélo) non concerné par le changement de sponsor-titre. Le signal ne porte que sur le nom/sponsor-titre, pas sur le matériel — à surveiller si la recherche échoue et fragilise le budget global, ou si un futur sponsor impose un changement d'équipementier vélo/roues."
     }
   ]
 }

@@ -6,33 +6,71 @@
       "equipe": "TotalEnergies",
       "famille": "B",
       "resume": "Absence de sponsor titre identifié pour la saison prochaine",
-      "niveau_confiance": "C",
+      "niveau_confiance": "A",
       "date_detection": "2026-07-15",
-      "derniere_maj": "2026-07-15",
+      "derniere_maj": "2026-07-20",
       "statut": "actif",
-      "sources": []
+      "sources": [
+        "https://www.franceinfo.fr/sports/cyclisme/cyclisme-la-perennite-de-l-equipe-totalenergies-n-est-pas-assuree-aujourd-hui-reconnait-jean-rene-bernaudeau-qui-cherche-un-sponsor-pour-la-saison-prochaine_7848128.html",
+        "https://sports.orange.fr/cyclisme/article/totalenergies-ne-sera-plus-sponsor-titre-fin-2026-CNT000002kUtiT.html"
+      ]
     },
     {
       "id": "picnic-postnl-licence-1an",
       "equipe": "Picnic PostNL",
       "famille": "C",
       "resume": "Licence WorldTour accordée pour 1 an seulement par l'UCI, équilibre financier jugé fragile",
-      "niveau_confiance": "C",
+      "niveau_confiance": "A",
       "date_detection": "2026-07-15",
-      "derniere_maj": "2026-07-15",
+      "derniere_maj": "2026-07-20",
       "statut": "actif",
-      "sources": []
+      "sources": [
+        "https://procyclinguk.com/picnic-postnl-mens-and-womens-worldtour-licence-initially-limited-to-single-year-as-full-list-of-2026-2028-wt-teams-released/",
+        "https://escapecollective.com/picnic-gets-a-limited-worldtour-license-as-uci-announces-2026-field/"
+      ]
+    },
+    {
+      "id": "picnic-postnl-risque-survie-dekker",
+      "equipe": "Picnic PostNL",
+      "famille": "C",
+      "resume": "Selon Thomas Dekker (consultant TV, non officiel), l'équipe « s'effrite » et sa survie à moyen terme n'est pas garantie ; pertes cumulées ~19,5 M€ sur 3 ans",
+      "niveau_confiance": "D",
+      "date_detection": "2026-07-20",
+      "derniere_maj": "2026-07-20",
+      "statut": "actif",
+      "sources": [
+        "https://cyclinguptodate.com/cycling/the-team-is-crumbling-thomas-dekker-worried-picnic-postnl-could-cease-to-exist-in-the-near-future",
+        "https://moneyinsport.substack.com/p/picnic-postnls-195m-losses-in-last"
+      ]
     },
     {
       "id": "soudal-qs-specialized-merida",
       "equipe": "Soudal Quick-Step",
       "famille": "A",
       "resume": "Fin de contrat Specialized, passage pressenti chez Merida la saison prochaine",
-      "niveau_confiance": "C",
+      "niveau_confiance": "B",
       "date_detection": "2026-07-15",
-      "derniere_maj": "2026-07-15",
+      "derniere_maj": "2026-07-20",
       "statut": "actif",
-      "sources": []
+      "sources": [
+        "https://escapecollective.com/reports-soudal-quick-step-to-switch-from-specialized-to-merida-in-2027/",
+        "https://www.wielerflits.be/materiaalzone/soudal-quick-step-neemt-afscheid-van-specialized-stapt-in-2027-over-op-merida/",
+        "https://www.cyclingnews.com/bikes/pro-bikes/soudal-quickstep-and-specialized-set-to-end-near-20-year-partnership-according-to-report/"
+      ]
+    },
+    {
+      "id": "visma-leaseabike-sponsor-titre-2027",
+      "equipe": "Visma-Lease a Bike",
+      "famille": "B",
+      "resume": "Visma se retire du rôle de sponsor-titre à partir de 2027 (rôle réduit), recherche d'un remplaçant depuis février 2026, trou budgétaire ~20 M€, aucun accord trouvé mi-juillet",
+      "niveau_confiance": "B",
+      "date_detection": "2026-07-20",
+      "derniere_maj": "2026-07-20",
+      "statut": "actif",
+      "sources": [
+        "https://www.cyclingnews.com/pro-cycling/teams-riders/visma-lease-a-bike-reportedly-seeking-new-title-sponsor-with-visma-set-to-take-a-step-back/",
+        "https://www.cyclingweekly.com/racing/tour-de-france/team-budgets-are-approaching-eur60-million-and-visma-lease-a-bike-is-still-hunting-for-a-title-sponsor-at-the-tour-de-france"
+      ]
     }
   ]
 }
