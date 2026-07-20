@@ -5,6 +5,11 @@ Veille commerciale **hebdomadaire** sur les nouveautés matériel du **cyclisme 
 production d'un **COMPTE RENDU INFORMATIONNEL DÉTAILLÉ**. **Aucune création de visuel.**
 Le visuel est réalisé ensuite par l'utilisateur dans **Claude Design**, à partir de ce compte rendu.
 
+> 🇫🇷 **Langue du livrable : français obligatoire.** Le compte rendu hebdomadaire — titres, textes,
+> fiche technique, section « Pour Claude Design », légende de post et résumé de notification — est
+> **entièrement rédigé en français**. Les noms de produits/marques et les URL sources restent tels
+> quels ; toute citation en anglais est traduite ou paraphrasée en français.
+
 > ⚠️ Changement de stratégie (14/07/2026) : ne plus générer de visuels ici (images, HTML, PNG, vidéos).
 > Le rôle est **uniquement informationnel**. Le livrable est un fichier Markdown structuré, exportable
 > tel quel vers Claude Design.
@@ -22,6 +27,7 @@ Le visuel est réalisé ensuite par l'utilisateur dans **Claude Design**, à par
 7. Si **rien de notable** cette semaine : le dire brièvement dans le compte rendu et la notification.
 
 ## ✅ À faire / ❌ à ne pas faire
+- ✅ **Rédiger tout le compte rendu en français** (voir consigne de langue ci-dessus).
 - ✅ Compte rendu exhaustif, factuel, chiffré, **toujours sourcé** (liens officiels + presse).
 - ✅ Inclure une section « Pour Claude Design » : angle éditorial, accroche, chiffres à mettre en
   avant, légendes prêtes, format conseillé — pour faciliter la création du visuel côté utilisateur.
