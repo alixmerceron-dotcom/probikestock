@@ -5,14 +5,15 @@
       "id": "totalenergies-sponsor-titre-2027",
       "equipe": "TotalEnergies",
       "famille": "B",
-      "resume": "Absence de sponsor titre identifié pour la saison prochaine",
+      "resume": "Absence de sponsor titre identifié pour la saison prochaine ; discussions pour 2027 prévues après le Tour de France ; équipementier vélo corrigé en CUBE (contrat 1 an, pas Bianchi)",
       "niveau_confiance": "A",
       "date_detection": "2026-07-15",
-      "derniere_maj": "2026-07-20",
+      "derniere_maj": "2026-07-21",
       "statut": "actif",
       "sources": [
         "https://www.franceinfo.fr/sports/cyclisme/cyclisme-la-perennite-de-l-equipe-totalenergies-n-est-pas-assuree-aujourd-hui-reconnait-jean-rene-bernaudeau-qui-cherche-un-sponsor-pour-la-saison-prochaine_7848128.html",
-        "https://sports.orange.fr/cyclisme/article/totalenergies-ne-sera-plus-sponsor-titre-fin-2026-CNT000002kUtiT.html"
+        "https://sports.orange.fr/cyclisme/article/totalenergies-ne-sera-plus-sponsor-titre-fin-2026-CNT000002kUtiT.html",
+        "https://www.velopack.fr/17143-le-team-totalenergies-roulera-sur-des-velos-cube-en-2026"
       ]
     },
     {
@@ -33,24 +34,25 @@
       "id": "picnic-postnl-risque-survie-dekker",
       "equipe": "Picnic PostNL",
       "famille": "C",
-      "resume": "Selon Thomas Dekker (consultant TV, non officiel), l'équipe « s'effrite » et sa survie à moyen terme n'est pas garantie ; pertes cumulées ~19,5 M€ sur 3 ans",
+      "resume": "Selon Thomas Dekker (consultant TV, non officiel), l'équipe « s'effrite » et sa survie à moyen terme n'est pas garantie ; pertes cumulées ~19,5 M€ sur 3 ans. Nuancé le 21/07 : titre PostNL en voie de renouvellement, co-sponsor Raisin en hausse, activité transferts et partenariat Volvo approfondi (signaux de stabilisation)",
       "niveau_confiance": "D",
       "date_detection": "2026-07-20",
-      "derniere_maj": "2026-07-20",
+      "derniere_maj": "2026-07-21",
       "statut": "actif",
       "sources": [
         "https://cyclinguptodate.com/cycling/the-team-is-crumbling-thomas-dekker-worried-picnic-postnl-could-cease-to-exist-in-the-near-future",
-        "https://moneyinsport.substack.com/p/picnic-postnls-195m-losses-in-last"
+        "https://moneyinsport.substack.com/p/picnic-postnls-195m-losses-in-last",
+        "https://cyclingflash.com/news/picnic-postnl-active-again-on-transfer-market-four-talents-get-multi-year-contracts"
       ]
     },
     {
       "id": "soudal-qs-specialized-merida",
       "equipe": "Soudal Quick-Step",
       "famille": "A",
-      "resume": "Fin de contrat Specialized, passage pressenti chez Merida la saison prochaine",
+      "resume": "Fin de contrat Specialized, passage pressenti chez Merida la saison prochaine ; WielerFlits indique une confirmation par des sources internes le 21/07, mais toujours pas d'annonce officielle de l'équipe",
       "niveau_confiance": "B",
       "date_detection": "2026-07-15",
-      "derniere_maj": "2026-07-20",
+      "derniere_maj": "2026-07-21",
       "statut": "actif",
       "sources": [
         "https://escapecollective.com/reports-soudal-quick-step-to-switch-from-specialized-to-merida-in-2027/",
@@ -59,17 +61,62 @@
       ]
     },
     {
+      "id": "soudal-safety-jogger-renommage-2027",
+      "equipe": "Soudal Quick-Step",
+      "famille": "B",
+      "resume": "Safety Jogger devient co-sponsor-titre à partir de 2027, équipe renommée « Soudal Safety Jogger » ; Quick-Step reste en sponsor de rang inférieur jusqu'à fin 2030 — annoncé officiellement par le CEO Jurgen Foré le 13/07/2026",
+      "niveau_confiance": "A",
+      "date_detection": "2026-07-21",
+      "derniere_maj": "2026-07-21",
+      "statut": "actif",
+      "sources": [
+        "https://soudal-quickstepteam.com/en/news/a-new-era-of-the-team-soudal-safety-jogger-announced-for-2027",
+        "https://escapecollective.com/safety-jogger-steps-up-as-soudal-co-title-partner-from-2027/",
+        "https://www.domestiquecycling.com/en/news/end-of-an-era-quick-step-to-be-replaced-as-title-sponsor-after-24-years/"
+      ]
+    },
+    {
       "id": "visma-leaseabike-sponsor-titre-2027",
       "equipe": "Visma-Lease a Bike",
       "famille": "B",
-      "resume": "Visma se retire du rôle de sponsor-titre à partir de 2027 (rôle réduit), recherche d'un remplaçant depuis février 2026, trou budgétaire ~20 M€, aucun accord trouvé mi-juillet",
+      "resume": "Visma se retire du rôle de sponsor-titre à partir de 2027 (rôle réduit), recherche d'un remplaçant depuis février 2026, trou budgétaire ~20 M€ ; fenêtre d'annonce visée (Grand Départ Barcelone, 04/07) passée sans accord, toujours aucun accord signé mi-Tour",
       "niveau_confiance": "B",
       "date_detection": "2026-07-20",
-      "derniere_maj": "2026-07-20",
+      "derniere_maj": "2026-07-21",
       "statut": "actif",
       "sources": [
         "https://www.cyclingnews.com/pro-cycling/teams-riders/visma-lease-a-bike-reportedly-seeking-new-title-sponsor-with-visma-set-to-take-a-step-back/",
-        "https://www.cyclingweekly.com/racing/tour-de-france/team-budgets-are-approaching-eur60-million-and-visma-lease-a-bike-is-still-hunting-for-a-title-sponsor-at-the-tour-de-france"
+        "https://www.cyclingweekly.com/racing/tour-de-france/team-budgets-are-approaching-eur60-million-and-visma-lease-a-bike-is-still-hunting-for-a-title-sponsor-at-the-tour-de-france",
+        "https://www.domestiquecycling.com/en/news/roubaix-win-has-boosted-visma-lease-a-bike-title-sponsor-search/"
+      ]
+    },
+    {
+      "id": "ef-education-recherche-sponsor-titre",
+      "equipe": "EF Education-EasyPost",
+      "famille": "B",
+      "resume": "Recherche publique d'un nouveau sponsor-titre avec offre de naming rights, pour financer un budget compétitif ; pas de rupture ni d'urgence financière identifiée",
+      "niveau_confiance": "A",
+      "date_detection": "2026-07-21",
+      "derniere_maj": "2026-07-21",
+      "statut": "actif",
+      "sources": [
+        "https://www.cyclingnews.com/pro-cycling/teams-riders/we-are-unique-team-and-i-think-people-are-attracted-to-that-ef-education-hope-a-successful-tour-de-france-will-secure-new-title-sponsor/",
+        "https://www.cyclingweekly.com/racing/winning-at-the-highest-level-while-staying-true-to-who-we-are-ef-pro-cycling-launches-search-for-new-title-partner-to-help-win-tour-de-france-and-tour-de-france-femmes-in-next-decade"
+      ]
+    },
+    {
+      "id": "fdj-united-madiot-depart-restructuration",
+      "equipe": "Groupama-FDJ United",
+      "famille": "C",
+      "resume": "Marc Madiot quitte la direction générale (avril 2026) au profit de Thierry Cornec ; selon The Inner Ring (source unique), l'équipe fait partie des plus fragiles du peloton avec Picnic PostNL, pérennité incertaine à horizon 2029, difficultés budgétaires anticipées en 2027",
+      "niveau_confiance": "C",
+      "date_detection": "2026-07-21",
+      "derniere_maj": "2026-07-21",
+      "statut": "actif",
+      "sources": [
+        "https://inrng.com/2026/07/the-race-for-survival-updated/",
+        "https://www.directvelo.com/actualite/126045/marc-madiot-quitte-la-direction-de-la-groupama-fdj-united",
+        "https://www.domestiquecycling.com/en/news/madiots-exit-sparks-change-in-philosophy-at-groupama-fdj-united/"
       ]
     }
   ]

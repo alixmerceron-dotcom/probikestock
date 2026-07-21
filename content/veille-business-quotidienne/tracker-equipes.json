@@ -4,68 +4,119 @@
     {
       "nom": "TotalEnergies",
       "division": "WorldTour",
-      "equipementier_velo": "Bianchi",
+      "equipementier_velo": "CUBE (depuis le 01/01/2026, remplace ENVE, contrat d'un an seulement)",
       "famille_signal": "B",
-      "statut": "TotalEnergies confirme ne plus être sponsor-titre à partir de fin 2026 (10 ans de partenariat). Jean-René Bernaudeau recherche activement un nouveau partenaire pour 2027 et reconnaît publiquement que « la pérennité de l'équipe n'est pas assurée aujourd'hui ». Aucun successeur identifié à ce jour.",
+      "statut": "TotalEnergies confirme ne plus être sponsor-titre à partir de fin 2026 (10 ans de partenariat) ; l'entreprise a confirmé son soutien pour la saison 2026 et prévoit d'ouvrir les discussions pour 2027 après le Tour de France. Jean-René Bernaudeau reconnaît publiquement que « la pérennité de l'équipe n'est pas assurée aujourd'hui » et compte sur la vitrine du Tour de France pour convaincre un nouveau sponsor-titre. Stéphane Heulot est devenu directeur général de l'équipe ; Bernaudeau reste CEO mais souhaite lever le pied et se recentrer sur les projets de développement. Aucun successeur identifié à ce jour.",
       "niveau_confiance": "A",
       "premiere_detection": "2026-07-15",
-      "derniere_maj": "2026-07-20",
+      "derniere_maj": "2026-07-21",
       "sources": [
         "https://www.franceinfo.fr/sports/cyclisme/cyclisme-la-perennite-de-l-equipe-totalenergies-n-est-pas-assuree-aujourd-hui-reconnait-jean-rene-bernaudeau-qui-cherche-un-sponsor-pour-la-saison-prochaine_7848128.html",
-        "https://sports.orange.fr/cyclisme/article/totalenergies-ne-sera-plus-sponsor-titre-fin-2026-CNT000002kUtiT.html"
+        "https://sports.orange.fr/cyclisme/article/totalenergies-ne-sera-plus-sponsor-titre-fin-2026-CNT000002kUtiT.html",
+        "https://www.connaissancedesenergies.org/afp/cyclisme-totalenergies-reste-sponsor-titre-en-2026-et-sengage-aupres-dune-autre-grosse-equipe-250626",
+        "https://www.velopack.fr/17143-le-team-totalenergies-roulera-sur-des-velos-cube-en-2026",
+        "https://www.sportbusiness.club/totalenergies-le-tour-comme-vitrine-pour-convaincre-un-sponsor-titre/",
+        "https://secuvelo.fr/actu-velo/heulot-prend-les-renes-de-totalenergies-un-nouveau-chapitre-pour-2026/"
       ],
-      "notes": "20/07/2026 : confirmation A que le départ de TotalEnergies fin 2026 est acté (déclaration du manager lui-même, reprise par plusieurs médias). Le niveau A porte sur l'absence de sponsor pour 2027, pas sur une fermeture de l'équipe (non actée). Stock Bianchi à surveiller si aucun repreneur n'est trouvé d'ici la fin de saison — historique de Bernaudeau : a toujours trouvé un repreneur par le passé (Direct Energie, Europcar, Bbox, Brioches La Boulangère, Bonjour)."
+      "notes": "21/07/2026 : CORRECTION — l'équipementier vélo précédemment noté « Bianchi » était erroné (info non revérifiée). Recherche du 21/07 confirme que le fournisseur vélo actuel est CUBE (Allemagne), effectif depuis le 01/01/2026 en remplacement d'ENVE, sur un contrat d'un an seulement — cohérent avec l'incertitude sur l'avenir de la structure au-delà de 2026. Si aucun sponsor-titre n'est trouvé pour 2027, le stock CUBE (Litening Aero C:68X, Litening Air C:68X, Aerium TT, du ProTeam aux équipes U19/U23) serait directement exposé. 20/07/2026 : confirmation A que le départ de TotalEnergies fin 2026 est acté (déclaration du manager lui-même, reprise par plusieurs médias). Le niveau A porte sur l'absence de sponsor pour 2027, pas sur une fermeture de l'équipe (non actée). Historique de Bernaudeau : a toujours trouvé un repreneur par le passé (Direct Energie, Europcar, Bbox, Brioches La Boulangère, Bonjour)."
     },
     {
       "nom": "Picnic PostNL",
       "division": "WorldTour",
-      "equipementier_velo": "",
+      "equipementier_velo": "Lapierre (Xelius DRS route, Aerostorm CLM)",
       "famille_signal": "C",
-      "statut": "Licence WorldTour hommes et femmes confirmée par l'UCI mais limitée à la seule saison 2026, sous conditions financières pour une prolongation 2027-2028. Pertes cumulées ~19,5 M€ sur 3 ans (perte de 6,2 M€ en 2024 pour 11,7 M€ de revenus) ; budget total ~18 M€/an, l'un des plus faibles du WorldTour. L'ancien coureur Thomas Dekker (analyste TV, non-officiel) juge que « l'équipe s'effrite » et s'interroge publiquement sur sa survie à moyen terme, après le départ du leader Oscar Onley.",
+      "statut": "Licence WorldTour hommes et femmes confirmée par l'UCI mais limitée à la seule saison 2026, sous conditions financières pour une prolongation 2027-2028. Pertes cumulées ~19,5 M€ sur 3 ans (perte de 6,2 M€ en 2024 pour 11,7 M€ de revenus) ; budget total ~18 M€/an, l'un des plus faibles du WorldTour. L'ancien coureur Thomas Dekker (analyste TV, non-officiel) juge que « l'équipe s'effrite » et s'interroge publiquement sur sa survie à moyen terme, après le départ du leader Oscar Onley. Signal contraire au 21/07 : le titre PostNL serait en voie de renouvellement, le co-sponsor Raisin monterait en puissance, et l'équipe est active sur le marché des transferts (contrats pluriannuels à de jeunes coureurs) et approfondit son partenariat avec Volvo Car Nederland (nouveau EX60, 20/07) — signaux de stabilisation qui nuancent le pronostic de Dekker.",
       "niveau_confiance": "B",
       "premiere_detection": "2026-07-15",
-      "derniere_maj": "2026-07-20",
+      "derniere_maj": "2026-07-21",
       "sources": [
         "https://procyclinguk.com/picnic-postnl-mens-and-womens-worldtour-licence-initially-limited-to-single-year-as-full-list-of-2026-2028-wt-teams-released/",
         "https://escapecollective.com/picnic-gets-a-limited-worldtour-license-as-uci-announces-2026-field/",
         "https://www.cyclingnews.com/pro-cycling/teams-riders/picnic-postnl-mens-and-womens-worldtour-licence-initially-limited-to-single-year-as-full-list-of-2026-2028-wt-teams-released/",
         "https://cyclinguptodate.com/cycling/the-team-is-crumbling-thomas-dekker-worried-picnic-postnl-could-cease-to-exist-in-the-near-future",
-        "https://moneyinsport.substack.com/p/picnic-postnls-195m-losses-in-last"
+        "https://moneyinsport.substack.com/p/picnic-postnls-195m-losses-in-last",
+        "https://cyclingflash.com/news/picnic-postnl-active-again-on-transfer-market-four-talents-get-multi-year-contracts",
+        "https://www.teampicnicpostnl.com/",
+        "https://www.3bikes.fr/2026/01/12/le-lapierre-xelius-drs-du-team-picnic-postnl-pour-2026/"
       ],
-      "notes": "20/07/2026 : niveau A pour la restriction de licence elle-même (décision officielle UCI, largement recoupée) ; niveau C/D pour le pronostic de disparition de l'équipe (opinion d'un consultant TV, pas une source officielle) — niveau_confiance global du dossier maintenu à B par prudence tant qu'aucune source officielle ne confirme un risque de fermeture. Équipementier vélo toujours non identifié dans nos recherches, à vérifier."
+      "notes": "21/07/2026 : équipementier vélo identifié — Lapierre (Xelius DRS, Aerostorm CLM), sponsor depuis 2026. Activité transferts + partenariat Volvo approfondi + renouvellement PostNL évoqué : plutôt des signaux de stabilisation à court terme, à mettre en balance avec le pronostic pessimiste de Dekker (toujours non officiel, niveau D). 20/07/2026 : niveau A pour la restriction de licence elle-même (décision officielle UCI, largement recoupée) ; niveau C/D pour le pronostic de disparition de l'équipe (opinion d'un consultant TV, pas une source officielle) — niveau_confiance global du dossier maintenu à B par prudence tant qu'aucune source officielle ne confirme un risque de fermeture."
     },
     {
       "nom": "Soudal Quick-Step",
       "division": "WorldTour",
-      "equipementier_velo": "Specialized (actuel) -> Merida (pressenti, 2027)",
+      "equipementier_velo": "Specialized (actuel) -> Merida (pressenti, 2027, encore non confirmé officiellement)",
       "famille_signal": "A",
-      "statut": "Fin de contrat avec Specialized (partenariat de ~20 ans) en fin de saison 2026 ; passage chez Merida rapporté pour 2027, contrat pressenti de 3-4 ans couvrant aussi l'équipe féminine AG Insurance-Soudal. Nouveaux modèles évoqués : Merida Reacto et Scultura. Par ailleurs, Quick-Step (la marque outillage) quitte aussi le sponsoring-titre après 24 ans, un remplaçant serait déjà trouvé pour 2027.",
+      "statut": "Fin de contrat avec Specialized (partenariat de ~20 ans) en fin de saison 2026 ; passage chez Merida rapporté pour 2027, contrat pressenti de 3-4 ans couvrant aussi l'équipe féminine AG Insurance-Soudal. Nouveaux modèles évoqués : Merida Reacto et Scultura. Confirmation officielle distincte le 13/07/2026 (jour de repos du Tour) : le CEO Jurgen Foré a annoncé que Safety Jogger (partenaire depuis 2022, sponsor secondaire) devient co-sponsor-titre à partir de 2027, l'équipe se renommant « Soudal Safety Jogger » (2027-2028) ; Quick-Step reste sur le maillot en sponsor de rang inférieur jusqu'à fin 2030.",
       "niveau_confiance": "B",
       "premiere_detection": "2026-07-15",
-      "derniere_maj": "2026-07-20",
+      "derniere_maj": "2026-07-21",
       "sources": [
         "https://escapecollective.com/reports-soudal-quick-step-to-switch-from-specialized-to-merida-in-2027/",
         "https://www.wielerflits.be/materiaalzone/soudal-quick-step-neemt-afscheid-van-specialized-stapt-in-2027-over-op-merida/",
         "https://www.cyclingnews.com/bikes/pro-bikes/soudal-quickstep-and-specialized-set-to-end-near-20-year-partnership-according-to-report/",
-        "https://www.domestiquecycling.com/en/news/soudal-quick-step-to-part-ways-with-specialized-a-year-after-evenepoel-exit/"
+        "https://www.domestiquecycling.com/en/news/soudal-quick-step-to-part-ways-with-specialized-a-year-after-evenepoel-exit/",
+        "https://soudal-quickstepteam.com/en/news/a-new-era-of-the-team-soudal-safety-jogger-announced-for-2027",
+        "https://escapecollective.com/safety-jogger-steps-up-as-soudal-co-title-partner-from-2027/",
+        "https://www.domestiquecycling.com/en/news/end-of-an-era-quick-step-to-be-replaced-as-title-sponsor-after-24-years/",
+        "https://www.cyclingweekly.com/racing/tour-de-france/end-of-an-era-as-quick-step-set-to-step-down-as-soudal-quick-step-title-sponsor-after-24-years"
       ],
-      "notes": "20/07/2026 : niveau relevé C → B — plusieurs médias indépendants (Wielerflits, Escape Collective citant le journaliste Daniel Benson, Cyclingnews, Domestique) convergent sur la même info, mais aucune confirmation officielle de l'équipe, de Specialized ou de Merida à ce stade. Opportunité de rachat du stock Specialized (Tarmac SL8/SL9, roues, etc.) en fin de saison 2026 si le passage à Merida se confirme. Angle complémentaire : Specialized a lancé le nouveau Tarmac SL9 (S-Works, ~14 000€) cet été, ce qui pousse déjà les SL8 en soldes sur le marché grand public — surveiller si Soudal Quick-Step écoule son parc SL8/SL9 avant le switch Merida plutôt que d'attendre la fin de contrat."
+      "notes": "21/07/2026 : le rebranding « Soudal Safety Jogger » est désormais niveau A (annonce officielle du CEO de l'équipe) — ce changement de nom/sponsor-titre est distinct du changement d'équipementier vélo, qui reste au niveau B : WielerFlits indique avoir eu confirmation par des sources internes que Merida remplacera Specialized, mais l'équipe n'a toujours pas officiellement confirmé ce volet à ce jour. 2027 s'annonce comme une année de double bascule pour la structure (nom ET fournisseur vélo). 20/07/2026 : niveau relevé C → B sur le volet Merida — plusieurs médias indépendants (Wielerflits, Escape Collective citant le journaliste Daniel Benson, Cyclingnews, Domestique) convergent sur la même info. Opportunité de rachat du stock Specialized (Tarmac SL8/SL9, roues, etc.) en fin de saison 2026 si le passage à Merida se confirme. Angle complémentaire : Specialized a lancé le nouveau Tarmac SL9 (S-Works, ~14 000€) cet été, ce qui pousse déjà les SL8 en soldes sur le marché grand public."
     },
     {
       "nom": "Visma-Lease a Bike",
       "division": "WorldTour",
       "equipementier_velo": "Cervélo (pas de changement identifié)",
       "famille_signal": "B",
-      "statut": "Visma (sponsor-titre depuis 2019, ex-Jumbo-Visma) annonce se retirer du rôle de sponsor-titre et passer à un rôle secondaire/réduit à partir de 2027, laissant un trou budgétaire estimé à ~20 M€/an. Recherche d'un remplaçant en cours depuis février 2026 ; aucun accord trouvé à la mi-juillet malgré de bons résultats sportifs (Vingegaard, van Aert). Le staff se dit optimiste (« it's a no until it's a yes but things are looking very promising »).",
+      "statut": "Visma (sponsor-titre depuis 2019, ex-Jumbo-Visma) annonce se retirer du rôle de sponsor-titre et passer à un rôle secondaire/réduit à partir de 2027, laissant un trou budgétaire estimé à ~20 M€/an. Recherche d'un remplaçant en cours depuis février 2026 ; le CEO Richard Plugge évoquait le Grand Départ du Tour à Barcelone (04/07) comme fenêtre d'annonce privilégiée, mais celle-ci est passée sans accord. La victoire de van Aert à Paris-Roubaix (avant le Tour) aurait « boosté » la recherche ; Plugge reste optimiste (« the search is going well, we have a lot of interest ») mais aucun accord signé à ce jour, y compris pendant le Tour de France.",
       "niveau_confiance": "B",
       "premiere_detection": "2026-07-20",
-      "derniere_maj": "2026-07-20",
+      "derniere_maj": "2026-07-21",
       "sources": [
         "https://www.cyclingnews.com/pro-cycling/teams-riders/visma-lease-a-bike-reportedly-seeking-new-title-sponsor-with-visma-set-to-take-a-step-back/",
         "https://www.cyclingweekly.com/racing/tour-de-france/team-budgets-are-approaching-eur60-million-and-visma-lease-a-bike-is-still-hunting-for-a-title-sponsor-at-the-tour-de-france",
-        "https://sports.yahoo.com/articles/visma-lease-bike-still-hunting-083138978.html"
+        "https://sports.yahoo.com/articles/visma-lease-bike-still-hunting-083138978.html",
+        "https://www.domestiquecycling.com/en/news/roubaix-win-has-boosted-visma-lease-a-bike-title-sponsor-search/",
+        "https://cyclinguptodate.com/cycling/it-would-be-nice-if-we-could-announce-something-at-the-tour-visma-lease-a-bike-close-to-bringing-in-new-title-sponsor",
+        "https://www.idlprocycling.com/cycling/im-extremely-busy-right-now-richard-plugge-and-visma-lease-a-bikes-search-for-a-new-title-sponsor-for-2027"
       ],
-      "notes": "Nouveau dossier ouvert le 20/07/2026. Priorité basse à moyenne pour Probikestock : équipe très performante et médiatisée (peu de risque de fermeture), équipementier vélo (Cervélo) non concerné par le changement de sponsor-titre. Le signal ne porte que sur le nom/sponsor-titre, pas sur le matériel — à surveiller si la recherche échoue et fragilise le budget global, ou si un futur sponsor impose un changement d'équipementier vélo/roues."
+      "notes": "21/07/2026 : la fenêtre d'annonce privilégiée (Grand Départ à Barcelone) est passée sans accord signé — la recherche continue, sans échec constaté à ce stade (Plugge indique que « les discussions se passent bien »). Priorité basse à moyenne pour Probikestock : équipe très performante et médiatisée (peu de risque de fermeture), équipementier vélo (Cervélo) non concerné par le changement de sponsor-titre. Nouveau dossier ouvert le 20/07/2026."
+    },
+    {
+      "nom": "EF Education-EasyPost",
+      "division": "WorldTour",
+      "equipementier_velo": "Cannondale (aucun changement identifié dans nos recherches)",
+      "famille_signal": "B",
+      "statut": "L'équipe (masculine EF Education-EasyPost et féminine EF Education-Oatly, toutes deux propriété d'EF Education First) a rendu publique le 21/07/2026 sa recherche d'un nouveau sponsor-titre, avec offre de « premier droit au nom » (naming rights) — démarche inhabituelle de transparence pour le milieu. Objectif affiché : financer un budget compétitif face à UAE Team Emirates-XRG, Lidl-Trek et Decathlon-CMA CGM, et viser la victoire au Tour de France et au Tour de France Femmes dans la décennie. Le directeur Jonathan Vaughters évoque des discussions avec des marques nord-américaines à rayonnement international ; EF est prêt à devenir partenaire minoritaire dans le nom si un accord se conclut.",
+      "niveau_confiance": "A",
+      "premiere_detection": "2026-07-21",
+      "derniere_maj": "2026-07-21",
+      "sources": [
+        "https://www.cyclingnews.com/pro-cycling/teams-riders/we-are-unique-team-and-i-think-people-are-attracted-to-that-ef-education-hope-a-successful-tour-de-france-will-secure-new-title-sponsor/",
+        "https://www.cyclingweekly.com/racing/winning-at-the-highest-level-while-staying-true-to-who-we-are-ef-pro-cycling-launches-search-for-new-title-partner-to-help-win-tour-de-france-and-tour-de-france-femmes-in-next-decade",
+        "https://cyclinguptodate.com/cycling/the-response-has-been-really-really-good-jonathan-vaughters-launches-a-search-for-new-title-sponsor",
+        "https://inrng.com/2026/07/the-race-for-survival-updated/"
+      ],
+      "notes": "Nouveau dossier ouvert le 21/07/2026. Niveau A pour le fait même de la recherche publique (annonce officielle de l'équipe/Vaughters), mais aucune incertitude financière immédiate ni risque de fermeture identifié — EF reste propriétaire, cherche un partenaire additionnel plutôt qu'un remplaçant en urgence. Pas de changement d'équipementier vélo (Cannondale) identifié à ce stade ; à surveiller si un futur sponsor-titre impose un changement d'équipementier comme condition (fréquent dans ce type de deal, cf. Soudal Quick-Step)."
+    },
+    {
+      "nom": "Groupama-FDJ United",
+      "division": "WorldTour",
+      "equipementier_velo": "Wilier Triestina (Filante SLR ID2, depuis 2026, remplace Lapierre après une longue ère) ; textile Bioracer depuis 2026 (remplace Alé après 7 ans)",
+      "famille_signal": "C",
+      "statut": "Restructuration de gouvernance officialisée en avril 2026 : Marc Madiot (fondateur, directeur général depuis 1997) quitte la direction générale au profit de Thierry Cornec (arrivé en juin 2024), Madiot devenant président avec un rôle réduit. Renommage de la structure en « Groupama-FDJ United » pour 2026. Selon l'analyste spécialisé The Inner Ring (source unique, non officielle), l'équipe fait partie (avec Picnic PostNL) des formations qui « semblent les plus faibles aujourd'hui » et dont la pérennité jusqu'en 2029 est incertaine ; difficultés budgétaires anticipées plutôt en 2027 qu'en 2026 (effectif limité à 29 coureurs pour raisons budgétaires). Groupama et FDJ restent engagés comme sponsors-titres jusqu'en 2027 selon les informations disponibles (pas de rupture de contrat identifiée).",
+      "niveau_confiance": "C",
+      "premiere_detection": "2026-07-21",
+      "derniere_maj": "2026-07-21",
+      "sources": [
+        "https://inrng.com/2026/07/the-race-for-survival-updated/",
+        "https://www.directvelo.com/actualite/126045/marc-madiot-quitte-la-direction-de-la-groupama-fdj-united",
+        "https://todaycycling.com/marc-madiot-lache-le-guidon-mon-ambition-cest-que-lequipe-me-survive/",
+        "https://www.domestiquecycling.com/en/news/madiots-exit-sparks-change-in-philosophy-at-groupama-fdj-united/",
+        "https://www.domestiquecycling.com/en/news/the-team-is-my-second-baby-madiot-steps-aside-after-over-25-years/",
+        "https://www.velofute.com/post/17e-%C3%A9quipe-en-2025-faut-il-s-inqui%C3%A9ter-pour-groupama-fdj-pour-2026-2028",
+        "https://cyclingarchives.com/groupama-fdj-2026-united-team-profile-roster-results-season-guide/"
+      ],
+      "notes": "Nouveau dossier ouvert le 21/07/2026. Niveau A pour le départ de Madiot de la direction générale (fait officiel, largement recoupé) ; niveau D pour le pronostic de non-pérennité à horizon 2029 (opinion d'un seul analyste spécialisé, The Inner Ring, pas de source officielle) — niveau_confiance global du dossier maintenu à C par prudence. Le changement d'équipementier vélo (Lapierre → Wilier) et textile (Alé → Bioracer) a déjà eu lieu en 2026, donc pas d'opportunité immédiate sur ce plan sauf nouvelle bascule ; à surveiller surtout sous l'angle budgétaire 2027 et la trajectoire sportive (recul au classement WorldTour)."
     }
   ]
 }
