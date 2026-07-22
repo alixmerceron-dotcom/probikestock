@@ -49,10 +49,10 @@
       "id": "soudal-qs-specialized-merida",
       "equipe": "Soudal Quick-Step",
       "famille": "A",
-      "resume": "Fin de contrat Specialized, passage pressenti chez Merida la saison prochaine ; WielerFlits indique une confirmation par des sources internes le 21/07, mais toujours pas d'annonce officielle de l'équipe",
+      "resume": "Fin de contrat Specialized, passage pressenti chez Merida la saison prochaine ; WielerFlits indique une confirmation par des sources internes le 21/07, mais toujours pas d'annonce officielle de l'équipe. Précision du 22/07 : le rapport circule en réalité depuis avril 2026 (journaliste Daniel Benson), pas une rumeur toute récente. Merida a lancé sa Reacto 5e génération en 2026, pressentie comme futur modèle course de l'équipe.",
       "niveau_confiance": "B",
       "date_detection": "2026-07-15",
-      "derniere_maj": "2026-07-21",
+      "derniere_maj": "2026-07-22",
       "statut": "actif",
       "sources": [
         "https://escapecollective.com/reports-soudal-quick-step-to-switch-from-specialized-to-merida-in-2027/",
@@ -117,6 +117,36 @@
         "https://inrng.com/2026/07/the-race-for-survival-updated/",
         "https://www.directvelo.com/actualite/126045/marc-madiot-quitte-la-direction-de-la-groupama-fdj-united",
         "https://www.domestiquecycling.com/en/news/madiots-exit-sparks-change-in-philosophy-at-groupama-fdj-united/"
+      ]
+    },
+    {
+      "id": "kern-pharma-perte-sponsor-titre-2027",
+      "equipe": "Kern Pharma",
+      "famille": "B",
+      "resume": "Kern Pharma (sponsor principal depuis 7 ans, ~80% du budget) met fin à son sponsoring de l'Equipo Kern Pharma (ProTeam) fin 2026 ; recherche d'un repreneur/naming pour 2027, échéance évoquée autour du 22/08/2026 (Vuelta), sinon risque de rétrogradation ou de disparition",
+      "niveau_confiance": "B",
+      "date_detection": "2026-07-22",
+      "derniere_maj": "2026-07-22",
+      "statut": "actif",
+      "sources": [
+        "https://www.cyclingnews.com/pro-cycling/teams-riders/if-we-have-to-take-a-step-back-we-will-despite-imminent-tour-de-france-grand-depart-on-home-soil-long-established-spanish-proteam-risks-folding-at-end-of-2026/",
+        "https://www.2playbook.com/patrocinio/equipo-kern-pharma-pierde-su-patrocinador-principal-busca-relevo-naming-cara-2027_21723_102.html",
+        "https://ciclismointernacional.com/kern-pharma-se-quedara-sin-patrocinador/"
+      ]
+    },
+    {
+      "id": "jayco-alula-gerry-ryan-derniere-saison-2027",
+      "equipe": "Jayco AlUla",
+      "famille": "B",
+      "resume": "Le propriétaire Gerry Ryan déclare (podcast Stanley St. Social) que 2027 serait probablement sa dernière saison de financement de l'équipe ; contexte de quasi-perte de licence UCI fin 2025 pour défaut de garantie bancaire, sauvetage in extremis",
+      "niveau_confiance": "B",
+      "date_detection": "2026-07-22",
+      "derniere_maj": "2026-07-22",
+      "statut": "actif",
+      "sources": [
+        "https://escapecollective.com/jayco-alula-founder-gerry-ryan-says-2027-will-likely-be-his-last-season/",
+        "https://www.domestiquecycling.com/en/news/gerry-ryan-suggests-2027-could-mark-final-year-of-jayco-alula-backing/",
+        "https://bicyclingaustralia.com.au/news/gerry-ryan-may-call-time-on-jayco-alula-backing/"
       ]
     }
   ]
