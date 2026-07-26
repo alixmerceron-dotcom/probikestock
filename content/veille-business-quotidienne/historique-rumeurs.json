@@ -5,15 +5,17 @@
       "id": "totalenergies-sponsor-titre-2027",
       "equipe": "TotalEnergies",
       "famille": "B",
-      "resume": "Absence de sponsor titre identifié pour la saison prochaine ; discussions pour 2027 prévues après le Tour de France ; équipementier vélo corrigé en CUBE (contrat 1 an, pas Bianchi)",
+      "resume": "Absence de sponsor titre identifié pour la saison prochaine ; discussions pour 2027 prévues après le Tour de France ; équipementier vélo corrigé en CUBE (contrat 1 an, pas Bianchi). Mise à jour du 26/07 : Bernaudeau chiffre publiquement le besoin à 10 M€ pour boucler le budget restant (WielerFlits) ; par prudence face à l'incertitude, l'équipe n'a signé que des contrats d'un an avec plusieurs coureurs (Turgis, Dujardin, Doubey, Breuillard, Le Berre, Lévêque) ; le coureur Jordan Jegat (10e du dernier Tour de France) serait pressenti pour un départ vers Lidl-Trek en 2027 (dicodusport.fr, source unique, non confirmé) — premier signal concret de départ de coureur lié à l'incertitude sponsor, à surveiller sans le présenter comme acquis.",
       "niveau_confiance": "A",
       "date_detection": "2026-07-15",
-      "derniere_maj": "2026-07-23",
+      "derniere_maj": "2026-07-26",
       "statut": "actif",
       "sources": [
         "https://www.franceinfo.fr/sports/cyclisme/cyclisme-la-perennite-de-l-equipe-totalenergies-n-est-pas-assuree-aujourd-hui-reconnait-jean-rene-bernaudeau-qui-cherche-un-sponsor-pour-la-saison-prochaine_7848128.html",
         "https://sports.orange.fr/cyclisme/article/totalenergies-ne-sera-plus-sponsor-titre-fin-2026-CNT000002kUtiT.html",
-        "https://www.velopack.fr/17143-le-team-totalenergies-roulera-sur-des-velos-cube-en-2026"
+        "https://www.velopack.fr/17143-le-team-totalenergies-roulera-sur-des-velos-cube-en-2026",
+        "https://www.wielerflits.nl/nieuws/totalenergies-nog-altijd-op-zoek-naar-nieuwe-sponsoren-10-miljoen-euro-nodig/",
+        "https://dicodusport.fr/blog/fin-du-partenariat-avec-totalenergies-en-2026-quel-avenir-pour-lequipe-de-jean-rene-bernaudeau/"
       ]
     },
     {
