@@ -1,0 +1,24 @@
+{
+  "_note": "Historique des sujets couverts dans les briefs carrousel. Sert à la déduplication sur 8 semaines (voir CLAUDE.md §3.3). Chaque entrée : date de la semaine + liste des sujets.",
+  "semaines": [
+    {
+      "date": "2026-07-14",
+      "sujets": [
+        "Specialized Tarmac SL9 (vélo route aéro+léger)",
+        "Colnago TT2 (vélo contre-la-montre)",
+        "Look 795 Blade RS 3e génération",
+        "Pirelli P Zero Race TLR SL-R (pneus)"
+      ]
+    },
+    {
+      "date": "2026-07-27",
+      "sujets": [
+        "Bilan matériel Tour de France 2026 (tech de la course)",
+        "Colnago Y1Rs de Tadej Pogacar (setup vainqueur)",
+        "Tendance transmission : plateaux XXL du peloton (55/40, 58/44)",
+        "Campagnolo Record 13 (groupe électronique sans fil, dispo juillet)",
+        "Roues Scope Artech chez INEOS Grenadiers"
+      ]
+    }
+  ]
+}
