@@ -183,6 +183,24 @@
       "derniere_maj": "2026-07-29",
       "sources": [],
       "notes": "29/07/2026 : Dossier ouvert et confirmé au niveau A par l'utilisateur lui-même, sur la base d'un contact direct avec l'équipe (source interne, non publique — pas d'article ni de communiqué à citer). Ce niveau A repose sur la confiance de l'utilisateur dans sa source directe, pas sur une confirmation publique/presse : à distinguer des autres dossiers A du tracker qui reposent sur des sources écrites citables. Le prochain run peut tenter une recherche presse complémentaire pour capter le calendrier précis du déménagement et l'ampleur du déstockage, mais ne doit pas rétrograder ce niveau faute de source publique trouvée."
+    },
+    {
+      "nom": "Alpecin - Premier Tech",
+      "division": "WorldTour",
+      "equipementier_velo": "Shimano (roues Dura-Ace)",
+      "famille_signal": "D",
+      "statut": "Shimano lance la nouvelle génération de roues Dura-Ace WH-R9370 (dispo à partir de septembre 2026), développée avec retour de l'équipe (Mathieu van der Poel notamment), testée en course toute la saison dont au Tour de France 2026. Le passage de l'équipe sur le nouveau modèle rend son stock de roues WH-R9200 (génération précédente) disponible à la revente.",
+      "niveau_confiance": "A",
+      "premiere_detection": "2026-07-29",
+      "derniere_maj": "2026-07-29",
+      "sources": [
+        "https://www.cyclingweekly.com/products/new-shimano-dura-ace-wheels-are-up-to-220g-lighter-thanks-to-carbon-spokes",
+        "https://road.cc/tech-news/shimano-launches-lighter-more-aero-dura-ace-wheels",
+        "https://www.cyclingnews.com/cycling-tech-components/wheels-tyres/shimano-launches-brand-new-dura-ace-wheel-range-does-this-mean-a-new-groupset-is-imminent/",
+        "https://www.bikeradar.com/news/shimano-dura-ace-r9370-wheels",
+        "https://bikebiz.com/shimano-launches-new-dura-ace-wh-r9370-wheel-line-up/"
+      ],
+      "notes": "29/07/2026 : Dossier ouvert. Le lancement du WH-R9370 et son adoption par l'équipe sont confirmés par la presse (sources ci-dessus, niveau B sur ce seul point). Le niveau A porte spécifiquement sur l'ampleur du déstockage : l'utilisateur confirme directement avoir connaissance d'un « gros stock » de roues R9200 à vendre par l'équipe — source interne non publique, pas d'article à citer sur ce point précis (à distinguer du reste du dossier, sourcé presse). Nom d'équipe relevé dans la presse comme « Alpecin - Premier Tech » plutôt que « Alpecin-Deceuninck » — possible changement de co-sponsor à vérifier, non recoupé à ce stade."
     }
   ]
 }

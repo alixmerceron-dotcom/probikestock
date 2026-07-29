@@ -174,6 +174,21 @@
       "derniere_maj": "2026-07-29",
       "statut": "actif",
       "sources": []
+    },
+    {
+      "id": "alpecin-premier-tech-destockage-r9200",
+      "equipe": "Alpecin - Premier Tech",
+      "famille": "D",
+      "resume": "Shimano lance les nouvelles roues Dura-Ace WH-R9370 (dispo septembre 2026), développées et testées par l'équipe (Mathieu van der Poel) toute la saison. Passage de l'équipe sur le nouveau modèle confirmé par la presse (niveau B). Ampleur du déstockage du stock WH-R9200 confirmée niveau A par l'utilisateur le 29/07 : « gros stock » de roues à vendre — source interne non publique sur ce point précis.",
+      "niveau_confiance": "A",
+      "date_detection": "2026-07-29",
+      "derniere_maj": "2026-07-29",
+      "statut": "actif",
+      "sources": [
+        "https://www.cyclingweekly.com/products/new-shimano-dura-ace-wheels-are-up-to-220g-lighter-thanks-to-carbon-spokes",
+        "https://road.cc/tech-news/shimano-launches-lighter-more-aero-dura-ace-wheels",
+        "https://www.cyclingnews.com/cycling-tech-components/wheels-tyres/shimano-launches-brand-new-dura-ace-wheel-range-does-this-mean-a-new-groupset-is-imminent/"
+      ]
     }
   ]
 }
