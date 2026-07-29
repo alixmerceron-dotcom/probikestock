@@ -177,12 +177,12 @@
       "division": "WorldTour",
       "equipementier_velo": "Trek",
       "famille_signal": "C",
-      "statut": "Déménagement pressenti des locaux de l'équipe en Allemagne ; obligerait à trier/réduire le stock de matériel pour faciliter le déménagement",
-      "niveau_confiance": "D",
+      "statut": "Déménagement des locaux de l'équipe en Allemagne ; oblige à trier/réduire le stock de matériel pour faciliter le déménagement",
+      "niveau_confiance": "A",
       "premiere_detection": "2026-07-29",
       "derniere_maj": "2026-07-29",
       "sources": [],
-      "notes": "29/07/2026 : Nouveau dossier ouvert manuellement par l'utilisateur (voir signaux-manuels.md), aucune source écrite fournie à ce stade. À recouper lors du prochain run : recherche presse sur un changement de siège/locaux Lidl-Trek en Allemagne (communiqués équipe, presse allemande spécialisée, WielerFlits/Sporza)."
+      "notes": "29/07/2026 : Dossier ouvert et confirmé au niveau A par l'utilisateur lui-même, sur la base d'un contact direct avec l'équipe (source interne, non publique — pas d'article ni de communiqué à citer). Ce niveau A repose sur la confiance de l'utilisateur dans sa source directe, pas sur une confirmation publique/presse : à distinguer des autres dossiers A du tracker qui reposent sur des sources écrites citables. Le prochain run peut tenter une recherche presse complémentaire pour capter le calendrier précis du déménagement et l'ampleur du déstockage, mais ne doit pas rétrograder ce niveau faute de source publique trouvée."
     }
   ]
 }

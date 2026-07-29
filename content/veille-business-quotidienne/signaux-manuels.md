@@ -7,9 +7,4 @@
 
 ## Entrées non traitées
 
-- **2026-07-29** — Équipe : **Lidl-Trek**. Signal : l'équipe déménagerait ses locaux en
-  Allemagne, ce qui l'obligerait à faire du tri dans son stock de matériel pour faciliter
-  le déménagement (opportunité potentielle de rachat). Source : information transmise par
-  l'utilisateur, aucun lien/article fourni. Niveau de confiance à ce stade : **D** (rumeur
-  non vérifiée, aucune source écrite identifiée) — à recouper par la routine (recherche
-  presse spécialisée + communiqués de l'équipe sur un éventuel changement de siège/locaux).
+_Aucune pour l'instant._
