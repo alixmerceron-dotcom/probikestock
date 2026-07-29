@@ -171,6 +171,18 @@
         "https://www.quibicisport.it/2026/04/18/jayco-alula-il-proprietario-ryan-potrei-lasciare-a-fine-2027-i-miei-figli-sono-interessati-alleredita/"
       ],
       "notes": "29/07/2026 : RAS de nouveau signal daté du jour — aucun nom de repreneur identifié. Niveau maintenu à B. 28/07/2026 : RAS de nouveau signal daté du jour — aucun nom de repreneur identifié, aucune précision nouvelle sur le calendrier de départ de Ryan. Niveau maintenu à B. 27/07/2026 : RAS de nouveau signal daté du jour — précision de calendrier retrouvée (déjà en substance connue, source Wikipedia/presse) : le sponsoring AlUla lui-même est daté comme expirant à fin 2027, ce qui coïncide avec l'horizon évoqué par Ryan pour son propre retrait — cohérence de calendrier, pas un nouvel élément de fond. Aucun nom de repreneur identifié. Niveau maintenu à B. 26/07/2026 : RAS de nouveau signal daté du jour — aucun nom de repreneur identifié. Niveau maintenu à B. 25/07/2026 : RAS de nouveau signal daté du jour — aucun nom de repreneur identifié. Confirmation contextuelle (déjà connue en substance) que l'Arabie Saoudite reste la piste de financement la plus probable évoquée par Ryan lui-même. Niveau maintenu à B. 24/07/2026 : RAS de nouveau signal daté du jour. Ryan reste cité comme « confiant que l'équipe trouvera un financement pour continuer » au-delà de son propre retrait ; aucun nom de repreneur identifié. Niveau maintenu à B. 23/07/2026 : RAS de nouveau signal daté du jour. Précision retrouvée (déjà connue en substance, source italienne Bicisport datée du 18/04/2026) : Ryan évoque aussi discuter avec « a couple of others in Saudi as well » pour un financement futur au-delà d'AlUla. Niveau maintenu à B. 22/07/2026 : Nouveau dossier ouvert. Déclaration directe et nommée du propriétaire, reprise par trois médias spécialisés indépendants (Escape Collective, Domestique Cycling, Bicycling Australia), mais reste une déclaration d'intention conditionnelle (« probablement »/« likely ») sur un podcast, pas un communiqué officiel de l'équipe → niveau B. Équipementier vélo Giant non menacé à court terme (investissement renforcé lors du sauvetage 2025), mais tout l'équipement (vélos, roues, textile) serait exposé si aucun repreneur n'est trouvé pour 2027-2028. Angle D complémentaire : Giant a présenté une évolution du Propel en 2026, roulée par l'équipe cette saison."
+    },
+    {
+      "nom": "Lidl-Trek",
+      "division": "WorldTour",
+      "equipementier_velo": "Trek",
+      "famille_signal": "C",
+      "statut": "Déménagement pressenti des locaux de l'équipe en Allemagne ; obligerait à trier/réduire le stock de matériel pour faciliter le déménagement",
+      "niveau_confiance": "D",
+      "premiere_detection": "2026-07-29",
+      "derniere_maj": "2026-07-29",
+      "sources": [],
+      "notes": "29/07/2026 : Nouveau dossier ouvert manuellement par l'utilisateur (voir signaux-manuels.md), aucune source écrite fournie à ce stade. À recouper lors du prochain run : recherche presse sur un changement de siège/locaux Lidl-Trek en Allemagne (communiqués équipe, presse allemande spécialisée, WielerFlits/Sporza)."
     }
   ]
 }

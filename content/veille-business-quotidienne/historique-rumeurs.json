@@ -163,6 +163,17 @@
       "sources": [
         "https://www.cyclingnews.com/pro-cycling/teams-riders/all-that-glitters-is-not-gold-half-of-tour-de-france-teams-searching-for-title-sponsors-to-fund-rising-rider-salaries/"
       ]
+    },
+    {
+      "id": "lidl-trek-demenagement-allemagne",
+      "equipe": "Lidl-Trek",
+      "famille": "C",
+      "resume": "Déménagement pressenti des locaux de l'équipe en Allemagne, nécessitant un tri du stock de matériel",
+      "niveau_confiance": "D",
+      "date_detection": "2026-07-29",
+      "derniere_maj": "2026-07-29",
+      "statut": "actif",
+      "sources": []
     }
   ]
 }
