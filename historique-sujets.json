@@ -1,0 +1,13 @@
+{
+  "_description": "Historique des sujets couverts par la routine 'La sortie de la semaine' / brief-carrousel. Sert à la déduplication sur les 8 dernières semaines (voir CLAUDE.md §3). Ajouter les sujets retenus à chaque routine.",
+  "sujets": [
+    { "date": "2026-07-14", "sujet": "Specialized Tarmac SL9", "categorie": "velo-route", "note": "Vélo de course aéro+léger, 687 g cadre, 6,5 kg" },
+    { "date": "2026-07-14", "sujet": "Colnago TT2", "categorie": "velo-clm", "note": "Nouveau CLM, -550 g" },
+    { "date": "2026-07-14", "sujet": "Look 795 Blade RS 3e gen", "categorie": "velo-route", "note": "-15 W a 50 km/h, -160 g" },
+    { "date": "2026-07-14", "sujet": "Pirelli P Zero Race TLR SL-R", "categorie": "pneus", "note": "jusqu'a 15 W plus rapides (PAAS)" },
+    { "date": "2026-08-03", "sujet": "Shimano Dura-Ace WH-R9370", "categorie": "roues", "note": "Rayons carbone, C36 1170g/C50 1302g/C60 1389g, 2970$, dispo sept 2026" },
+    { "date": "2026-08-03", "sujet": "Rumeur Shimano Dura-Ace R9300 13v sans fil", "categorie": "transmission-rumeur", "note": "Brevet 2024 + fuite E-Tube 2026, signal via numerotation roues 9300" },
+    { "date": "2026-08-03", "sujet": "Campagnolo Zonda Carbon All Road", "categorie": "roues", "note": "50mm, 1550g, 25mm interne, 29-40mm, 1420 EUR" },
+    { "date": "2026-08-03", "sujet": "CADEX Aero Integrated cockpit", "categorie": "cockpit", "note": "Monobloc T800/T1100, 255g, 699 EUR" }
+  ]
+}
