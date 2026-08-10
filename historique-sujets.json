@@ -1,0 +1,29 @@
+{
+  "description": "Historique des sujets couverts par la routine veille. Sert a la deduplication (8 dernieres semaines). Ne pas re-couvrir un sujet present ici sauf developpement majeur.",
+  "sujets": [
+    {
+      "sujet": "Shimano Dura-Ace WH-R9370 (nouvelle gamme de roues, rayons carbone, ere R9300)",
+      "categorie": "roues",
+      "date_couverture": "2026-08-10",
+      "semaine": "2026-08-04/2026-08-10"
+    },
+    {
+      "sujet": "Look 785 Huez RS (grimpeur, cadre 830 g)",
+      "categorie": "cadre",
+      "date_couverture": "2026-08-10",
+      "semaine": "2026-08-04/2026-08-10"
+    },
+    {
+      "sujet": "Zipp 404 S (roues carbone aero hookless sous 1100 EUR)",
+      "categorie": "roues",
+      "date_couverture": "2026-08-10",
+      "semaine": "2026-08-04/2026-08-10"
+    },
+    {
+      "sujet": "Van Rysel RCR-R Pro / RCR-F Pro (commercialisation machines de Tour)",
+      "categorie": "cadre",
+      "date_couverture": "2026-08-10",
+      "semaine": "2026-08-04/2026-08-10"
+    }
+  ]
+}
