@@ -125,6 +125,18 @@ Règles :
    requête dédiée `{équipe} twitter rumeur sponsor` pour capter les reprises presse d'un
    tweet. Le fichier `signaux-manuels.md` (point 2) reste le canal pour les tweets que
    l'utilisateur juge utile de faire suivre directement.
+6. **Signaux Instagram** : instagram.com est **bloqué par la politique réseau** de
+   l'environnement (`EGRESS_BLOCKED`, confirmé le 11/08/2026) — inutile de retenter un
+   fetch direct d'un post/reel/story à chaque run, ce sera toujours refusé. Même traitement
+   que pour X/Twitter : ajouter une requête dédiée `{équipe} instagram annonce {sujet}` pour
+   capter une éventuelle reprise presse du post (comptes officiels d'équipes/marques postent
+   souvent en simultané sur Instagram et dans un communiqué repris par la presse listée en
+   (3)). Si l'utilisateur partage un lien Instagram sans reprise presse trouvable, ne pas
+   inventer le contenu du post : lui demander de coller le texte de la légende / une
+   description / une capture dans `signaux-manuels.md` (ou directement dans le run), puis
+   traiter cette description comme un signal manuel sourcé "utilisateur, capture Instagram
+   non vérifiable indépendamment" — niveau de confiance C ou D selon qu'un compte officiel
+   nommé est identifiable ou non, jamais présenté comme confirmé sans recoupement presse.
 
 ---
 
