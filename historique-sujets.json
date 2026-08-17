@@ -1,0 +1,9 @@
+{
+  "_note": "Historique de déduplication de la routine veille cyclisme. Ne pas recouvrir un sujet des 8 dernières semaines, sauf développement majeur.",
+  "sujets": [
+    { "date": "2026-07-14", "titre": "Specialized Tarmac SL9", "categorie": "velo-route" },
+    { "date": "2026-08-17", "titre": "Shimano Dura-Ace WH-R9370 — roues à rayons carbone", "categorie": "roues" },
+    { "date": "2026-08-17", "titre": "Tendance pneus larges — 30 mm nouveau standard route", "categorie": "pneus" },
+    { "date": "2026-08-17", "titre": "Campagnolo — accord syndical et descente en gamme 13v", "categorie": "industrie" }
+  ]
+}
