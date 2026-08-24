@@ -1,0 +1,14 @@
+{
+  "description": "Historique des sujets couverts dans les briefs carrousel. Utilisé pour dedup sur 8 semaines glissantes. Format : liste d'entrées {date_brief, sujets: [str]}. Les 'sujets' sont des identifiants courts et stables (marque + produit).",
+  "entries": [
+    {
+      "date_brief": "2026-08-24",
+      "sujets": [
+        "shimano-dura-ace-r9300-spotted-vuelta",
+        "shimano-dura-ace-r9300-13-vitesses-satellite-shift",
+        "shimano-dura-ace-r9300-semi-wireless-udh",
+        "shimano-dura-ace-wh-r9370-roues-carbone"
+      ]
+    }
+  ]
+}
