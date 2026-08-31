@@ -1,0 +1,25 @@
+{
+  "_comment": "Historique des sujets couverts par la routine veille Probikestock. Sert à la déduplication sur 8 semaines glissantes (voir CLAUDE.md §3).",
+  "sujets": [
+    {
+      "date": "2026-08-31",
+      "titre": "Shimano Dura-Ace R9300 13 vitesses aperçu à la Vuelta",
+      "tags": ["shimano", "dura-ace", "groupe", "13v", "prototype", "vuelta"]
+    },
+    {
+      "date": "2026-08-31",
+      "titre": "Roues Shimano Dura-Ace WH-R9370 (rayons carbone, allègement)",
+      "tags": ["shimano", "dura-ace", "roues", "wh-r9370", "carbone"]
+    },
+    {
+      "date": "2026-08-31",
+      "titre": "Prolongateurs et cockpits chrono sur mesure - Vuelta CLM",
+      "tags": ["chrono", "aero", "prolongateurs", "cockpit", "vuelta", "impression3d"]
+    },
+    {
+      "date": "2026-08-31",
+      "titre": "Selle prototype Tadej Pogacar - chrono Vuelta",
+      "tags": ["selle", "pogacar", "prototype", "chrono", "vuelta"]
+    }
+  ]
+}
