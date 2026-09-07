@@ -1,0 +1,22 @@
+{
+  "sujets": [
+    {
+      "date": "2026-09-07",
+      "titre": "Prototype Shimano Dura-Ace R9300 13 vitesses repéré à la Vuelta",
+      "categorie": "transmission",
+      "marque": "Shimano"
+    },
+    {
+      "date": "2026-09-07",
+      "titre": "Roues Shimano Dura-Ace WH-R9370 (rayons carbone)",
+      "categorie": "roues",
+      "marque": "Shimano"
+    },
+    {
+      "date": "2026-09-07",
+      "titre": "Vuelta 2026 - tech du chrono : prolongateurs aero imprimes 3D, selle proto Pogacar",
+      "categorie": "tech-peloton",
+      "marque": "divers"
+    }
+  ]
+}
