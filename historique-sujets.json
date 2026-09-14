@@ -1,0 +1,29 @@
+{
+  "_description": "Historique des sujets couverts par la routine veille Probikestock. Sert à la déduplication : ne pas re-couvrir un sujet des 8 dernieres semaines sauf developpement majeur. Mis a jour en fin de routine.",
+  "sujets": [
+    {
+      "date": "2026-09-14",
+      "brief": "briefs/brief-carrousel-2026-09-14.md",
+      "titre": "Shimano Dura-Ace R9300 (prototype 13 vitesses, Vuelta)",
+      "marque": "Shimano",
+      "categorie": "transmission",
+      "hook": true
+    },
+    {
+      "date": "2026-09-14",
+      "brief": "briefs/brief-carrousel-2026-09-14.md",
+      "titre": "Shimano Dura-Ace WH-R9370 (roues, rayons carbone, dispo septembre)",
+      "marque": "Shimano",
+      "categorie": "roues",
+      "hook": false
+    },
+    {
+      "date": "2026-09-14",
+      "brief": "briefs/brief-carrousel-2026-09-14.md",
+      "titre": "Mavic Comete 50 (retour segment performance, test presse)",
+      "marque": "Mavic",
+      "categorie": "roues",
+      "hook": false
+    }
+  ]
+}
