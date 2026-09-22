@@ -601,6 +601,22 @@
     "https://www.dhnet.be/sports/cyclisme/2026/09/10/rik-verbrugghe-devoile-les-contours-du-projet-color-code-ftp-tous-les-agents-nous-contactent-MAZM74MMPFE5NH43LFIN45MRKY/",
     "https://www.cyclismactu.net/news-cyclisme-route-rik-verbrugghe-cree-une-nouvelle-equipe-belge-en-continental-95984.html"
    ]
+  },
+  {
+   "id": "uae-team-emirates-xrg-colnago-tt2",
+   "equipe": "UAE Team Emirates-XRG",
+   "famille": "D",
+   "resume": "Nouveau dossier ouvert le 22/09/2026. Colnago lance le TT2, nouveau vélo de contre-la-montre développé avec UAE Team Emirates-XRG et UAE Team ADQ, en remplacement du TT1 : lancement officiel courant juin/juillet 2026 (avant le Tour de France 2026), disponibilité commerciale chez les revendeurs annoncée pour fin septembre 2026 — c'est ce calendrier de mise sur le marché qui rend le signal d'actualité cette semaine. Allègement d'environ 550 g sur le kit-cadre, gains aérodynamiques et de stabilité revendiqués. Prix du kit-cadre : 7 040 € / £6 499 / $7 500 (identique au TT1). Convergence de plusieurs sources spécialisées via recherche web (niveau B), mais accès direct (WebFetch) bloqué par la politique réseau sur l'ensemble des domaines presse cyclisme testés aujourd'hui — confiance basée sur la convergence des extraits de recherche, sans vérification de source primaire. Le TT1 (utilisé en course jusqu'à début 2026) devient la génération obsolète pour l'équipe — cadres/roues associées potentiellement à écouler, aucune date de déstockage identifiée à ce stade.",
+   "niveau_confiance": "B",
+   "date_detection": "2026-09-22",
+   "derniere_maj": "2026-09-22",
+   "statut": "actif",
+   "sources": [
+    "Cyclingnews (article : \"Tadej Pogačar's new time trial bike is officially here\") — titre retrouvé via recherche web, accès direct bloqué par la politique réseau",
+    "BikeRadar (article : \"2026 Colnago TT2\") — idem, accès direct bloqué",
+    "Escape Collective (article : \"Colnago launches TT2 ahead of the Tour de France\") — idem, accès direct bloqué",
+    "Bikerumor, Biketips, Velo/Outside, Brújula Bike — convergence de snippets de recherche sur les mêmes caractéristiques et le même prix, aucun accès direct possible"
+   ]
   }
  ]
 }
