@@ -1,26 +1,34 @@
-# Texte à coller dans Claude dans Chrome — planificateur Instagram (instagram.com)
+# Texte à coller dans Claude dans Chrome — Meta Business Suite (19 posts)
 
-Avant de coller : dézippe l'archive dans `Téléchargements/PBS-visuels/` (38 fichiers .jpg).
+Avant de coller : dézippe l'archive dans `Téléchargements/PBS-visuels/` (38 fichiers .jpg) et connecte-toi
+à business.facebook.com dans Chrome.
 
 ```
-Tu travailles sur instagram.com, connecté au compte @probikestock. N'utilise PAS Meta Business Suite.
+Tu travailles dans Meta Business Suite (business.facebook.com), compte ProBikeStock.
+
+COMPTES DE PUBLICATION : Instagram @probikestock ET page Facebook ProBikeStock.
+(Si l'utilisateur a retiré « ET page Facebook » de cette ligne, coche uniquement Instagram.)
 
 OBJECTIF : programmer 19 publications (posts du fil), une tous les 3 jours à 18h30 (heure de Paris),
-à partir des fichiers du dossier Téléchargements/PBS-visuels/ (utilise uniquement les fichiers -4x5.jpg).
+avec les fichiers du dossier Téléchargements/PBS-visuels/ — UNIQUEMENT les fichiers se terminant par -4x5.jpg.
+
+MÉTHODE POUR CHAQUE PUBLICATION :
+a. Menu de gauche « Planificateur » (ou « Contenu ») > « Créer une publication ».
+b. Dans « Publier sur », coche les comptes indiqués plus haut.
+c. « Ajouter une photo » > « Importer depuis l'ordinateur » > choisis le fichier indiqué.
+d. Colle la légende EXACTEMENT comme fournie (retours à la ligne et hashtags compris).
+e. Si un recadrage Instagram est proposé, choisis 4:5 (portrait) sans zoomer.
+f. En bas, clique sur la flèche à côté de « Publier » > « Programmer », saisis la date et 18:30, fuseau Paris.
+g. Clique « Programmer » et vérifie que la publication apparaît dans le calendrier au bon jour et à la bonne heure.
 
 RÈGLES DE SÉCURITÉ (obligatoires) :
-1. Commence par UN SEUL test avec la publication P01. Dans le parcours « Créer » > « Publication »,
-   cherche l'option de programmation (souvent dans « Paramètres avancés » ou via la flèche à côté de
-   « Partager »). Si l'option « Programmer » n'existe pas, ARRÊTE-TOI immédiatement, ne clique jamais
-   sur « Partager », et dis-moi ce que tu vois à l'écran.
-2. Ne publie JAMAIS immédiatement. Si un bouton ne propose que « Partager » maintenant, arrête-toi.
-3. Recadrage : choisis le format 4:5 (portrait) ; l'image est déjà au bon format, ne zoome pas.
-4. Colle la légende EXACTEMENT comme fournie (retours à la ligne et hashtags compris).
-5. Après chaque publication programmée, vérifie la date et l'heure affichées, puis passe à la suivante.
-6. À la fin, liste les 19 publications programmées (date, heure, fichier) et signale toute anomalie.
+1. Fais d'abord P01 SEULE, puis arrête-toi et montre-moi le résultat dans le calendrier avant de continuer.
+2. Ne clique JAMAIS sur « Publier maintenant ». Si l'option « Programmer » n'apparaît pas, arrête-toi et décris l'écran.
+3. Une seule image par publication. Ne booste rien, ne crée aucune publicité, ne dépense rien.
+4. Si une publication échoue, note-la et passe à la suivante ; ne réessaie pas plus d'une fois.
+5. À la fin, liste les 19 publications programmées (date, heure, fichier, comptes) et signale toute anomalie.
 
 PUBLICATIONS :
-
 --- P01 · jeudi 24/09/2026 · 18:30 · fichier P01-2409-cassette-r9200-4x5.jpg
 LÉGENDE :
 223 grammes. La plus légère des cassettes Shimano route 12 vitesses.
