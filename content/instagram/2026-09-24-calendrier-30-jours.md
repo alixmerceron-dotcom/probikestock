@@ -1,10 +1,10 @@
 # Calendrier Instagram — 30 publications, 1 par jour à 18h30 (24/09 → 23/10/2026)
 
-**Visuels** (archive ZIP v2 avec titre produit, 60 fichiers : un 4:5 pour le fil + un 9:16 pour la story, par produit) :
-https://d2ol7oe51mr4n9.cloudfront.net/user_3GSEWmqCuPzkU1KmgDaa3I4SaRd/c07a8a93-af7e-4900-b66e-86f27e3bb525.zip
+**Visuels** (archive ZIP v3, titre produit en lettres pleines discrètes, 60 fichiers : un 4:5 pour le fil + un 9:16 pour la story, par produit) :
+https://d2ol7oe51mr4n9.cloudfront.net/user_3GSEWmqCuPzkU1KmgDaa3I4SaRd/4b91c6c3-c4f0-40f7-b830-c2ff3711f8d6.zip
 
 **Planche de contrôle** (les 30 visuels en miniature, à vérifier avant tout) :
-https://d2ol7oe51mr4n9.cloudfront.net/user_3GSEWmqCuPzkU1KmgDaa3I4SaRd/e670ef90-0752-43f9-bdb2-d76fcb53d445.jpg
+https://d2ol7oe51mr4n9.cloudfront.net/user_3GSEWmqCuPzkU1KmgDaa3I4SaRd/bd0c2c98-9a84-4bc8-a73d-a44448fd361a.jpg
 
 Règles appliquées à l'ordre : jamais deux produits < 30 € d'affilée, jamais deux fois la même catégorie
 d'affilée, et un produit ≥ 89 € au moins tous les 3 jours (deux exceptions : J18-J20 et J26-J28,
