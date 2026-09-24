@@ -2,8 +2,8 @@
 import base64, html, pathlib
 here = pathlib.Path(__file__).parent
 b64 = lambda p: base64.b64encode((here / p).read_bytes()).decode()
-title = "".join(f'<span class="ch" aria-hidden="true" style="--i:{i}">{html.escape(c)}</span>'
-                for i, c in enumerate("Nos ambassadeurs"))
+title = " ".join(f'<span class="w" aria-hidden="true"><span class="wi" style="--i:{i}">{html.escape(w)}</span></span>'
+                for i, w in enumerate("Nos ambassadeurs".split()))
 out = (here / "src.html").read_text() \
     .replace("__OUTFIT__", b64("fonts/Outfit-var.woff2")) \
     .replace("__INSTRUMENT__", b64("fonts/InstrumentSans-var.woff2")) \
