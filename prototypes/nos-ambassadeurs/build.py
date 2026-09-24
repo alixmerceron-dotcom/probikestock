@@ -1,14 +1,14 @@
-"""Assemble apercu.html (autonome) à partir de src.html : polices du site + logo du thème."""
-import base64, pathlib
+"""Assemble apercu.html (autonome, sans dépendance au JavaScript) à partir de src.html."""
+import base64, html, pathlib
 here = pathlib.Path(__file__).parent
 b64 = lambda p: base64.b64encode((here / p).read_bytes()).decode()
-logo = (here / "logo.svg").read_text()
+title = "".join(f'<span class="ch" aria-hidden="true" style="--i:{i}">{html.escape(c)}</span>'
+                for i, c in enumerate("Nos ambassadeurs"))
 out = (here / "src.html").read_text() \
     .replace("__OUTFIT__", b64("fonts/Outfit-var.woff2")) \
     .replace("__INSTRUMENT__", b64("fonts/InstrumentSans-var.woff2")) \
-    .replace("__LOGO__", logo) \
-    .replace("__PHOTO__", "data:image/jpeg;base64," + b64("photos/course.jpg"), 1) \
-    .replace('src="__PHOTO__"', 'data-same-photo src=""') \
-    .replace("__PODIUM__", "data:image/jpeg;base64," + b64("photos/podium.jpg"))
+    .replace("__TITLE__", title) \
+    .replace("__COURSE__", "data:image/jpeg;base64," + b64("photos/web/course.jpg")) \
+    .replace("__PODIUM__", "data:image/jpeg;base64," + b64("photos/web/podium.jpg"))
 (here / "apercu.html").write_text(out)
 print(len(out))

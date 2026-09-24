@@ -69,11 +69,11 @@ body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font
 </head>
 <body>
 
-<header class="title"><h1 data-split>Nos ambassadeurs</h1></header>
+<header class="title"><h1 aria-label="Nos ambassadeurs">__TITLE__</h1></header>
 
 <main class="list">
   <section class="amb" style="--pos:42% 55%">
-    <img src="__PHOTO__" alt="Léa Marchand en course">
+    <img src="__COURSE__" alt="Léa Marchand en course">
     <div class="amb__text">
       <p>Route · Critérium</p>
       <h2>Léa Marchand</h2>
@@ -90,8 +90,8 @@ body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font
     </div>
   </section>
 
-  <section class="amb" style="--pos:44% 38%;--z:1.9">
-    <img src="__PHOTO__" alt="Nina Castel en course">
+  <section class="amb" style="--pos:60% 42%;--z:1.8">
+    <img src="__COURSE__" alt="Nina Castel en course">
     <div class="amb__text">
       <p>Chrono · Triathlon</p>
       <h2>Nina Castel</h2>
@@ -122,14 +122,6 @@ body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font
 
 <script>
 (() => {
-  // Aperçu : les 3 sections réutilisent la même photo
-  const first = document.querySelector('.amb img'); document.querySelectorAll('[data-same-photo]').forEach(i => i.src = first.src);
-  // Titre : fondu lettre à lettre
-  document.querySelectorAll('[data-split]').forEach(el => {
-    const t = el.textContent; el.setAttribute('aria-label', t); el.textContent = '';
-    [...t].forEach((c, i) => { const s = document.createElement('span'); s.className = 'ch'; s.ariaHidden = 'true';
-      s.style.setProperty('--i', i); s.textContent = c; el.appendChild(s); });
-  });
   // Écrans tactiles (pas de survol) : le texte s'affiche quand la section passe au centre de l'écran
   if (matchMedia('(hover: none)').matches) {
     const io = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('is-active', e.isIntersecting)),
