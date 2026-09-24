@@ -40,11 +40,11 @@ body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font
   transform:scale(var(--z,1));transform-origin:var(--pos,50% 50%);transition:transform 1.2s var(--ease)}
 .amb::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,14,40,.75) 0%,rgba(8,14,40,.35) 45%,rgba(8,14,40,0) 70%),linear-gradient(0deg,rgba(8,14,40,.8) 0%,rgba(8,14,40,.25) 45%,rgba(8,14,40,0) 75%);
   opacity:0;transition:opacity .6s var(--ease)}
-.amb__text{position:absolute;z-index:1;left:clamp(24px,4vw,56px);right:clamp(24px,4vw,56px);bottom:clamp(24px,4vw,56px);max-width:620px}
+.amb__text{position:absolute;z-index:1;left:clamp(24px,4vw,56px);right:clamp(24px,4vw,56px);bottom:clamp(24px,4vw,56px);max-width:760px}
 .amb__text > *{opacity:0;transform:translateX(-48px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .amb__text p:first-child{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:0}
 .amb__text h2{font-family:var(--font-heading);font-weight:600;letter-spacing:-.02em;line-height:1;font-size:clamp(40px,6vw,80px);margin:10px 0 14px;transition-delay:.06s}
-.amb__text p:last-child{font-size:16px;line-height:1.55;color:rgba(255,255,255,.88);transition-delay:.12s}
+.amb__text p:last-child{font-size:16px;line-height:1.55;text-wrap:pretty;color:rgba(255,255,255,.88);transition-delay:.12s}
 
 /* état actif : survol (ordinateur) ou section au centre de l'écran (mobile) */
 .amb:hover img,.amb.is-active img{transform:scale(calc(var(--z,1) * 1.04))}
@@ -86,9 +86,9 @@ body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font
   <section class="amb" style="--pos:50% 30%">
     <img src="__PODIUM__" alt="Alexis Champion sur le podium des Championnats de France de gravel à Thouars">
     <div class="amb__text">
-      <p>Champion de France de gravel · Thouars 2026</p>
+      <p>Champion de France Gravel U23</p>
       <h2>Alexis Champion</h2>
-      <p>Titre national de gravel décroché à Thouars en septembre 2026. Il roule avec notre matériel.</p>
+      <p>Sacré champion de France de gravel U23 à Thouars en septembre 2026, Alexis confirme sa place parmi les meilleurs jeunes coureurs français. Chez Probikestock, nous l'accompagnons vers le plus haut niveau, en gravel comme sur route, en mettant à sa disposition du matériel de pointe. En retour, ses tests en course et à l'entraînement nous aident à sélectionner les composants que nous vous proposons.</p>
     </div>
   </section>
   <section class="amb" style="--pos:42% 55%">
