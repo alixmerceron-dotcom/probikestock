@@ -29,6 +29,9 @@
           {%- unless forloop.last %} {% endunless -%}
         {%- endfor -%}
       </h1>
+      {%- if s.show_page_content and page.content != blank -%}
+        <div class="pbs-amb__intro">{{ page.content | remove: '<meta charset="utf-8">' }}</div>
+      {%- endif -%}
     </header>
   {%- endif -%}
 
@@ -110,7 +113,9 @@
     overflow: hidden;
     isolation: isolate;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     min-height: var(--amb-bh, 150px);
     padding: 28px clamp(16px, 4vw, 50px);
     background: var(--amb-c1);
@@ -155,6 +160,27 @@
   }
   @keyframes pbs-amb-blur-in {
     to { opacity: 1; filter: blur(0); transform: none; }
+  }
+  /* Texte d'introduction : repris du contenu de la page (Boutique en ligne > Pages) */
+  .pbs-amb__intro {
+    max-width: 680px;
+    margin-top: 14px;
+    color: var(--amb-title, #fff);
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    line-height: 1.55;
+    opacity: .9;
+    text-wrap: pretty;
+  }
+  .pbs-amb__intro p { margin: 0; }
+  .pbs-amb__intro p + p { margin-top: .6em; }
+  .pbs-amb__title.is-animated ~ .pbs-amb__intro {
+    opacity: 0;
+    animation: pbs-amb-intro-in .9s ease-out .55s forwards;
+  }
+  @keyframes pbs-amb-intro-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: .9; transform: none; }
   }
 
   /* ---------- Ambassadeurs : une photo pleine largeur, texte au passage ---------- */
@@ -274,6 +300,10 @@
       filter: none;
       transform: none;
     }
+    .pbs-amb__title.is-animated ~ .pbs-amb__intro {
+      animation: none;
+      opacity: .9;
+    }
     .pbs-amb__img,
     .pbs-amb__item::after,
     .pbs-amb__text > * {
@@ -292,6 +322,7 @@
     { "type": "text", "id": "title", "label": "Titre", "default": "Nos ambassadeurs" },
     { "type": "checkbox", "id": "title_animation", "label": "Animer le titre (flou vers net)", "default": true },
     { "type": "color", "id": "title_color", "label": "Couleur du titre", "default": "#FFFFFF" },
+    { "type": "checkbox", "id": "show_page_content", "label": "Afficher le texte de la page sous le titre", "info": "Le texte se modifie dans Boutique en ligne > Pages.", "default": true },
     { "type": "color", "id": "color_start", "label": "Couleur de départ du dégradé", "default": "#0E1B4D" },
     { "type": "color", "id": "color_end", "label": "Couleur d'arrivée du dégradé", "default": "#FFFFFF" },
     { "type": "checkbox", "id": "gradient_animated", "label": "Animer le dégradé", "default": true },
