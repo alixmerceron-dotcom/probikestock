@@ -17,8 +17,19 @@
 body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font-smoothing:antialiased}
 
 /* ---- Titre ---- */
-.title{padding:clamp(48px,7vw,88px) 24px clamp(36px,5vw,64px);text-align:center}
-.title h1{font-family:var(--font-heading);font-weight:300;letter-spacing:-.01em;line-height:1.1;font-size:clamp(30px,4.2vw,56px)}
+.title{position:relative;overflow:hidden;isolation:isolate;display:grid;place-items:center;min-height:clamp(220px,34vh,380px);
+  padding:clamp(48px,7vw,88px) 24px;text-align:center;background:#0e1b4d;color:#fff}
+/* Dégradé animé : un calque plus grand que le bandeau, qui dérive lentement (transform seul, pas de repeint) */
+.title::before{content:"";position:absolute;inset:-45%;z-index:-1;
+  background:
+    radial-gradient(38% 48% at 22% 32%,rgba(52,96,204,.85),transparent 70%),
+    radial-gradient(30% 40% at 78% 68%,rgba(227,36,2,.32),transparent 70%),
+    radial-gradient(45% 55% at 62% 22%,rgba(34,58,140,.9),transparent 70%),
+    radial-gradient(40% 50% at 35% 80%,rgba(21,36,89,.95),transparent 70%),
+    #0e1b4d;
+  animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{0%{transform:translate(-7%,-5%) rotate(0deg)}50%{transform:translate(5%,4%) rotate(8deg)}100%{transform:translate(8%,-3%) rotate(-6deg)}}
+.title h1{color:#fff;font-family:var(--font-heading);font-weight:300;letter-spacing:-.01em;line-height:1.1;font-size:clamp(30px,4.2vw,56px)}
 /* TextEffect preset="fade-in-blur" speedReveal={1.1} speedSegment={0.3} :
    chaque mot passe du flou (12 px) au net en montant de 20 px, en 1 s, décalé de 45 ms */
 .title .w{display:inline-block}
@@ -66,6 +77,7 @@ body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .title .wi{opacity:1;filter:none;transform:none}
+  .title::before{transform:none}
 }
 
 </style>
