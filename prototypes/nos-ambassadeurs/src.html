@@ -8,22 +8,19 @@
 @font-face{font-family:'Outfit';font-weight:100 900;font-display:swap;src:url(data:font/woff2;base64,__OUTFIT__) format('woff2')}
 @font-face{font-family:'Instrument Sans';font-weight:400 700;font-display:swap;src:url(data:font/woff2;base64,__INSTRUMENT__) format('woff2')}
 
-/* Jetons repris de assets/pbs-cockpit.css (thème Refresh 2.2) */
+/* Jetons du thème (assets/pbs-cockpit.css) */
 :root{
-  --pbs-navy:#0e1b4d; --pbs-navy-700:#152459; --pbs-orange:#e32402; --pbs-orange-700:#c0230a; --pbs-orange-soft:#fde9e5;
-  --pbs-ink:#33384c; --pbs-muted:#6b7188; --pbs-line:#e4e6ef; --pbs-surface:#f4f5f9; --pbs-radius:12px;
+  --pbs-navy:#0e1b4d; --pbs-orange:#e32402; --pbs-ink:#33384c; --pbs-muted:#6b7188; --pbs-line:#e4e6ef; --pbs-surface:#f4f5f9; --pbs-radius:12px;
   --font-heading:'Outfit',sans-serif; --font-body:'Instrument Sans',-apple-system,'Segoe UI',sans-serif;
-  --page-width:1400px;
-  --ease-reveal:cubic-bezier(0,0,.3,1); /* même courbe que les animations Dawn */
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-body);color:var(--pbs-ink);background:#fff;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-h1,h2,h3{font-family:var(--font-heading);font-weight:600;letter-spacing:-.02em;color:var(--pbs-navy);text-wrap:balance}
-.page-width{max-width:var(--page-width);margin:0 auto;padding:0 50px}
+h1,h2,h3{font-family:var(--font-heading);font-weight:600;letter-spacing:-.02em;text-wrap:balance}
+.page-width{max-width:1400px;margin:0 auto;padding:0 50px}
 @media (max-width:749px){.page-width{padding:0 16px}}
 
-/* ============ En-tête du site (reproduction pour le contexte) ============ */
+/* ---------- En-tête du site (reproduit pour le contexte) ---------- */
 .ann{background:var(--pbs-navy);color:#fff;text-align:center;font-size:13px;font-weight:500;padding:8px 16px}
 .hdr{background:#fff;border-bottom:1px solid var(--pbs-line)}
 .hdr__in{display:flex;align-items:center;gap:28px;padding-top:20px;padding-bottom:20px}
@@ -35,141 +32,132 @@ h1,h2,h3{font-family:var(--font-heading);font-weight:600;letter-spacing:-.02em;c
 .rail ul{display:flex;gap:28px;list-style:none;min-height:46px;align-items:center}
 .rail a{text-decoration:none;font-size:14px;font-weight:500;color:var(--pbs-navy)}
 .rail .promo a{color:var(--pbs-orange)}
-.crumb{font-size:12px;color:#8b8f9e;padding-top:14px;padding-bottom:14px}
-.crumb b{color:var(--pbs-navy);font-weight:500}
 @media (max-width:989px){.rail,.hdr__search{display:none}.hdr__in{justify-content:space-between}}
 
-/* Barre de progression (réglage : afficher / masquer) */
 .progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--pbs-orange);transform-origin:left;transform:scaleX(0);z-index:99}
-@supports (animation-timeline:scroll()){.progress{animation:grow linear both;animation-timeline:scroll(root)}}
-@keyframes grow{to{transform:scaleX(1)}}
 
-/* ============ 1. Bandeau « Nos ambassadeurs » ============ */
-.hero{position:relative;background:var(--pbs-navy);color:#fff;overflow:hidden}
-.hero__in{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:40px;min-height:560px;padding-top:72px;padding-bottom:64px}
-/* biseau repris du logo « Probike / stock » */
-.hero__slab{position:absolute;top:0;bottom:0;right:-8%;width:58%;background:var(--pbs-navy-700);clip-path:polygon(14% 0,100% 0,100% 100%,0 100%)}
-.hero__text{position:relative;z-index:2;max-width:560px}
-.eyebrow{display:block;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-.hero .eyebrow{color:#b9c3e4;margin-bottom:14px}
-.hero h1{color:#fff;font-size:min(76px,12vw);line-height:1.02;margin-bottom:18px}
-.hero h1 .ch{opacity:0;animation:fade .5s ease-out forwards;animation-delay:calc(.15s + var(--i)*30ms)}
+/* =====================================================================
+   1. OUVERTURE — comme le haut d'Unsplash Awards : titre à gauche, image à droite
+   ===================================================================== */
+.intro{display:grid;grid-template-columns:1fr 1fr;min-height:min(78vh,720px)}
+.intro__text{display:flex;flex-direction:column;justify-content:space-between;padding:28px 50px 32px}
+.intro__meta{font-size:13px;font-weight:600;color:var(--pbs-navy);letter-spacing:.02em}
+.intro h1{font-size:min(84px,11vw);line-height:1;color:var(--pbs-navy)}
+.intro h1 .ch{opacity:0;animation:fade .5s ease-out forwards;animation-delay:calc(.15s + var(--i)*30ms)}
 @keyframes fade{to{opacity:1}}
-.hero__sub{color:#dce3fa;font-size:16px;max-width:460px;margin-bottom:28px}
-.hero__cta{display:inline-flex;align-items:center;gap:10px;background:#fff;color:#101010;padding:15px 30px;font-size:15px;text-decoration:none;font-weight:500}
-.hero__cta:hover{opacity:.85}
-.hero__team{position:relative;z-index:2;display:flex;gap:14px;justify-content:flex-end;align-items:flex-end}
-.tile{position:relative;width:min(180px,13vw);aspect-ratio:3/4;border-radius:var(--pbs-radius);overflow:hidden;background:linear-gradient(160deg,#243577,#0e1b4d);
-  opacity:0;transform:translateY(30px);animation:tileIn .7s var(--ease-reveal) forwards;animation-delay:calc(.7s + var(--i)*120ms);text-decoration:none}
-.tile:nth-child(2){margin-bottom:36px}
-.tile:nth-child(3){margin-bottom:72px}
-.tile__ini{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-heading);font-size:56px;font-weight:600;color:rgba(255,255,255,.12)}
-.tile__cap{position:absolute;left:0;right:0;bottom:0;padding:12px;background:linear-gradient(transparent,rgba(0,0,0,.55));font-size:13px;font-weight:600;color:#fff}
-.tile__cap small{display:block;font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#b9c3e4}
-.tile:hover{transform:translateY(-6px)!important;transition:transform .3s}
-@keyframes tileIn{to{opacity:1;transform:none}}
+.intro__foot{display:flex;justify-content:space-between;align-items:end;gap:24px;font-size:14px;color:var(--pbs-muted)}
+.intro__foot p{max-width:380px}
+.intro__foot a{font-size:13px;font-weight:600;color:var(--pbs-navy);white-space:nowrap}
+.intro__media{position:relative;overflow:hidden;background:#1b2a63}
+.intro__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);animation:settle 1.6s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes settle{to{transform:scale(1)}}
+.intro__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 30%,transparent 65%,rgba(0,0,0,.45))}
+.intro__over{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:28px 32px;color:#fff}
+.intro__over b{font-size:13px;font-weight:500;text-align:right}
+.intro__over h2{font-size:min(84px,11vw);line-height:1;color:#fff;align-self:center}
+.intro__over span{font-size:12px;align-self:flex-end;opacity:.85}
 @media (max-width:749px){
-  .hero__in{grid-template-columns:1fr;min-height:0;padding-top:48px;padding-bottom:40px;gap:32px}
-  .hero__slab{width:90%;right:-45%}
-  .hero__team{justify-content:flex-start}
-  .tile{width:30%}
+  .intro{grid-template-columns:1fr}
+  .intro__text{padding:24px 16px;gap:32px}
+  .intro__media{min-height:56vh}
+  .intro__foot{flex-direction:column;align-items:start}
 }
 
-/* ============ Réassurance (même grille que .pbs-trust de l'accueil) ============ */
-.trust{border-bottom:1px solid var(--pbs-line)}
-.trust__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e7e9f1}
-.trust__item{background:#fff;padding:16px 20px}
-.trust__item b{display:block;font-size:13px;font-weight:600;color:var(--pbs-navy)}
-.trust__item span{font-size:12px;color:#767b8e}
-@media (max-width:749px){.trust__grid{grid-template-columns:1fr}}
+/* =====================================================================
+   2. AMBASSADEURS — bandes pleine largeur, photo paysage
+   Au défilement : la photo reste en place (sticky), le texte d'accroche
+   s'efface et la fiche détaillée glisse depuis la droite.
+   --p  : progression dans la section (0 → 1)
+   --a  : disparition de l'accroche   --b : arrivée de la fiche
+   ===================================================================== */
+.amb{position:relative;height:230vh;background:#0b1233;--p:0;--a:0;--b:0}
+.amb__stage{position:sticky;top:0;height:100vh;min-height:560px;overflow:hidden;color:#fff}
+.amb__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(calc(1.1 - .1 * var(--p)));will-change:transform;background:linear-gradient(135deg,#1b2a63,#0e1b4d)}
+.amb__shade{position:absolute;inset:0;background:
+  linear-gradient(90deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.25) 45%,rgba(0,0,0,0) 70%),
+  linear-gradient(0deg,rgba(0,0,0,.45),rgba(0,0,0,0) 35%)}
+.amb__dim{position:absolute;inset:0;background:#0b1233;opacity:calc(var(--b) * .35)}
 
-/* ============ 2. Sections ambassadeurs ============ */
-.amb{position:relative;overflow:hidden;overflow:clip;padding:88px 0}
-.amb:nth-of-type(even){background:var(--pbs-surface)}
-.amb__in{position:relative;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:72px;align-items:center}
-.amb--flip .amb__in{grid-template-columns:minmax(0,6fr) minmax(0,5fr)}
-.amb--flip .amb__media{order:2}
-.amb__num{position:absolute;z-index:-1;top:-.42em;right:0;font-family:var(--font-heading);font-weight:700;font-size:min(220px,30vw);line-height:1;
-  letter-spacing:-.05em;color:#e9ebf2;pointer-events:none;user-select:none}
-.amb:nth-of-type(even) .amb__num{color:#e4e7ef}
-@supports (animation-timeline:view()){.amb__num{animation:plx linear both;animation-timeline:view()}}
-@keyframes plx{from{transform:translateY(60px)}to{transform:translateY(-60px)}}
+.amb__hook{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;
+  opacity:calc(1 - var(--a));transform:translateY(calc(var(--a) * -40px))}
+.amb__hook .page-width{width:100%}
+.amb__kicker{font-size:12px;font-weight:500;line-height:1.5;margin-bottom:26px;opacity:.9}
+.amb__kicker b{display:block;font-weight:600}
+.amb__name{font-size:min(96px,13vw);line-height:.98;color:#fff;margin-bottom:16px;max-width:760px}
+.amb__line{max-width:520px;font-size:16px;opacity:.9;margin-bottom:22px}
+.amb__btn{display:inline-block;background:#fff;color:#101010;font-size:13px;font-weight:600;padding:10px 16px;border-radius:4px;text-decoration:none}
 
-.amb__media{position:relative;z-index:1;aspect-ratio:4/5;border-radius:var(--pbs-radius);overflow:hidden;background:#e7e9f1}
-.amb__photo{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:10px;color:#8b8f9e;font-size:13px;
-  background:linear-gradient(160deg,#eceef4,#dfe2ec);transition:transform .8s var(--ease-reveal)}
-.amb__photo i{font-family:var(--font-heading);font-style:normal;font-weight:600;font-size:120px;line-height:1;color:#c9cddb;letter-spacing:-.04em}
-.amb__disc{position:absolute;z-index:3;top:16px;left:16px;background:#fff;color:var(--pbs-navy);font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px}
-.amb__back{position:absolute;inset:auto 0 0 0;z-index:2;padding:28px;background:rgba(14,27,77,.96);color:#fff;transform:translateY(101%);transition:transform .55s var(--ease-reveal)}
-.amb__back .eyebrow{color:#b9c3e4;margin-bottom:12px}
-.amb__back ul{list-style:none}
-.amb__back li{display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-top:1px solid rgba(255,255,255,.12);font-size:14px}
-.amb__back li span{color:#b9c3e4}
-.amb__back li b{font-weight:600;text-align:right}
-.amb__fact{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12);font-size:14px;color:#dce3fa}
-.amb__fact strong{color:#fff}
-@media (hover:hover) and (pointer:fine){
-  .amb__media:hover .amb__back,.amb__media:focus-within .amb__back{transform:none}
-  .amb__media:hover .amb__photo{transform:scale(1.04)}
-}
-.amb.is-open .amb__back{transform:none}
-.amb__hint{position:absolute;z-index:3;right:16px;bottom:16px;background:var(--pbs-navy);color:#fff;font-size:12px;font-weight:600;padding:6px 12px;border-radius:999px;transition:opacity .3s}
-.amb__media:hover .amb__hint,.amb.is-open .amb__hint{opacity:0}
+.amb__tags{position:absolute;left:0;right:0;bottom:24px;opacity:calc(1 - var(--a))}
+.amb__tags .page-width{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.55);padding:4px 9px;border-radius:3px}
+.amb__credit{position:absolute;right:24px;bottom:24px;font-size:12px;opacity:.8;z-index:3}
+.amb__index{position:absolute;right:24px;top:24px;z-index:3;opacity:calc(1 - var(--b));font-family:var(--font-heading);font-size:14px;font-weight:600;opacity:.9}
+.amb__index i{font-style:normal;opacity:.5}
 
-.amb__body{position:relative;z-index:1;isolation:isolate}
-.amb__body .eyebrow{color:var(--pbs-orange);margin-bottom:12px}
-.amb h2{font-size:min(56px,10vw);line-height:1.05;margin-bottom:6px}
-.amb__role{font-size:15px;color:var(--pbs-muted);margin-bottom:26px}
-.amb__quote{font-family:var(--font-heading);font-size:22px;line-height:1.4;font-weight:500;color:var(--pbs-navy);padding-left:18px;border-left:3px solid var(--pbs-orange);max-width:560px;margin-bottom:28px;letter-spacing:-.01em}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e7e9f1;border:1px solid #e7e9f1;border-radius:var(--pbs-radius);overflow:hidden;max-width:560px;margin-bottom:28px}
-.stat{background:#fff;padding:16px 18px}
-.stat b{display:block;font-family:var(--font-heading);font-size:32px;font-weight:600;line-height:1.1;color:var(--pbs-navy);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.stat b small{font-size:15px;font-weight:500;margin-left:3px;color:var(--pbs-muted)}
-.stat span{font-size:12px;color:#767b8e}
-.btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 24px;border-radius:var(--pbs-radius);font-family:var(--font-body);font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;border:0;transition:filter .15s}
-.button:hover{filter:brightness(.94)}
+/* Fiche détaillée */
+.amb__card{position:absolute;z-index:2;top:0;right:0;bottom:0;width:min(560px,46vw);padding:88px 48px 56px;overflow:hidden;
+  background:rgba(14,27,77,.92);transform:translateX(calc((1 - var(--b)) * 105%));display:flex;flex-direction:column;justify-content:center}
+.amb__card > *{opacity:calc(var(--b) * 1.6 - .6)}
+.card__eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#b9c3e4;margin-bottom:8px}
+.card__name{font-size:40px;line-height:1.05;color:#fff;margin-bottom:4px}
+.card__role{color:#b9c3e4;font-size:14px;margin-bottom:24px}
+.card__stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.14);border-radius:var(--pbs-radius);overflow:hidden;margin-bottom:24px}
+.card__stats div{background:rgba(14,27,77,.96);padding:14px}
+.card__stats b{display:block;font-family:var(--font-heading);font-size:28px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.card__stats b small{font-size:13px;font-weight:500;margin-left:2px;color:#b9c3e4}
+.card__stats span{font-size:12px;color:#b9c3e4}
+.card__cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:22px}
+.card__cols h4{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#b9c3e4;margin-bottom:8px}
+.card__cols ul{list-style:none;font-size:14px}
+.card__cols li{padding:6px 0;border-top:1px solid rgba(255,255,255,.12)}
+.card__cols li span{display:block;font-size:11px;color:#b9c3e4}
+.card__quote{font-family:var(--font-heading);font-size:18px;line-height:1.4;padding-left:14px;border-left:3px solid var(--pbs-orange);margin-bottom:24px}
+.card__actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.button{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:var(--pbs-radius);font-size:14px;font-weight:600;text-decoration:none}
 .button--primary{background:var(--pbs-orange);color:#fff}
-.button--secondary{background:#fff;color:var(--pbs-navy);border:1px solid #d3d7e4}
-.code{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--pbs-orange-700);background:var(--pbs-orange-soft);padding:6px 12px;border-radius:999px;font-weight:500}
-.code b{font-weight:700;letter-spacing:.04em}
-.amb__toggle{display:none}
-@media (hover:none),(pointer:coarse){.amb__toggle{display:inline-flex}.amb__hint{display:none}}
-@media (max-width:989px){
-  .amb{padding:56px 0}
-  .amb__in{grid-template-columns:1fr;gap:28px}
-  .amb--flip .amb__media{order:0}
-  .amb__media{aspect-ratio:4/4.2}
-  .amb--flip .amb__in{grid-template-columns:1fr}
-  .amb__num{font-size:120px}
-  .amb__quote{font-size:19px}
-  .stat{padding:12px}
-  .stat b{font-size:24px}
+.code{font-size:13px;color:#fff;border:1px dashed rgba(255,255,255,.5);padding:6px 12px;border-radius:999px}
+.code b{letter-spacing:.05em}
+
+/* Mobile : pas d'effet collant (écran trop court). Photo, puis fiche révélée au scroll. */
+@media (max-width:749px){
+  .amb{height:auto}
+  .amb{--h:max(72vh,460px)}
+  .amb__stage{position:relative;height:auto;min-height:0;overflow:visible;padding-top:var(--h)}
+  .amb__img,.amb__shade{height:var(--h);bottom:auto}
+  .amb__img{transform:none}
+  .amb__hook{bottom:auto;height:var(--h)}
+  .amb__tags{bottom:auto;top:calc(var(--h) - 42px)}
+  .amb__credit{bottom:auto;top:calc(var(--h) - 38px)}
+  .amb__hook{opacity:1;transform:none;justify-content:flex-end;padding-bottom:64px}
+  .amb__tags,.amb__credit{opacity:1}
+  .amb__dim{display:none}
+  .amb__card{position:relative;width:auto;transform:none;padding:32px 16px 40px;background:var(--pbs-navy)}
+  .amb__card > *{opacity:1}
+  .amb__card{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s cubic-bezier(0,0,.3,1)}
+  .amb.in .amb__card{opacity:1;transform:none}
+  .card__cols{grid-template-columns:1fr}
+  .card__stats b{font-size:22px}
 }
 
-/* Révélation au scroll, même rendu que « Révéler les sections au défilement » (Dawn) */
-.rv{opacity:0;transform:translateY(2rem);transition:opacity .6s var(--ease-reveal),transform .6s var(--ease-reveal);transition-delay:calc(var(--d,0)*75ms)}
-.in .rv{opacity:1;transform:none}
-
-/* ============ 3. Bandeau final (même style que « Matériel neuf ») ============ */
+/* ---------- Bandeau final ---------- */
 .band{background:var(--pbs-navy);color:#fff;padding:40px 0}
 .band__in{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
-.band .eyebrow{font-size:11px;letter-spacing:.18em;color:#dce3fa;margin-bottom:6px}
-.band h3{color:#fff;font-size:30px;line-height:1.1}
+.band small{display:block;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#dce3fa;margin-bottom:6px}
+.band h3{font-size:30px;line-height:1.1}
 .band p{color:#e6eafb;margin-top:4px}
 @media (max-width:749px){.band__in{grid-template-columns:1fr}}
 .note{text-align:center;font-size:12px;color:#8b8f9e;padding:20px 16px 32px}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
-  .hero h1 .ch,.tile,.rv{opacity:1!important;transform:none!important}
+  .intro h1 .ch{opacity:1}
+  .intro__media img{transform:none}
 }
 </style>
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
 
-<!-- ===== En-tête : reproduction de celui du thème, pour juger l'ensemble ===== -->
 <div class="ann">Livraison gratuite à partir de 100€ d'achats</div>
 <header class="hdr">
   <div class="hdr__in page-width">
@@ -182,196 +170,207 @@ h1,h2,h3{font-family:var(--font-heading);font-weight:600;letter-spacing:-.02em;c
   </div>
   <nav class="rail"><ul class="page-width"><li><a href="#">Tout le catalogue ▾</a></li><li><a href="#">Périphériques</a></li><li><a href="#">Transmission</a></li><li><a href="#">Roues</a></li><li class="promo"><a href="#">Promotions</a></li></ul></nav>
 </header>
-<div class="crumb page-width">Accueil / <b>Nos ambassadeurs</b></div>
 
-<!-- ===== 1. Bandeau ===== -->
-<section class="hero">
-  <div class="hero__slab" aria-hidden="true"></div>
-  <div class="hero__in page-width">
-    <div class="hero__text">
-      <span class="eyebrow">La team Probikestock</span>
-      <h1 data-split>Nos ambassadeurs</h1>
-      <p class="hero__sub">Trois passionnés qui roulent avec notre matériel, le testent en course et te disent ce qu'ils en pensent.</p>
-      <a class="hero__cta" href="#amb-1">Découvrir la team ↓</a>
+<!-- ===== 1. Ouverture ===== -->
+<section class="intro">
+  <div class="intro__text">
+    <span class="intro__meta">Saison 2026</span>
+    <h1 data-split>Nos ambassadeurs</h1>
+    <div class="intro__foot">
+      <p>Trois cyclistes qui roulent avec notre matériel, le testent en course et te disent ce qu'ils en pensent.</p>
+      <a href="#amb-1">Découvrir ↓</a>
     </div>
-    <div class="hero__team">
-      <a class="tile" href="#amb-1" style="--i:0"><span class="tile__ini">LM</span><span class="tile__cap"><small>Route</small>Léa Marchand</span></a>
-      <a class="tile" href="#amb-2" style="--i:1"><span class="tile__ini">HR</span><span class="tile__cap"><small>Gravel</small>Hugo Renaud</span></a>
-      <a class="tile" href="#amb-3" style="--i:2"><span class="tile__ini">NC</span><span class="tile__cap"><small>Chrono</small>Nina Castel</span></a>
+  </div>
+  <div class="intro__media">
+    <img src="https://cdn.shopify.com/s/files/1/0896/6707/6438/files/pbs-hero-michelin-power-cup-ursus.jpg?v=1790098351&width=1400" alt="" fetchpriority="high">
+    <div class="intro__over">
+      <b>Le matériel des pros, testé par des passionnés.</b>
+      <h2>La team</h2>
+      <span>Instagram · @probikestock</span>
     </div>
   </div>
 </section>
 
-<div class="trust"><div class="trust__grid page-width" style="padding:0">
-  <div class="trust__item"><b>Testé en conditions réelles</b><span>Chaque produit passe par leurs sorties et leurs courses</span></div>
-  <div class="trust__item"><b>Des conseils de terrain</b><span>Réglages, montages, choix de pneus : ils partagent tout</span></div>
-  <div class="trust__item"><b>Leurs codes promo</b><span>Une remise exclusive par ambassadeur</span></div>
-</div></div>
-
-<!-- ===== 2. Ambassadeurs (données fictives) ===== -->
+<!-- ===== 2. Ambassadeurs (données fictives, photos provisoires de la boutique) ===== -->
 <section class="amb" id="amb-1" data-amb>
-  <div class="amb__in page-width">
-    <div class="amb__media rv" tabindex="0">
-      <span class="amb__disc">Route · Critérium</span>
-      <div class="amb__photo"><i>LM</i>Photo portrait 4:5</div>
-      <span class="amb__hint">Son vélo ↑</span>
-      <div class="amb__back" id="back-1">
-        <span class="eyebrow">Son vélo</span>
-        <ul>
-          <li><span>Cadre</span><b>Carbone aéro, taille 52</b></li>
-          <li><span>Transmission</span><b>Shimano Dura-Ace 12V</b></li>
-          <li><span>Roues</span><b>Carbone 50 mm</b></li>
-          <li><span>Pneus</span><b>Michelin Power Cup 28 mm</b></li>
-        </ul>
-        <p class="amb__fact"><strong>Le sais-tu ?</strong> Elle roule en manivelles de 165 mm depuis 2025.</p>
+  <div class="amb__stage">
+    <img class="amb__img" src="https://cdn.shopify.com/s/files/1/0896/6707/6438/files/adn-equipe-pro.jpg?v=1790159680&width=2000" alt="Léa Marchand à l'entraînement" loading="lazy">
+    <div class="amb__shade"></div><div class="amb__dim"></div>
+    <div class="amb__index">01 <i>/ 03</i></div>
+    <div class="amb__hook"><div class="page-width">
+      <p class="amb__kicker">Ambassadrice<b>Route · Critérium</b></p>
+      <h2 class="amb__name">Léa Marchand</h2>
+      <p class="amb__line">Sur un critérium, tout se joue en trois secondes. Elle court avec ce qu'on vend — et nous dit ce qui tient.</p>
+      <a class="amb__btn" href="#">Voir son profil</a>
+    </div></div>
+    <div class="amb__tags"><div class="page-width"><span class="tag">Route</span><span class="tag">Critérium</span><span class="tag">Nantes</span></div></div>
+    <div class="amb__credit">Photo provisoire</div>
+    <aside class="amb__card">
+      <p class="card__eyebrow">Ambassadrice #01</p>
+      <h3 class="card__name">Léa Marchand</h3>
+      <p class="card__role">Coureuse route, spécialiste du critérium · 27 ans · Nantes</p>
+      <div class="card__stats">
+        <div><b data-count="14200">0</b><span>km par an</span></div>
+        <div><b data-count="38">0</b><span>podiums</span></div>
+        <div><b data-count="62" data-suffix="km/h">0</b><span>au sprint</span></div>
       </div>
-    </div>
-    <div class="amb__body">
-      <div class="amb__num" aria-hidden="true">01</div>
-      <span class="eyebrow rv" style="--d:0">Ambassadrice #01</span>
-      <h2 class="rv" style="--d:1">Léa Marchand</h2>
-      <p class="amb__role rv" style="--d:1">Coureuse route, spécialiste du critérium — Nantes</p>
-      <blockquote class="amb__quote rv" style="--d:2">« Sur un critérium, tout se joue en trois secondes. Le matériel doit disparaître sous les jambes. »</blockquote>
-      <div class="stats rv" style="--d:3">
-        <div class="stat"><b data-count="14200">0</b><span>km par an</span></div>
-        <div class="stat"><b data-count="38">0</b><span>podiums</span></div>
-        <div class="stat"><b data-count="62" data-suffix="km/h">0</b><span>au sprint</span></div>
+      <div class="card__cols">
+        <div><h4>Son vélo</h4><ul>
+          <li><span>Transmission</span>Shimano Dura-Ace 12V</li>
+          <li><span>Roues</span>Carbone 50 mm</li>
+          <li><span>Pneus</span>Michelin Power Cup 28</li></ul></div>
+        <div><h4>Palmarès</h4><ul>
+          <li><span>2026</span>Championne régionale crit.</li>
+          <li><span>2025</span>Vainqueure Coupe de l'Ouest</li>
+          <li><span>2024</span>12 victoires en élite</li></ul></div>
       </div>
-      <div class="btns rv" style="--d:4">
-        <a class="button button--primary" href="#">Voir son matériel</a>
-        <button class="button button--secondary amb__toggle" aria-controls="back-1" aria-expanded="false">Son vélo</button>
-        <span class="code">−10 % avec <b>LEA10</b></span>
-      </div>
-    </div>
+      <blockquote class="card__quote">« Le matériel doit disparaître sous les jambes. »</blockquote>
+      <div class="card__actions"><a class="button button--primary" href="#">Voir son matériel</a><span class="code">−10 % avec <b>LEA10</b></span></div>
+    </aside>
   </div>
 </section>
 
-<section class="amb amb--flip" id="amb-2" data-amb>
-  <div class="amb__in page-width">
-    <div class="amb__media rv" tabindex="0">
-      <span class="amb__disc">Gravel · Ultra-distance</span>
-      <div class="amb__photo"><i>HR</i>Photo portrait 4:5</div>
-      <span class="amb__hint">Son vélo ↑</span>
-      <div class="amb__back" id="back-2">
-        <span class="eyebrow">Son vélo</span>
-        <ul>
-          <li><span>Cadre</span><b>Gravel carbone, taille 56</b></li>
-          <li><span>Transmission</span><b>Mono-plateau 1×12</b></li>
-          <li><span>Roues</span><b>Carbone 35 mm</b></li>
-          <li><span>Pneus</span><b>Tubeless 45 mm</b></li>
-        </ul>
-        <p class="amb__fact"><strong>Le sais-tu ?</strong> 700 km en autonomie avec une seule paire de pneus.</p>
+<section class="amb" id="amb-2" data-amb>
+  <div class="amb__stage">
+    <img class="amb__img" src="https://cdn.shopify.com/s/files/1/0896/6707/6438/files/FhCJq9dyGUE-tZWmOlxKvu0I9gJF-RopBcy8cZioIoyIBX_PYIw3NTSCFYAh06Z5pL7ZO_8rO38qF1ZkA4LuBBhGiooLHVViEAJu7JvS5XAqGIRvkNYkxqSufcNAyPDyT9Ed4kYpDdZ0vHwrbcmX5x8HIzvMh8fwOOMxZo-FdIO6Hzb3YeBxQk9_dc3da1b0-c185-43ee-a8d6-267d07ac2cdb.jpg?v=1790160182&width=2000" alt="Hugo Renaud en gravel" loading="lazy">
+    <div class="amb__shade"></div><div class="amb__dim"></div>
+    <div class="amb__index">02 <i>/ 03</i></div>
+    <div class="amb__hook"><div class="page-width">
+      <p class="amb__kicker">Ambassadeur<b>Gravel · Ultra-distance</b></p>
+      <h2 class="amb__name">Hugo Renaud</h2>
+      <p class="amb__line">À la vingtième heure, chaque gramme compte. Il ne roule qu'avec ce qu'il a testé.</p>
+      <a class="amb__btn" href="#">Voir son profil</a>
+    </div></div>
+    <div class="amb__tags"><div class="page-width"><span class="tag">Gravel</span><span class="tag">Ultra</span><span class="tag">Annecy</span></div></div>
+    <div class="amb__credit">Photo provisoire</div>
+    <aside class="amb__card">
+      <p class="card__eyebrow">Ambassadeur #02</p>
+      <h3 class="card__name">Hugo Renaud</h3>
+      <p class="card__role">Gravel et ultra-distance · 34 ans · Annecy</p>
+      <div class="card__stats">
+        <div><b data-count="700" data-suffix="km">0</b><span>plus longue sortie</span></div>
+        <div><b data-count="9800">0</b><span>m D+ / semaine</span></div>
+        <div><b data-count="12">0</b><span>ultras terminés</span></div>
       </div>
-    </div>
-    <div class="amb__body">
-      <div class="amb__num" aria-hidden="true">02</div>
-      <span class="eyebrow rv" style="--d:0">Ambassadeur #02</span>
-      <h2 class="rv" style="--d:1">Hugo Renaud</h2>
-      <p class="amb__role rv" style="--d:1">Gravel et ultra-distance — Annecy</p>
-      <blockquote class="amb__quote rv" style="--d:2">« À la vingtième heure, chaque gramme compte. Je ne roule qu'avec ce que j'ai testé. »</blockquote>
-      <div class="stats rv" style="--d:3">
-        <div class="stat"><b data-count="700" data-suffix="km">0</b><span>plus longue sortie</span></div>
-        <div class="stat"><b data-count="9800">0</b><span>m D+ / semaine</span></div>
-        <div class="stat"><b data-count="12">0</b><span>ultras terminés</span></div>
+      <div class="card__cols">
+        <div><h4>Son vélo</h4><ul>
+          <li><span>Transmission</span>Mono-plateau 1×12</li>
+          <li><span>Roues</span>Carbone 35 mm</li>
+          <li><span>Pneus</span>Tubeless 45 mm</li></ul></div>
+        <div><h4>Palmarès</h4><ul>
+          <li><span>2026</span>Finisher Race Across France</li>
+          <li><span>2025</span>Top 10 Gravel Alpes 300</li>
+          <li><span>2024</span>Premier ultra, 700 km</li></ul></div>
       </div>
-      <div class="btns rv" style="--d:4">
-        <a class="button button--primary" href="#">Voir son matériel</a>
-        <button class="button button--secondary amb__toggle" aria-controls="back-2" aria-expanded="false">Son vélo</button>
-        <span class="code">−10 % avec <b>HUGO10</b></span>
-      </div>
-    </div>
+      <blockquote class="card__quote">« Le gravel, c'est la liberté. Mais la liberté, ça se prépare. »</blockquote>
+      <div class="card__actions"><a class="button button--primary" href="#">Voir son matériel</a><span class="code">−10 % avec <b>HUGO10</b></span></div>
+    </aside>
   </div>
 </section>
 
 <section class="amb" id="amb-3" data-amb>
-  <div class="amb__in page-width">
-    <div class="amb__media rv" tabindex="0">
-      <span class="amb__disc">Chrono · Triathlon</span>
-      <div class="amb__photo"><i>NC</i>Photo portrait 4:5</div>
-      <span class="amb__hint">Son vélo ↑</span>
-      <div class="amb__back" id="back-3">
-        <span class="eyebrow">Son vélo</span>
-        <ul>
-          <li><span>Cadre</span><b>Contre-la-montre, taille 54</b></li>
-          <li><span>Cockpit</span><b>Prolongateurs carbone</b></li>
-          <li><span>Roues</span><b>Lenticulaire + 80 mm</b></li>
-          <li><span>Capteur</span><b>Dura-Ace 12V double face</b></li>
-        </ul>
-        <p class="amb__fact"><strong>Le sais-tu ?</strong> Elle a gagné 18 W en changeant seulement de position.</p>
+  <div class="amb__stage">
+    <img class="amb__img" src="https://cdn.shopify.com/s/files/1/0896/6707/6438/files/pbs-hero-transmission-dura-ace.jpg?v=1790114199&width=2000" alt="Nina Castel en contre-la-montre" loading="lazy">
+    <div class="amb__shade"></div><div class="amb__dim"></div>
+    <div class="amb__index">03 <i>/ 03</i></div>
+    <div class="amb__hook"><div class="page-width">
+      <p class="amb__kicker">Ambassadrice<b>Chrono · Triathlon</b></p>
+      <h2 class="amb__name">Nina Castel</h2>
+      <p class="amb__line">Contre la montre, personne ne t'aide. Alors elle laisse les chiffres parler.</p>
+      <a class="amb__btn" href="#">Voir son profil</a>
+    </div></div>
+    <div class="amb__tags"><div class="page-width"><span class="tag">Chrono</span><span class="tag">Triathlon</span><span class="tag">Bordeaux</span></div></div>
+    <div class="amb__credit">Photo provisoire</div>
+    <aside class="amb__card">
+      <p class="card__eyebrow">Ambassadrice #03</p>
+      <h3 class="card__name">Nina Castel</h3>
+      <p class="card__role">Contre-la-montre et triathlon · 30 ans · Bordeaux</p>
+      <div class="card__stats">
+        <div><b data-count="4.6" data-dec="1" data-suffix="W/kg">0</b><span>FTP</span></div>
+        <div><b data-count="46" data-suffix="km/h">0</b><span>moyenne CLM</span></div>
+        <div><b data-count="7">0</b><span>titres régionaux</span></div>
       </div>
-    </div>
-    <div class="amb__body">
-      <div class="amb__num" aria-hidden="true">03</div>
-      <span class="eyebrow rv" style="--d:0">Ambassadrice #03</span>
-      <h2 class="rv" style="--d:1">Nina Castel</h2>
-      <p class="amb__role rv" style="--d:1">Contre-la-montre et triathlon — Bordeaux</p>
-      <blockquote class="amb__quote rv" style="--d:2">« Contre la montre, personne ne t'aide. Alors je laisse les chiffres parler. »</blockquote>
-      <div class="stats rv" style="--d:3">
-        <div class="stat"><b data-count="4.6" data-dec="1" data-suffix="W/kg">0</b><span>FTP</span></div>
-        <div class="stat"><b data-count="46" data-suffix="km/h">0</b><span>moyenne CLM</span></div>
-        <div class="stat"><b data-count="7">0</b><span>titres régionaux</span></div>
+      <div class="card__cols">
+        <div><h4>Son vélo</h4><ul>
+          <li><span>Cockpit</span>Prolongateurs carbone</li>
+          <li><span>Roues</span>Lenticulaire + 80 mm</li>
+          <li><span>Capteur</span>Dura-Ace 12V</li></ul></div>
+        <div><h4>Palmarès</h4><ul>
+          <li><span>2026</span>Championne régionale CLM</li>
+          <li><span>2025</span>Ironman 70.3, top 5 groupe d'âge</li>
+          <li><span>2024</span>+18 W en soufflerie</li></ul></div>
       </div>
-      <div class="btns rv" style="--d:4">
-        <a class="button button--primary" href="#">Voir son matériel</a>
-        <button class="button button--secondary amb__toggle" aria-controls="back-3" aria-expanded="false">Son vélo</button>
-        <span class="code">−10 % avec <b>NINA10</b></span>
-      </div>
-    </div>
+      <blockquote class="card__quote">« Je laisse les chiffres parler. »</blockquote>
+      <div class="card__actions"><a class="button button--primary" href="#">Voir son matériel</a><span class="code">−10 % avec <b>NINA10</b></span></div>
+    </aside>
   </div>
 </section>
 
-<!-- ===== 3. Bandeau final ===== -->
 <section class="band">
   <div class="band__in page-width">
-    <div>
-      <span class="eyebrow">Candidatures ouvertes</span>
-      <h3>Tu roules fort ? Rejoins la team.</h3>
-      <p>Route, gravel ou chrono : on cherche des cyclistes exigeants sur leur matériel.</p>
-    </div>
+    <div><small>Candidatures ouvertes</small><h3>Tu roules fort ? Rejoins la team.</h3><p>Route, gravel ou chrono : on cherche des cyclistes exigeants sur leur matériel.</p></div>
     <a class="button button--primary" href="#">Devenir ambassadeur →</a>
   </div>
 </section>
-<p class="note">Aperçu — athlètes, chiffres et photos fictifs. En-tête reproduit pour le contexte : dans le thème, ce sera le vrai.</p>
+<p class="note">Aperçu — athlètes et chiffres fictifs, photos provisoires issues de la boutique. En-tête reproduit pour le contexte.</p>
 
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  // Titre : découpe en lettres (fera l'objet d'une boucle Liquid dans la section)
+  const mobile = matchMedia('(max-width: 749px)');
+
+  // Titre : fondu lettre à lettre (TextEffect per="char" preset="fade")
   document.querySelectorAll('[data-split]').forEach(el => {
     const t = el.textContent; el.setAttribute('aria-label', t); el.textContent = '';
     [...t].forEach((c, i) => { const s = document.createElement('span'); s.className = 'ch'; s.ariaHidden = 'true';
       s.style.setProperty('--i', i); s.textContent = c; el.appendChild(s); });
   });
-  // Compteurs
+
+  // Compteurs (une seule fois)
   const fmt = (v, d) => v.toLocaleString('fr-FR', {minimumFractionDigits: d, maximumFractionDigits: d});
-  const run = el => {
-    const end = +el.dataset.count, d = +(el.dataset.dec || 0), suf = el.dataset.suffix;
-    const put = v => el.innerHTML = fmt(v, d) + (suf ? `<small>${suf}</small>` : '');
-    if (reduce) return put(end);
-    const t0 = performance.now();
-    const step = t => { const p = Math.min((t - t0) / 1200, 1); put(end * (1 - (1 - p) ** 3)); if (p < 1) requestAnimationFrame(step); };
-    requestAnimationFrame(step);
+  const count = sec => {
+    if (sec.dataset.counted) return; sec.dataset.counted = 1;
+    sec.querySelectorAll('[data-count]').forEach(el => {
+      const end = +el.dataset.count, d = +(el.dataset.dec || 0), suf = el.dataset.suffix;
+      const put = v => el.innerHTML = fmt(v, d) + (suf ? `<small>${suf}</small>` : '');
+      if (reduce) return put(end);
+      const t0 = performance.now();
+      const step = t => { const p = Math.min((t - t0) / 1100, 1); put(end * (1 - (1 - p) ** 3)); if (p < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    });
   };
-  // Révélation au scroll
+
+  const secs = [...document.querySelectorAll('[data-amb]')];
+  const bar = document.querySelector('.progress');
+  const clamp = v => Math.min(Math.max(v, 0), 1);
+  let ticking = false;
+
+  const update = () => {
+    ticking = false;
+    const vh = innerHeight, doc = document.documentElement;
+    bar.style.transform = `scaleX(${clamp(scrollY / (doc.scrollHeight - vh))})`;
+    if (mobile.matches) return;
+    secs.forEach(s => {
+      const r = s.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      const p = clamp(-r.top / (r.height - vh));
+      const a = reduce ? 1 : clamp((p - .12) / .25);   // l'accroche s'efface
+      const b = reduce ? 1 : clamp((p - .2) / .35);    // la fiche arrive
+      s.style.setProperty('--p', p.toFixed(3));
+      s.style.setProperty('--a', a.toFixed(3));
+      s.style.setProperty('--b', b.toFixed(3));
+      if (b > .7) count(s);
+    });
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, {passive: true});
+  addEventListener('resize', update);
+  update();
+
+  // Mobile : la fiche apparaît quand elle entre dans l'écran
   const io = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add('in'); e.target.querySelectorAll('[data-count]').forEach(run); io.unobserve(e.target);
-  }), {threshold: .2});
-  document.querySelectorAll('[data-amb]').forEach(s => io.observe(s));
-  // Mobile : bouton « Son vélo »
-  document.querySelectorAll('.amb__toggle').forEach(b => b.addEventListener('click', () => {
-    const open = b.closest('.amb').classList.toggle('is-open'); b.setAttribute('aria-expanded', open);
-    b.textContent = open ? 'Fermer' : 'Son vélo';
-  }));
-  // Secours Firefox : parallaxe + progression
-  if (!reduce && !CSS.supports('animation-timeline: view()')) {
-    const nums = [...document.querySelectorAll('.amb__num')], bar = document.querySelector('.progress'); let tk = false;
-    const upd = () => { const vh = innerHeight;
-      nums.forEach(n => { const r = n.parentElement.getBoundingClientRect(); const p = Math.min(Math.max((vh - r.top) / (vh + r.height), 0), 1);
-        n.style.transform = `translateY(${60 - 120 * p}px)`; });
-      const h = document.documentElement.scrollHeight - vh; bar.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`; tk = false; };
-    addEventListener('scroll', () => { if (!tk) { tk = true; requestAnimationFrame(upd); } }, {passive: true}); upd();
-  }
+    if (e.isIntersecting && mobile.matches) { e.target.closest('.amb').classList.add('in'); count(e.target.closest('.amb')); }
+  }), {threshold: .15});
+  secs.forEach(s => io.observe(s.querySelector('.amb__card')));
 })();
 </script>
 </body>
