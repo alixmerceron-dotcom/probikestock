@@ -14,10 +14,3 @@ out = (here / "src.html").read_text() \
 (here / "apercu.html").write_text(out)
 print(len(out))
 
-# Exemple « cartes App Store » : même titre, mêmes photos
-cartes = (here / "cartes-src.html").read_text() \
-    .replace("__TITLE__", title) \
-    .replace("__COURSE__", "data:image/jpeg;base64," + b64("photos/web/course.jpg")) \
-    .replace("__PODIUM__", "data:image/jpeg;base64," + b64("photos/web/podium.jpg"))
-(here / "cartes.html").write_text(cartes)
-print(len(cartes))
