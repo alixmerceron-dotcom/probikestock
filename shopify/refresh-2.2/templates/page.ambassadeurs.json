@@ -54,9 +54,9 @@
       "settings": {
         "title": "Nos ambassadeurs",
         "title_animation": true,
-        "title_color": "#0E1B4D",
+        "title_color": "#002843",
         "color_start": "#FFFFFF",
-        "color_end": "#0E1B4D",
+        "color_end": "#002843",
         "gradient_animated": true,
         "gradient_speed": 9,
         "banner_height": 150,
