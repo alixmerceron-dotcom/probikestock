@@ -11,7 +11,8 @@ credit_photo: "[À COMPLÉTER : nom du photographe / © compagnie]"
 
 <!--
 NOTES DE RÉDACTION (à supprimer avant publication)
-- Les passages entre [crochets] sont à compléter : je n'ai pas eu accès aux termes exacts du partenariat.
+- Partenariat : formulation reprise de la page « Nos ambassadeurs » (artifact ProBikeStock).
+- Restent entre [crochets] : parcours amateur détaillé, prochaines dates, citation de Léo, crédit photo.
 - Crédit photo obligatoire : les deux photos proviennent visiblement d'une captation du spectacle.
   Vérifier l'autorisation de diffusion auprès du photographe et de la compagnie (En Votre Compagnie).
 - Faire relire l'article à Léo Gardy avant publication (citations, parcours sportif, raison de l'arrêt).
@@ -32,17 +33,17 @@ Chez ProBikeStock, on a vu beaucoup de vélos passer entre nos mains. On n'en av
 
 ### Un coureur avant tout
 
-Léo Gardy a grandi dans le vélo. Il a couru en compétition sur route, en France, au sein du circuit amateur, avec un objectif clair : passer professionnel. Selon les termes de la presse qui a suivi son parcours, il a longtemps été considéré comme **un jeune espoir du cyclisme français**.
+Comédien, auteur et ancien cycliste, Léo Gardy a 31 ans. Il a grandi dans le vélo et a couru en compétition sur route, avec un objectif clair : passer professionnel. Selon les termes de la presse qui a suivi son parcours, il a longtemps été considéré comme **un jeune espoir du cyclisme français**.
 
 Un problème de santé important l'a contraint à renoncer à la carrière de haut niveau qu'il visait. Pour un coureur, c'est le scénario le plus dur : les jambes sont là, l'envie aussi, mais le corps dit stop.
 
-[À COMPLÉTER avec Léo : clubs, catégorie atteinte, meilleurs résultats, âge au moment de l'arrêt. Une ou deux phrases suffisent.]
+[À COMPLÉTER avec Léo (facultatif) : clubs, catégorie atteinte, meilleurs résultats, âge au moment de l'arrêt.]
 
 ### Puis le théâtre
 
 Léo ne s'est pas éloigné du vélo. Il a changé de terrain. Il se forme comme comédien à l'**École Kourtrajmé** (programme théâtre, Lab14 au Théâtre 14, Paris), où il a notamment pour professeur le metteur en scène **Jacques Vincey**, ancien directeur du Centre dramatique national de Tours (Théâtre Olympia).
 
-C'est de cette rencontre qu'est né le projet qui le porte aujourd'hui.
+C'est de cette rencontre qu'est né le projet qui a fait de lui, en 2026, l'une des révélations théâtrales majeures de l'année, grâce à une performance à la fois scénique et athlétique hors norme.
 
 ---
 
@@ -89,12 +90,13 @@ ProBikeStock vend du matériel de route haut de gamme, dont une grande partie is
 
 ### Ce que recouvre le partenariat
 
-[À COMPLÉTER : nature exacte du soutien. Exemples de formulations selon ce qui a été convenu :]
-- [Matériel fourni : vélo / roues / transmission / home-trainer utilisés sur scène]
-- [Entretien et préparation mécanique du vélo de scène pendant la tournée]
-- [Contenus communs : coulisses de la tournée, sorties route, présentation du matériel]
-- [Avantage pour notre communauté : places, rencontre après une représentation, code promo]
-- [Durée du partenariat]
+Chez ProBikeStock, nous accompagnons Léo dans **ses projets artistiques, cinématographiques et physiques**. Concrètement, cela veut dire être à ses côtés sur trois terrains :
+
+- **Sur scène** : un spectacle où le vélo tourne pour de vrai pendant plus d'une heure, soir après soir, exige une machine fiable et bien réglée.
+- **À l'écran** : Léo développe aussi des projets pour le cinéma. [À préciser si un projet peut être annoncé.]
+- **Sur la route** : parce que tenir *Forcenés* suppose de rester un athlète, avec l'entraînement et le matériel que cela implique.
+
+Léo rejoint ainsi nos ambassadeurs aux côtés d'Alexis Champion, champion de France de gravel U23, et de Valérian Lajaunias, coureur élite à l'UC Cholet 49. Il est le seul à ne pas courir après un chrono, et c'est précisément ce qui nous plaît : il rappelle que le vélo est aussi une culture.
 
 ### Le mot de Léo
 
