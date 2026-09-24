@@ -1,0 +1,2956 @@
+/* ==========================================================================
+   PROBIKESTOCK — Direction « Cockpit » (orange)
+   Surcouche pour thème Dawn. Ne modifie aucun fichier du thème :
+   à charger APRÈS base.css. Voir INSTALLATION.md.
+   Couleur maîtresse conservée : navy #0E1B4D. Accent : orange #E32402.
+   ========================================================================== */
+
+:root {
+  --pbs-navy: #0e1b4d;
+  --pbs-navy-700: #152459;
+  --pbs-orange: #e32402;
+  --pbs-orange-700: #c0230a;
+  --pbs-orange-soft: #fde9e5;
+  --pbs-ink: #33384c;
+  --pbs-muted: #6b7188;
+  --pbs-line: #e4e6ef;
+  --pbs-surface: #f4f5f9;
+  --pbs-green: #1c7a4a;
+  --pbs-radius: 12px;
+
+  /* Typographie */
+  --font-heading-family: 'Outfit', var(--font-body-family);
+  --font-heading-weight: 600;
+  --font-heading-style: normal;
+  --font-body-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body-weight: 400;
+  --font-body-weight-bold: 600;
+}
+
+h1, h2, h3, h4, h5,
+.h0, .h1, .h2, .h3, .h4, .h5 {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p, li, .rte {
+  text-wrap: pretty;
+}
+
+/* ---------- Barre d'annonce : navy, compacte ---------- */
+
+.announcement-bar,
+.utility-bar {
+  background: var(--pbs-navy);
+  min-height: 3.4rem;
+}
+
+.announcement-bar__message,
+.utility-bar .announcement-bar__message {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0.8rem 0;
+}
+
+/* La maquette du client ne garde que la phrase : ni flèche, ni soulignement.
+   Le message reste cliquable, il mène toujours à la page de l'offre. */
+.utility-bar .announcement-bar__link .icon-arrow,
+.utility-bar .announcement-bar__link .svg-wrapper {
+  display: none;
+}
+
+.utility-bar .announcement-bar__link {
+  text-decoration: none;
+}
+
+.utility-bar__grid .localization-form__select,
+.utility-bar .list-social__link {
+  color: #b9c3e4;
+}
+
+/* Liens utilitaires et localisation : une seule ligne à droite (maquette 1b) */
+.utility-bar__grid {
+  align-items: center;
+}
+
+.pbs-utility {
+  justify-self: end;
+}
+
+.pbs-utility__list {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.pbs-utility__link {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #b9c3e4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pbs-utility__link:hover {
+  color: #fff;
+}
+
+.utility-bar .localization-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.6rem;
+}
+
+.utility-bar .localization-form__select {
+  font-size: 1.2rem;
+  padding: 0.4rem 0.8rem;
+  white-space: nowrap;
+}
+
+/* ---------- Header allégé : fond blanc, recherche centrale ---------- */
+
+.header-wrapper {
+  border-bottom: 1px solid var(--pbs-line);
+  background: #fff;
+}
+
+/* Le padding vertical est écrit avec `.page-width` pour monter la spécificité :
+   à `.header` seul, il tombait à 0 partout SAUF sur l'accueil — l'en-tête y
+   faisait 88 px contre 48 ailleurs, et le logo sautait d'une page à l'autre.
+   Les classes du <header> sont pourtant identiques sur les deux pages : c'est
+   une feuille de section de Dawn, chargée après celle-ci, qui l'emportait. */
+.header.page-width {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  column-gap: 2.8rem;
+}
+
+.header__heading-logo {
+  max-width: 17rem;
+}
+
+/* --------------------------------------------------------------------------
+   Le logo vectoriel (snippets/pbs-logo.liquid)
+
+   Le bandeau « Probike / stock » (23/09/2026) porte ses couleurs et son fond :
+   il ne dépend pas du texte qui l'entoure, et se lit sur fond clair comme
+   sur fond navy.
+   -------------------------------------------------------------------------- */
+.pbs-logo {
+  display: block;
+  line-height: 0;
+}
+
+/* Sur l'ACCUEIL, Dawn enveloppe le logo d'un <h1 class="header__heading"> ;
+   ailleurs, non. Ce <h1> porte le style des titres — font-size 42 px — et sa
+   boîte de ligne gonflait la barre de 40 px : l'en-tête faisait 88 px à
+   l'accueil contre 48 ailleurs, et le logo « descendait » d'une page à
+   l'autre. Le conteneur ne porte qu'un SVG : il n'a aucune raison d'avoir une
+   taille de texte. */
+.header__heading,
+.header__heading-link {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+/* 3,4 rem de haut, 191 px de large (rapport 5,63) — agrandi le 23/09/2026 sur
+   le modèle de bike-room.com : à 2,8 rem, le mot ne faisait que 13 px de
+   capitale, le bandeau portant sa propre marge ; 4 rem a paru trop gros. ⚠️ `max-width` doit suivre :
+   plus étroit que la largeur calculée, il rétrécit le logo sans prévenir. */
+.pbs-logo__svg {
+  display: block;
+  height: 3.4rem;
+  width: auto;
+  max-width: 22rem;
+}
+
+
+.header__menu-item,
+.header__menu-item span,
+.header__icon,
+.header__icon span {
+  color: var(--pbs-navy);
+}
+
+.header__menu-item {
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 1rem 0.6rem;
+}
+
+.header__menu-item:hover span,
+.header__active-menu-item {
+  color: var(--pbs-orange-700);
+  text-decoration: none;
+}
+
+/* ---------- Recherche centrale (snippet pbs-search-inline) ----------
+   Le header Dawn est une grille 'heading navigation icons'. La colonne
+   navigation est en `auto` : elle ne s'étire pas. On l'ouvre en 1fr, et
+   la recherche occupe la place que le menu laisse en descendant dans le rail. */
+@media screen and (min-width: 990px) {
+  .header--middle-left.header--has-menu:not(.drawer-menu) {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+  }
+
+  .header--middle-center.header--has-menu:not(.drawer-menu) {
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+}
+
+/* La loupe modale fait doublon avec le champ ouvert, sur tous les formats.
+   component-search.css est chargé après cette feuille, d'où le !important. */
+.header-wrapper details-modal.header__search {
+  display: none !important;
+}
+
+.pbs-search {
+  min-width: 0;
+}
+
+.pbs-search__wrap {
+  display: block;
+}
+
+/* Champ de recherche de la maquette du client : une surface gris très clair,
+   posée à plat, sans cerne navy ni bouton — pas le champ bordé de 1b. */
+.pbs-search__form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  height: 4.8rem;
+  padding: 0 1.8rem;
+  border: 1px solid #eceef4;
+  border-radius: var(--pbs-radius);
+  background: #f3f4f8;
+}
+
+.pbs-search__form:focus-within {
+  border-color: #d3d7e4;
+  box-shadow: 0 0 0 3px rgba(14, 27, 77, 0.08);
+}
+
+.pbs-search__icon {
+  flex: none;
+  display: flex;
+  color: #9aa0b4;
+}
+
+.pbs-search__icon svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.pbs-search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: none;
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  color: var(--pbs-navy);
+}
+
+.pbs-search__input::placeholder {
+  color: #8b90a5;
+  opacity: 1;
+}
+
+.pbs-search__input:focus {
+  outline: 0;
+}
+
+.pbs-search__input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.pbs-search__submit {
+  flex: none;
+  height: 3.6rem;
+  padding: 0 2rem;
+  border: 0;
+  border-radius: 7px;
+  background: var(--pbs-navy);
+  color: #fff;
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pbs-search__submit:hover {
+  background: var(--pbs-orange);
+}
+
+/* Le panneau de suggestions se cale sous le champ */
+.pbs-search__form .predictive-search {
+  top: calc(100% + 0.6rem);
+  border-radius: var(--pbs-radius);
+  overflow: hidden;
+}
+
+/* ---------- Sélecteur langue / devise (snippet pbs-localisation) ----------
+   Deux listes courtes depuis le 23/09/2026, plus les 83 pays : voir le snippet
+   pour la façon dont une devise se traduit en pays. */
+.pbs-loc {
+  position: relative;
+  flex: none;
+}
+
+.pbs-loc__bouton {
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 4.4rem;
+  padding: 0 0.6rem;
+  cursor: pointer;
+  list-style: none;
+  color: var(--pbs-navy);
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.pbs-loc__bouton::-webkit-details-marker {
+  display: none;
+}
+
+.pbs-loc__bouton::marker {
+  content: '';
+}
+
+.pbs-loc__globe svg {
+  display: block;
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Les trois icônes de droite à la MÊME taille. Dawn ne contraint pas celle du
+   panier : avec notre dessin en grille 24 elle partait à 44 px, deux fois les
+   autres. */
+.header__icons .header__icon--cart svg,
+.header__icons .header__icon--account svg,
+.header__icons .header__icon--account account-icon svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* ⚠️ Même mécanique que les menus du rail : le survol porte sur le CONTENEUR,
+   pas sur le bouton — sinon le panneau se referme dès que le pointeur descend
+   vers lui. `:focus-within` garde l'accès au clavier. */
+.pbs-loc:hover .pbs-loc__panneau,
+.pbs-loc:focus-within .pbs-loc__panneau {
+  display: block;
+}
+
+.pbs-loc__panneau {
+  display: none;
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  right: 0;
+  z-index: 5;
+  width: 26rem;
+  padding: 1.6rem;
+  border: 1px solid var(--pbs-line);
+  border-radius: var(--pbs-radius);
+  background: #fff;
+  /* l'ombre unique du thème */
+  box-shadow: 0 18px 40px -24px rgba(14, 27, 77, 0.45);
+}
+
+.pbs-loc__chevron {
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: none;
+}
+
+.pbs-loc__titre {
+  margin: 0 0 0.8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--pbs-muted);
+}
+
+.pbs-loc__titre--suite {
+  margin-top: 1.4rem;
+}
+
+/* Maquette A (23/09/2026) : un interrupteur par réglage. Le choix actif est
+   en NAVY — l'orange signale les promos ailleurs sur le site. */
+.pbs-loc__segments {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 0.4rem;
+  padding: 0.4rem;
+  border-radius: 10px;
+  background: var(--pbs-surface);
+}
+
+.pbs-loc__seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.6rem;
+  padding: 0 0.8rem;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  color: var(--pbs-ink);
+  transition: background 0.15s, color 0.15s;
+}
+
+.pbs-loc__seg:hover {
+  background: var(--pbs-line);
+}
+
+.pbs-loc__seg--actuel,
+.pbs-loc__seg--actuel:hover {
+  background: var(--pbs-navy);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 1px 2px rgba(14, 27, 77, 0.25);
+}
+
+.pbs-loc__seg:focus-visible {
+  outline: 2px solid var(--pbs-navy);
+  outline-offset: 2px;
+}
+
+.pbs-loc__symbole {
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.pbs-loc__seg--actuel .pbs-loc__symbole {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pbs-loc__seg {
+    transition: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  /* Sur mobile le panneau prend toute la largeur utile plutôt que de sortir
+     du cadre par la droite. */
+  .pbs-loc__panneau {
+    position: fixed;
+    top: auto;
+    left: 1.6rem;
+    right: 1.6rem;
+    width: auto;
+    max-height: 60vh;
+  }
+
+  /* Le code pays disparaît, il ne reste que le globe : 44 px de côté quand
+     même, c'est une cible tactile. */
+  .pbs-loc__code,
+  .pbs-loc__chevron {
+    display: none;
+  }
+
+  .pbs-loc__bouton {
+    justify-content: center;
+    min-width: 4.4rem;
+    padding: 0;
+  }
+
+  /* Dawn masque le lien « compte » sur mobile quand un menu existe : il vit
+     dans le tiroir du burger. On ne le force pas à revenir, la barre n'a pas
+     la place de trois icônes et d'un logo à 390 px. */
+}
+
+/* ---------- Rail de catégories (snippet pbs-rail) ---------- */
+.pbs-rail {
+  border-top: 1px solid #e7e9f1;
+  border-bottom: 1px solid #e7e9f1;
+  background: #fafbfd;
+}
+
+.pbs-rail__inner {
+  display: flex;
+  align-items: center;
+  min-height: 4.6rem;
+}
+
+.pbs-rail__list,
+.pbs-rail .header__inline-menu > .list-menu {
+  display: flex;
+  align-items: center;
+  gap: 2.8rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.pbs-rail .header__inline-menu {
+  width: 100%;
+}
+
+.pbs-rail__link,
+.pbs-rail .header__menu-item {
+  /* `relative` pour le trait du dessous, qui est un `::after` et non une
+     `border-bottom` : une bordure élargirait la boîte et décalerait les
+     entrées voisines d'un pixel à chaque survol. */
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* L'écart texte / chevron était porté par le `summary` du `<details>` ; il se
+     redéclare ici depuis que l'entrée est un lien. */
+  gap: 0.5rem;
+  padding: 1.2rem 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--pbs-navy);
+  text-decoration: none;
+}
+
+/* ⚠️ **L'ÉTAT SURVOLÉ EST UN TRAIT, PAS UNE COULEUR** (22/09/2026). Le survol
+   passait l'entrée en orange — exactement la couleur que « Promotions » porte
+   en permanence pour se distinguer. On ne savait plus si une entrée était
+   survolée ou si c'était la vitrine. Le trait dit l'état, la couleur dit la
+   nature : deux signaux, deux sens. */
+.pbs-rail__link::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0.6rem;
+  left: 0;
+  height: 2px;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.pbs-rail__item:hover > .pbs-rail__link::after,
+.pbs-rail__item:focus-within > .pbs-rail__link::after,
+.pbs-rail__link--current::after {
+  opacity: 1;
+}
+
+.pbs-rail__item--clearance {
+  margin-left: auto;
+}
+
+.pbs-rail__item--clearance .pbs-rail__link {
+  color: var(--pbs-orange-700);
+  font-weight: 600;
+}
+
+/* « Tout le catalogue » : entrée en gras qui déplie le menu principal */
+
+.pbs-rail__link--catalog {
+  gap: 0.7rem;
+  font-weight: 600;
+}
+
+.pbs-rail__caret {
+  width: 1.1rem;
+  height: 1.1rem;
+  transition: transform 0.15s ease;
+}
+
+/* ⚠️ **LE SURVOL PORTE SUR LE `<li>`, PAS SUR LE LIEN.** Posé sur le lien, le
+   panneau se refermait dès que le pointeur quittait le texte pour descendre
+   vers lui — il n'y a pas de « pont » entre les deux. Le `<li>` contient les
+   deux, le survol ne se rompt donc jamais en chemin. */
+.pbs-rail__item--menu:hover > .pbs-rail__panel,
+.pbs-rail__item--menu:focus-within > .pbs-rail__panel,
+.pbs-rail__item--menu:hover > .pbs-rail__sous-panel,
+.pbs-rail__item--menu:focus-within > .pbs-rail__sous-panel {
+  display: block;
+}
+
+.pbs-rail__item--menu:hover > .pbs-rail__panel {
+  display: flex;
+}
+
+.pbs-rail__item--menu:hover .pbs-rail__caret,
+.pbs-rail__item--menu:focus-within .pbs-rail__caret {
+  transform: rotate(180deg);
+}
+
+/* ── « Tout le catalogue » : panneau à DEUX VOLETS ────────────────────────────
+   Les rayons à gauche, les sous-rayons du seul rayon survolé à droite. Le
+   panneau affichait ses sept colonnes d'un coup : lisible à sept rayons,
+   illisible dès qu'il y en aura douze, et rien n'y guidait l'œil.
+
+   ⚠️ **AUCUN JAVASCRIPT**, le handoff l'interdit. Le volet tient par `:hover`,
+   et `:has()` affiche le PREMIER rayon tant que rien n'est survolé — sans lui
+   le panneau s'ouvrirait sur un grand vide. */
+.pbs-rail__panel {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  left: -1.6rem;
+  border: 1px solid var(--pbs-line);
+  border-radius: var(--pbs-radius);
+  background: #fff;
+  box-shadow: 0 18px 40px -24px rgba(14, 27, 77, 0.45);
+}
+
+.pbs-mega {
+  /* ⚠️ **NE PAS REDÉCLARER `position` ICI.** Les deux classes sont sur le MÊME
+     élément : `.pbs-rail__panel` le met en `absolute`, et un `relative` déclaré
+     plus bas dans la feuille le remettait dans le flux — le panneau ouvert
+     poussait alors le reste du rail vers la droite, sans erreur nulle part.
+     L'absolu suffit à ancrer le volet, qui était auparavant ancré sur la
+     colonne de gauche (24rem) et donc coupé par `overflow: hidden`.
+
+     ⚠️ **NE PAS DÉCLARER `display` ICI NON PLUS**, pour la même raison :
+     `.pbs-rail__panel` le met à `none`, et un `flex` déclaré plus bas le
+     rouvrait — le méga-menu restait affiché en permanence, par-dessus la page.
+     C'est la règle de survol qui pose `display: flex`. */
+  overflow: hidden;
+  /* La hauteur est portée par le volet de gauche : sans elle, le panneau se
+     redimensionne à chaque survol, et le pointeur perd sa cible en chemin.
+     La largeur, elle, doit contenir la colonne ET le volet : le volet est en
+     position absolue, il ne compte donc pas dans la largeur du panneau. */
+  min-height: 27rem;
+  min-width: 76rem;
+  max-width: 94vw;
+  padding: 0;
+}
+
+.pbs-mega__rayons {
+  flex: 0 0 24rem;
+  margin: 0;
+  padding: 0.8rem 0;
+  border-right: 1px solid var(--pbs-line);
+  background: #fff;
+}
+
+.pbs-mega__item {
+  position: static;
+}
+
+.pbs-mega__rayon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 0.9rem 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--pbs-navy);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pbs-mega__fleche {
+  width: 1.4rem;
+  height: 1.4rem;
+  flex: none;
+  opacity: 0.45;
+}
+
+.pbs-mega__item:hover .pbs-mega__rayon {
+  background: var(--pbs-gris-100, #f4f5f9);
+  color: var(--pbs-orange-700);
+}
+
+.pbs-mega__item:hover .pbs-mega__fleche {
+  opacity: 1;
+}
+
+/* Le volet de droite recouvre toute la hauteur, à droite de la colonne. */
+.pbs-mega__volet {
+  position: absolute;
+  top: 0;
+  left: 24rem;
+  right: 0;
+  display: none;
+  height: 100%;
+  padding: 1.6rem 2.4rem;
+  background: #fff;
+}
+
+.pbs-mega__item:hover .pbs-mega__volet {
+  display: block;
+}
+
+/* Tant que rien n'est survolé, c'est le premier rayon qui s'affiche. */
+.pbs-mega__item:first-child .pbs-mega__volet {
+  display: block;
+}
+
+.pbs-mega__rayons:has(.pbs-mega__item:hover) .pbs-mega__item:first-child .pbs-mega__volet {
+  display: none;
+}
+
+.pbs-mega__rayons:has(.pbs-mega__item:hover) .pbs-mega__item:hover .pbs-mega__volet {
+  display: block;
+}
+
+.pbs-mega__volet-titre {
+  display: block;
+  margin-bottom: 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--pbs-navy);
+  text-decoration: none;
+}
+
+.pbs-mega__sous {
+  /* Colonnes plutôt qu'une liste qui descend : huit sous-rayons sur une seule
+     colonne rendaient le panneau plus haut que la fenêtre. */
+  columns: 2;
+  column-gap: 3.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.pbs-mega__lien {
+  display: block;
+  padding: 0.4rem 0;
+  font-size: 1.4rem;
+  color: var(--pbs-ink);
+  text-decoration: none;
+  white-space: nowrap;
+  break-inside: avoid;
+}
+
+.pbs-mega__lien:hover,
+.pbs-mega__volet-titre:hover {
+  color: var(--pbs-orange-700);
+}
+
+/* ── Le déroulant d'une entrée de rail ──────────────────────────────────────
+   Chaque rayon de la barre ouvre ses sous-rayons. Le lien vers le rayon entier
+   reste EN TÊTE de la liste : le `summary` capte le clic, et sans cette ligne
+   la page du rayon devient inatteignable depuis la barre. */
+/* Le `<li>` ancre le panneau : c'est lui qui porte `position: relative`, pas le
+   lien — sinon le panneau se calerait sur le texte et non sur l'entrée. */
+.pbs-rail__item--menu {
+  position: relative;
+}
+
+.pbs-rail__sous-panel {
+  display: none;
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  left: -1.6rem;
+  min-width: 24rem;
+  padding: 1.2rem 1.6rem;
+  border: 1px solid var(--pbs-line);
+  border-radius: var(--pbs-radius);
+  background: #fff;
+  box-shadow: 0 18px 40px -24px rgba(14, 27, 77, 0.45);
+}
+
+.pbs-rail__sous-tout {
+  display: block;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--pbs-line);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--pbs-navy);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pbs-rail__sous-liste {
+  margin: 0;
+  padding: 0;
+}
+
+.pbs-rail__sous-lien {
+  display: block;
+  padding: 0.4rem 0;
+  font-size: 1.4rem;
+  color: var(--pbs-ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pbs-rail__sous-lien:hover,
+.pbs-rail__sous-tout:hover {
+  color: var(--pbs-orange-700);
+}
+
+.header__submenu.list-menu {
+  border: 1px solid var(--pbs-line);
+  border-radius: var(--pbs-radius);
+  box-shadow: 0 18px 40px -24px rgba(14, 27, 77, 0.45);
+  padding: 1.6rem;
+}
+
+.mega-menu__list {
+  gap: 2.4rem 3.2rem;
+}
+
+.mega-menu__link,
+.header__submenu .header__menu-item {
+  font-size: 1.4rem;
+  color: var(--pbs-navy);
+}
+
+/* ---------- Boutons ---------- */
+
+.button,
+.shopify-challenge__button,
+.customer button,
+button.shopify-payment-button__button--unbranded {
+  border-radius: var(--pbs-radius);
+  min-height: 4.6rem;
+  font-family: var(--font-body-family);
+  font-weight: 600;
+  letter-spacing: 0;
+  transition: filter 0.15s ease, background-color 0.15s ease;
+}
+
+.button:not([disabled]):hover {
+  filter: brightness(0.94);
+}
+
+/* CTA principal : orange */
+.button:not(.button--secondary):not(.button--tertiary),
+.product-form__submit,
+.shopify-payment-button__button--unbranded {
+  --color-button: 227, 36, 2;
+  --color-button-text: 255, 255, 255;
+  --alpha-button-border: 0;
+}
+
+.button--secondary {
+  --color-button: 255, 255, 255;
+  --color-button-text: 14, 27, 77;
+  border: 1px solid #d3d7e4;
+}
+
+/* Sur un fond ORANGE (scheme-4 : le bandeau « Matériel neuf »), le CTA
+   s'inverse — fond blanc, texte orange. Sans cette règle il hérite du CTA
+   orange ci-dessus et devient invisible : orange sur orange. */
+.color-scheme-4 .button:not(.button--secondary):not(.button--tertiary) {
+  --color-button: 255, 255, 255;
+  --color-button-text: 227, 36, 2;
+}
+
+/* « Ajouter au panier » de la fiche produit : orange, comme le demande le
+   handoff §4. Quand les paiements accélérés sont actifs, Dawn le passe en
+   `button--secondary` — il ressortait donc blanc, à côté du bouton Shop Pay
+   violet, et la fiche n'avait plus de CTA de la marque. */
+.product-form__submit,
+.product-form__submit.button--secondary {
+  --color-button: 227, 36, 2;
+  --color-button-text: 255, 255, 255;
+  border: 0;
+  min-height: 4.6rem;
+}
+
+/* ---------- Cartes produit ---------- */
+
+.card-wrapper .card,
+.card-wrapper .card__inner {
+  border-radius: var(--pbs-radius);
+}
+
+.card--card {
+  border: 1px solid var(--pbs-line);
+  box-shadow: none;
+}
+
+.card__inner .card__media,
+.card .media {
+  background: var(--pbs-surface);
+  border-radius: calc(var(--pbs-radius) - 2px);
+}
+
+.card__content {
+  padding: 1.4rem;
+  row-gap: 0.8rem;
+}
+
+/* Dawn donne à .card__information SON PROPRE padding vertical (1.3rem), qui
+   s'ajoutait aux 1.4rem de .card__content : 26 px de haut gagnés par carte,
+   et autant de blanc entre le stock et le bouton. La maquette ne compte
+   qu'un seul padding de 14 px. */
+.card__content .card__information {
+  padding-top: 0;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Note, prix et disponibilité vivent dans un sous-conteneur, et Dawn y pose la
+   note en TROIS éléments distincts (étoiles, « 4,8 », « (37) »). En colonne
+   ils s'empilaient sur trois lignes et gonflaient la carte de 24 px. En
+   `wrap`, la note tient sur une ligne et seuls le prix et la disponibilité
+   prennent toute la largeur. */
+.card__content .card-information {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 0.6rem;
+}
+
+.card__content .card-information > .price,
+.card__content .card-information > .pbs-stock {
+  flex: 0 0 100%;
+}
+
+/* Un enfant vide reste un élément de flex : il ne se voit pas mais il
+   consomme une gouttière. C'est le cas du <span> de description, qui n'est
+   rempli que dans certains blocs de section. */
+.card__content .card-information > *:empty,
+.card__content .card__information > *:empty {
+  display: none;
+}
+
+.card__content .card-information .rating-text,
+.card__content .card-information .rating-count {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--pbs-muted);
+}
+
+/* Les étoiles de Dawn prennent la couleur du TEXTE (navy, donc presque
+   noires). La maquette les veut ambre, comme celles du bloc avis. */
+.card-wrapper .rating-star,
+.product .rating-star {
+  --color-rating-star: #e9a200;
+  font-size: 1.2rem;
+}
+
+.card__heading,
+.card__heading a {
+  font-family: var(--font-body-family);
+  font-size: 1.4rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--pbs-navy);
+}
+
+/* Titre sur DEUX lignes au maximum (handoff §1.7). Sans cette limite, une
+   désignation longue — il y en a beaucoup au catalogue — prend trois ou
+   quatre lignes, la carte grandit d'autant et les cartes d'une même rangée
+   ne sont plus de la même hauteur. */
+.card__heading a {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Prix et prix barré sur une seule ligne, le prix courant D'ABORD.
+   Dawn empile les deux et sort l'ancien prix en premier.
+   NE PAS toucher au `display` de .price__regular : Dawn s'en sert pour cacher
+   le prix plein quand l'article est soldé (`.price--on-sale .price__regular
+   { display: none }`). Le passer en flex ici le faisait réapparaître, et la
+   carte affichait deux prix barrés.
+   Même raison pour ne cibler `.price__sale` QUE sous `.price--on-sale` :
+   hors solde Dawn le masque, et un `display: flex` posé sans condition le
+   rallumait — la carte montrait alors le prix deux fois, avec un « 0,00 € »
+   barré quand le prix comparé n'était pas renseigné. */
+.card__information .price--on-sale .price__sale {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.card__information .price__sale > span:has(s) {
+  order: 2;
+}
+
+.card__information .caption-with-letter-spacing {
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8b8f9e;
+}
+
+.price {
+  font-family: var(--font-heading-family);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--pbs-navy);
+  font-variant-numeric: tabular-nums;
+}
+
+.price--on-sale .price-item--regular {
+  font-family: var(--font-body-family);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #9a9eac;
+}
+
+.price__badge-sale,
+.badge {
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.5rem 0.9rem;
+}
+
+.card__badge .badge {
+  background: var(--pbs-orange);
+  color: #fff;
+  border: 0;
+}
+
+/* Disponibilité : rassure avant le clic */
+.card__information .pbs-stock {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--pbs-green);
+}
+
+.card__information .pbs-stock::before {
+  content: '';
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.card__information .pbs-stock--low {
+  color: #b06a00;
+}
+
+.card__information .pbs-stock--out {
+  color: #8b8f9e;
+}
+
+/* Rupture : l'ajout rapide reste en place mais n'invite plus au clic */
+.card:has(.pbs-stock--out) .quick-add__submit,
+.card-wrapper:has(.pbs-stock--out) .quick-add__submit {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Dawn réserve 1rem sous l'ajout rapide : dans la maquette le bouton s'arrête
+   au padding de la carte. */
+.card__content .quick-add {
+  margin-bottom: 0;
+}
+
+/* Ajout rapide toujours visible, cible tactile confortable */
+.quick-add__submit {
+  min-height: 4.4rem;
+  border-radius: calc(var(--pbs-radius) - 3px);
+  margin-top: 0.4rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  --color-button: 14, 27, 77;
+  --color-button-text: 255, 255, 255;
+}
+
+/* Dawn dessine le contour des boutons dans un ::after en box-shadow, à un
+   rayon « outset » qui ne suit pas celui du bouton : d'où le liseré clair aux
+   coins désaccordés. Les réglages passent maintenant l'épaisseur à 0, cette
+   règle ferme la porte pour les boutons qui portent encore leur propre
+   --buttons-border-width (Dawn les recharge dans ses feuilles de section,
+   chargées APRÈS celle-ci). */
+.button::after,
+.shopify-challenge__button::after,
+.customer button::after,
+.quick-add__submit::after {
+  box-shadow: none !important;
+}
+
+/* ---------- Grille collection + filtres ---------- */
+
+.facets__summary,
+.facets__button,
+.facet-filters__sort,
+.facets__price .field__input {
+  border-radius: var(--pbs-radius);
+  font-size: 1.4rem;
+}
+
+.facets__disclosure .facets__display {
+  border: 1px solid var(--pbs-line);
+  border-radius: var(--pbs-radius);
+  box-shadow: 0 18px 40px -24px rgba(14, 27, 77, 0.4);
+}
+
+.active-facets__button .active-facets__button-inner {
+  border-radius: 999px;
+  background: var(--pbs-orange-soft);
+  color: var(--pbs-orange-700);
+  border: 0;
+  font-weight: 600;
+}
+
+.collection-hero__title,
+.main-collection-banner .title {
+  font-size: 3.2rem;
+}
+
+/* ---------- Fiche produit ---------- */
+
+.product__title h1,
+.product__title .h1 {
+  font-size: 3.2rem;
+  line-height: 1.1;
+}
+
+.product__info-container > * + * {
+  margin-top: 1.6rem;
+}
+
+.product-form__input .form__label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--pbs-navy);
+}
+
+.product-form__input input[type='radio'] + label {
+  border-radius: 999px;
+  min-height: 4.4rem;
+  padding: 0 1.8rem;
+  font-size: 1.4rem;
+}
+
+.product-form__input input[type='radio']:checked + label {
+  background: var(--pbs-navy);
+  color: #fff;
+  border-color: var(--pbs-navy);
+}
+
+.product__accordion .summary__title,
+.product__description h2 {
+  font-size: 1.6rem;
+}
+
+/* ---------- Réassurance (section custom-liquid) ---------- */
+
+.pbs-trust {
+  border-top: 1px solid var(--pbs-line);
+  border-bottom: 1px solid var(--pbs-line);
+  background: #fff;
+}
+
+.pbs-trust__grid {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  /* Les filets verticaux ne sont pas des bordures : c'est le fond de la
+     grille qui affleure dans une gouttière d'un pixel. */
+  gap: 1px;
+  background: #e7e9f1;
+}
+
+/* Pas d'icône : la maquette de référence (ligne 310 du fichier .dc.html) ne
+   porte qu'un titre et un sous-titre, empilés. Le §1.5 du handoff annonçait
+   une icône de 26 px, mais le document précise que la maquette fait foi. */
+.pbs-trust__item {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 1.6rem 2rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.pbs-trust__title {
+  font-size: 1.3rem;
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--pbs-navy);
+}
+
+.pbs-trust__sub {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: #767b8e;
+}
+
+/* ---------- Bloc SEO bas de page ---------- */
+
+.seo-wrapper {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  font-size: 1.4rem;
+  line-height: 1.7;
+}
+
+.seo-wrapper h2 {
+  font-size: 1.8rem;
+  margin: 2.4rem 0 0.8rem;
+}
+
+/* ---------- Bloc SEO de bas d'accueil (section custom_liquid_y8X4fc) --------
+   Un aperçu de quelques lignes, puis « Voir plus » qui déplie — sans une ligne
+   de JavaScript, que le handoff interdit.
+
+   Pourquoi une case à cocher masquée et non un <details> : un <details> fermé
+   ne PEINT PAS son contenu. On peut lui forcer un `display: block` et lui
+   donner une hauteur — la boîte existe alors, mesurable — mais le texte reste
+   invisible, et `content-visibility: visible` n'y change rien. Essayé le
+   22/09/2026 : la section n'affichait plus que son titre sur un grand aplat
+   noir. La case reste focusable au clavier (elle n'est pas en display:none),
+   et le texte est toujours dans le DOM, donc lu par les moteurs comme par les
+   lecteurs d'écran.
+
+   Les couleurs viennent du SCHÉMA (--color-foreground) et ne sont pas écrites
+   en dur : la section est en scheme-5, fond noir. Un titre navy y était
+   illisible, et le jour où le bloc changerait de schéma il le redeviendrait. */
+.pbs-seo {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 3.2rem;
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: rgba(var(--color-foreground), 0.78);
+}
+
+.pbs-seo__title {
+  font-family: 'Outfit', var(--font-body-family);
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: rgb(var(--color-foreground));
+  margin: 0 0 1.2rem;
+}
+
+/* Masquée à l'œil, mais toujours atteignable au clavier : pas de display:none. */
+.pbs-seo__state {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* L'aperçu : les premières lignes, fondues vers le bas. Le fondu passe par un
+   mask et non par un dégradé de couleur — le fond de la section est noir, un
+   dégradé vers le blanc y ferait une tache. */
+.pbs-seo__body {
+  max-height: 8.5rem;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(#000 55%, transparent);
+  mask-image: linear-gradient(#000 55%, transparent);
+}
+
+.pbs-seo__state:checked ~ .pbs-seo__body {
+  max-height: none;
+  overflow: visible;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.pbs-seo__toggle {
+  display: inline-block;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.pbs-seo__toggle:hover {
+  color: var(--pbs-orange);
+}
+
+/* Le focus clavier est porté par la case : sans ce report, on ne verrait rien. */
+.pbs-seo__state:focus-visible ~ .pbs-seo__toggle {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 4px;
+}
+
+/* Le libellé change sans script : deux mots, on montre celui qui convient. */
+.pbs-seo__less {
+  display: none;
+}
+
+.pbs-seo__state:checked ~ .pbs-seo__toggle .pbs-seo__more {
+  display: none;
+}
+
+.pbs-seo__state:checked ~ .pbs-seo__toggle .pbs-seo__less {
+  display: inline;
+}
+
+.pbs-seo__body h3 {
+  font-family: 'Outfit', var(--font-body-family);
+  font-size: 1.6rem;
+  line-height: 1.3;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+  margin: 2.4rem 0 0.6rem;
+}
+
+.pbs-seo__body p {
+  margin: 0 0 1.2rem;
+  text-wrap: pretty;
+}
+
+.pbs-seo__body a {
+  color: rgb(var(--color-foreground));
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.pbs-seo__body a:hover {
+  color: var(--pbs-orange);
+}
+
+@media screen and (max-width: 749px) {
+  .pbs-seo {
+    padding: 2.4rem 1.6rem;
+  }
+
+  .pbs-seo__title {
+    font-size: 1.8rem;
+  }
+
+  /* 44 px de cible tactile : le libellé seul n'en fait que 22. */
+  .pbs-seo__toggle {
+    display: inline-flex;
+    align-items: center;
+    min-height: 4.4rem;
+  }
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  border-top: 0;
+}
+
+.footer__content-bottom,
+.copyright__content {
+  color: #9a9895;
+  font-size: 1.2rem;
+}
+
+.footer-block__heading {
+  font-family: var(--font-heading-family);
+  font-size: 1.6rem;
+}
+
+.footer__list-social .list-social__link,
+.footer-block__details-content a {
+  font-size: 1.3rem;
+}
+
+.newsletter-form__field-wrapper .field__input {
+  border-radius: var(--pbs-radius);
+}
+
+/* ==========================================================================
+   MOBILE — corrections ciblées
+   ========================================================================== */
+
+@media screen and (max-width: 749px) {
+  /* `.page-width` ici aussi : sans lui, la règle desktop `.header.page-width`
+     l'emporterait et le mobile récupérerait ses 2 rem de padding. */
+  .header.page-width {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    column-gap: 1rem;
+  }
+
+  /* Dawn décale sa dernière icône de header vers la droite pour aligner le
+     pictogramme sur la marge. À 390 px le panier sortait alors de 4 px du
+     cadre, et le navigateur élargissait toute la page pour le faire tenir. */
+  .header__icons {
+    margin-right: 0;
+  }
+
+  .header__icons .header__icon--cart {
+    margin-right: -0.4rem;
+  }
+
+  .header__heading-logo {
+    max-width: 14rem;
+  }
+
+  .pbs-logo__svg {
+    height: 2.6rem;
+    max-width: 16rem;
+  }
+
+  /* Recherche pleine largeur sous le logo */
+  .pbs-search {
+    grid-column: 1 / -1;
+    order: 10;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .pbs-search__submit {
+    padding: 0 1.4rem;
+  }
+
+  /* Cibles tactiles : 44 px, handoff §2. Les trois dernières manquaient —
+     le déclencheur des filtres, son « Effacer » et les réseaux sociaux
+     tombaient entre 27 et 42 px. */
+  .header__icon,
+  .header__icon--menu,
+  .header__icon--cart,
+  .quick-add__submit,
+  .button,
+  .product-form__submit,
+  .facets__summary,
+  .facet-filters__sort,
+  .mobile-facets__open,
+  .mobile-facets__open-wrapper,
+  .list-social__link {
+    min-height: 4.4rem;
+  }
+
+  .mobile-facets__open-wrapper,
+  .mobile-facets__open {
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-facets__clear,
+  .mobile-facets__close-button,
+  .cart__login-title + .cart__login-paragraph .link {
+    min-height: 4.4rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Le lien du logo : le SVG ne fait que 22 px de haut, la zone à toucher
+     doit quand même en faire 44. */
+  .header__heading-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 4.4rem;
+  }
+
+  .list-social__link {
+    min-width: 4.4rem;
+  }
+
+  /* Grille 2 colonnes plus lisible */
+  .grid--2-col-tablet-down .grid__item {
+    width: calc(50% - var(--grid-mobile-horizontal-spacing) / 2);
+  }
+
+  .product-grid,
+  .grid {
+    --grid-mobile-horizontal-spacing: 1.2rem;
+    --grid-mobile-vertical-spacing: 2rem;
+  }
+
+  .card__content {
+    padding: 1rem;
+  }
+
+  .card__heading,
+  .card__heading a {
+    font-size: 1.3rem;
+  }
+
+  .price {
+    font-size: 1.6rem;
+  }
+
+  /* Le bouton des cartes tient sur UNE ligne : à deux colonnes sur 390 px,
+     « Ajouter au panier » se coupait en deux et la carte grandissait. */
+  .card__content .quick-add__submit {
+    font-size: 1.3rem;
+    padding: 0 0.8rem;
+    white-space: nowrap;
+  }
+
+  /* Titres de section : plus de hiérarchie, moins de casse haute */
+  .collection .title,
+  .title-wrapper-with-link .title {
+    font-size: 2.2rem;
+    line-height: 1.15;
+  }
+
+  /* Réassurance : scroll horizontal au lieu d'un pavé de 5 blocs.
+     Sur téléphone, les cases sont des cartes cerclées : les filets haut et
+     bas du bandeau y faisaient doublon — les cartes collaient à la bannière,
+     puis venaient 4 px de vide et un trait gris (23/09/2026). La marge est la
+     même au-dessus et au-dessous, et `scroll-padding` garde la première carte
+     à 1,5 rem du bord au lieu de la coller à l'écran. */
+  .pbs-trust {
+    border: 0;
+  }
+
+  .pbs-trust__grid {
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    grid-auto-columns: 74%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 1rem;
+    background: transparent;
+    padding: 1.2rem 1.5rem;
+  }
+
+  .pbs-trust__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pbs-trust__item {
+    scroll-snap-align: start;
+    border: 1px solid var(--pbs-line);
+    border-radius: var(--pbs-radius);
+  }
+
+  /* Achat toujours à portée de pouce sur la fiche produit */
+  .product-form__buttons {
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+    background: #fff;
+    padding: 1rem 0 calc(1rem + env(safe-area-inset-bottom));
+    box-shadow: 0 -8px 20px -16px rgba(14, 27, 77, 0.6);
+  }
+}
+
+/* ==========================================================================
+   Performance / confort
+   ========================================================================== */
+
+img,
+.card__media img {
+  content-visibility: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   Blocs de la page d'accueil — maquette 1b, sections 1.6 à 1.11 du handoff
+   ========================================================================== */
+
+/* ---------- 1.6 « Offres de la semaine » : en-tête sur une ligne ---------- */
+.featured-collection .title-wrapper-with-link {
+  align-items: center;
+  gap: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+.collection__title .title,
+.collection-list-wrapper .title,
+.featured-collection .title-wrapper-with-link .title {
+  font-family: 'Outfit', var(--font-body-family);
+  font-size: 2.7rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--pbs-navy);
+  text-transform: none;
+  margin: 0;
+}
+
+.featured-collection .link.underlined-link,
+.featured-collection .button--tertiary {
+  margin-left: auto;
+  height: 3.8rem;
+  padding: 0 1.8rem;
+  border: 1px solid #d3d7e4;
+  border-radius: var(--pbs-radius);
+  background: #fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--pbs-navy);
+  text-decoration: none;
+}
+
+/* ---------- 1.8 « Catégories à la une » ---------- */
+.collection-list-wrapper .title {
+  font-family: 'Outfit', var(--font-body-family);
+  font-size: 2.7rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--pbs-navy);
+  text-transform: none;
+}
+
+/* .pbs-count (« N références » sous le nom de catégorie) a été retiré du
+   balisage le 22/09/2026 ; la règle reste, elle reprendrait effet si on
+   remettait le compteur dans snippets/card-collection.liquid. */
+.pbs-count {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #8b8f9e;
+}
+
+.collection-list .card__heading {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--pbs-navy);
+}
+
+.collection-list .card--card {
+  border-radius: var(--pbs-radius);
+  border-color: var(--pbs-line);
+}
+
+.collection-list .card__media,
+.collection-list .card .media {
+  border-radius: 8px;
+  background: var(--pbs-surface);
+}
+
+/* ---------- 1.10 Bandeau « Matériel neuf » : une ligne, pas un pavé ----------
+   Piège payé : en `flex; justify-content: space-between`, ce sont les BLOCS
+   qui s'écartent — le sur-titre partait à gauche, le titre au milieu et le
+   lien à droite. La maquette veut un groupe de texte à gauche et le bouton
+   seul à droite : c'est une grille, le texte empilé en colonne 1, le bouton
+   en colonne 2 sur toute la hauteur. */
+@media screen and (min-width: 990px) {
+  .rich-text .rich-text__wrapper {
+    max-width: none;
+    padding: 0 3.2rem;
+  }
+
+  .rich-text .rich-text__blocks {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    column-gap: 3.2rem;
+    row-gap: 0.6rem;
+    max-width: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  .rich-text .rich-text__blocks > * {
+    grid-column: 1;
+    margin: 0;
+  }
+
+  /* Le bouton file à droite, centré sur la hauteur du texte.
+     `grid-row: 1 / -1` ne marcherait PAS ici : les lignes de cette grille sont
+     implicites, et -1 renvoie alors à la fin de la grille explicite, c'est-à-
+     dire la ligne 1 — le bouton se retrouvait collé au sur-titre. On couvre
+     donc explicitement les deux blocs de texte du bandeau (sur-titre, puis
+     titre + sous-titre). */
+  .rich-text .rich-text__blocks > .rich-text__buttons {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    margin: 0;
+  }
+}
+
+.color-scheme-4 .rich-text__heading,
+.rich-text .rich-text__heading,
+.rich-text .rich-text__text h3 {
+  font-family: 'Outfit', var(--font-body-family);
+  font-size: 3rem;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* Le sous-titre du bandeau : 15/1.5, et surtout PAS la graisse d'un titre —
+   il est écrit en <h4> dans le bloc de texte. */
+.rich-text .rich-text__text h4 {
+  font-family: var(--font-body-family);
+  font-size: 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #e6eafb;
+  margin: 0.4rem 0 0;
+}
+
+.rich-text .rich-text__caption {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #dce3fa;
+}
+
+.rich-text .rich-text__buttons .button {
+  height: 4.6rem;
+  padding: 0 2.4rem;
+  border-radius: var(--pbs-radius);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* ---------- 1.11 Footer ----------
+   Dawn empile : les blocs de liens d'abord, la newsletter ensuite, le tout
+   centré. La maquette met la newsletter À GAUCHE et les colonnes de liens à
+   sa droite. La newsletter n'est pas un bloc — c'est un réglage de section
+   rendu hors du conteneur de blocs — donc on la remet en place par `order`. */
+@media screen and (min-width: 750px) {
+  .footer .footer__content-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 4.8rem;
+    padding-bottom: 0;
+  }
+
+  .footer .footer-block--newsletter {
+    order: -1;
+    flex: 0 0 34rem;
+    max-width: 34rem;
+    display: block;
+    margin: 0;
+    text-align: left;
+  }
+
+  .footer .footer__blocks-wrapper {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: flex-start;
+    gap: 4.8rem;
+    margin: 0;
+    row-gap: 0;
+  }
+
+  .footer .footer-block {
+    flex: 0 0 auto;
+    max-width: none;
+    margin: 0;
+    text-align: left;
+  }
+
+  .footer .footer-block__details-content {
+    margin-bottom: 0;
+  }
+
+  /* Les réseaux sociaux passent sous le formulaire : la maquette n'en montre
+     pas, mais les retirer supprimerait un lien que la boutique veut garder. */
+  .footer .footer-block--newsletter .footer__list-social {
+    justify-content: flex-start;
+    margin-top: 1.6rem;
+  }
+}
+
+.footer .footer-block__newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.footer .footer-block__newsletter .footer-block__heading {
+  font-family: 'Outfit', var(--font-body-family);
+  font-size: 1.7rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+/* Champ et bouton côte à côte : Dawn pose le bouton en absolu DANS le champ. */
+.footer .newsletter-form__field-wrapper .field {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.footer .newsletter-form__field-wrapper .field::after,
+.footer .newsletter-form__field-wrapper .field::before {
+  display: none;
+}
+
+.footer .footer-block__newsletter .field__input,
+.footer .newsletter-form__field-wrapper .field__input {
+  flex: 1 1 auto;
+  height: 4.4rem;
+  min-height: 4.4rem;
+  padding: 0 1.4rem;
+  border-radius: var(--pbs-radius);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: none;
+  font-size: 1.3rem;
+}
+
+/* Dawn cache le placeholder et fait flotter un <label> par-dessus le champ.
+   La maquette veut le placeholder « E-mail » nu : on retire le label et on
+   rend le placeholder visible — sinon le champ paraît sans aucune indication. */
+.footer .newsletter-form__field-wrapper .field__label {
+  display: none;
+}
+
+.footer .newsletter-form__field-wrapper .field__input::placeholder {
+  opacity: 1;
+  color: #8c8a88;
+}
+
+/* `component-newsletter.css` est une feuille de SECTION : elle est chargée
+   après celle-ci et repose le bouton en absolu, transparent, dans le champ.
+   D'où les !important — à spécificité égale, c'est elle qui gagnerait. */
+.footer .newsletter-form__button {
+  position: static !important;
+  flex: none;
+  width: auto !important;
+  height: 4.4rem !important;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 2rem !important;
+  border-radius: var(--pbs-radius);
+  background: var(--pbs-orange) !important;
+  color: #fff !important;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.footer .newsletter-form__button:hover {
+  filter: brightness(0.94);
+}
+
+.footer .list-menu__item--link,
+.footer .footer-block__details-content a {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: #b5b3b0;
+}
+
+.footer .footer-block__heading {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+
+/* Bas du footer : le copyright à gauche, les moyens de paiement à droite.
+   Dawn sort deux `.footer__content-bottom-wrapper` l'un sous l'autre et centre
+   le second — on les remet sur une ligne, dans l'ordre de la maquette. */
+.footer .footer__content-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem 2.4rem;
+  border-top: 1px solid #33312f;
+  margin: 0 3.2rem;
+  padding-top: 1.6rem;
+}
+
+.footer .footer__content-bottom-wrapper {
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer .footer__content-bottom-wrapper--center {
+  order: -1;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.footer .footer__content-bottom-wrapper--center .footer__copyright {
+  text-align: left;
+}
+
+.footer .footer__column--info {
+  align-items: flex-end;
+  padding: 0;
+}
+
+.footer .copyright__content,
+.footer .footer__content-bottom small {
+  font-size: 1.2rem;
+  color: #9a9895;
+}
+
+/* ---------- Header : « Compte » et « Panier (2) », en toutes lettres ----------
+   La maquette du client ne garde que les mots : plus de pictogramme de compte
+   ni de panier sur desktop. Sur mobile ils restent — le libellé y est masqué
+   par small-hide/medium-hide dans le Liquid, et une barre sans repère visuel
+   n'offrirait plus rien à toucher. */
+@media screen and (min-width: 990px) {
+  .header__icons .header__icon--account,
+  .header__icons .header__icon--cart {
+    width: auto;
+    gap: 0.7rem;
+    padding: 0 0.4rem;
+  }
+
+  /* Compte et panier sont des ICÔNES, sans libellé (demande du 22/09/2026 au
+     soir : c'était l'inverse le matin — icône masquée, mot affiché). Le nom
+     reste dans le DOM, en visually-hidden, pour les lecteurs d'écran. */
+  .pbs-icon-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* Dawn souligne ses liens de header en permanence ; la maquette du client
+     les pose nus, et ne souligne qu'au survol. */
+  .header__icons .header__icon--account,
+  .header__icons .header__icon--cart,
+  .header__icons .header__icon--account .pbs-icon-label,
+  .header__icons .header__icon--cart .pbs-icon-label {
+    text-decoration: none;
+  }
+
+  .header__icons .header__icon--account:hover .pbs-icon-label,
+  .header__icons .header__icon--cart:hover .pbs-icon-label {
+    text-decoration: underline;
+    text-underline-offset: 0.3rem;
+  }
+
+  /* La pastille du compteur revient : le libellé « Panier (2) » qui la
+     remplaçait est maintenant masqué. */
+  .header__icon--cart .cart-count-bubble {
+    display: flex;
+  }
+}
+
+/* ---------- Hero : l'appel à l'action passe en orange (1b) ---------- */
+/* section-image-banner.css est chargé après cette feuille : sans !important,
+   le bouton reprend le blanc du jeu de couleurs navy. */
+.banner__buttons .button,
+.slideshow .button {
+  height: 4.8rem;
+  padding: 0 2.6rem;
+  border-radius: var(--pbs-radius);
+  border-color: var(--pbs-orange) !important;
+  background-color: var(--pbs-orange) !important;
+  color: #fff !important;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.banner__buttons .button::after,
+.slideshow .button::after {
+  box-shadow: none;
+}
+
+.banner__buttons .button:hover,
+.slideshow .button:hover {
+  background: var(--pbs-orange-700);
+  border-color: var(--pbs-orange-700);
+}
+
+/* ---------- Catégories à la une : vignette basse, carte compacte ---------- */
+.collection-list .card__inner .card__media,
+.collection-list .card__inner > .ratio::before {
+  max-height: 8.6rem;
+}
+
+.collection-list .card__inner {
+  --ratio-percent: 0 !important;
+  height: 8.6rem;
+}
+
+.collection-list .card__content {
+  padding: 1.6rem;
+  gap: 1rem;
+}
+
+.collection-list .card__heading .icon-wrap {
+  display: none;
+}
+
+/* Le jeu de couleurs du diaporama repeint le bouton via --color-button :
+   on écrase la variable elle-même, pas seulement la propriété. */
+.slideshow .banner__buttons a.button,
+.banner .banner__buttons a.button {
+  --color-button: 227, 36, 2;
+  --color-button-text: 255, 255, 255;
+  --alpha-button-background: 1;
+  --alpha-button-border: 1;
+  background-color: rgb(227, 36, 2) !important;
+  color: rgb(255, 255, 255) !important;
+  border-color: rgb(227, 36, 2) !important;
+}
+
+/* ---------- Hero Cockpit (section pbs-hero, maquette 1.4) ---------- */
+.pbs-hero {
+  padding: var(--pbs-hero-pt, 44px) 0 var(--pbs-hero-pb, 44px);
+  background: var(--pbs-navy);
+  color: #fff;
+}
+
+/* Diaporama sans JavaScript : une piste qui défile, une diapositive par écran. */
+.pbs-hero__track {
+  display: flex;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.pbs-hero__track::-webkit-scrollbar {
+  display: none;
+}
+
+.pbs-hero__slide {
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: center;
+  min-width: 0;
+}
+
+.pbs-hero__slide > .page-width {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Les puces de position du hero ont été retirées le 22/09/2026 : il ne reste
+   que les deux flèches. */
+
+.pbs-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+  align-items: center;
+}
+
+@media screen and (min-width: 990px) {
+  .pbs-hero__inner {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 3.6rem;
+  }
+}
+
+.pbs-hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.pbs-hero__eyebrow {
+  align-self: flex-start;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #c6d0ee;
+}
+
+.pbs-hero__heading {
+  margin: 0;
+  font-family: 'Outfit', var(--font-body-family);
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: #fff;
+  text-wrap: balance;
+}
+
+@media screen and (min-width: 990px) {
+  .pbs-hero__heading {
+    font-size: 4.6rem;
+  }
+}
+
+.pbs-hero__sub {
+  max-width: 47rem;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: #c3cbe6;
+  text-wrap: pretty;
+}
+
+.pbs-hero__sub > :first-child { margin-top: 0; }
+.pbs-hero__sub > :last-child { margin-bottom: 0; }
+
+.pbs-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.4rem;
+  margin-top: 0.6rem;
+}
+
+.pbs-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  height: 4.8rem;
+  padding: 0 2.6rem;
+  border-radius: var(--pbs-radius);
+  background: var(--pbs-orange);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+}
+
+.pbs-hero__cta:hover {
+  background: var(--pbs-orange-700);
+  color: #fff;
+}
+
+.pbs-hero__count {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #c3cbe6;
+}
+
+.pbs-hero__media {
+  min-width: 0;
+}
+
+.pbs-hero__img {
+  display: block;
+  width: 100%;
+  height: 30rem;
+  border-radius: var(--pbs-radius);
+  object-fit: cover;
+}
+
+.pbs-hero__img--placeholder {
+  background: var(--pbs-navy-700);
+  border: 1px dashed rgba(255, 255, 255, 0.28);
+}
+
+/* ---------- Avis Cockpit (section pbs-reviews, maquette 1.9) ---------- */
+.pbs-reviews {
+  padding: 3.2rem 0;
+  border-top: 1px solid #e7e9f1;
+  background: var(--pbs-surface);
+}
+
+.pbs-reviews__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+  align-items: center;
+}
+
+@media screen and (min-width: 990px) {
+  .pbs-reviews__inner {
+    grid-template-columns: auto 1fr;
+    gap: 3.6rem;
+  }
+
+  .pbs-reviews__score {
+    padding-right: 3.6rem;
+    border-right: 1px solid #dfe2ec;
+  }
+}
+
+.pbs-reviews__number {
+  font-family: 'Outfit', var(--font-body-family);
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pbs-navy);
+}
+
+.pbs-reviews__out-of {
+  font-size: 2.2rem;
+  color: #8b8f9e;
+}
+
+.pbs-reviews__stars {
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  color: #e9a200;
+}
+
+.pbs-reviews__meta {
+  margin: 0.8rem 0 0;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  color: var(--pbs-muted);
+}
+
+.pbs-reviews__quotes {
+  min-width: 0;
+}
+
+/* Le carrousel Judge.me reprend la carte de 1b.
+
+   Judge.me pose son propre CSS dans un <style> DE LA PAGE, donc APRÈS cette
+   feuille : à spécificité égale il gagne, et il met `!important` sur le
+   remplissage et les marges de ses étoiles. D'où les sélecteurs à rallonge et
+   les `!important` ci-dessous — ils ne sont pas décoratifs.
+   Les classes visées sont celles du gabarit « card-theme » :
+   .jdgm-carousel-item > .jdgm-carousel-item__inner-wrapper. */
+
+/* L'en-tête de l'app (titre + note + « sur N avis ») fait doublon avec la
+   colonne de gauche, qui porte déjà la note et la source. */
+.pbs-reviews .jdgm-carousel-title-and-link,
+.pbs-reviews .jdgm-carousel-title,
+.pbs-reviews .jdgm-carousel__title,
+.pbs-reviews .jdgm-carousel-wrapper__title {
+  display: none !important;
+}
+
+/* L'app pose un `max-width: 1080px` EN STYLE INLINE sur son conteneur, et
+   réserve 81 px aux flèches : le bloc n'occupait qu'une partie de la largeur
+   et laissait un grand vide après la colonne du score. */
+.pbs-reviews .shopify-app-block > div,
+.pbs-reviews .jdgm-carousel-wrapper .jdgm-widget.jdgm-carousel,
+.pbs-reviews .jdgm-carousel-wrapper .jdgm-carousel-title-and-link {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.pbs-reviews .jdgm-carousel-item {
+  padding: 0 0.9rem !important;
+}
+
+.pbs-reviews .jdgm-carousel--card-theme .jdgm-carousel-item__inner-wrapper {
+  background: #fff;
+  border: 1px solid var(--pbs-line);
+  border-radius: var(--pbs-radius);
+  padding: 1.6rem;
+  /* La maquette ne porte aucune ombre sur les cartes ; l'app en pose une. */
+  box-shadow: none !important;
+}
+
+/* Les étoiles : Judge.me les sert en pastilles navy pleines. La maquette veut
+   de simples étoiles ambre de 12 px. */
+.pbs-reviews .jdgm-carousel-wrapper .jdgm-star.jdgm-star,
+.pbs-reviews .jdgm-carousel .jdgm-star.jdgm-star {
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 1px 0 0 !important;
+  color: #e9a200;
+  font-size: 1.2rem;
+}
+
+.pbs-reviews .jdgm-carousel-wrapper .jdgm-star.jdgm-star.jdgm--off,
+.pbs-reviews .jdgm-carousel .jdgm-star.jdgm-star.jdgm--off {
+  background: none !important;
+  color: #d8dbe6;
+}
+
+.pbs-reviews .jdgm-carousel-wrapper .jdgm-star.jdgm-star.jdgm--half,
+.pbs-reviews .jdgm-carousel .jdgm-star.jdgm-star.jdgm--half {
+  background: linear-gradient(90deg, #e9a200 50%, #d8dbe6 50%) !important;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.pbs-reviews .jdgm-carousel-item__review-rating {
+  margin-bottom: 0.8rem;
+}
+
+.pbs-reviews .jdgm-carousel-item__review-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--pbs-navy);
+  margin-bottom: 0.2rem;
+}
+
+.pbs-reviews .jdgm-carousel-item__review-body,
+.pbs-reviews .jdgm-carousel-item__review-body p {
+  font-size: 1.4rem;
+  line-height: 1.55;
+  color: #33384c;
+  margin: 0;
+}
+
+.pbs-reviews .jdgm-carousel-item__reviewer-name-wrapper {
+  margin-top: 0.8rem !important;
+}
+
+.pbs-reviews .jdgm-carousel-item__reviewer-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #8b8f9e;
+  opacity: 1;
+}
+
+/* Les flèches restent — sans elles on ne peut plus faire défiler — mais elles
+   s'effacent : la maquette montre trois cartes posées, rien d'autre. */
+.pbs-reviews .jdgm-carousel__left-arrow,
+.pbs-reviews .jdgm-carousel__right-arrow {
+  border-color: #c9cddb;
+  opacity: 0.55;
+}
+
+/* L'app pose ses flèches avec une marge NÉGATIVE de 25 px. À 390 px, celle de
+   droite sortait du cadre : le navigateur élargissait alors la page entière à
+   404 px et tout le site se décalait. On borne la section plutôt que de
+   toucher aux marges de l'app, que sa prochaine mise à jour réécrirait. */
+.pbs-reviews {
+  overflow-x: clip;
+}
+
+@media screen and (max-width: 749px) {
+  .pbs-reviews .jdgm-carousel__left-arrow,
+  .pbs-reviews .jdgm-carousel__right-arrow {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* ---------- Hero : navigation entre les offres ---------- */
+.pbs-hero__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.pbs-hero__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  /* 44 px : la cible tactile minimale du handoff (§2). */
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.pbs-hero__arrow svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.pbs-hero__arrow:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* ── Fil d'Ariane ───────────────────────────────────────────────────────────
+   Dawn n'en porte aucun : le snippet `pbs-fil-ariane` l'ajoute, ce bloc
+   l'habille. Le séparateur est un `::before` et non un caractère du markup —
+   un chevron dans le texte se ferait lire par un lecteur d'écran, une fois par
+   niveau. */
+.pbs-ariane {
+  padding: 14px 0 6px;
+}
+.pbs-ariane__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 8px;
+  margin: 0;
+  padding: 0;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+.pbs-ariane__item {
+  display: flex;
+  align-items: center;
+}
+.pbs-ariane__item + .pbs-ariane__item::before {
+  content: "›";
+  margin-right: 8px;
+  color: #9aa0b4;
+}
+.pbs-ariane__lien {
+  color: #5b6178;
+  text-decoration: none;
+}
+.pbs-ariane__lien:hover {
+  color: var(--pbs-navy);
+  text-decoration: underline;
+}
+.pbs-ariane__actuel {
+  color: var(--pbs-navy);
+  font-weight: 600;
+  /* Un titre de produit fait deux lignes sur mobile et repousse la fiche vers
+     le bas : on le tronque plutôt que de faire descendre la page. */
+  max-width: 46ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media screen and (max-width: 749px) {
+  .pbs-ariane {
+    padding: 10px 0 4px;
+  }
+  .pbs-ariane__list {
+    font-size: 1.2rem;
+    /* Défilement plutôt que retour à la ligne : le fil reste sur une ligne,
+       et le rayon reste visible sans pousser le titre hors de l'écran. */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .pbs-ariane__list::-webkit-scrollbar {
+    display: none;
+  }
+  .pbs-ariane__actuel {
+    max-width: 24ch;
+  }
+}
+
+/* ── Sous-rayons ────────────────────────────────────────────────────────────
+   Les puces de `pbs-sous-rayons`, sous le titre du rayon. Elles remplacent les
+   sous-collections supprimées : ce sont les valeurs du filtre « Type de
+   produit », sorties du menu déroulant et posées à plat, là où un client les
+   cherche. */
+.pbs-sous-rayons {
+  padding: 4px 0 20px;
+}
+.pbs-sous-rayons__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+.pbs-sous-rayons__puce {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border: 1px solid #dfe2ec;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--pbs-navy);
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.pbs-sous-rayons__puce:hover {
+  border-color: var(--pbs-navy);
+}
+.pbs-sous-rayons__puce--active {
+  border-color: var(--pbs-navy);
+  background: var(--pbs-navy);
+  color: #fff;
+}
+.pbs-sous-rayons__n {
+  /* Le compte se lit, il ne se crie pas : il doit rester lisible sur le fond
+     navy de la puce active comme sur le fond blanc. */
+  color: inherit;
+  opacity: 0.55;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+@media screen and (max-width: 749px) {
+  .pbs-sous-rayons {
+    padding: 2px 0 14px;
+  }
+  .pbs-sous-rayons__list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* La dernière puce ne doit pas coller au bord quand on défile jusqu'au
+       bout : sans ce padding, elle paraît coupée. */
+    padding-right: 16px;
+  }
+  .pbs-sous-rayons__list::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ── Déjà vendus ────────────────────────────────────────────────────────────
+   Les épuisés d'un rayon, sous la grille des disponibles, repliés. Assez
+   visibles pour montrer que le rayon vit, assez éteints pour ne pas passer
+   pour de l'offre. */
+.pbs-rien-dispo {
+  margin: 0 0 16px;
+  color: var(--pbs-muted);
+  font-size: 1.5rem;
+}
+.pbs-vendus {
+  margin-top: 40px;
+  border-top: 1px solid var(--pbs-line);
+}
+.pbs-vendus__titre {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 16px 0;
+  color: var(--pbs-navy);
+  font-size: 1.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+.pbs-vendus__titre::-webkit-details-marker {
+  display: none;
+}
+.pbs-vendus__titre::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.2s;
+}
+.pbs-vendus[open] > .pbs-vendus__titre::after {
+  transform: translateY(2px) rotate(-135deg);
+}
+.pbs-vendus__grille .card__media {
+  opacity: 0.6;
+  filter: grayscale(0.6);
+}
+@media screen and (max-width: 749px) {
+  .pbs-vendus {
+    margin-top: 28px;
+  }
+}
+
+/* ── Vignettes produit : l'image ENTIÈRE, pas un recadrage ───────────────────
+   ⚠️ **LA MOITIÉ DU CATALOGUE ÉTAIT ROGNÉE** (22/09/2026). Les cartes sont en
+   ratio carré et Dawn y pose `object-fit: cover` : l'image remplit le carré et
+   ce qui dépasse est coupé. Relevé sur les 103 produits actifs : **49 images
+   carrées seulement**. Onze sont en portrait 3:4 — des photos de téléphone en
+   3024 × 4032 — et perdaient un quart de leur hauteur, haut et bas.
+
+   `contain` montre l'image entière et complète avec du fond. Les photos
+   produit sont détourées sur blanc, donc le remplissage ne se voit pas ; une
+   photo sur fond coloré se verra, elle, dans un cadre blanc — c'est le prix à
+   payer, et il est moindre qu'une pièce coupée en deux.
+
+   ⚠️ **SPÉCIFICITÉ SUPÉRIEURE, ET C'EST OBLIGATOIRE.** `component-card.css` est
+   une feuille de SECTION : Dawn la charge APRÈS le `<head>`, donc après
+   `pbs-cockpit.css`. À spécificité égale elle gagne, et la règle serait sans
+   effet — sans erreur, sans rien dans la console.
+
+   Les cartes de COLLECTION gardent `cover` : leur image est un visuel de
+   rayon, cadré pour remplir, pas une pièce à montrer en entier. */
+.card-wrapper .card__media .media img,
+.card-wrapper .card__media .media > img {
+  object-fit: contain;
+  /* Le fond du carré, visible autour d'une image non carrée. Blanc plutôt que
+     le gris des cartes : une photo détourée s'y fond, un gris ferait un cadre. */
+  background: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   Carrousels : les flèches sous la grille, sans compteur
+
+   Le « 1 / de 3 » de Dawn ne compte pas des pages mais des positions d'UNE
+   carte (6 produits, 4 visibles : 3 positions). Il ne disait rien d'utile et
+   a été retiré le 23/09/2026.
+
+   Les flèches restent SOUS la grille, à leur place Dawn. Posées sur les
+   côtés (essayé le même jour), la droite tombait entre deux cartes ou sur la
+   carte qui dépasse, selon la largeur d'écran.
+
+   ⚠️ LA MOLETTE NE FAIT PAS DÉFILER LE CARROUSEL. Essayé le même jour puis
+   retiré : en descendant la page, le pointeur passe sur le carrousel et le
+   fait tourner sans qu'on l'ait voulu.
+
+   ⚠️ component-slider.css est chargé par la section, APRÈS cette feuille :
+   chaque règle est préfixée de `slider-component` pour gagner en spécificité.
+   Aucun `display` n'est forcé sur la barre — Dawn la masque ainsi sur les
+   sections sans carrousel.
+   -------------------------------------------------------------------------- */
+slider-component .slider-counter {
+  display: none;
+}
+
+/* Discrètes : la flèche seule, en orange, sans pastille. La zone cliquable
+   garde 44 px — seul le dessin est petit. */
+slider-component .slider-buttons {
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+}
+
+slider-component .slider-button {
+  width: 4.4rem;
+  height: 4.4rem;
+  background: none;
+  color: var(--pbs-orange);
+  transition: color 0.15s ease, opacity 0.15s ease;
+}
+
+slider-component .slider-button .svg-wrapper,
+slider-component .slider-button svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+slider-component .slider-button:not([disabled]):hover {
+  color: var(--pbs-orange-700);
+}
+
+/* Au bout du carrousel, la flèche pâlit mais garde sa place : effacée, elle
+   ferait glisser sa voisine. */
+slider-component .slider-button[disabled] {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* --------------------------------------------------------------------------
+   Cartes d'articles : l'image remplit le haut de la carte
+
+   La règle « image entière » des vignettes produit (plus haut) vise
+   `.card-wrapper`, que les cartes d'articles portent aussi : leurs photos,
+   non carrées, s'affichaient réduites entre deux bandes blanches, et encore
+   rentrées de 16 px par `--image-padding`. Une photo d'article est une
+   illustration, pas un produit à montrer entier : on la recadre.
+   -------------------------------------------------------------------------- */
+.article-card-wrapper .card__inner .card__media {
+  margin: 0;
+  width: 100%;
+  border-radius: calc(var(--border-radius) - var(--border-width))
+    calc(var(--border-radius) - var(--border-width)) 0 0;
+}
+
+.article-card-wrapper .card__media .media img,
+.article-card-wrapper .card__media .media > img {
+  object-fit: cover;
+}
+
+/* Le bas de l'image touche le texte : pas d'arrondi, ni sur le cadre ni sur
+   la photo elle-même, que Dawn arrondit aussi. */
+.article-card-wrapper .card__media .media,
+.article-card-wrapper .card__media img {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* --------------------------------------------------------------------------
+   La carte « Tout voir » qui ferme les carrousels (featured-collection.liquid)
+
+   Même hauteur que ses voisines — l'élément de grille s'étire — et un fond
+   clair pour qu'on ne la prenne pas pour un produit.
+   -------------------------------------------------------------------------- */
+.pbs-tout-voir {
+  display: flex;
+}
+
+.pbs-tout-voir__lien {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 24rem;
+  border: 1px solid var(--pbs-line);
+  border-radius: var(--pbs-radius);
+  background: var(--pbs-surface);
+  color: var(--pbs-navy);
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.pbs-tout-voir__lien:hover {
+  border-color: var(--pbs-orange);
+}
+
+.pbs-tout-voir__titre {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.pbs-tout-voir__nombre {
+  font-size: 1.3rem;
+  color: var(--pbs-muted);
+}
+
+.pbs-tout-voir__fleche {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  margin-top: 0.8rem;
+  border-radius: 50%;
+  background: var(--pbs-orange);
+  color: #fff;
+}
+
+.pbs-tout-voir__fleche .svg-wrapper,
+.pbs-tout-voir__fleche svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+/* --------------------------------------------------------------------------
+   Tiroir de menu mobile : les mêmes entrées que le rail (pbs-tiroir-entree)
+   -------------------------------------------------------------------------- */
+.pbs-tiroir__promo > .menu-drawer__menu-item,
+.pbs-tiroir__promo > details > .menu-drawer__menu-item {
+  color: var(--pbs-orange);
+}
+
+/* « Tout voir » ouvre chaque sous-menu : en gras, pour qu'on ne le prenne pas
+   pour un sous-rayon de plus. */
+.pbs-tiroir__tout {
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Page de blog (la FAQ) : une colonne de lecture (main-blog.liquid)
+
+   Le titre, les articles et la FAQ partagent la même colonne de 88 rem et le
+   même bord gauche. Avant le 23/09/2026, le blog tenait toute la largeur à
+   gauche et la FAQ une colonne de 73 rem centrée : deux pages collées.
+   La gouttière recopie celle de `.page-width` (1,5 puis 5 rem), sinon les
+   deux bords divergent en tablette.
+   -------------------------------------------------------------------------- */
+.main-blog.pbs-lecture {
+  max-width: calc(88rem + 3rem);
+}
+
+.pbs-lecture__titre {
+  margin: 0 0 2.4rem;
+}
+
+.pbs-articles {
+  display: grid;
+  gap: 2rem;
+}
+
+.pbs-article {
+  position: relative;
+  display: grid;
+  grid-template-columns: 35rem 1fr;
+  border: 1px solid var(--pbs-line);
+  border-radius: var(--pbs-radius);
+  overflow: hidden;
+  background: #fff;
+  transition: border-color 0.15s ease;
+}
+
+.pbs-article:hover {
+  border-color: var(--pbs-orange);
+}
+
+.pbs-article--sans-image {
+  grid-template-columns: 1fr;
+}
+
+/* La photo suit la hauteur du texte : c'est une illustration, recadrée. */
+.pbs-article__media {
+  position: relative;
+  min-height: 22rem;
+  background: var(--pbs-surface);
+}
+
+.pbs-article__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pbs-article__corps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2.8rem 3.2rem;
+}
+
+.pbs-article__surtitre {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pbs-muted);
+}
+
+.pbs-article__titre {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: 2.4rem;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--pbs-navy);
+}
+
+.pbs-article__lien {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Toute la carte est cliquable, sans imbriquer de lien. */
+.pbs-article__lien::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.pbs-article__lien:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.pbs-article:has(.pbs-article__lien:focus-visible) {
+  outline: 2px solid var(--pbs-navy);
+  outline-offset: 2px;
+}
+
+.pbs-article__extrait {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: var(--pbs-ink);
+}
+
+.pbs-article__suite {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--pbs-orange);
+}
+
+.pbs-article__suite .svg-wrapper,
+.pbs-article__suite svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  transition: transform 0.15s ease;
+}
+
+.pbs-article:hover .pbs-article__suite .svg-wrapper {
+  transform: translateX(3px);
+}
+
+/* La FAQ (collapsible-content de blog.json) se cale sur la même colonne.
+   Ciblée par `:has()` : la section Dawn n'est pas à nous. */
+main:has(.pbs-lecture) .collapsible-content-wrapper-narrow {
+  max-width: calc(88rem + 3rem);
+}
+
+main:has(.pbs-lecture) .collapsible-content__heading {
+  margin-bottom: 1.6rem;
+  font-size: 2.4rem;
+  color: var(--pbs-navy);
+}
+
+/* Dawn pose 2,5 rem au-dessus de chaque ligne sous 750 px : le titre de la
+   FAQ flottait loin de sa première question. */
+main:has(.pbs-lecture) .collapsible-content .accordion {
+  margin-top: 0;
+  border-color: var(--pbs-line);
+}
+
+main:has(.pbs-lecture) .collapsible-content summary {
+  padding: 1.8rem 0;
+}
+
+/* Dawn grise le fond au survol : sur une ligne sans marge, le gris touche
+   le texte. Le soulignement du titre suffit. */
+main:has(.pbs-lecture) .collapsible-content summary:hover {
+  background: none;
+}
+
+main:has(.pbs-lecture) .collapsible-content .accordion__title {
+  font-family: var(--font-body-family);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--pbs-navy);
+}
+
+main:has(.pbs-lecture) .collapsible-content summary .svg-wrapper {
+  color: var(--pbs-navy);
+  fill: var(--pbs-navy);
+}
+
+/* La réponse s'aligne sur le texte de la question, pas sur son icône. */
+main:has(.pbs-lecture) .collapsible-content .accordion__content {
+  padding: 0 0 0.4rem 3rem;
+  font-size: 1.5rem;
+  line-height: 1.7;
+  color: var(--pbs-ink);
+}
+
+@media screen and (min-width: 750px) {
+  .main-blog.pbs-lecture,
+  main:has(.pbs-lecture) .collapsible-content-wrapper-narrow {
+    max-width: calc(88rem + 10rem);
+  }
+
+  main:has(.pbs-lecture) .collapsible-content-wrapper-narrow {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .pbs-article {
+    grid-template-columns: 1fr;
+  }
+
+  .pbs-article__media {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .pbs-article__corps {
+    padding: 2rem;
+  }
+
+  .pbs-article__titre,
+  main:has(.pbs-lecture) .collapsible-content__heading {
+    font-size: 2rem;
+  }
+
+  main:has(.pbs-lecture) .collapsible-content .accordion__content {
+    padding-left: 0;
+  }
+}
+
+/* FAQ : arrivé par une ancre du pied de page, la question ne se colle pas au
+   bord haut de l'écran. */
+.collapsible-content .accordion[id] {
+  scroll-margin-top: 2.4rem;
+}
