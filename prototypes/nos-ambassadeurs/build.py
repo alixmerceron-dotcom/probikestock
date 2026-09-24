@@ -8,6 +8,7 @@ out = (here / "src.html").read_text() \
     .replace("__INSTRUMENT__", b64("fonts/InstrumentSans-var.woff2")) \
     .replace("__LOGO__", logo) \
     .replace("__PHOTO__", "data:image/jpeg;base64," + b64("photos/course.jpg"), 1) \
-    .replace('src="__PHOTO__"', 'data-same-photo src=""')
+    .replace('src="__PHOTO__"', 'data-same-photo src=""') \
+    .replace("__PODIUM__", "data:image/jpeg;base64," + b64("photos/podium.jpg"))
 (here / "apercu.html").write_text(out)
 print(len(out))
