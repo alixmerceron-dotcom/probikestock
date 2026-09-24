@@ -2,7 +2,7 @@
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 import { readFileSync, writeFileSync } from 'fs';
 const b = await chromium.launch(); const p = await b.newPage();
-for (const name of ['course', 'podium']) {
+for (const name of ['course', 'podium', 'leo']) {
   const src = 'data:image/jpeg;base64,' + readFileSync(`photos/${name}.jpg`).toString('base64');
   const out = await p.evaluate(async src => {
     const img = new Image(); img.src = src; await img.decode();
