@@ -17,18 +17,14 @@
 body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font-smoothing:antialiased}
 
 /* ---- Titre ---- */
-.title{position:relative;overflow:hidden;isolation:isolate;display:grid;place-items:center;min-height:clamp(220px,34vh,380px);
-  padding:clamp(48px,7vw,88px) 24px;text-align:center;background:#0e1b4d;color:#fff}
-/* Dégradé animé : un calque plus grand que le bandeau, qui dérive lentement (transform seul, pas de repeint) */
-.title::before{content:"";position:absolute;inset:-45%;z-index:-1;
-  background:
-    radial-gradient(38% 48% at 22% 32%,rgba(52,96,204,.85),transparent 70%),
-    radial-gradient(30% 40% at 78% 68%,rgba(227,36,2,.32),transparent 70%),
-    radial-gradient(45% 55% at 62% 22%,rgba(34,58,140,.9),transparent 70%),
-    radial-gradient(40% 50% at 35% 80%,rgba(21,36,89,.95),transparent 70%),
-    #0e1b4d;
-  animation:drift 18s ease-in-out infinite alternate}
-@keyframes drift{0%{transform:translate(-7%,-5%) rotate(0deg)}50%{transform:translate(5%,4%) rotate(8deg)}100%{transform:translate(8%,-3%) rotate(-6deg)}}
+.title{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;min-height:clamp(120px,15vw,170px);
+  padding:28px clamp(16px,4vw,50px);text-align:left;background:#0e1b4d;color:#fff}
+/* Dégradé navy du site (#0E1B4D) vers le blanc. Calque plus large que le bandeau qui glisse lentement
+   (transform seul) : le blanc « respire » à droite sans jamais atteindre le titre. */
+.title::before{content:"";position:absolute;top:0;bottom:0;left:0;width:140%;z-index:-1;
+  background:linear-gradient(100deg,#0e1b4d 0%,#0e1b4d 38%,#5a6590 60%,#dfe2ec 82%,#ffffff 100%);
+  animation:drift 9s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-22%)}}
 .title h1{color:#fff;font-family:var(--font-heading);font-weight:300;letter-spacing:-.01em;line-height:1.1;font-size:clamp(30px,4.2vw,56px)}
 /* TextEffect preset="fade-in-blur" speedReveal={1.1} speedSegment={0.3} :
    chaque mot passe du flou (12 px) au net en montant de 20 px, en 1 s, décalé de 45 ms */
