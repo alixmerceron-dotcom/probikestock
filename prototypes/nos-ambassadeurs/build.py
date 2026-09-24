@@ -8,7 +8,6 @@ out = (here / "src.html").read_text() \
     .replace("__OUTFIT__", b64("fonts/Outfit-var.woff2")) \
     .replace("__INSTRUMENT__", b64("fonts/InstrumentSans-var.woff2")) \
     .replace("__TITLE__", title) \
-    .replace("__SERIF__", b64("fonts/InstrumentSerif-400.woff2")) \
     .replace("__COURSE__", "data:image/jpeg;base64," + b64("photos/web/course.jpg")) \
     .replace("__PODIUM__", "data:image/jpeg;base64," + b64("photos/web/podium.jpg"))
 (here / "apercu.html").write_text(out)
