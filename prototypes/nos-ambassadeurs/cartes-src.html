@@ -1,0 +1,213 @@
+<title>Ambassadeurs Probikestock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Outfit:wght@500;600&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Identité du site Probikestock (thème Refresh 2.2) — page volontairement claire, comme la boutique */
+:root{
+  --navy:#0e1b4d; --orange:#e32402; --ink:#33384c; --muted:#6b7188; --line:#e4e6ef; --surface:#f4f5f9; --bg:#ffffff;
+  --font-heading:'Outfit','Helvetica Neue',Arial,sans-serif;
+  --font-body:'Instrument Sans',-apple-system,'Segoe UI',Arial,sans-serif;
+  --ease:cubic-bezier(.39,.14,.26,1);   /* courbe « iOS » du tutoriel Motion */
+  --radius:20px;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--navy);font-family:var(--font-body);font-size:16px;line-height:1.55;padding-inline:16px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--font-heading);letter-spacing:-.02em;text-wrap:balance;margin:0}
+p{margin:0}
+
+/* ---------- Titre ---------- */
+.title{text-align:center;padding-block:clamp(40px,7vw,80px) clamp(28px,4vw,48px)}
+.title h1{font-family:'Instrument Serif',Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.01em;line-height:1.05;font-size:clamp(42px,6.2vw,88px)}
+/* TextEffect preset="fade-in-blur" speedReveal={1.1} speedSegment={0.3} :
+   chaque mot passe du flou (12 px) au net en montant de 20 px, en 1 s, décalé de 45 ms */
+.title .w{display:inline-block}
+.title .wi{display:inline-block;opacity:0;filter:blur(12px);transform:translateY(20px);
+  animation:blurIn 1s cubic-bezier(.25,.1,.25,1) forwards;animation-delay:calc(.15s + var(--i)*45ms)}
+@keyframes blurIn{to{opacity:1;filter:blur(0);transform:none}}
+.title p{margin-top:28px;color:var(--muted);font-size:15px}
+
+/* ---------- Cartes ---------- */
+.cards{list-style:none;margin:0 auto;padding:0 0 64px;max-width:1280px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.card{all:unset;box-sizing:border-box;position:relative;display:block;width:100%;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;cursor:pointer;
+  background:var(--navy);color:#fff;box-shadow:0 1px 2px rgba(14,27,77,.08),0 12px 32px -12px rgba(14,27,77,.35);
+  /* ressort léger, repris de card.css du tutoriel */
+  transition:scale 300ms linear(0,.009,.036,.084,.157,.255,.378,.522,.679,.832,.954,1.029,1.052,1.038,1.011,.99,.984,.991,1.001,1.005,1)}
+.card:hover{scale:1.02}
+.card:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+.card[aria-expanded="true"]{visibility:hidden}
+.media{position:absolute;inset:0;overflow:hidden}
+.media img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%);display:block}
+.media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,14,40,.55) 0%,rgba(8,14,40,0) 38%,rgba(8,14,40,0) 60%,rgba(8,14,40,.55) 100%)}
+.head{position:absolute;z-index:1;left:22px;right:22px;top:20px}
+.head small{display:block;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+.head h2{font-weight:600;font-size:clamp(26px,2.4vw,34px);line-height:1.05;margin-top:6px}
+.card .more{position:absolute;z-index:1;left:22px;bottom:20px;font-size:14px;font-weight:500;opacity:.9}
+
+/* ---------- Fenêtre ouverte ---------- */
+.overlay{position:fixed;inset:0;z-index:40;background:rgba(8,14,40,.55);backdrop-filter:blur(4px);opacity:0}
+.overlay[hidden]{display:none}
+.sheet{position:fixed;z-index:50;top:24px;bottom:24px;left:50%;width:min(860px,calc(100vw - 32px));translate:-50% 0;
+  border-radius:var(--radius);overflow:hidden;background:var(--bg);color:var(--navy);display:flex;flex-direction:column;box-shadow:0 30px 80px -20px rgba(8,14,40,.6)}
+.sheet[hidden]{display:none}
+.sheet .media{position:relative;inset:auto;flex:none;height:min(56vh,520px);color:#fff}
+.sheet .head{top:28px;left:32px;right:72px}
+.sheet .head h2{font-size:clamp(30px,4vw,48px)}
+.sheet__scroll{flex:1;overflow:auto;overscroll-behavior:contain}
+.sheet__body{padding:32px 32px 40px;max-width:680px;display:grid;gap:22px}
+.lead{font-family:var(--font-heading);font-weight:500;font-size:clamp(19px,2vw,23px);line-height:1.4;letter-spacing:-.01em}
+.sheet__body > p:not(.lead){color:var(--ink)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.stats div{background:var(--bg);padding:14px 16px}
+.stats b{display:block;font-family:var(--font-heading);font-weight:600;font-size:26px;line-height:1.1;font-variant-numeric:tabular-nums}
+.stats span{font-size:12px;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:12px;font-weight:600;font-size:14px;text-decoration:none}
+.btn--primary{background:var(--orange);color:#fff}
+.btn--ghost{border:1px solid #d3d7e4;color:var(--navy)}
+.close{all:unset;position:absolute;z-index:2;top:18px;right:18px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;cursor:pointer;
+  background:rgba(255,255,255,.92);color:var(--navy);font-size:22px;line-height:1}
+.close:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+
+@media (max-width:900px){
+  .cards{grid-template-columns:1fr;max-width:520px}
+  .sheet{top:0;bottom:0;width:100vw;border-radius:0}
+  .sheet .media{height:52vh}
+  .sheet .head{left:20px}
+  .sheet__body{padding:24px 20px 40px}
+  .stats b{font-size:21px}
+}
+@media (prefers-reduced-motion:reduce){
+  .title .wi{animation:none;opacity:1;filter:none;transform:none}
+  .card{transition:none}
+}
+</style>
+
+<header class="title">
+  <h1 aria-label="Nos ambassadeurs">__TITLE__</h1>
+  <p>Touche une carte pour découvrir l'ambassadeur.</p>
+</header>
+
+<ul class="cards">
+  <li>
+    <div class="card" role="button" tabindex="0" aria-expanded="false" style="--pos:42% 50%">
+      <span class="media"><img src="__COURSE__" alt=""></span>
+      <span class="head"><small>Route · Critérium</small><h2>Léa Marchand</h2></span>
+      <span class="more">Découvrir →</span>
+      <template class="details">
+        <p class="lead">Sur un critérium, tout se joue en trois secondes. Elle court avec notre matériel et nous dit ce qui tient.</p>
+        <p>Texte à remplacer : parcours de l'ambassadeur, son club, ses objectifs de la saison et le matériel qu'il utilise en course.</p>
+        <div class="stats"><div><b>14 200</b><span>km par an</span></div><div><b>38</b><span>podiums</span></div><div><b>62 km/h</b><span>au sprint</span></div></div>
+      </template>
+    </div>
+  </li>
+  <li>
+    <div class="card" role="button" tabindex="0" aria-expanded="false" style="--pos:50% 30%">
+      <span class="media"><img src="__PODIUM__" alt=""></span>
+      <span class="head"><small>Gravel · Thouars 2026</small><h2>Champion de France</h2></span>
+      <span class="more">Découvrir →</span>
+      <template class="details">
+        <p class="lead">Titre national de gravel décroché à Thouars, lors des Championnats de France du 11 au 13 septembre 2026.</p>
+        <p>Texte à remplacer : le récit de la course, le moment décisif, et le matériel Probikestock qu'il utilisait ce jour-là.</p>
+        <div class="stats"><div><b>1er</b><span>Championnats de France</span></div><div><b>Gravel</b><span>discipline</span></div><div><b>2026</b><span>Thouars</span></div></div>
+      </template>
+    </div>
+  </li>
+  <li>
+    <div class="card" role="button" tabindex="0" aria-expanded="false" style="--pos:60% 42%">
+      <span class="media"><img src="__COURSE__" alt="" style="scale:1.8;transform-origin:60% 42%"></span>
+      <span class="head"><small>Chrono · Triathlon</small><h2>Nina Castel</h2></span>
+      <span class="more">Découvrir →</span>
+      <template class="details">
+        <p class="lead">Contre la montre, personne ne t'aide. Elle laisse les chiffres parler.</p>
+        <p>Texte à remplacer : parcours de l'ambassadeur, son club, ses objectifs de la saison et le matériel qu'il utilise en course.</p>
+        <div class="stats"><div><b>4,6 W/kg</b><span>FTP</span></div><div><b>46 km/h</b><span>moyenne CLM</span></div><div><b>7</b><span>titres régionaux</span></div></div>
+      </template>
+    </div>
+  </li>
+</ul>
+
+<div class="overlay" hidden></div>
+<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden>
+  <button class="close" type="button" aria-label="Fermer">×</button>
+  <div class="sheet__scroll">
+    <div class="media"><img alt=""><div class="head"><small></small><h2 id="sheet-title"></h2></div></div>
+    <div class="sheet__body"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  // Même principe que animateLayout (Motion+) : on mesure la carte (First), on ouvre la fenêtre (Last),
+  // puis on anime l'écart (Invert + Play) avec l'API d'animation du navigateur. Aucune librairie.
+  const EASE = 'cubic-bezier(.39,.14,.26,1)';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DUR = reduce ? 0 : 500;
+  const sheet = document.querySelector('.sheet'), overlay = document.querySelector('.overlay');
+  const sMedia = sheet.querySelector('.media'), sImg = sMedia.querySelector('img');
+  const sSmall = sheet.querySelector('.head small'), sTitle = sheet.querySelector('#sheet-title');
+  const sBody = sheet.querySelector('.sheet__body'), sScroll = sheet.querySelector('.sheet__scroll');
+  let openCard = null, running = null;
+
+  const box = r => ({ top: r.top + 'px', left: r.left + 'px', width: r.width + 'px', height: r.height + 'px' });
+
+  function fill(card) {
+    const img = card.querySelector('img'), d = card.querySelector('.details');
+    sImg.src = img.src; sImg.style.cssText = img.style.cssText; sImg.style.objectPosition = getComputedStyle(card).getPropertyValue('--pos');
+    sSmall.textContent = card.querySelector('small').textContent;
+    sTitle.textContent = card.querySelector('h2').textContent;
+    sBody.innerHTML = d.innerHTML;
+    sBody.insertAdjacentHTML('beforeend', '<div class="actions"><a class="btn btn--primary" href="#">Voir son matériel</a><a class="btn btn--ghost" href="#">Instagram</a></div>');
+  }
+
+  function morph(from, to, mediaFrom, mediaTo, radiusFrom, radiusTo) {
+    running && running.forEach(a => a.cancel());
+    const opts = { duration: DUR, easing: EASE };
+    const a1 = sheet.animate([{ ...from, translate: '0 0', borderRadius: radiusFrom }, { ...to, translate: '0 0', borderRadius: radiusTo }], opts);
+    const a2 = sMedia.animate([{ height: mediaFrom }, { height: mediaTo }], opts);
+    running = [a1, a2];
+    return a1.finished.catch(() => {});
+  }
+
+  async function open(card) {
+    if (openCard) return;
+    openCard = card;
+    const r = card.getBoundingClientRect();
+    fill(card);
+    sheet.hidden = false; overlay.hidden = false; sScroll.scrollTop = 0;
+    document.documentElement.style.overflow = 'hidden';
+    const f = sheet.getBoundingClientRect(), mediaH = sMedia.getBoundingClientRect().height;
+    card.setAttribute('aria-expanded', 'true');
+    overlay.animate([{ opacity: 0 }, { opacity: 1 }], { duration: DUR, easing: EASE, fill: 'forwards' });
+    sBody.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: DUR, delay: DUR * .45, easing: 'ease-out', fill: 'backwards' });
+    await morph(box(r), box(f), r.height + 'px', mediaH + 'px', '20px', getComputedStyle(sheet).borderRadius);
+    sheet.querySelector('.close').focus({ preventScroll: true });
+  }
+
+  async function close() {
+    if (!openCard) return;
+    const card = openCard; openCard = null;
+    sScroll.scrollTop = 0;
+    const f = sheet.getBoundingClientRect(), r = card.getBoundingClientRect(), mediaH = sMedia.getBoundingClientRect().height;
+    overlay.animate([{ opacity: 1 }, { opacity: 0 }], { duration: DUR, easing: EASE, fill: 'forwards' });
+    sBody.animate([{ opacity: 1 }, { opacity: 0 }], { duration: DUR * .3, fill: 'forwards' });
+    const anim = morph(box(f), box(r), mediaH + 'px', r.height + 'px', getComputedStyle(sheet).borderRadius, '20px');
+    running.forEach(a => a.effect.updateTiming({ fill: 'forwards' }));
+    await anim;
+    if (openCard) return;                       // rouverte entre-temps
+    sheet.hidden = true; overlay.hidden = true;
+    running.forEach(a => a.cancel()); sBody.getAnimations().forEach(a => a.cancel());
+    card.setAttribute('aria-expanded', 'false');
+    document.documentElement.style.overflow = '';
+    card.focus({ preventScroll: true });
+  }
+
+  document.querySelectorAll('.card').forEach(c => {
+    c.addEventListener('click', () => open(c));
+    c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(c); } });
+  });
+  overlay.addEventListener('click', close);
+  sheet.querySelector('.close').addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
+</script>
