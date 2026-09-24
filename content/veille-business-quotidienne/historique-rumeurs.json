@@ -608,10 +608,10 @@
       "id": "uae-team-emirates-xrg-colnago-tt2",
       "equipe": "UAE Team Emirates-XRG",
       "famille": "D",
-      "resume": "Nouveau dossier ouvert le 22/09/2026. Colnago lance le TT2, nouveau vélo de contre-la-montre développé avec UAE Team Emirates-XRG et UAE Team ADQ, en remplacement du TT1 : lancement officiel courant juin/juillet 2026 (avant le Tour de France 2026), disponibilité commerciale chez les revendeurs annoncée pour fin septembre 2026 — c'est ce calendrier de mise sur le marché qui rend le signal d'actualité cette semaine. Allègement d'environ 550 g sur le kit-cadre, gains aérodynamiques et de stabilité revendiqués. Prix du kit-cadre : 7 040 € / £6 499 / $7 500 (identique au TT1). Convergence de plusieurs sources spécialisées via recherche web (niveau B), mais accès direct (WebFetch) bloqué par la politique réseau sur l'ensemble des domaines presse cyclisme testés aujourd'hui — confiance basée sur la convergence des extraits de recherche, sans vérification de source primaire. Le TT1 (utilisé en course jusqu'à début 2026) devient la génération obsolète pour l'équipe — cadres/roues associées potentiellement à écouler, aucune date de déstockage identifiée à ce stade. 23/09/2026 : confirmation supplémentaire via plusieurs sources presse indépendantes (topvelo.fr, velo101.com, lexpertvelo.com, biketips.com, brujulabike.com) convergeant sur des détails identiques (prix 7 040 €, gain de 550 g, ~2W d'aéro), suggérant un communiqué de presse Colnago source commune ; premiers débuts en compétition situés au prologue du Tour de Romandie le 28/04/2026 avec Tadej Pogačar. Toujours aucune confirmation via colnago.com (bloqué à l'accès direct). Niveau maintenu à B.",
-      "niveau_confiance": "B",
+      "resume": "Nouveau dossier ouvert le 22/09/2026. Colnago lance le TT2, nouveau vélo de contre-la-montre développé avec UAE Team Emirates-XRG et UAE Team ADQ, en remplacement du TT1 : lancement officiel courant juin/juillet 2026 (avant le Tour de France 2026), disponibilité commerciale chez les revendeurs annoncée pour fin septembre 2026 — c'est ce calendrier de mise sur le marché qui rend le signal d'actualité cette semaine. Allègement d'environ 550 g sur le kit-cadre, gains aérodynamiques et de stabilité revendiqués. Prix du kit-cadre : 7 040 € / £6 499 / $7 500 (identique au TT1). Convergence de plusieurs sources spécialisées via recherche web (niveau B), mais accès direct (WebFetch) bloqué par la politique réseau sur l'ensemble des domaines presse cyclisme testés aujourd'hui — confiance basée sur la convergence des extraits de recherche, sans vérification de source primaire. Le TT1 (utilisé en course jusqu'à début 2026) devient la génération obsolète pour l'équipe — cadres/roues associées potentiellement à écouler, aucune date de déstockage identifiée à ce stade. 23/09/2026 : confirmation supplémentaire via plusieurs sources presse indépendantes (topvelo.fr, velo101.com, lexpertvelo.com, biketips.com, brujulabike.com) convergeant sur des détails identiques (prix 7 040 €, gain de 550 g, ~2W d'aéro), suggérant un communiqué de presse Colnago source commune ; premiers débuts en compétition situés au prologue du Tour de Romandie le 28/04/2026 avec Tadej Pogačar. Toujours aucune confirmation via colnago.com (bloqué à l'accès direct). Niveau maintenu à B. 24/09/2026 : CONFIRMATION (niveau A) — accès direct obtenu cette fois à plusieurs sources presse (Cyclingnews, BikeRadar, Escape Collective, Bikerumor, Brújula Bike), alors qu'il était bloqué lors des runs précédents. Le Colnago TT2 est officiellement disponible à la vente au grand public depuis fin septembre 2026, prix identique au TT1 (kit-cadre 7 040 €/7 500 $/6 499 £), ~550 g plus léger et ~2W de traînée en moins que le TT1. Le TT1 (génération précédente, utilisée en course jusqu'à début 2026) reste listé « coming soon »/en précommande chez plusieurs revendeurs, sans aucune mention d'opération de déstockage ou de clearance identifiée à ce stade — à surveiller en priorité dans les prochaines semaines, un déstockage étant désormais plausible à court terme compte tenu du lancement commercial effectif du TT2.",
+      "niveau_confiance": "A (lancement TT2) / D (déstockage TT1 non confirmé)",
       "date_detection": "2026-09-22",
-      "derniere_maj": "2026-09-23",
+      "derniere_maj": "2026-09-24",
       "statut": "actif",
       "sources": [
         "Cyclingnews (article : \"Tadej Pogačar's new time trial bike is officially here\") — titre retrouvé via recherche web, accès direct bloqué par la politique réseau",
@@ -620,7 +620,12 @@
         "Bikerumor, Biketips, Velo/Outside, Brújula Bike — convergence de snippets de recherche sur les mêmes caractéristiques et le même prix, aucun accès direct possible",
         "topvelo.fr",
         "velo101.com",
-        "lexpertvelo.com"
+        "lexpertvelo.com",
+        "https://www.bikeradar.com/news/2026-colnago-tt2",
+        "https://www.cyclingnews.com/bikes/pro-bikes/tadej-pogacars-new-time-trial-bike-is-officially-here-all-the-details-on-the-half-kilo-lighter-colnago-tt2/",
+        "https://escapecollective.com/colnago-launches-tt2-ahead-of-the-tour-de-france/",
+        "https://en.brujulabike.com/pogacar-debuts-the-colnago-tt2-features-price-and-weight-of-his-new-time-trial-bike/",
+        "https://bikerumor.com/pogacars-new-tt-weapon-colnago-tt2-drops-1-22lbs-adds-aero-savings/"
       ]
     }
   ]
