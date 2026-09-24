@@ -8,369 +8,96 @@
 @font-face{font-family:'Outfit';font-weight:100 900;font-display:swap;src:url(data:font/woff2;base64,__OUTFIT__) format('woff2')}
 @font-face{font-family:'Instrument Sans';font-weight:400 700;font-display:swap;src:url(data:font/woff2;base64,__INSTRUMENT__) format('woff2')}
 
-/* Jetons du thème (assets/pbs-cockpit.css) */
 :root{
-  --pbs-navy:#0e1b4d; --pbs-orange:#e32402; --pbs-ink:#33384c; --pbs-muted:#6b7188; --pbs-line:#e4e6ef; --pbs-surface:#f4f5f9; --pbs-radius:12px;
+  --navy:#0e1b4d; --radius:12px;
   --font-heading:'Outfit',sans-serif; --font-body:'Instrument Sans',-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-body);color:var(--pbs-ink);background:#fff;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
-a{color:inherit}
-h1,h2,h3{font-family:var(--font-heading);font-weight:600;letter-spacing:-.02em;text-wrap:balance}
-.page-width{max-width:1400px;margin:0 auto;padding:0 50px}
-@media (max-width:749px){.page-width{padding:0 16px}}
+body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font-smoothing:antialiased}
 
-/* ---------- En-tête du site (reproduit pour le contexte) ---------- */
-.ann{background:var(--pbs-navy);color:#fff;text-align:center;font-size:13px;font-weight:500;padding:8px 16px}
-.hdr{background:#fff;border-bottom:1px solid var(--pbs-line)}
-.hdr__in{display:flex;align-items:center;gap:28px;padding-top:20px;padding-bottom:20px}
-.hdr__logo svg{height:34px;width:auto;display:block}
-.hdr__search{flex:1;max-width:620px;margin:0 auto;display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;border:1px solid #d3d7e4;border-radius:var(--pbs-radius);color:#8b8f9e;font-size:14px}
-.hdr__icons{display:flex;gap:18px;color:var(--pbs-navy)}
-.hdr__icons svg{width:22px;height:22px}
-.rail{background:#fafbfd;border-bottom:1px solid #e7e9f1}
-.rail ul{display:flex;gap:28px;list-style:none;min-height:46px;align-items:center}
-.rail a{text-decoration:none;font-size:14px;font-weight:500;color:var(--pbs-navy)}
-.rail .promo a{color:var(--pbs-orange)}
-@media (max-width:989px){.rail,.hdr__search{display:none}.hdr__in{justify-content:space-between}}
-
-.progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--pbs-orange);transform-origin:left;transform:scaleX(0);z-index:99}
-
-/* =====================================================================
-   1. OUVERTURE — comme le haut d'Unsplash Awards : titre à gauche, image à droite
-   ===================================================================== */
-.intro{display:grid;grid-template-columns:1fr 1fr;min-height:min(78vh,720px)}
-.intro__text{display:flex;flex-direction:column;justify-content:space-between;padding:28px 50px 32px}
-.intro__meta{font-size:13px;font-weight:600;color:var(--pbs-navy);letter-spacing:.02em}
-.intro h1{font-size:min(84px,11vw);line-height:1;color:var(--pbs-navy)}
-.intro h1 .ch{opacity:0;animation:fade .5s ease-out forwards;animation-delay:calc(.15s + var(--i)*30ms)}
+/* ---- Titre ---- */
+.title{padding:clamp(56px,10vw,120px) 24px clamp(40px,6vw,72px);text-align:center}
+.title h1{font-family:var(--font-heading);font-weight:600;letter-spacing:-.03em;line-height:1;font-size:clamp(44px,8vw,112px)}
+.title .ch{opacity:0;animation:fade .5s ease-out forwards;animation-delay:calc(.1s + var(--i)*30ms)}
 @keyframes fade{to{opacity:1}}
-.intro__foot{display:flex;justify-content:space-between;align-items:end;gap:24px;font-size:14px;color:var(--pbs-muted)}
-.intro__foot p{max-width:380px}
-.intro__foot a{font-size:13px;font-weight:600;color:var(--pbs-navy);white-space:nowrap}
-.intro__media{position:relative;overflow:hidden;background:#1b2a63}
-.intro__media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);animation:settle 1.6s cubic-bezier(.2,.7,.2,1) forwards}
-@keyframes settle{to{transform:scale(1)}}
-.intro__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 30%,transparent 65%,rgba(0,0,0,.45))}
-.intro__over{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:28px 32px;color:#fff}
-.intro__over b{font-size:13px;font-weight:500;text-align:right}
-.intro__over h2{font-size:min(84px,11vw);line-height:1;color:#fff;align-self:center}
-.intro__over span{font-size:12px;align-self:flex-end;opacity:.85}
-@media (max-width:749px){
-  .intro{grid-template-columns:1fr}
-  .intro__text{padding:24px 16px;gap:32px}
-  .intro__media{min-height:56vh}
-  .intro__foot{flex-direction:column;align-items:start}
-}
 
-/* =====================================================================
-   2. AMBASSADEURS — bandes pleine largeur, photo paysage
-   Au défilement : la photo reste en place (sticky), le texte d'accroche
-   s'efface et la fiche détaillée glisse depuis la droite.
-   --p  : progression dans la section (0 → 1)
-   --a  : disparition de l'accroche   --b : arrivée de la fiche
-   ===================================================================== */
-.amb{position:relative;height:230vh;background:#0b1233;--p:0;--a:0;--b:0}
-.amb__stage{position:sticky;top:0;height:100vh;min-height:560px;overflow:hidden;color:#fff}
-.amb__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(calc(1.1 - .1 * var(--p)));will-change:transform;background:linear-gradient(135deg,#1b2a63,#0e1b4d)}
-.amb__shade{position:absolute;inset:0;background:
-  linear-gradient(90deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.25) 45%,rgba(0,0,0,0) 70%),
-  linear-gradient(0deg,rgba(0,0,0,.45),rgba(0,0,0,0) 35%)}
-.amb__dim{position:absolute;inset:0;background:#0b1233;opacity:calc(var(--b) * .35)}
+/* ---- Sections : une image, le texte apparaît au passage ---- */
+.list{display:grid;gap:16px;padding:0 16px 16px;max-width:1600px;margin:0 auto}
+.amb{position:relative;height:min(80vh,760px);min-height:420px;border-radius:var(--radius);overflow:hidden;background:var(--navy);color:#fff;isolation:isolate}
+.amb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%);
+  transform:scale(var(--z,1));transform-origin:var(--pos,50% 50%);transition:transform 1.2s var(--ease)}
+.amb::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,14,40,.85) 0%,rgba(8,14,40,.35) 45%,rgba(8,14,40,0) 75%);
+  opacity:0;transition:opacity .6s var(--ease)}
+.amb__text{position:absolute;z-index:1;left:clamp(24px,4vw,56px);right:clamp(24px,4vw,56px);bottom:clamp(24px,4vw,56px);max-width:620px}
+.amb__text > *{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.amb__text p:first-child{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:0}
+.amb__text h2{font-family:var(--font-heading);font-weight:600;letter-spacing:-.02em;line-height:1;font-size:clamp(40px,6vw,80px);margin:10px 0 14px;transition-delay:.06s}
+.amb__text p:last-child{font-size:16px;line-height:1.55;color:rgba(255,255,255,.88);transition-delay:.12s}
 
-.amb__hook{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;
-  opacity:calc(1 - var(--a));transform:translateY(calc(var(--a) * -40px))}
-.amb__hook .page-width{width:100%}
-.amb__kicker{font-size:12px;font-weight:500;line-height:1.5;margin-bottom:26px;opacity:.9}
-.amb__kicker b{display:block;font-weight:600}
-.amb__name{font-size:min(96px,13vw);line-height:.98;color:#fff;margin-bottom:16px;max-width:760px}
-.amb__line{max-width:520px;font-size:16px;opacity:.9;margin-bottom:22px}
-.amb__btn{display:inline-block;background:#fff;color:#101010;font-size:13px;font-weight:600;padding:10px 16px;border-radius:4px;text-decoration:none}
-
-.amb__tags{position:absolute;left:0;right:0;bottom:24px;opacity:calc(1 - var(--a))}
-.amb__tags .page-width{display:flex;gap:8px;flex-wrap:wrap}
-.tag{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(255,255,255,.55);padding:4px 9px;border-radius:3px}
-.amb__credit{position:absolute;right:24px;bottom:24px;font-size:12px;opacity:.8;z-index:3}
-.amb__index{position:absolute;right:24px;top:24px;z-index:3;opacity:calc(1 - var(--b));font-family:var(--font-heading);font-size:14px;font-weight:600;opacity:.9}
-.amb__index i{font-style:normal;opacity:.5}
-
-/* Fiche détaillée */
-.amb__card{position:absolute;z-index:2;top:0;right:0;bottom:0;width:min(560px,46vw);padding:88px 48px 56px;overflow:hidden;
-  background:rgba(14,27,77,.92);transform:translateX(calc((1 - var(--b)) * 105%));display:flex;flex-direction:column;justify-content:center}
-.amb__card > *{opacity:calc(var(--b) * 1.6 - .6)}
-.card__eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#b9c3e4;margin-bottom:8px}
-.card__name{font-size:40px;line-height:1.05;color:#fff;margin-bottom:4px}
-.card__role{color:#b9c3e4;font-size:14px;margin-bottom:24px}
-.card__stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.14);border-radius:var(--pbs-radius);overflow:hidden;margin-bottom:24px}
-.card__stats div{background:rgba(14,27,77,.96);padding:14px}
-.card__stats b{display:block;font-family:var(--font-heading);font-size:28px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
-.card__stats b small{font-size:13px;font-weight:500;margin-left:2px;color:#b9c3e4}
-.card__stats span{font-size:12px;color:#b9c3e4}
-.card__cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:22px}
-.card__cols h4{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#b9c3e4;margin-bottom:8px}
-.card__cols ul{list-style:none;font-size:14px}
-.card__cols li{padding:6px 0;border-top:1px solid rgba(255,255,255,.12)}
-.card__cols li span{display:block;font-size:11px;color:#b9c3e4}
-.card__quote{font-family:var(--font-heading);font-size:18px;line-height:1.4;padding-left:14px;border-left:3px solid var(--pbs-orange);margin-bottom:24px}
-.card__actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.button{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:var(--pbs-radius);font-size:14px;font-weight:600;text-decoration:none}
-.button--primary{background:var(--pbs-orange);color:#fff}
-.code{font-size:13px;color:#fff;border:1px dashed rgba(255,255,255,.5);padding:6px 12px;border-radius:999px}
-.code b{letter-spacing:.05em}
-
-/* Mobile : pas d'effet collant (écran trop court). Photo, puis fiche révélée au scroll. */
-@media (max-width:749px){
-  .amb{height:auto}
-  .amb{--h:max(72vh,460px)}
-  .amb__stage{position:relative;height:auto;min-height:0;overflow:visible;padding-top:var(--h)}
-  .amb__img,.amb__shade{height:var(--h);bottom:auto}
-  .amb__img{transform:none}
-  .amb__hook{bottom:auto;height:var(--h)}
-  .amb__tags{bottom:auto;top:calc(var(--h) - 42px)}
-  .amb__credit{bottom:auto;top:calc(var(--h) - 38px)}
-  .amb__hook{opacity:1;transform:none;justify-content:flex-end;padding-bottom:64px}
-  .amb__tags,.amb__credit{opacity:1}
-  .amb__dim{display:none}
-  .amb__card{position:relative;width:auto;transform:none;padding:32px 16px 40px;background:var(--pbs-navy)}
-  .amb__card > *{opacity:1}
-  .amb__card{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s cubic-bezier(0,0,.3,1)}
-  .amb.in .amb__card{opacity:1;transform:none}
-  .card__cols{grid-template-columns:1fr}
-  .card__stats b{font-size:22px}
-}
-
-/* ---------- Bandeau final ---------- */
-.band{background:var(--pbs-navy);color:#fff;padding:40px 0}
-.band__in{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
-.band small{display:block;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#dce3fa;margin-bottom:6px}
-.band h3{font-size:30px;line-height:1.1}
-.band p{color:#e6eafb;margin-top:4px}
-@media (max-width:749px){.band__in{grid-template-columns:1fr}}
-.note{text-align:center;font-size:12px;color:#8b8f9e;padding:20px 16px 32px}
+/* état actif : survol (ordinateur) ou section au centre de l'écran (mobile) */
+.amb:hover img,.amb.is-active img{transform:scale(calc(var(--z,1) * 1.04))}
+.amb:hover::after,.amb.is-active::after{opacity:1}
+.amb:hover .amb__text > *,.amb.is-active .amb__text > *{opacity:1;transform:none}
 
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
-  .intro h1 .ch{opacity:1}
-  .intro__media img{transform:none}
+  .title .ch{opacity:1}
 }
+.note{text-align:center;font-size:12px;color:#8b8f9e;padding:24px 16px 40px}
 </style>
 </head>
 <body>
-<div class="progress" aria-hidden="true"></div>
 
-<div class="ann">Livraison gratuite à partir de 100€ d'achats</div>
-<header class="hdr">
-  <div class="hdr__in page-width">
-    <a class="hdr__logo" href="#" aria-label="Probikestock">__LOGO__</a>
-    <div class="hdr__search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Rechercher un produit, une marque…</div>
-    <div class="hdr__icons">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 7h14l-1.5 11h-11z"/><path d="M9 7a3 3 0 016 0"/></svg>
+<header class="title"><h1 data-split>Nos ambassadeurs</h1></header>
+
+<main class="list">
+  <section class="amb" style="--pos:42% 55%">
+    <img src="__PHOTO__" alt="Léa Marchand en course">
+    <div class="amb__text">
+      <p>Route · Critérium</p>
+      <h2>Léa Marchand</h2>
+      <p>Coureuse de critérium, 14 200 km par an. Elle court avec notre matériel et nous dit ce qui tient.</p>
     </div>
-  </div>
-  <nav class="rail"><ul class="page-width"><li><a href="#">Tout le catalogue ▾</a></li><li><a href="#">Périphériques</a></li><li><a href="#">Transmission</a></li><li><a href="#">Roues</a></li><li class="promo"><a href="#">Promotions</a></li></ul></nav>
-</header>
+  </section>
 
-<!-- ===== 1. Ouverture ===== -->
-<section class="intro">
-  <div class="intro__text">
-    <span class="intro__meta">Saison 2026</span>
-    <h1 data-split>Nos ambassadeurs</h1>
-    <div class="intro__foot">
-      <p>Trois cyclistes qui roulent avec notre matériel, le testent en course et te disent ce qu'ils en pensent.</p>
-      <a href="#amb-1">Découvrir ↓</a>
+  <section class="amb" style="--pos:55% 45%;--z:1.7">
+    <img src="__PHOTO__" alt="Hugo Renaud en course">
+    <div class="amb__text">
+      <p>Gravel · Ultra-distance</p>
+      <h2>Hugo Renaud</h2>
+      <p>700 km en autonomie sur sa plus longue sortie. Il ne roule qu'avec ce qu'il a testé.</p>
     </div>
-  </div>
-  <div class="intro__media">
-    <img src="https://cdn.shopify.com/s/files/1/0896/6707/6438/files/pbs-hero-michelin-power-cup-ursus.jpg?v=1790098351&width=1400" alt="" fetchpriority="high">
-    <div class="intro__over">
-      <b>Le matériel des pros, testé par des passionnés.</b>
-      <h2>La team</h2>
-      <span>Instagram · @probikestock</span>
+  </section>
+
+  <section class="amb" style="--pos:44% 38%;--z:1.9">
+    <img src="__PHOTO__" alt="Nina Castel en course">
+    <div class="amb__text">
+      <p>Chrono · Triathlon</p>
+      <h2>Nina Castel</h2>
+      <p>46 km/h de moyenne en contre-la-montre. Elle laisse les chiffres parler.</p>
     </div>
-  </div>
-</section>
+  </section>
+</main>
 
-<!-- ===== 2. Ambassadeurs (données fictives, photos provisoires de la boutique) ===== -->
-<section class="amb" id="amb-1" data-amb>
-  <div class="amb__stage">
-    <img class="amb__img" src="https://cdn.shopify.com/s/files/1/0896/6707/6438/files/adn-equipe-pro.jpg?v=1790159680&width=2000" alt="Léa Marchand à l'entraînement" loading="lazy">
-    <div class="amb__shade"></div><div class="amb__dim"></div>
-    <div class="amb__index">01 <i>/ 03</i></div>
-    <div class="amb__hook"><div class="page-width">
-      <p class="amb__kicker">Ambassadrice<b>Route · Critérium</b></p>
-      <h2 class="amb__name">Léa Marchand</h2>
-      <p class="amb__line">Sur un critérium, tout se joue en trois secondes. Elle court avec ce qu'on vend — et nous dit ce qui tient.</p>
-      <a class="amb__btn" href="#">Voir son profil</a>
-    </div></div>
-    <div class="amb__tags"><div class="page-width"><span class="tag">Route</span><span class="tag">Critérium</span><span class="tag">Nantes</span></div></div>
-    <div class="amb__credit">Photo provisoire</div>
-    <aside class="amb__card">
-      <p class="card__eyebrow">Ambassadrice #01</p>
-      <h3 class="card__name">Léa Marchand</h3>
-      <p class="card__role">Coureuse route, spécialiste du critérium · 27 ans · Nantes</p>
-      <div class="card__stats">
-        <div><b data-count="14200">0</b><span>km par an</span></div>
-        <div><b data-count="38">0</b><span>podiums</span></div>
-        <div><b data-count="62" data-suffix="km/h">0</b><span>au sprint</span></div>
-      </div>
-      <div class="card__cols">
-        <div><h4>Son vélo</h4><ul>
-          <li><span>Transmission</span>Shimano Dura-Ace 12V</li>
-          <li><span>Roues</span>Carbone 50 mm</li>
-          <li><span>Pneus</span>Michelin Power Cup 28</li></ul></div>
-        <div><h4>Palmarès</h4><ul>
-          <li><span>2026</span>Championne régionale crit.</li>
-          <li><span>2025</span>Vainqueure Coupe de l'Ouest</li>
-          <li><span>2024</span>12 victoires en élite</li></ul></div>
-      </div>
-      <blockquote class="card__quote">« Le matériel doit disparaître sous les jambes. »</blockquote>
-      <div class="card__actions"><a class="button button--primary" href="#">Voir son matériel</a><span class="code">−10 % avec <b>LEA10</b></span></div>
-    </aside>
-  </div>
-</section>
-
-<section class="amb" id="amb-2" data-amb>
-  <div class="amb__stage">
-    <img class="amb__img" src="https://cdn.shopify.com/s/files/1/0896/6707/6438/files/FhCJq9dyGUE-tZWmOlxKvu0I9gJF-RopBcy8cZioIoyIBX_PYIw3NTSCFYAh06Z5pL7ZO_8rO38qF1ZkA4LuBBhGiooLHVViEAJu7JvS5XAqGIRvkNYkxqSufcNAyPDyT9Ed4kYpDdZ0vHwrbcmX5x8HIzvMh8fwOOMxZo-FdIO6Hzb3YeBxQk9_dc3da1b0-c185-43ee-a8d6-267d07ac2cdb.jpg?v=1790160182&width=2000" alt="Hugo Renaud en gravel" loading="lazy">
-    <div class="amb__shade"></div><div class="amb__dim"></div>
-    <div class="amb__index">02 <i>/ 03</i></div>
-    <div class="amb__hook"><div class="page-width">
-      <p class="amb__kicker">Ambassadeur<b>Gravel · Ultra-distance</b></p>
-      <h2 class="amb__name">Hugo Renaud</h2>
-      <p class="amb__line">À la vingtième heure, chaque gramme compte. Il ne roule qu'avec ce qu'il a testé.</p>
-      <a class="amb__btn" href="#">Voir son profil</a>
-    </div></div>
-    <div class="amb__tags"><div class="page-width"><span class="tag">Gravel</span><span class="tag">Ultra</span><span class="tag">Annecy</span></div></div>
-    <div class="amb__credit">Photo provisoire</div>
-    <aside class="amb__card">
-      <p class="card__eyebrow">Ambassadeur #02</p>
-      <h3 class="card__name">Hugo Renaud</h3>
-      <p class="card__role">Gravel et ultra-distance · 34 ans · Annecy</p>
-      <div class="card__stats">
-        <div><b data-count="700" data-suffix="km">0</b><span>plus longue sortie</span></div>
-        <div><b data-count="9800">0</b><span>m D+ / semaine</span></div>
-        <div><b data-count="12">0</b><span>ultras terminés</span></div>
-      </div>
-      <div class="card__cols">
-        <div><h4>Son vélo</h4><ul>
-          <li><span>Transmission</span>Mono-plateau 1×12</li>
-          <li><span>Roues</span>Carbone 35 mm</li>
-          <li><span>Pneus</span>Tubeless 45 mm</li></ul></div>
-        <div><h4>Palmarès</h4><ul>
-          <li><span>2026</span>Finisher Race Across France</li>
-          <li><span>2025</span>Top 10 Gravel Alpes 300</li>
-          <li><span>2024</span>Premier ultra, 700 km</li></ul></div>
-      </div>
-      <blockquote class="card__quote">« Le gravel, c'est la liberté. Mais la liberté, ça se prépare. »</blockquote>
-      <div class="card__actions"><a class="button button--primary" href="#">Voir son matériel</a><span class="code">−10 % avec <b>HUGO10</b></span></div>
-    </aside>
-  </div>
-</section>
-
-<section class="amb" id="amb-3" data-amb>
-  <div class="amb__stage">
-    <img class="amb__img" src="https://cdn.shopify.com/s/files/1/0896/6707/6438/files/pbs-hero-transmission-dura-ace.jpg?v=1790114199&width=2000" alt="Nina Castel en contre-la-montre" loading="lazy">
-    <div class="amb__shade"></div><div class="amb__dim"></div>
-    <div class="amb__index">03 <i>/ 03</i></div>
-    <div class="amb__hook"><div class="page-width">
-      <p class="amb__kicker">Ambassadrice<b>Chrono · Triathlon</b></p>
-      <h2 class="amb__name">Nina Castel</h2>
-      <p class="amb__line">Contre la montre, personne ne t'aide. Alors elle laisse les chiffres parler.</p>
-      <a class="amb__btn" href="#">Voir son profil</a>
-    </div></div>
-    <div class="amb__tags"><div class="page-width"><span class="tag">Chrono</span><span class="tag">Triathlon</span><span class="tag">Bordeaux</span></div></div>
-    <div class="amb__credit">Photo provisoire</div>
-    <aside class="amb__card">
-      <p class="card__eyebrow">Ambassadrice #03</p>
-      <h3 class="card__name">Nina Castel</h3>
-      <p class="card__role">Contre-la-montre et triathlon · 30 ans · Bordeaux</p>
-      <div class="card__stats">
-        <div><b data-count="4.6" data-dec="1" data-suffix="W/kg">0</b><span>FTP</span></div>
-        <div><b data-count="46" data-suffix="km/h">0</b><span>moyenne CLM</span></div>
-        <div><b data-count="7">0</b><span>titres régionaux</span></div>
-      </div>
-      <div class="card__cols">
-        <div><h4>Son vélo</h4><ul>
-          <li><span>Cockpit</span>Prolongateurs carbone</li>
-          <li><span>Roues</span>Lenticulaire + 80 mm</li>
-          <li><span>Capteur</span>Dura-Ace 12V</li></ul></div>
-        <div><h4>Palmarès</h4><ul>
-          <li><span>2026</span>Championne régionale CLM</li>
-          <li><span>2025</span>Ironman 70.3, top 5 groupe d'âge</li>
-          <li><span>2024</span>+18 W en soufflerie</li></ul></div>
-      </div>
-      <blockquote class="card__quote">« Je laisse les chiffres parler. »</blockquote>
-      <div class="card__actions"><a class="button button--primary" href="#">Voir son matériel</a><span class="code">−10 % avec <b>NINA10</b></span></div>
-    </aside>
-  </div>
-</section>
-
-<section class="band">
-  <div class="band__in page-width">
-    <div><small>Candidatures ouvertes</small><h3>Tu roules fort ? Rejoins la team.</h3><p>Route, gravel ou chrono : on cherche des cyclistes exigeants sur leur matériel.</p></div>
-    <a class="button button--primary" href="#">Devenir ambassadeur →</a>
-  </div>
-</section>
-<p class="note">Aperçu — athlètes et chiffres fictifs, photos provisoires issues de la boutique. En-tête reproduit pour le contexte.</p>
+<p class="note">Aperçu — noms et textes fictifs, même photo recadrée pour les trois (à remplacer). Passe la souris sur une image.</p>
 
 <script>
 (() => {
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const mobile = matchMedia('(max-width: 749px)');
-
-  // Titre : fondu lettre à lettre (TextEffect per="char" preset="fade")
+  // Aperçu : les 3 sections réutilisent la même photo
+  const first = document.querySelector('.amb img'); document.querySelectorAll('[data-same-photo]').forEach(i => i.src = first.src);
+  // Titre : fondu lettre à lettre
   document.querySelectorAll('[data-split]').forEach(el => {
     const t = el.textContent; el.setAttribute('aria-label', t); el.textContent = '';
     [...t].forEach((c, i) => { const s = document.createElement('span'); s.className = 'ch'; s.ariaHidden = 'true';
       s.style.setProperty('--i', i); s.textContent = c; el.appendChild(s); });
   });
-
-  // Compteurs (une seule fois)
-  const fmt = (v, d) => v.toLocaleString('fr-FR', {minimumFractionDigits: d, maximumFractionDigits: d});
-  const count = sec => {
-    if (sec.dataset.counted) return; sec.dataset.counted = 1;
-    sec.querySelectorAll('[data-count]').forEach(el => {
-      const end = +el.dataset.count, d = +(el.dataset.dec || 0), suf = el.dataset.suffix;
-      const put = v => el.innerHTML = fmt(v, d) + (suf ? `<small>${suf}</small>` : '');
-      if (reduce) return put(end);
-      const t0 = performance.now();
-      const step = t => { const p = Math.min((t - t0) / 1100, 1); put(end * (1 - (1 - p) ** 3)); if (p < 1) requestAnimationFrame(step); };
-      requestAnimationFrame(step);
-    });
-  };
-
-  const secs = [...document.querySelectorAll('[data-amb]')];
-  const bar = document.querySelector('.progress');
-  const clamp = v => Math.min(Math.max(v, 0), 1);
-  let ticking = false;
-
-  const update = () => {
-    ticking = false;
-    const vh = innerHeight, doc = document.documentElement;
-    bar.style.transform = `scaleX(${clamp(scrollY / (doc.scrollHeight - vh))})`;
-    if (mobile.matches) return;
-    secs.forEach(s => {
-      const r = s.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > vh) return;
-      const p = clamp(-r.top / (r.height - vh));
-      const a = reduce ? 1 : clamp((p - .12) / .25);   // l'accroche s'efface
-      const b = reduce ? 1 : clamp((p - .2) / .35);    // la fiche arrive
-      s.style.setProperty('--p', p.toFixed(3));
-      s.style.setProperty('--a', a.toFixed(3));
-      s.style.setProperty('--b', b.toFixed(3));
-      if (b > .7) count(s);
-    });
-  };
-  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, {passive: true});
-  addEventListener('resize', update);
-  update();
-
-  // Mobile : la fiche apparaît quand elle entre dans l'écran
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting && mobile.matches) { e.target.closest('.amb').classList.add('in'); count(e.target.closest('.amb')); }
-  }), {threshold: .15});
-  secs.forEach(s => io.observe(s.querySelector('.amb__card')));
+  // Écrans tactiles (pas de survol) : le texte s'affiche quand la section passe au centre de l'écran
+  if (matchMedia('(hover: none)').matches) {
+    const io = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('is-active', e.isIntersecting)),
+      {rootMargin: '-35% 0px -35% 0px'});
+    document.querySelectorAll('.amb').forEach(s => io.observe(s));
+  }
 })();
 </script>
 </body>
