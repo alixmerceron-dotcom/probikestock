@@ -1,0 +1,344 @@
+{%- comment -%}
+  « Nos ambassadeurs » — bandeau à dégradé animé + une photo pleine largeur par ambassadeur.
+  Le texte (sur-titre, nom, présentation) apparaît au survol sur ordinateur, et quand la photo
+  passe au centre de l'écran sur mobile (pas de survol au doigt).
+
+  Tout se règle dans l'éditeur de thème : titre, couleurs et vitesse du dégradé, hauteur des photos,
+  assombrissement, direction du texte ; et par ambassadeur : photo, cadrage, zoom, textes.
+  Animations en CSS (transform / opacity), désactivées si le visiteur a réduit les animations.
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign mid_1 = s.color_start | color_mix: s.color_end, 70
+  assign mid_2 = s.color_start | color_mix: s.color_end, 15
+  assign shade = s.overlay_strength | divided_by: 100.0
+-%}
+
+<div
+  class="pbs-amb pbs-amb--text-{{ s.text_direction }}{% if s.text_always_visible %} pbs-amb--always{% endif %}"
+  id="pbs-amb-{{ section.id }}"
+  style="--amb-c1: {{ s.color_start }}; --amb-m1: {{ mid_1 }}; --amb-m2: {{ mid_2 }}; --amb-c2: {{ s.color_end }}; --amb-title: {{ s.title_color }}; --amb-speed: {{ s.gradient_speed }}s; --amb-bh: {{ s.banner_height }}px; --amb-h: {{ s.image_height }}vh; --amb-shade: {{ shade }};"
+>
+  {%- if s.title != blank -%}
+    <header class="pbs-amb__banner{% if s.gradient_animated %} is-animated{% endif %}">
+      <h1 class="pbs-amb__title{% if s.title_animation %} is-animated{% endif %}" aria-label="{{ s.title | escape }}">
+        {%- assign words = s.title | split: ' ' -%}
+        {%- for word in words -%}
+          <span class="pbs-amb__w" aria-hidden="true"><span class="pbs-amb__wi" style="--i: {{ forloop.index0 }};">{{ word }}</span></span>
+          {%- unless forloop.last %} {% endunless -%}
+        {%- endfor -%}
+      </h1>
+    </header>
+  {%- endif -%}
+
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign b = block.settings
+      assign zoom = b.zoom | divided_by: 100.0
+      if forloop.first
+        assign loading = 'eager'
+      else
+        assign loading = 'lazy'
+      endif
+    -%}
+    <section
+      class="pbs-amb__item"
+      style="--pos: {{ b.position_x }}% {{ b.position_y }}%; --z: {{ zoom }};"
+      {{ block.shopify_attributes }}
+    >
+      {%- if b.image != blank -%}
+        {{
+          b.image
+          | image_url: width: 2400
+          | image_tag:
+            widths: '750, 1100, 1500, 1920, 2400',
+            sizes: '100vw',
+            loading: loading,
+            class: 'pbs-amb__img',
+            alt: b.image.alt
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'pbs-amb__img pbs-amb__img--placeholder' }}
+      {%- endif -%}
+      <div class="pbs-amb__text">
+        {%- if b.kicker != blank -%}<p class="pbs-amb__kicker">{{ b.kicker | escape }}</p>{%- endif -%}
+        {%- if b.name != blank -%}<h2 class="pbs-amb__name">{{ b.name | escape }}</h2>{%- endif -%}
+        {%- if b.text != blank -%}<div class="pbs-amb__desc">{{ b.text }}</div>{%- endif -%}
+        {%- if b.link != blank and b.link_label != blank -%}
+          <a class="pbs-amb__link" href="{{ b.link }}">{{ b.link_label | escape }} →</a>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endfor -%}
+</div>
+
+<script>
+  (() => {
+    const root = document.getElementById('pbs-amb-{{ section.id }}');
+    if (!root) return;
+    const items = root.querySelectorAll('.pbs-amb__item');
+    // Écrans tactiles : le texte s'affiche quand la photo passe au centre de l'écran.
+    if (window.matchMedia('(hover: none)').matches && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.target.classList.toggle('is-active', e.isIntersecting)),
+        { rootMargin: '-35% 0px -35% 0px' }
+      );
+      items.forEach((item) => io.observe(item));
+    }
+    // Éditeur de thème : le texte reste visible sur l'ambassadeur sélectionné, pour l'éditer à l'œil.
+    {%- if request.design_mode %}
+      document.addEventListener('shopify:block:select', (e) => {
+        if (root.contains(e.target)) e.target.classList.add('is-active');
+      });
+      document.addEventListener('shopify:block:deselect', (e) => {
+        if (root.contains(e.target)) e.target.classList.remove('is-active');
+      });
+    {%- endif %}
+  })();
+</script>
+
+{% stylesheet %}
+  .pbs-amb {
+    --amb-ease: cubic-bezier(.2, .7, .2, 1);
+    display: block;
+  }
+
+  /* ---------- Bandeau : dégradé animé (transform seul, pas de repeint) ---------- */
+  .pbs-amb__banner {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: var(--amb-bh, 150px);
+    padding: 28px clamp(16px, 4vw, 50px);
+    background: var(--amb-c1);
+  }
+  .pbs-amb__banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 140%;
+    z-index: -1;
+    background: linear-gradient(100deg, var(--amb-c1) 0%, var(--amb-c1) 38%, var(--amb-m1) 60%, var(--amb-m2) 82%, var(--amb-c2) 100%);
+  }
+  .pbs-amb__banner.is-animated::before {
+    animation: pbs-amb-drift var(--amb-speed, 9s) ease-in-out infinite alternate;
+  }
+  @keyframes pbs-amb-drift {
+    from { transform: translateX(0); }
+    to { transform: translateX(-22%); }
+  }
+  .pbs-amb__title {
+    margin: 0;
+    color: var(--amb-title, #fff);
+    font-family: var(--font-heading-family);
+    font-weight: 300;
+    font-size: clamp(30px, 4.2vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .pbs-amb__w,
+  .pbs-amb__wi {
+    display: inline-block;
+  }
+  /* Chaque mot passe du flou au net en montant légèrement (effet « fade-in-blur ») */
+  .pbs-amb__title.is-animated .pbs-amb__wi {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(20px);
+    animation: pbs-amb-blur-in 1s cubic-bezier(.25, .1, .25, 1) forwards;
+    animation-delay: calc(.15s + var(--i) * 45ms);
+  }
+  @keyframes pbs-amb-blur-in {
+    to { opacity: 1; filter: blur(0); transform: none; }
+  }
+
+  /* ---------- Ambassadeurs : une photo pleine largeur, texte au passage ---------- */
+  .pbs-amb__item {
+    position: relative;
+    height: var(--amb-h, 100vh);
+    min-height: 420px;
+    overflow: hidden;
+    isolation: isolate;
+    background: #0e1b4d;
+    color: #fff;
+  }
+  .pbs-amb__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--pos, 50% 50%);
+    transform: scale(var(--z, 1));
+    transform-origin: var(--pos, 50% 50%);
+    transition: transform 1.2s var(--amb-ease);
+  }
+  .pbs-amb__img--placeholder {
+    background: #152459;
+    fill: rgba(255, 255, 255, .25);
+  }
+  .pbs-amb__item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(8, 14, 40, calc(.75 * var(--amb-shade))) 0%, rgba(8, 14, 40, calc(.35 * var(--amb-shade))) 45%, rgba(8, 14, 40, 0) 70%),
+      linear-gradient(0deg, rgba(8, 14, 40, var(--amb-shade)) 0%, rgba(8, 14, 40, calc(.3 * var(--amb-shade))) 45%, rgba(8, 14, 40, 0) 75%);
+    opacity: 0;
+    transition: opacity .6s var(--amb-ease);
+  }
+  .pbs-amb__text {
+    position: absolute;
+    z-index: 1;
+    left: clamp(24px, 4vw, 56px);
+    right: clamp(24px, 4vw, 56px);
+    bottom: clamp(24px, 4vw, 56px);
+    max-width: 760px;
+  }
+  .pbs-amb__text > * {
+    opacity: 0;
+    transition: opacity .6s var(--amb-ease), transform .6s var(--amb-ease);
+  }
+  .pbs-amb--text-left .pbs-amb__text > * { transform: translateX(-48px); }
+  .pbs-amb--text-bottom .pbs-amb__text > * { transform: translateY(32px); }
+  .pbs-amb--text-fade .pbs-amb__text > * { transform: none; }
+  .pbs-amb__kicker {
+    margin: 0;
+    font-family: var(--font-body-family);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .pbs-amb__name {
+    margin: 10px 0 14px;
+    color: #fff;
+    font-family: var(--font-heading-family);
+    font-weight: 600;
+    font-size: clamp(40px, 6vw, 80px);
+    line-height: 1;
+    letter-spacing: -.02em;
+    transition-delay: .06s;
+  }
+  .pbs-amb__desc {
+    font-family: var(--font-body-family);
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, .88);
+    text-wrap: pretty;
+    transition-delay: .12s;
+  }
+  .pbs-amb__desc p { margin: 0; }
+  .pbs-amb__desc p + p { margin-top: .6em; }
+  .pbs-amb__link {
+    display: inline-block;
+    margin-top: 18px;
+    color: #fff;
+    font-family: var(--font-body-family);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition-delay: .18s;
+  }
+
+  /* État actif : survol (ordinateur), photo au centre de l'écran (mobile), ou bloc sélectionné (éditeur) */
+  .pbs-amb__item:hover .pbs-amb__img,
+  .pbs-amb__item.is-active .pbs-amb__img {
+    transform: scale(calc(var(--z, 1) * 1.04));
+  }
+  .pbs-amb__item:hover::after,
+  .pbs-amb__item.is-active::after,
+  .pbs-amb--always .pbs-amb__item::after {
+    opacity: 1;
+  }
+  .pbs-amb__item:hover .pbs-amb__text > *,
+  .pbs-amb__item.is-active .pbs-amb__text > *,
+  .pbs-amb__item:focus-within .pbs-amb__text > *,
+  .pbs-amb--always .pbs-amb__text > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pbs-amb__banner.is-animated::before,
+    .pbs-amb__title.is-animated .pbs-amb__wi {
+      animation: none;
+      opacity: 1;
+      filter: none;
+      transform: none;
+    }
+    .pbs-amb__img,
+    .pbs-amb__item::after,
+    .pbs-amb__text > * {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Nos ambassadeurs",
+  "tag": "section",
+  "class": "section-pbs-ambassadeurs",
+  "settings": [
+    { "type": "header", "content": "Bandeau du haut" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Nos ambassadeurs" },
+    { "type": "checkbox", "id": "title_animation", "label": "Animer le titre (flou vers net)", "default": true },
+    { "type": "color", "id": "title_color", "label": "Couleur du titre", "default": "#FFFFFF" },
+    { "type": "color", "id": "color_start", "label": "Couleur de départ du dégradé", "default": "#0E1B4D" },
+    { "type": "color", "id": "color_end", "label": "Couleur d'arrivée du dégradé", "default": "#FFFFFF" },
+    { "type": "checkbox", "id": "gradient_animated", "label": "Animer le dégradé", "default": true },
+    { "type": "range", "id": "gradient_speed", "label": "Durée d'un mouvement du dégradé", "min": 3, "max": 20, "step": 1, "unit": "s", "default": 9 },
+    { "type": "range", "id": "banner_height", "label": "Hauteur du bandeau", "min": 80, "max": 300, "step": 10, "unit": "px", "default": 150 },
+    { "type": "header", "content": "Photos des ambassadeurs" },
+    { "type": "range", "id": "image_height", "label": "Hauteur de chaque photo (% de l'écran)", "min": 50, "max": 100, "step": 5, "unit": "%", "default": 100 },
+    { "type": "range", "id": "overlay_strength", "label": "Assombrissement quand le texte apparaît", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 80 },
+    {
+      "type": "select",
+      "id": "text_direction",
+      "label": "Arrivée du texte",
+      "options": [
+        { "value": "left", "label": "Depuis la gauche" },
+        { "value": "bottom", "label": "Depuis le bas" },
+        { "value": "fade", "label": "Fondu sur place" }
+      ],
+      "default": "left"
+    },
+    { "type": "checkbox", "id": "text_always_visible", "label": "Toujours afficher le texte (sans survol)", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "ambassador",
+      "name": "Ambassadeur",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo (format paysage, 2000 px de large ou plus)" },
+        { "type": "range", "id": "position_x", "label": "Cadrage horizontal (0 = gauche, 100 = droite)", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "position_y", "label": "Cadrage vertical (0 = haut, 100 = bas)", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 50 },
+        { "type": "range", "id": "zoom", "label": "Zoom", "min": 100, "max": 200, "step": 5, "unit": "%", "default": 100 },
+        { "type": "text", "id": "kicker", "label": "Sur-titre (petit, au-dessus du nom)", "default": "Ambassadeur Probikestock" },
+        { "type": "text", "id": "name", "label": "Nom", "default": "Prénom Nom" },
+        { "type": "richtext", "id": "text", "label": "Présentation", "default": "<p>Quelques lignes pour présenter l'ambassadeur et ce que nous construisons ensemble.</p>" },
+        { "type": "url", "id": "link", "label": "Lien (facultatif)" },
+        { "type": "text", "id": "link_label", "label": "Texte du lien (facultatif)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Nos ambassadeurs",
+      "blocks": [
+        { "type": "ambassador" },
+        { "type": "ambassador" },
+        { "type": "ambassador" }
+      ]
+    }
+  ]
+}
+{% endschema %}

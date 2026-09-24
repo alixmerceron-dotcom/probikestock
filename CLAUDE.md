@@ -37,3 +37,12 @@ logo, composants). Elle sert de **référence pour Claude Design** — ne pas pr
 ## 🔒 Limites connues de l'environnement
 - `probikestock.com` et les hébergeurs d'images/CDN sont **bloqués** par la politique réseau : pas
   de crawl du site ni de téléchargement de photos produit. La veille se fait via recherche web + presse.
+
+## 🛒 Site Shopify (probikestock.com) — contexte pour les autres tâches
+- Accès via le **connecteur Shopify (MCP)**. Le CLI Shopify ne passe pas le réseau de l'environnement.
+- Thème **en ligne** : « Refresh 2.1 » (`207407382870`). Thème **de travail** : « Refresh 2.2 - bandeau des marques »
+  (`207481831766`, non publié). Ne jamais écrire dans le thème en ligne ; les menus et pages sont communs à tous les thèmes.
+- Identité réelle du site (≠ charte `brand/` des visuels réseaux) : navy `#0E1B4D`, orange `#E32402`, fonds blancs /
+  `#F4F5F9`, titres **Outfit**, texte **Instrument Sans**, rayon 12 px (voir `assets/pbs-cockpit.css` du thème).
+- Page « Nos ambassadeurs » : section `pbs-ambassadeurs` + modèle `page.ambassadeurs` (copies dans `shopify/refresh-2.2/`),
+  maquette dans `prototypes/nos-ambassadeurs/`. Le pied de page de Refresh 2.2 utilise le menu `liens-rapides-refresh-2-2`.

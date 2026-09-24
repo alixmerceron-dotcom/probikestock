@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "ambassadeurs": {
+      "type": "pbs-ambassadeurs",
+      "blocks": {
+        "alexis": {
+          "type": "ambassador",
+          "settings": {
+            "image": "shopify://shop_images/pbs-ambassadeur-alexis-champion.jpg",
+            "position_x": 50,
+            "position_y": 30,
+            "zoom": 100,
+            "kicker": "Champion de France Gravel U23",
+            "name": "Alexis Champion",
+            "text": "<p>Sacré champion de France de gravel U23 à Thouars en septembre 2026, Alexis confirme sa place parmi les meilleurs jeunes coureurs français. Chez Probikestock, nous l'accompagnons vers le plus haut niveau, en gravel comme sur route, en mettant à sa disposition du matériel de pointe. En retour, ses tests en course et à l'entraînement nous aident à sélectionner les composants que nous vous proposons.</p>",
+            "link": "",
+            "link_label": ""
+          }
+        },
+        "valerian": {
+          "type": "ambassador",
+          "settings": {
+            "image": "shopify://shop_images/pbs-ambassadeur-valerian-lajaunias.jpg",
+            "position_x": 55,
+            "position_y": 40,
+            "zoom": 100,
+            "kicker": "Coureur Élite · UC Cholet 49",
+            "name": "Valérian Lajaunias",
+            "text": "<p>Coureur élite à l'UC Cholet 49, l'une des meilleures équipes françaises, Valérian est en recherche permanente d'optimisation. Pour performer au plus haut niveau national, chaque détail compte, du choix des composants aux moindres réglages. Une exigence sur laquelle nous sommes pleinement alignés, et que nous voulons développer main dans la main.</p>",
+            "link": "",
+            "link_label": ""
+          }
+        },
+        "leo": {
+          "type": "ambassador",
+          "settings": {
+            "image": "shopify://shop_images/pbs-ambassadeur-leo-gardy.jpg",
+            "position_x": 50,
+            "position_y": 55,
+            "zoom": 100,
+            "kicker": "Comédien · Auteur · Ancien cycliste",
+            "name": "Léo Gardy",
+            "text": "<p>Comédien, auteur et ancien cycliste de 31 ans, Léo s'est imposé comme l'une des révélations théâtrales majeures de 2026, grâce à une performance scénique et athlétique hors norme. Chez Probikestock, nous l'accompagnons dans ses projets artistiques, cinématographiques et physiques.</p>",
+            "link": "",
+            "link_label": ""
+          }
+        }
+      },
+      "block_order": [
+        "alexis",
+        "valerian",
+        "leo"
+      ],
+      "settings": {
+        "title": "Nos ambassadeurs",
+        "title_animation": true,
+        "title_color": "#FFFFFF",
+        "color_start": "#0E1B4D",
+        "color_end": "#FFFFFF",
+        "gradient_animated": true,
+        "gradient_speed": 9,
+        "banner_height": 150,
+        "image_height": 100,
+        "overlay_strength": 80,
+        "text_direction": "left",
+        "text_always_visible": false
+      }
+    }
+  },
+  "order": [
+    "ambassadeurs"
+  ]
+}

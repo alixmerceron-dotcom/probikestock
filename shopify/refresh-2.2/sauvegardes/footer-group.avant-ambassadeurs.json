@@ -1,0 +1,54 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "link_list_MWn9kA": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Liens rapides",
+            "menu": "footer-1"
+          }
+        },
+        "link_list_boutique": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Boutique",
+            "menu": "rail-principal"
+          }
+        },
+        "link_list_faq": {
+          "type": "link_list",
+          "settings": {
+            "heading": "FAQ",
+            "menu": "faq"
+          }
+        }
+      },
+      "block_order": [
+        "link_list_MWn9kA",
+        "link_list_boutique",
+        "link_list_faq"
+      ],
+      "settings": {
+        "color_scheme": "scheme-5",
+        "newsletter_enable": true,
+        "newsletter_heading": "Soyez le premier informé de nos derniers arrivages !",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 40,
+        "padding_bottom": 24
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
