@@ -8,6 +8,7 @@ out = (here / "src.html").read_text() \
     .replace("__OUTFIT__", b64("fonts/Outfit-var.woff2")) \
     .replace("__INSTRUMENT__", b64("fonts/InstrumentSans-var.woff2")) \
     .replace("__TITLE__", title) \
+    .replace("__LOGO__", (here / "logo.svg").read_text().replace("#0E1B4D", "#002843")) \
     .replace("__VALERIAN__", "data:image/jpeg;base64," + b64("photos/web/valerian.jpg")) \
     .replace("__PODIUM__", "data:image/jpeg;base64," + b64("photos/web/podium.jpg")) \
     .replace("__LEO__", "data:image/jpeg;base64," + b64("photos/web/leo.jpg"))

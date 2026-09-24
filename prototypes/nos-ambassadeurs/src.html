@@ -9,36 +9,47 @@
 @font-face{font-family:'Instrument Sans';font-weight:400 700;font-display:swap;src:url(data:font/woff2;base64,__INSTRUMENT__) format('woff2')}
 
 :root{
-  --navy:#0e1b4d; --radius:12px;
+  --navy:#002843; --radius:12px;
   --font-heading:'Outfit',sans-serif; --font-body:'Instrument Sans',-apple-system,'Segoe UI',sans-serif;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font-smoothing:antialiased}
 
-/* ---- Titre ---- */
-.title{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;min-height:clamp(120px,15vw,170px);
-  padding:28px clamp(16px,4vw,50px);text-align:left;background:#0e1b4d;color:#fff}
-/* Dégradé navy du site (#0E1B4D) vers le blanc. Calque plus large que le bandeau qui glisse lentement
-   (transform seul) : le blanc « respire » à droite sans jamais atteindre le titre. */
+/* ---- En-tête du site (reproduction de Refresh 2.2, pour le contexte) ---- */
+.ann{background:#002843;color:#fff;text-align:center;font-size:13px;font-weight:500;padding:8px 16px}
+.hdr{background:#fff;border-bottom:1px solid #e4e6ef}
+.hdr__in{max-width:1400px;margin:0 auto;padding:20px 50px;display:flex;align-items:center;gap:28px}
+.hdr__logo svg{height:34px;width:auto;display:block}
+.hdr__search{flex:1;max-width:620px;margin:0 auto;display:flex;align-items:center;gap:10px;height:44px;padding:0 16px;border:1px solid #d3d7e4;border-radius:12px;color:#8b8f9e;font-size:14px}
+.hdr__icons{display:flex;gap:18px;color:#002843}.hdr__icons svg{width:22px;height:22px}
+.rail{background:#fafbfd;border-bottom:1px solid #e7e9f1}
+.rail ul{max-width:1400px;margin:0 auto;padding:0 50px;display:flex;gap:28px;list-style:none;min-height:46px;align-items:center}
+.rail a{text-decoration:none;font-size:14px;font-weight:500;color:#002843}.rail .promo a{color:#e32402}
+@media (max-width:989px){.rail,.hdr__search{display:none}.hdr__in{justify-content:space-between;padding:14px 16px}}
+
+/* ---- Bandeau (identique à la section pbs-ambassadeurs, réglages actuels du modèle) ---- */
+.title{position:relative;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  min-height:150px;padding:28px clamp(16px,4vw,50px);background:#fff}
 .title::before{content:"";position:absolute;top:0;bottom:0;left:0;width:140%;z-index:-1;
-  background:linear-gradient(100deg,#0e1b4d 0%,#0e1b4d 38%,#5a6590 60%,#dfe2ec 82%,#ffffff 100%);
+  background:linear-gradient(100deg,#fff 0%,#fff 42%,#b3bec6 55%,#26475f 66%,#002843 72%,#002843 100%);
   animation:drift 9s ease-in-out infinite alternate}
-@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-22%)}}
-.title h1{color:#fff;font-family:var(--font-heading);font-weight:300;letter-spacing:-.01em;line-height:1.1;font-size:clamp(30px,4.2vw,56px)}
-/* TextEffect preset="fade-in-blur" speedReveal={1.1} speedSegment={0.3} :
-   chaque mot passe du flou (12 px) au net en montant de 20 px, en 1 s, décalé de 45 ms */
+@media (max-width:749px){.title::before{background:linear-gradient(100deg,#fff 0%,#fff 45%,#b3bec6 100%)}}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-12%)}}
+.title h1{margin:0;color:#002843;font-family:var(--font-heading);font-weight:300;letter-spacing:-.01em;line-height:1.1;font-size:clamp(30px,4.2vw,56px)}
 .title .w{display:inline-block}
 .title .wi{display:inline-block;opacity:0;filter:blur(12px);transform:translateY(20px);
   animation:blurIn 1s cubic-bezier(.25,.1,.25,1) forwards;animation-delay:calc(.15s + var(--i)*45ms)}
 @keyframes blurIn{to{opacity:1;filter:blur(0);transform:none}}
+.intro{max-width:600px;margin-top:14px;color:#002843;font-size:16px;line-height:1.55;text-wrap:pretty;opacity:0;animation:introIn .9s ease-out .55s forwards}
+@keyframes introIn{from{opacity:0;transform:translateY(12px)}to{opacity:.9;transform:none}}
 
 /* ---- Sections : une image, le texte apparaît au passage ---- */
 .list{display:block}
 .amb{position:relative;height:100vh;min-height:420px;overflow:hidden;background:var(--navy);color:#fff;isolation:isolate}
 .amb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%);
   transform:scale(var(--z,1));transform-origin:var(--pos,50% 50%);transition:transform 1.2s var(--ease)}
-.amb::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,14,40,.75) 0%,rgba(8,14,40,.35) 45%,rgba(8,14,40,0) 70%),linear-gradient(0deg,rgba(8,14,40,.8) 0%,rgba(8,14,40,.25) 45%,rgba(8,14,40,0) 75%);
+.amb::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,22,38,.75) 0%,rgba(0,22,38,.35) 45%,rgba(0,22,38,0) 70%),linear-gradient(0deg,rgba(0,22,38,.8) 0%,rgba(0,22,38,.25) 45%,rgba(0,22,38,0) 75%);
   opacity:0;transition:opacity .6s var(--ease)}
 .amb__text{position:absolute;z-index:1;left:clamp(24px,4vw,56px);right:clamp(24px,4vw,56px);bottom:clamp(24px,4vw,56px);max-width:760px}
 .amb__text > *{opacity:0;transform:translateX(-48px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
@@ -74,13 +85,24 @@ body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font
   *{animation:none!important;transition:none!important}
   .title .wi{opacity:1;filter:none;transform:none}
   .title::before{transform:none}
+  .intro{opacity:.9}
 }
 
 </style>
 </head>
 <body>
 
-<header class="title"><h1 aria-label="Nos ambassadeurs">__TITLE__</h1></header>
+<div class="ann">Livraison gratuite à partir de 100€ d'achats</div>
+<div class="hdr"><div class="hdr__in">
+  <a class="hdr__logo" href="#" aria-label="Probikestock">__LOGO__</a>
+  <div class="hdr__search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Rechercher un produit, une marque…</div>
+  <div class="hdr__icons"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 7h14l-1.5 11h-11z"/><path d="M9 7a3 3 0 016 0"/></svg></div>
+</div></div>
+<nav class="rail"><ul><li><a href="#">Tout le catalogue ▾</a></li><li><a href="#">Périphériques</a></li><li><a href="#">Transmission</a></li><li><a href="#">Roues</a></li><li class="promo"><a href="#">Promotions</a></li></ul></nav>
+
+<header class="title"><h1 aria-label="Nos ambassadeurs">__TITLE__</h1>
+  <div class="intro">Chez Probikestock, nous accompagnons des athlètes vers le haut niveau et dans leurs objectifs personnels. Nous mettons à leur disposition du matériel de pro, pour qu'ils puissent donner le meilleur d'eux-mêmes, à l'entraînement comme en compétition. Découvrez celles et ceux qui roulent à nos côtés.</div>
+</header>
 
 <main class="list">
   <section class="amb" style="--pos:50% 30%">
@@ -112,7 +134,7 @@ body{font-family:var(--font-body);background:#fff;color:var(--navy);-webkit-font
 <footer class="footer">
   <div class="pw">
     <div class="footer__top">
-      <div><h3>Liens rapides</h3><ul><li><a href="#">Contact</a></li><li><a href="#">Articles de blog</a></li><li><a href="#">Apps</a></li><li><a href="#">FAQ</a></li><li><a href="#">Marques &amp; Partenaires</a></li></ul></div>
+      <div><h3>Liens rapides</h3><ul><li><a href="#">Contact</a></li><li><a href="#">Articles de blog</a></li><li><a href="#">Apps</a></li><li><a href="#">FAQ</a></li><li><a href="#">Marques &amp; Partenaires</a></li><li><a href="#">Nos ambassadeurs</a></li></ul></div>
       <div><h3>Boutique</h3><ul><li><a href="#">Périphériques</a></li><li><a href="#">Transmission</a></li><li><a href="#">Roues</a></li><li><a href="#">Promotions</a></li></ul></div>
       <div><h3>FAQ</h3><ul><li><a href="#">Qui sommes-nous ?</a></li><li><a href="#">Origine et authenticité</a></li><li><a href="#">État des produits</a></li><li><a href="#">Contact et service client</a></li><li><a href="#">Commande et paiement</a></li><li><a href="#">Expédition et livraison</a></li><li><a href="#">Retours et remboursement</a></li></ul></div>
       <div class="footer__nl"><p>Soyez le premier informé de nos derniers arrivages !</p>
