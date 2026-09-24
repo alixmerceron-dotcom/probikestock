@@ -54,16 +54,17 @@
       "settings": {
         "title": "Nos ambassadeurs",
         "title_animation": true,
-        "title_color": "#FFFFFF",
-        "color_start": "#0E1B4D",
-        "color_end": "#FFFFFF",
+        "title_color": "#0E1B4D",
+        "color_start": "#FFFFFF",
+        "color_end": "#0E1B4D",
         "gradient_animated": true,
         "gradient_speed": 9,
         "banner_height": 150,
         "image_height": 100,
         "overlay_strength": 80,
         "text_direction": "left",
-        "text_always_visible": false
+        "text_always_visible": false,
+        "show_page_content": true
       }
     }
   },
