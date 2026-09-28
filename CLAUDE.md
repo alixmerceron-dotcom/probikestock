@@ -37,3 +37,6 @@ logo, composants). Elle sert de **référence pour Claude Design** — ne pas pr
 ## 🔒 Limites connues de l'environnement
 - `probikestock.com` et les hébergeurs d'images/CDN sont **bloqués** par la politique réseau : pas
   de crawl du site ni de téléchargement de photos produit. La veille se fait via recherche web + presse.
+- Serveur MCP **Motion** (`https://mcp.motion.so/mcp`) déclaré dans `.mcp.json` : utilisable en Claude Code
+  local (authentification OAuth au premier appel via `/mcp`). En session cloud, l'hôte `mcp.motion.so` est
+  **bloqué** par la politique réseau : il faut l'ajouter comme connecteur sur claude.ai/customize/connectors.
