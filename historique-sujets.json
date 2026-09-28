@@ -1,0 +1,15 @@
+{
+  "_description": "Historique des sujets couverts par la routine 'Veille cyclisme'. Sert à la déduplication sur 8 semaines (voir CLAUDE.md §3). Chaque entrée : date de la routine + sujets retenus.",
+  "sujets": [
+    {
+      "date": "2026-09-28",
+      "brief": "briefs/brief-carrousel-2026-09-28.md",
+      "sujets_retenus": [
+        "Shimano Dura-Ace WH-R9370 (roues carbone, rayons carbone, -220g, dispo sept 2026)",
+        "Prototype Shimano Dura-Ace R9300 13 vitesses (Mathieu van der Poel, Mondiaux Montreal)",
+        "Canyon Speedmax CFR TT prototype (doublE CLM feminin Mondiaux, Reusser/Backstedt)",
+        "Reglementation UCI 2026 (jante 65mm, cintre 400mm, limitation de braquet gelee - recours SRAM)"
+      ]
+    }
+  ]
+}
