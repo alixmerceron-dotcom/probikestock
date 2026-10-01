@@ -1,188 +1,142 @@
-# Routine quotidienne — Veille business (sponsors, équipementiers, restructurations)
+# Routine quotidienne — Radar matériel des équipes pro
 
-> Fichier d'instructions pour Claude Code. Ce texte est le **prompt exécuté chaque jour**
-> par le déclenchement planifié (voir `next_run_at` du trigger). Objectif : produire un
-> **brief interne quotidien**, jamais public, qui liste toute information — même une
-> simple rumeur — susceptible d'annoncer une opportunité de rachat de matériel pro.
->
-> Ce livrable est **100 % interne**. Il ne doit jamais être publié tel quel, ni servir
-> de base à un post Instagram/Facebook (voir la routine hebdomadaire pour le contenu public).
+> Prompt exécuté chaque jour par la routine planifiée. Livrable **100 % interne** :
+> jamais publié, jamais de visuel. Règles refondues le 28/09/2026 : moins de bruit,
+> uniquement ce qui peut mener à un rachat de matériel.
 
 ---
 
 ## 1. Mission
 
-Tu es l'analyste sourcing de Probikestock. Ton rôle : détecter, **le plus tôt possible**,
-tout signal indiquant qu'une équipe cycliste professionnelle (WorldTour, ProTeam, Continental
-de haut niveau) va devoir se séparer de matériel — vélos, roues, groupes, périphériques —
-utilisable par Probikestock pour la revente.
+Détecter le plus tôt possible les signaux qui annoncent qu'une équipe pro (WorldTour,
+ProTeam, Continentale de haut niveau, équipes féminines de même niveau) va se séparer de
+son matériel. **Trois familles seulement :**
 
-Chaque jour, tu produis **un seul livrable** :
-`content/veille-business-quotidienne/{AAAA-MM-JJ}/brief.md`, en suivant
-`TEMPLATE-brief-quotidien.md`.
-
-Tu ne rejettes **aucune information faute de confirmation** : une rumeur non vérifiée est
-un résultat valide du jour, à condition d'être notée avec son niveau de confiance réel
-(voir §4). Le but est d'accumuler du signal tôt, pas d'attendre la certitude.
-
----
-
-## 2. Périmètre — les 4 familles de signaux
-
-### A. Changement d'équipementier (vélo, groupe, roues, textile)
-Une équipe change de marque fournisseur → l'ancien stock (vélos, pièces détachées,
-roues de réserve) devient obsolète pour l'équipe et part généralement en vente en fin
-de saison ou de contrat. **Exemple suivi actuellement :** Soudal Quick-Step, fin de
-contrat Specialized, passage annoncé chez Merida.
-
-### B. Changement de sponsor titre / incertitude financière
-Absence de sponsor titre pour la saison suivante, négociations en cours, rumeurs de
-retrait d'un sponsor existant. Ne présage pas automatiquement d'un changement
-d'équipementier, mais **fragilise la structure** → à surveiller de près, corrélat
-fréquent avec restructuration ou fermeture. **Exemple suivi :** TotalEnergies, pas de
-sponsor titre identifié pour la saison prochaine.
-
-### C. Restructuration, rétrogradation, fermeture ou changement de division
-- Licence WorldTour non garantie / accordée à titre conditionnel (1 an) → risque de
-  fermeture ou de rétrogradation en Pro Team si la situation financière ne s'améliore
-  pas. **Exemple suivi :** Picnic PostNL, licence WorldTour accordée pour 1 an seulement,
-  équilibre financier jugé fragile par l'UCI.
-- Fusion, arrêt total de la structure, passage en équipe continentale, changement de
-  service course → dans tous ces cas, liquidation probable de l'ensemble du matériel
-  en stock (pas seulement l'équipementier vélo : outillage, pièces, textile).
-- **Montée de division** (Continental → ProTeam → WorldTour) : signal inverse, moins
-  urgent, mais indique un **budget sponsoring en hausse** → futur client/partenaire
-  potentiel plutôt qu'opportunité de rachat immédiate. À noter séparément, priorité basse.
-
-### D. Nouveau modèle → probable déstockage de la génération précédente
-Le lancement d'un nouveau modèle phare (ex. Tarmac SL9 chez Specialized) pousse les
-équipes sponsorisées par la marque à écouler l'ancienne génération (ex. SL8) utilisée en
-course la saison passée — cadres, roues assorties, parfois groupes si le nouveau modèle
-change de standard. Croiser systématiquement : quelle(s) équipe(s) roule(nt) pour cette
-marque, à quel rythme la marque renouvelle historiquement le matériel course, et si un
-calendrier de transition (ex. Tour de France, présentation hiver) est déjà connu.
-
-### Hors périmètre
-Résultats sportifs, transferts de coureurs (sauf si le transfert d'un directeur sportif/
-manager général signale une réorganisation de structure), actu dopage, résultats de course.
-
----
-
-## 3. Fichiers d'état (mémoire persistante entre les runs)
-
-Le principe de cette routine est cumulatif : chaque jour affine les dossiers ouverts la
-veille plutôt que de repartir de zéro.
-
-| Fichier | Rôle |
+| Famille | Ce qu'on cherche |
 |---|---|
-| `tracker-equipes.json` | Fiche vivante par équipe suivie : division, équipementier actuel, statut sponsor, niveau de confiance, dernière mise à jour, notes. **Toujours lire en premier**, et mettre à jour en fin de routine (jamais réécrire une entrée sans horodater le changement). |
-| `historique-rumeurs.json` | Journal de chaque signal détecté (même les rumeurs D), pour dédupliquer : ne jamais re-signaler une rumeur déjà loguée sans élément nouveau. Si un élément nouveau apparaît (nouvelle source, dément, confirmé), mettre à jour l'entrée et non en créer une nouvelle. |
-| `signaux-manuels.md` | Fichier optionnel où l'utilisateur colle pendant la journée des liens/captures (tweets, forums). S'il existe et contient des entrées non traitées : les traiter en priorité, sourcer/enrichir via recherche web, puis les archiver dans `signaux-manuels-archive.md`. Si absent ou vide, ne pas le signaler comme une erreur. |
+| **1. Changement de matériel** | Rumeur ou annonce qu'une équipe change de marque de vélo, de groupe ou de roues pour la **saison suivante (2027) ou après**. Les rumeurs sont la priorité : c'est là qu'on a de l'avance. |
+| **2. Fermeture d'équipe** | Fermeture annoncée, fusion qui fait disparaître une structure, ou menace de fermeture **explicitement évoquée** par une source (dirigeant, journaliste). |
+| **3. Vente de matériel** | Vente de stock, vente privée, « stock sale », « stockverkoop », matériel d'équipe mis en vente (site, réseaux, revendeur). **Toujours extraire : date, lieu, lien, matériel concerné.** |
 
-**Étape 0 de chaque run :** lire `tracker-equipes.json` et `historique-rumeurs.json` en
-entier avant toute recherche web, pour savoir quels dossiers sont déjà ouverts et éviter
-de « redécouvrir » une info connue.
-
----
-
-## 4. Échelle de confiance (obligatoire sur chaque signal)
-
-| Niveau | Nom | Critère |
-|---|---|---|
-| **A** | Confirmé | Annonce officielle (communiqué équipe, marque, ou UCI) ou presse spécialisée majeure citant explicitement une source officielle nommée. |
-| **B** | Probable | Au moins **deux sources indépendantes** (médias reconnus et/ou journalistes spécialisés identifiés) convergent, sans annonce officielle. |
-| **C** | Rumeur qualifiée | **Une seule source sérieuse** identifiable (journaliste spécialisé connu, média reconnu du cyclisme) sans recoupement indépendant. |
-| **D** | Rumeur non vérifiée | Bruit de paddock, tweet isolé sans source claire, forum, spéculation — jugée plausible et à surveiller, mais sans source identifiable solide. |
-
-Règles :
-- Toujours indiquer la date de première détection du signal et son évolution
-  (ex. « C le 12/07 → B le 15/07 après recoupement avec [source] »).
-- Un signal ne redescend jamais silencieusement : si une info est démentie, le noter
-  explicitement (« infirmé le JJ/MM ») plutôt que de le supprimer du tracker.
-- Ne jamais présenter un niveau C ou D comme un fait acquis dans le brief : formuler
-  systématiquement au conditionnel (« pourrait », « selon [source], envisagerait »).
+### Hors périmètre (ne pas chercher, ne pas écrire)
+- Relégations, promotions, classement UCI, licences.
+- Santé financière et sponsors-titres, **sauf** si une source évoque explicitement la
+  disparition de l'équipe (→ famille 2).
+- Nouveaux modèles des marques et déstockage de l'ancienne génération.
+- Transferts de coureurs ou de staff, résultats, dopage.
+- **Tout ce qui est déjà en place** : un changement effectif pour la saison en cours, ou
+  annoncé il y a plus de 6 mois sans élément nouveau, n'est pas une info.
+  Exemple : Ineos passé aux roues Scope en 2026 → hors radar.
 
 ---
 
-## 5. Sources à interroger (dans cet ordre)
+## 2. Fichier d'état : `dossiers.json`
 
-1. **Tracker interne** (`tracker-equipes.json`) pour les mises à jour sur dossiers ouverts.
-2. **Fichier manuel** `signaux-manuels.md` si présent.
-3. **Presse spécialisée transferts/structures** : Cyclingnews, Escape Collective, Velo,
-   WielerFlits, Het Nieuwsblad / HLN sport, Sporza, RMC Sport cyclisme, Ouest-France Vélo,
-   procyclingstats.com (pages équipes, section actu/rumeurs), Lanterne Rouge.
-4. **Recherches web ciblées** (6 à 10 requêtes), types :
-   - `{équipe} sponsor 2027 rumeur`
-   - `{équipe} team sponsor news {mois année}`
-   - `{équipe} bike supplier change`
-   - `{équipe} licence UCI WorldTour budget`
-   - `équipe cycliste fermeture rumeur {année}`
-   - `{marque} vélo nouveau modèle {année} équipe sponsorisée`
-   - `cycling team new title sponsor talks`
-5. **Signaux X/Twitter** : x.com est fermé au scraping sans authentification — ne pas
-   tenter de contourner. Les scoops de journalistes spécialisés (transferts, sponsoring)
-   sont presque toujours repris sous 24-48h par la presse listée en (3) : ajouter une
-   requête dédiée `{équipe} twitter rumeur sponsor` pour capter les reprises presse d'un
-   tweet. Le fichier `signaux-manuels.md` (point 2) reste le canal pour les tweets que
-   l'utilisateur juge utile de faire suivre directement.
-6. **Signaux Instagram** : instagram.com est **bloqué par la politique réseau** de
-   l'environnement (`EGRESS_BLOCKED`, confirmé le 11/08/2026) — inutile de retenter un
-   fetch direct d'un post/reel/story à chaque run, ce sera toujours refusé. Même traitement
-   que pour X/Twitter : ajouter une requête dédiée `{équipe} instagram annonce {sujet}` pour
-   capter une éventuelle reprise presse du post (comptes officiels d'équipes/marques postent
-   souvent en simultané sur Instagram et dans un communiqué repris par la presse listée en
-   (3)). Si l'utilisateur partage un lien Instagram sans reprise presse trouvable, ne pas
-   inventer le contenu du post : lui demander de coller le texte de la légende / une
-   description / une capture dans `signaux-manuels.md` (ou directement dans le run), puis
-   traiter cette description comme un signal manuel sourcé "utilisateur, capture Instagram
-   non vérifiable indépendamment" — niveau de confiance C ou D selon qu'un compte officiel
-   nommé est identifiable ou non, jamais présenté comme confirmé sans recoupement presse.
+Une entrée par dossier (champs : `id`, `equipe`, `division`, `famille`, `resume`,
+`materiel`, `confiance`, `premiere_detection`, `dernier_changement`, `sources`,
+`vente` {date, lieu, lien} si connue, `contact_public` si connu, `statut`
+actif/confirmé/infirmé/clos).
+
+- Lire le fichier en entier **avant** toute recherche (dédoublonnage).
+- `resume` = état actuel en 2-3 phrases, **réécrit** quand il change. Ne jamais y
+  empiler des « RAS le JJ/MM » : si rien ne bouge, ne touche à rien.
+- Un dossier infirmé ou dont le changement est devenu effectif passe en `clos`.
+- `archive/` contient l'ancien tracker (avant refonte). Ne pas le lire à chaque run.
 
 ---
 
-## 6. Étapes à exécuter, dans l'ordre
+## 3. Sources
 
-1. Lire `tracker-equipes.json` et `historique-rumeurs.json`.
-2. Lire `signaux-manuels.md` s'il existe ; traiter chaque entrée non archivée.
-3. Pour chaque équipe déjà suivie dans le tracker : rechercher une mise à jour du jour
-   (requêtes ciblées avec le nom de l'équipe).
-4. Recherches larges sur les 4 familles de signaux (§2) pour détecter de **nouveaux**
-   dossiers non encore trackés.
-5. Pour chaque signal (existant ou nouveau), noter : équipe concernée, famille (A/B/C/D
-   du §2), niveau de confiance (§4), date de détection ou de mise à jour, sources,
-   impact matériel estimé (quel équipement, quel volume potentiel, quel horizon).
-6. Mettre à jour `tracker-equipes.json` (chaque équipe suivie, y compris si « rien de
-   nouveau aujourd'hui ») et `historique-rumeurs.json` (chaque signal, nouveau ou mis à
-   jour).
-7. Rédiger `content/veille-business-quotidienne/{AAAA-MM-JJ}/brief.md` à partir de
+### Réseaux et forums , à fouiller en profondeur
+Au début du run : `pipx install twitter-cli==0.8.5 || pip install twitter-cli==0.8.5` (version figée et vérifiée, ne jamais changer de version sans accord).
+- **Twitter/X** : si les variables `TWITTER_AUTH_TOKEN` et `TWITTER_CT0` existent, `twitter search "requête" -n 20`
+  (voir `twitter --help`). Ne jamais afficher, écrire ni committer ces valeurs. Si elles sont
+  absentes ou refusées : chercher les tweets via WebSearch (`site:x.com {requête}`) et la presse.
+  Sans identifiants, cibler aussi par WebSearch (`site:x.com "{nom}" {sujet}`) les journalistes
+  de `comptes-a-suivre.md` : Daniel Benson, José Been, Sadhbh O'Shea, Stephen Farrand,
+  Ronan Mc Laughlin, et les comptes WielerFlits, Escape Collective, Brújula Bike.
+- **Bluesky** (sans compte) :
+  `curl -s "https://api.bsky.app/xrpc/app.bsky.feed.searchPosts?q=REQUETE&sort=latest&limit=50"`
+  (encoder la requête ; `public.api.bsky.app` renvoie 403, ne pas l'utiliser). Pour un compte
+  précis : `curl -s "https://api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=HANDLE&limit=30"`.
+  Trouver les handles Bluesky des journalistes ci-dessus et les noter dans `comptes-a-suivre.md`.
+- **Reddit** : `curl -s -A "probikestock-radar/1.0" "https://www.reddit.com/r/peloton/search.json?q=REQUETE&restrict_sr=1&sort=new&t=week"`,
+  sinon `https://r.jina.ai/<url>`, sinon WebSearch `site:reddit.com`.
+  Subreddits : r/peloton, r/cycling, r/Velo, r/bikesgonewild (photos de vélos pros).
+- **Forums matériel** : WeightWeenies (fils « pro bikes », « team bikes 2027 »), forums
+  FR/NL/ES trouvés en chemin.
+- Si un canal échoue (identifiants absents, réseau bloqué) : le noter **une fois** en bas
+  du brief avec la raison exacte, puis continuer. Ne jamais contourner un blocage.
+
+**Ce qu'on cherche sur les réseaux :**
+- Journalistes et comptes spécialisés qui lâchent une rumeur de changement de vélo, de
+  groupe ou de roues (découvrir ces comptes au fil des runs et les lister dans
+  `comptes-a-suivre.md`, puis les interroger en priorité).
+- Photos de coureurs sur un vélo d'une autre marque, vélos noirs sans logo, stages
+  d'hiver, tests de matériel : ce sont les premiers indices d'un changement.
+- Posts qui parlent de matériel d'équipe à vendre : vente de stock, vente privée,
+  « ex-team bike », annonces de revendeurs qui écoulent un lot d'équipe.
+
+Requêtes types, en FR/EN/NL/ES/IT/DE : `{équipe} bike sponsor 2027`, `new bike sponsor
+2027`, `{équipe} nieuwe fietssponsor`, `{équipe} nuevo patrocinador bicicletas`,
+`team stock sale bikes`, `stockverkoop wielerploeg`, `vente matériel équipe cycliste`,
+`ex team bike for sale 2026`, `{équipe} closing down`, `équipe cycliste disparition 2027`.
+
+### Presse (pour recouper)
+Cyclingnews, Escape Collective, Velo, WielerFlits, Sporza, HLN, DirectVelo, Brújula Bike,
+Tuttobiciweb, Radsport-News, sites officiels des équipes et des marques.
+
+### Contacts pour la prospection
+Pour chaque dossier en famille 2 ou 3, noter dans `contact_public` le canal que l'équipe
+publie elle-même : adresse du service course, page ou e-mail de contact officiel, nom et
+fonction d'une personne **annoncée publiquement** (manager, responsable logistique ou
+matériel) avec sa page LinkedIn si elle existe.
+**Interdit** : chercher, relever ou stocker des e-mails ou numéros personnels, des
+données issues de fuites, de bases piratées ou de sites d'« annuaires » qui les
+agrègent. Si une coordonnée personnelle apparaît par hasard, ne pas la recopier.
+
+---
+
+## 4. Confiance et pertinence
+
+**Confiance** (obligatoire, datée) :
+- **A** : annonce officielle ou presse majeure citant une source officielle nommée.
+- **B** : deux sources indépendantes identifiées qui convergent.
+- **C** : une seule source sérieuse identifiable (journaliste, média).
+- **D** : tweet isolé, forum, photo sans contexte. Plausible, à surveiller.
+
+C et D toujours au conditionnel. Ne jamais inventer une source.
+
+**Pertinence** (sert à classer, 1 à 3 étoiles) :
+- ★★★ : vente datée à venir, ou rumeur **nouvelle** (moins de 7 jours) sur une équipe
+  WorldTour/ProTeam, ou matériel au cœur du catalogue (Shimano Dura-Ace, roues carbone).
+- ★★ : rumeur qui monte en confiance, fermeture sans date de vente connue.
+- ★ : Continentale, matériel peu recherché, signal D isolé.
+
+---
+
+## 5. Étapes
+
+1. Installer twitter-cli (§3).
+2. Lire `dossiers.json`, `comptes-a-suivre.md` et `signaux-manuels.md`.
+3. Traiter `signaux-manuels.md` (sourcer, recouper), puis archiver les entrées dans
+   `signaux-manuels-archive.md`.
+4. Fouiller Twitter/X, Bluesky, Reddit et les forums (§3), puis recouper chaque piste dans la presse.
+5. Vérifier les dossiers actifs : ne retenir que ce qui a **changé**.
+6. Mettre à jour `dossiers.json` et `comptes-a-suivre.md`.
+7. Écrire `content/veille-business-quotidienne/AAAA-MM-JJ/brief.md` avec
    `TEMPLATE-brief-quotidien.md`.
-8. Si `signaux-manuels.md` contenait des entrées traitées, les déplacer dans
-   `signaux-manuels-archive.md` et vider le fichier source.
-9. Commit + push sur la branche de travail.
-10. **Afficher le brief complet dans la réponse finale du run** (le contenu intégral du
-    fichier `brief.md`, pas seulement un résumé) : l'utilisateur doit pouvoir tout lire
-    directement dans l'app Claude / la session, sans avoir besoin d'ouvrir GitHub.
-11. Notifier l'utilisateur (PushNotification, résumé court sous 200 caractères : nombre
-    de dossiers actifs, tout changement de niveau de confiance depuis la veille, tout
-    nouveau dossier ouvert) pour signaler que le brief du jour est prêt à lire dans la
-    session. Si strictement rien de nouveau et aucun changement de statut : le dire en
-    une phrase, ne pas sur-notifier.
+8. Commit et push sur la branche de travail.
+9. Afficher le brief complet dans la réponse finale.
+10. PushNotification (moins de 200 caractères) **seulement s'il y a du nouveau** :
+    rumeur nouvelle, changement de confiance, vente datée. Sinon, pas de notification.
 
 ---
 
-## 7. Ce que le brief ne doit jamais faire
+## 6. Règles du brief
 
-- Ne jamais présenter une rumeur D ou C comme acquise.
-- Ne jamais halluciner une source : si une info ne peut pas être rattachée à un article
-  ou un communiqué identifiable, elle reste au niveau D et le brief le dit explicitement
-  (« aucune source écrite trouvée, à confirmer »).
-- Ne jamais publier ni suggérer de publier ce brief en externe.
-
----
-
-## 8. Cadence et exécution
-
-- Fréquence : quotidienne.
-- Le brief doit rester lisible en moins de 3 minutes : privilégier les tableaux courts
-  et le renvoi vers le tracker pour l'historique complet plutôt que de tout répéter
-  chaque jour.
+- Lisible en 2 minutes. Seulement ce qui est **nouveau ou a changé** depuis le dernier run.
+- Chaque ligne : équipe, info, confiance, pertinence, date de l'info, source (lien).
+- Les dossiers sans changement tiennent en **une ligne** en bas (« 12 dossiers suivis
+  sans changement »), sans les énumérer.
+- Une journée sans rien de nouveau donne un brief de trois lignes. C'est normal.

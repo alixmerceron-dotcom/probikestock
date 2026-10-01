@@ -40,32 +40,16 @@ logo, composants). Elle sert de **référence pour Claude Design** — ne pas pr
 
 ---
 
-# Routine « Veille business quotidienne » — ProBikeStock
+# Routine « Radar matériel » (quotidienne) — ProBikeStock
 
-## 🎯 Mission (à chaque exécution planifiée, quotidienne)
-Détecter au plus tôt les signaux — **même de simples rumeurs non vérifiées** — annonçant
-qu'une équipe pro va se séparer de matériel : changement d'équipementier, incertitude ou
-perte de sponsor titre, restructuration/rétrogradation/fermeture, ou sortie d'un nouveau
-modèle chez une marque qui pousse au déstockage de la génération précédente. Livrable
-**100 % interne** : jamais de contenu public, jamais de visuel.
-
-Instructions complètes, échelle de confiance, sources et gabarit :
-`content/veille-business-quotidienne/ROUTINE.md`.
-
-## 📋 Résumé des étapes (voir ROUTINE.md pour le détail)
-1. Lire `tracker-equipes.json` et `historique-rumeurs.json` (mémoire des dossiers déjà ouverts).
-2. Traiter `signaux-manuels.md` s'il contient des liens/captures ajoutés par l'utilisateur.
-3. Rechercher les mises à jour des dossiers suivis + de nouveaux signaux (4 familles : voir
-   ROUTINE.md §2), en croisant plusieurs sources.
-4. Noter chaque signal avec un **niveau de confiance A/B/C/D** (voir ROUTINE.md §4).
-5. Mettre à jour `tracker-equipes.json` et `historique-rumeurs.json`.
-6. Rédiger `content/veille-business-quotidienne/AAAA-MM-JJ/brief.md` (gabarit
-   `TEMPLATE-brief-quotidien.md`).
-7. Commit + push sur la branche de travail.
-8. Notifier l'utilisateur d'un résumé court (nouveaux dossiers, changements de confiance).
-
-## ✅ À faire / ❌ à ne pas faire
-- ✅ Ne jamais écarter une rumeur faute de preuve — la classer au bon niveau (A-D) plutôt.
-- ✅ Toujours dater la première détection et tracer l'évolution du niveau de confiance.
-- ❌ Ne jamais présenter une rumeur C/D comme un fait acquis.
-- ❌ Ne jamais publier ce brief en externe ni l'utiliser comme base de contenu public.
+Règles complètes : `content/veille-business-quotidienne/ROUTINE.md` (refonte du 28/09/2026). Livrable 100 % interne, jamais publié, jamais de visuel.
+1. Trois familles seulement : changement de matériel (2027+, rumeurs prioritaires), fermeture d'équipe, vente de matériel (date, lieu, lien, matériel).
+2. Hors périmètre : sponsors/finances sans menace de disparition, nouveaux modèles, transferts, UCI, tout ce qui est déjà en place.
+3. État dans `dossiers.json` (lu avant toute recherche) ; `resume` réécrit seulement s'il change, jamais de « RAS ».
+4. Sources : X (twitter-cli 0.8.5 ou WebSearch), Bluesky (api.bsky.app), Reddit, forums, puis recoupement presse ; comptes dans `comptes-a-suivre.md`.
+5. Confiance A/B/C/D (C et D au conditionnel) et pertinence ★ à ★★★ ; ne jamais inventer de source.
+6. Contacts : uniquement canaux officiels publiés ; jamais d'e-mails/numéros personnels ni de données issues de fuites.
+7. Traiter `signaux-manuels.md`, puis archiver dans `signaux-manuels-archive.md`.
+8. Brief `AAAA-MM-JJ/brief.md` (gabarit `TEMPLATE-brief-quotidien.md`), seulement le nouveau ; dossiers inchangés en une ligne.
+9. Commit + push, brief complet dans la réponse finale.
+10. PushNotification (< 200 car.) uniquement s'il y a du nouveau ; sinon silence.

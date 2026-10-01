@@ -1,37 +1,26 @@
-# Veille business quotidienne — Probikestock
-**Date : `JJ/MM/AAAA`** · Usage interne uniquement — ne pas publier
+# Radar matériel — `JJ/MM/AAAA`
+Usage interne, ne pas publier.
 
-## 🔥 À la une
-`Le signal le plus fort ou le plus nouveau du jour, toutes catégories confondues. "RAS" si rien de notable.`
+## À la une
+`1 à 3 lignes maximum, les infos ★★★ du jour. « Rien de nouveau aujourd'hui. » sinon.`
 
-## A. Changements d'équipementier
-| Équipe | Ancien équipementier | Nouvel équipementier (pressenti) | Confiance | Depuis le | Sources | Impact matériel estimé |
+## 1. Changements de matériel (2027 et après)
+| ★ | Équipe | Actuel → pressenti | Confiance | Info du | Source |
+|---|---|---|---|---|---|
+| | | | A/B/C/D | | |
+
+## 2. Fermetures d'équipes
+| ★ | Équipe | Situation | Matériel concerné | Confiance | Info du | Source |
 |---|---|---|---|---|---|---|
-| | | | A/B/C/D | | | |
+| | | | | A/B/C/D | | |
 
-## B. Sponsors titres / incertitude financière
-| Équipe | Situation | Confiance | Depuis le | Sources | Risque pour la structure |
+## 3. Ventes de matériel
+| ★ | Équipe / vendeur | Date | Lieu | Matériel | Lien |
 |---|---|---|---|---|---|
-| | | A/B/C/D | | | |
+| | | | | | |
 
-## C. Restructurations, rétrogradations, fermetures, montées de division
-| Équipe | Type de signal | Confiance | Depuis le | Sources | Horizon probable de déstockage |
-|---|---|---|---|---|---|
-| | | A/B/C/D | | | |
-
-## D. Nouveaux modèles → déstockage de l'ancienne génération
-| Marque | Nouveau modèle | Ancien modèle concerné | Équipe(s) sponsorisée(s) | Confiance | Sources |
-|---|---|---|---|---|---|
-| | | | | A/B/C/D | |
-
-## 📈 Évolution des dossiers suivis depuis hier
-- `Équipe — changement de niveau de confiance ou nouvel élément (ex. "Soudal Quick-Step : C → B, Sporza cite un contrat signé")`
-
-## 🆕 Nouveaux dossiers ouverts aujourd'hui
-- `Équipe — résumé en une ligne`
-
-## 🗄️ Sources consultées aujourd'hui
-- `Liste des recherches/pages effectivement lues`
+## Contacts publics repérés
+- `Équipe — canal officiel publié (service course, contact, fonction annoncée + LinkedIn)`
 
 ---
-*Brief généré automatiquement — usage interne Probikestock, ne pas diffuser.*
+`N dossiers suivis sans changement.` · Canaux indisponibles aujourd'hui : `aucun / raison`
